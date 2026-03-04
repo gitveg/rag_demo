@@ -1,0 +1,101 @@
+[
+  {
+    "bad_pattern": "gs.morphs.Mesh(path=...)",
+    "correction": "gs.morphs.Mesh(file=...)",
+    "explanation": "The 'gs.morphs.Mesh' class does not accept a 'path' attribute. Use the 'file' attribute to specify the location of the mesh file.",
+    "tags": [
+      "parameter_mismatch",
+      "api_mistake"
+    ],
+    "id": "test_0_145852.py",
+    "query_context": "User Query: Create a soft body mesh from an OBJ file and set anisotropic stiffness values (e.g., stretch stiffness 0.8, bend stiffness 0.3) to simulate a cloth-like material that resists stretching more than bending."
+  },
+  {
+    "bad_pattern": "class CustomMaterial(gs.materials.MPM.Base): # Missing update_F_S_Jp implementation",
+    "correction": "class CustomMaterial(gs.materials.MPM.Base):\n    @gs.func\n    def update_F_S_Jp(self, dt, ...):\n        # Implement constitutive model here",
+    "explanation": "The error 'Unsupported node \"Raise\"' occurs because the custom material inherits the base 'update_F_S_Jp' method, which raises NotImplementedError. Since this method is compiled into a Taichi kernel (GPU code), it cannot contain Python 'raise' statements. You must override this method with a concrete implementation decorated with '@gs.func'.",
+    "tags": [
+      "mpm",
+      "custom_material",
+      "taichi_error"
+    ],
+    "id": "test_1_150005.py",
+    "query_context": "User Query: Initialize an MPM fluid simulation with a custom non-Newtonian viscosity model where viscosity changes based on local shear rate, and configure the emitter to pulse at intervals."
+  },
+  {
+    "bad_pattern": "gs.options.renderers.BatchRenderer(resolution=(1920, 1200))",
+    "correction": "gs.options.ViewerOptions(res=(1920, 1200))",
+    "explanation": "The `BatchRenderer` options class does not accept a `resolution` attribute. Rendering resolution must be specified in `ViewerOptions` using the `res` parameter.",
+    "tags": [
+      "configuration",
+      "rendering"
+    ],
+    "id": "test_2_150212.py",
+    "query_context": "User Query: Configure the Genesis viewer to render at a non-standard resolution (e.g., 1920x1200) and set up a headless recording to save frames directly to disk without opening a GUI window."
+  },
+  {
+    "bad_pattern": "gs.materials.Rigid(..., linear_damping=...)",
+    "correction": "gs.materials.Rigid(...) # Set damping on the entity/link instead",
+    "explanation": "The `gs.materials.Rigid` class defines surface properties (friction, restitution) and density, but not dynamic damping. Linear and angular damping should be set on the entity or link definition, not within the material.",
+    "tags": [
+      "parameter_mismatch",
+      "physics_properties"
+    ],
+    "id": "test_3_150429.py",
+    "query_context": "User Query: Apply distinct static and dynamic friction coefficients to a rigid body, and set angular damping separately from linear damping to simulate a top spinning on a rough surface."
+  },
+  {
+    "bad_pattern": "gs.init(backend=\"torch\", device=\"cuda\")",
+    "correction": "gs.init(backend=gs.gpu)",
+    "explanation": "The `gs.init()` function does not accept a `device` argument. To run on CUDA/GPU, simply set `backend=gs.gpu`.",
+    "tags": [
+      "api_mistake",
+      "initialization"
+    ],
+    "id": "test_4_150648.py",
+    "query_context": "User Query: Create a soft body sphere, pin specific vertices identified by their index to a kinematic rigid body, and animate the rigid body to deform the soft body."
+  },
+  {
+    "bad_pattern": "gs.morphs.Box(center=...)",
+    "correction": "gs.morphs.Box(pos=...)",
+    "explanation": "The 'Box' morph constructor does not accept a 'center' attribute. To specify the location or offset of the geometry, use the 'pos' attribute.",
+    "tags": [
+      "api_mistake",
+      "parameter_error"
+    ],
+    "id": "test_5_150803.py",
+    "query_context": "User Query: Set up a two-phase MPM simulation (e.g., water and sand) with different material parameters and a barrier to separate the initial emitter regions."
+  },
+  {
+    "bad_pattern": "gs.morphs.MeshSet(path=...)",
+    "correction": "gs.morphs.MeshSet(file=...)",
+    "explanation": "The `MeshSet` class expects the argument `file` to specify the mesh file location, but `path` was provided, which is unrecognized.",
+    "tags": [
+      "parameter_mismatch"
+    ],
+    "id": "test_7_151043.py",
+    "query_context": "User Query: Create a composite rigid body from multiple convex hulls with non-uniform density distribution and apply a local center of mass offset."
+  },
+  {
+    "bad_pattern": "gs.shapes.Plane()",
+    "correction": "gs.morphs.Plane()",
+    "explanation": "The 'genesis' module does not have a 'shapes' attribute. Geometric primitives (morphologies) are located in the 'gs.morphs' module.",
+    "tags": [
+      "attribute_error",
+      "namespace_error"
+    ],
+    "id": "test_8_151314.py",
+    "query_context": "User Query: Implement a soft body self-collision with a custom distance threshold and a different friction value for soft-soft contacts versus soft-rigid contacts."
+  },
+  {
+    "bad_pattern": "gs.materials.MPM.Material(...)",
+    "correction": "gs.materials.MPM.Elastic(...)",
+    "explanation": "The error 'Unsupported node Raise' occurring in 'update_F_S_Jp' indicates that the abstract base class 'gs.materials.MPM.Material' was instantiated directly. This class does not implement the required physics update methods. You must use a concrete material subclass such as 'gs.materials.MPM.Elastic', 'gs.materials.MPM.Liquid', 'gs.materials.MPM.Sand', or 'gs.materials.MPM.Snow'.",
+    "tags": [
+      "logic_error",
+      "mpm"
+    ],
+    "id": "test_9_151601.py",
+    "query_context": "User Query: Configure an MPM emitter with a velocity field defined by a mathematical function (e.g., a vortex) and limit the total number of particles emitted to a fixed budget."
+  }
+]

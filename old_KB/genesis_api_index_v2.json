@@ -1,0 +1,1330 @@
+[
+  {
+    "name": "genesis.CTRL_MODE",
+    "short_name": "CTRL_MODE",
+    "type": "class",
+    "signature": "(/, *args, **kwargs)",
+    "doc": "An enumeration.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.EQUALITY_TYPE",
+    "short_name": "EQUALITY_TYPE",
+    "type": "class",
+    "signature": "(/, *args, **kwargs)",
+    "doc": "An enumeration.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.GEOM_TYPE",
+    "short_name": "GEOM_TYPE",
+    "type": "class",
+    "signature": "(/, *args, **kwargs)",
+    "doc": "An enumeration.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.GenesisException",
+    "short_name": "GenesisException",
+    "type": "class",
+    "signature": "(/, *args, **kwargs)",
+    "doc": "Common base class for all non-exit exceptions.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.IntEnum",
+    "short_name": "IntEnum",
+    "type": "class",
+    "signature": "(/, *args, **kwargs)",
+    "doc": "An enumeration.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.JOINT_TYPE",
+    "short_name": "JOINT_TYPE",
+    "type": "class",
+    "signature": "(/, *args, **kwargs)",
+    "doc": "An enumeration.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.List",
+    "short_name": "List",
+    "type": "class",
+    "signature": "(/, *args, **kwargs)",
+    "doc": "Custom list with more informative repr. Elements in the list should also inherit from RBC.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.List.common_ancestor",
+    "short_name": "common_ancestor",
+    "type": "method",
+    "signature": "()",
+    "doc": "No description.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.List.common_length",
+    "short_name": "common_length",
+    "type": "method",
+    "signature": "()",
+    "doc": "No description.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Logger",
+    "short_name": "Logger",
+    "type": "class",
+    "signature": "(logging_level, verbose_time)",
+    "doc": "No description.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Logger.addFilter",
+    "short_name": "addFilter",
+    "type": "method",
+    "signature": "(filter)",
+    "doc": "No description.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Logger.critical",
+    "short_name": "critical",
+    "type": "method",
+    "signature": "(message)",
+    "doc": "No description.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Logger.debug",
+    "short_name": "debug",
+    "type": "method",
+    "signature": "(message)",
+    "doc": "No description.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Logger.error",
+    "short_name": "error",
+    "type": "method",
+    "signature": "(message)",
+    "doc": "No description.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Logger.info",
+    "short_name": "info",
+    "type": "method",
+    "signature": "(message)",
+    "doc": "No description.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Logger.lock_timer",
+    "short_name": "lock_timer",
+    "type": "method",
+    "signature": "()",
+    "doc": "No description.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Logger.log",
+    "short_name": "log",
+    "type": "method",
+    "signature": "(level, msg, *args, **kwargs)",
+    "doc": "No description.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Logger.log_wrapper",
+    "short_name": "log_wrapper",
+    "type": "method",
+    "signature": "()",
+    "doc": "No description.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Logger.raw",
+    "short_name": "raw",
+    "type": "method",
+    "signature": "(message)",
+    "doc": "No description.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Logger.removeFilter",
+    "short_name": "removeFilter",
+    "type": "method",
+    "signature": "(filter)",
+    "doc": "No description.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Logger.removeHandler",
+    "short_name": "removeHandler",
+    "type": "method",
+    "signature": "(handler)",
+    "doc": "No description.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Logger.timer",
+    "short_name": "timer",
+    "type": "method",
+    "signature": "(msg, refresh_rate=10, end_msg='')",
+    "doc": "No description.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Logger.warning",
+    "short_name": "warning",
+    "type": "method",
+    "signature": "(message)",
+    "doc": "No description.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Mesh",
+    "short_name": "Mesh",
+    "type": "class",
+    "signature": "(mesh, surface: genesis.options.surfaces.Surface | None = None, uvs: 'np.typing.NDArray | None' = None, convexify=False, decimate=False, decimate_face_num=500, decimate_aggressiveness=0, metadata=None)",
+    "doc": "Genesis's own triangle mesh object. This is a wrapper of `trimesh.Trimesh` with some additional features and attributes. The internal trimesh object can be accessed via `self.trimesh`. We perform both",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Mesh.apply_transform",
+    "short_name": "apply_transform",
+    "type": "method",
+    "signature": "(T)",
+    "doc": "Apply a 4x4 transformation matrix (translation on the right column) to the mesh.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Mesh.clear_visuals",
+    "short_name": "clear_visuals",
+    "type": "method",
+    "signature": "()",
+    "doc": "Clear the mesh's visual attributes by resetting the surface to gs.surfaces.Default().",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Mesh.convert_to_zup",
+    "short_name": "convert_to_zup",
+    "type": "method",
+    "signature": "()",
+    "doc": "Convert the mesh to z-up.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Mesh.convexify",
+    "short_name": "convexify",
+    "type": "method",
+    "signature": "()",
+    "doc": "Convexify the mesh.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Mesh.copy",
+    "short_name": "copy",
+    "type": "method",
+    "signature": "()",
+    "doc": "Copy the mesh.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Mesh.decimate",
+    "short_name": "decimate",
+    "type": "method",
+    "signature": "(decimate_face_num, decimate_aggressiveness, convexify)",
+    "doc": "Decimate the mesh.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Mesh.from_attrs",
+    "short_name": "from_attrs",
+    "type": "method",
+    "signature": "(verts, faces, normals=None, surface=None, uvs=None, scale=None)",
+    "doc": "Create a genesis.Mesh from mesh attribtues including vertices, faces, and normals.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Mesh.from_morph_surface",
+    "short_name": "from_morph_surface",
+    "type": "method",
+    "signature": "(morph, surface=None)",
+    "doc": "Create a genesis.Mesh from morph and surface options. If the morph is a Mesh morph (morphs.Mesh), it could contain multiple sub-meshes, so we return a list.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Mesh.from_trimesh",
+    "short_name": "from_trimesh",
+    "type": "method",
+    "signature": "(mesh, scale=None, convexify=False, decimate=False, decimate_face_num=500, decimate_aggressiveness=2, metadata=None, surface=None)",
+    "doc": "Create a genesis.Mesh from a trimesh.Trimesh object.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Mesh.get_unique_edges",
+    "short_name": "get_unique_edges",
+    "type": "method",
+    "signature": "()",
+    "doc": "Get the unique edges of the mesh.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Mesh.particlize",
+    "short_name": "particlize",
+    "type": "method",
+    "signature": "(p_size=0.01, sampler='random')",
+    "doc": "Sample particles using the mesh volume.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Mesh.remesh",
+    "short_name": "remesh",
+    "type": "method",
+    "signature": "(edge_len_abs=None, edge_len_ratio=0.01, fix=True)",
+    "doc": "Remesh for tetrahedralization.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Mesh.set_color",
+    "short_name": "set_color",
+    "type": "method",
+    "signature": "(color)",
+    "doc": "Set the mesh's color.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Mesh.show",
+    "short_name": "show",
+    "type": "method",
+    "signature": "()",
+    "doc": "Visualize the mesh using trimesh's built-in viewer.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Mesh.tetrahedralize",
+    "short_name": "tetrahedralize",
+    "type": "method",
+    "signature": "(tet_cfg)",
+    "doc": "Tetrahedralize the mesh.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Mesh.update_trimesh_visual",
+    "short_name": "update_trimesh_visual",
+    "type": "method",
+    "signature": "()",
+    "doc": "Update the trimesh obj's visual attributes using its surface and uvs.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.PARA_LEVEL",
+    "short_name": "PARA_LEVEL",
+    "type": "class",
+    "signature": "(/, *args, **kwargs)",
+    "doc": "An enumeration.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Scene",
+    "short_name": "Scene",
+    "type": "class",
+    "signature": "(sim_options: genesis.options.solvers.SimOptions | None = None, coupler_options: genesis.options.solvers.BaseCouplerOptions | None = None, tool_options: genesis.options.solvers.ToolOptions | None = None, rigid_options: genesis.options.solvers.RigidOptions | None = None, avatar_options: genesis.options.solvers.AvatarOptions | None = None, mpm_options: genesis.options.solvers.MPMOptions | None = None, sph_options: genesis.options.solvers.SPHOptions | None = None, fem_options: genesis.options.solvers.FEMOptions | None = None, sf_options: genesis.options.solvers.SFOptions | None = None, pbd_options: genesis.options.solvers.PBDOptions | None = None, vis_options: genesis.options.vis.VisOptions | None = None, viewer_options: genesis.options.vis.ViewerOptions | None = None, profiling_options: genesis.options.profiling.ProfilingOptions | None = None, renderer: genesis.options.renderers.RendererOptions | None = None, show_viewer: bool | None = None, show_FPS: bool | None = None)",
+    "doc": "A ``genesis.Scene`` object wraps all components in a simulation environment, including a simulator (containing multiple physics solvers), entities, and a visualizer (controlling both the viewer and al",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Scene.add_camera",
+    "short_name": "add_camera",
+    "type": "method",
+    "signature": "(model='pinhole', res=(320, 320), pos=(0.5, 2.5, 3.5), lookat=(0.5, 0.5, 0.5), up=(0.0, 0.0, 1.0), fov=30, aperture=2.0, focus_dist=None, GUI=False, spp=256, denoise=None, near=0.1, far=20.0, env_idx=None, debug=False)",
+    "doc": "Add a camera to the scene.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Scene.add_emitter",
+    "short_name": "add_emitter",
+    "type": "method",
+    "signature": "(material: genesis.engine.materials.base.Material, max_particles=20000, surface: genesis.options.surfaces.Surface | None = None)",
+    "doc": "Add a fluid emitter to the scene.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Scene.add_entity",
+    "short_name": "add_entity",
+    "type": "method",
+    "signature": "(morph: genesis.options.morphs.Morph, material: genesis.engine.materials.base.Material | None = None, surface: genesis.options.surfaces.Surface | None = None, visualize_contact: bool = False, vis_mode: str | None = None)",
+    "doc": "Add an entity to the scene.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Scene.add_force_field",
+    "short_name": "add_force_field",
+    "type": "method",
+    "signature": "(force_field: genesis.engine.force_fields.ForceField)",
+    "doc": "Add a force field to the scene.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Scene.add_light",
+    "short_name": "add_light",
+    "type": "method",
+    "signature": "(pos: 'np.typing.ArrayLike | None', dir: 'np.typing.ArrayLike | None', color: 'np.typing.ArrayLike | None' = (1.0, 1.0, 1.0), intensity: float = 1.0, directional: bool = False, castshadow: bool = True, cutoff: float = 45.0, attenuation: float = 0.0)",
+    "doc": "Add a light to the scene for batch renderer.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Scene.add_mesh_light",
+    "short_name": "add_mesh_light",
+    "type": "method",
+    "signature": "(morph: genesis.options.morphs.Morph | None = None, color: 'np.typing.ArrayLike | None' = (1.0, 1.0, 1.0, 1.0), intensity: float = 20.0, revert_dir: bool | None = False, double_sided: bool | None = False, cutoff: float | None = 180.0)",
+    "doc": "Add a mesh light to the scene. Only supported by RayTracer.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Scene.add_sensor",
+    "short_name": "add_sensor",
+    "type": "method",
+    "signature": "(sensor_options: 'SensorOptions')",
+    "doc": "Add a sensor to the scene.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Scene.build",
+    "short_name": "build",
+    "type": "method",
+    "signature": "(n_envs=0, env_spacing=(0.0, 0.0), n_envs_per_row: int | None = None, center_envs_at_origin=True, compile_kernels=None)",
+    "doc": "Builds the scene once all entities have been added. This operation is required before running the simulation.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Scene.clear_debug_object",
+    "short_name": "clear_debug_object",
+    "type": "method",
+    "signature": "(obj)",
+    "doc": "Clears all the debug objects in the scene.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Scene.clear_debug_objects",
+    "short_name": "clear_debug_objects",
+    "type": "method",
+    "signature": "()",
+    "doc": "Clears all the debug objects in the scene.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Scene.destroy",
+    "short_name": "destroy",
+    "type": "method",
+    "signature": "()",
+    "doc": "No description.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Scene.draw_debug_arrow",
+    "short_name": "draw_debug_arrow",
+    "type": "method",
+    "signature": "(pos, vec=(0, 0, 1), radius=0.01, color=(1.0, 0.0, 0.0, 0.5))",
+    "doc": "Draws an arrow in the scene for visualization.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Scene.draw_debug_box",
+    "short_name": "draw_debug_box",
+    "type": "method",
+    "signature": "(bounds, color=(1.0, 0.0, 0.0, 1.0), wireframe=True, wireframe_radius=0.0015)",
+    "doc": "Draws a box in the scene for visualization.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Scene.draw_debug_frame",
+    "short_name": "draw_debug_frame",
+    "type": "method",
+    "signature": "(T, axis_length=1.0, origin_size=0.015, axis_radius=0.01)",
+    "doc": "Draws a 3-axis coordinate frame in the scene for visualization.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Scene.draw_debug_frames",
+    "short_name": "draw_debug_frames",
+    "type": "method",
+    "signature": "(Ts, axis_length=1.0, origin_size=0.015, axis_radius=0.01)",
+    "doc": "Draws 3-axis coordinate frames in the scene for visualization.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Scene.draw_debug_line",
+    "short_name": "draw_debug_line",
+    "type": "method",
+    "signature": "(start, end, radius=0.002, color=(1.0, 0.0, 0.0, 0.5))",
+    "doc": "Draws a line in the scene for visualization.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Scene.draw_debug_mesh",
+    "short_name": "draw_debug_mesh",
+    "type": "method",
+    "signature": "(mesh, pos=array([0., 0., 0.]), T=None)",
+    "doc": "Draws a mesh in the scene for visualization.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Scene.draw_debug_path",
+    "short_name": "draw_debug_path",
+    "type": "method",
+    "signature": "(qposs, entity, link_idx=-1, density=0.3, frame_scaling=1.0)",
+    "doc": "Draws a planned joint trajectory in the scene for visualization.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Scene.draw_debug_points",
+    "short_name": "draw_debug_points",
+    "type": "method",
+    "signature": "(poss, colors=(1.0, 0.0, 0.0, 0.5))",
+    "doc": "Draws points in the scene for visualization.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Scene.draw_debug_sphere",
+    "short_name": "draw_debug_sphere",
+    "type": "method",
+    "signature": "(pos, radius=0.01, color=(1.0, 0.0, 0.0, 0.5))",
+    "doc": "Draws a sphere in the scene for visualization.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Scene.draw_debug_spheres",
+    "short_name": "draw_debug_spheres",
+    "type": "method",
+    "signature": "(poss, radius=0.01, color=(1.0, 0.0, 0.0, 0.5))",
+    "doc": "Draws multiple spheres in the scene for visualization.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Scene.dump_ckpt_to_numpy",
+    "short_name": "dump_ckpt_to_numpy",
+    "type": "method",
+    "signature": "() -> dict[str, numpy.ndarray]",
+    "doc": "Collect every Taichi field in the **scene and its active solvers** and return them as a flat ``{key: ndarray}`` dictionary.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Scene.get_state",
+    "short_name": "get_state",
+    "type": "method",
+    "signature": "()",
+    "doc": "Returns the current state of the scene.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Scene.load_checkpoint",
+    "short_name": "load_checkpoint",
+    "type": "method",
+    "signature": "(path: str | os.PathLike) -> None",
+    "doc": "Restore a file produced by :py:meth:`save_checkpoint`.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Scene.render_all_cameras",
+    "short_name": "render_all_cameras",
+    "type": "method",
+    "signature": "(rgb=True, depth=False, segmentation=False, colorize_seg=False, normal=False, antialiasing=False, force_render=False)",
+    "doc": "Render the scene for all cameras using the batch renderer.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Scene.reset",
+    "short_name": "reset",
+    "type": "method",
+    "signature": "(state: genesis.engine.states.solvers.SimState | None = None, envs_idx=None)",
+    "doc": "Resets the scene to its initial state.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Scene.save_checkpoint",
+    "short_name": "save_checkpoint",
+    "type": "method",
+    "signature": "(path: str | os.PathLike) -> None",
+    "doc": "Pickle the full physics state to *one* file.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Scene.start_recording",
+    "short_name": "start_recording",
+    "type": "method",
+    "signature": "(data_func: Callable, rec_options: 'RecorderOptions') -> 'Recorder'",
+    "doc": "Automatically read and process data. See RecorderOptions for more details.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Scene.step",
+    "short_name": "step",
+    "type": "method",
+    "signature": "(update_visualizer=True, refresh_visualizer=True)",
+    "doc": "Runs a simulation step forward in time.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Scene.stop_recording",
+    "short_name": "stop_recording",
+    "type": "method",
+    "signature": "()",
+    "doc": "No description.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.SpatialHasher",
+    "short_name": "SpatialHasher",
+    "type": "class",
+    "signature": "(cell_size, grid_res, n_slots=None)",
+    "doc": "No description.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.SpatialHasher.build",
+    "short_name": "build",
+    "type": "method",
+    "signature": "(n_batch)",
+    "doc": "No description.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Tensor",
+    "short_name": "Tensor",
+    "type": "class",
+    "signature": "(/, *args, **kwargs)",
+    "doc": "This is the genesis customization of torch's Tensor datatype. This allows our customizations, a few safety checks and also more elegant end-to-end gradient flow.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Tensor.assert_contiguous",
+    "short_name": "assert_contiguous",
+    "type": "method",
+    "signature": "()",
+    "doc": "No description.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Tensor.assert_sceneless",
+    "short_name": "assert_sceneless",
+    "type": "method",
+    "signature": "()",
+    "doc": "No description.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Tensor.backward",
+    "short_name": "backward",
+    "type": "method",
+    "signature": "(*args, **kwargs)",
+    "doc": "Computes the gradient of current tensor wrt graph leaves.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Tensor.detach",
+    "short_name": "detach",
+    "type": "method",
+    "signature": "(*args, sceneless=True, **kwargs)",
+    "doc": "Returns a new Tensor, detached from the current graph.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Tensor.sceneless",
+    "short_name": "sceneless",
+    "type": "method",
+    "signature": "()",
+    "doc": "Return a tensor detached from a scene.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Tensor.zero_grad",
+    "short_name": "zero_grad",
+    "type": "method",
+    "signature": "()",
+    "doc": "A handy method that resembles nn.Module.zero_grad().",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.UID",
+    "short_name": "UID",
+    "type": "class",
+    "signature": "() -> None",
+    "doc": "REPR Base Class. All class that inherits this class will have an artist-level __repr__ method that prints out all the properties (decorated by @property) of the class, ordered by length of the propert",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.UID.full",
+    "short_name": "full",
+    "type": "method",
+    "signature": "() -> str",
+    "doc": "No description.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.UID.short",
+    "short_name": "short",
+    "type": "method",
+    "signature": "() -> str",
+    "doc": "No description.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.constraint_solver",
+    "short_name": "constraint_solver",
+    "type": "class",
+    "signature": "(/, *args, **kwargs)",
+    "doc": "An enumeration.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.gs_backend",
+    "short_name": "gs_backend",
+    "type": "class",
+    "signature": "(/, *args, **kwargs)",
+    "doc": "An enumeration.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.integrator",
+    "short_name": "integrator",
+    "type": "class",
+    "signature": "(/, *args, **kwargs)",
+    "doc": "An enumeration.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.redirect_libc_stderr",
+    "short_name": "redirect_libc_stderr",
+    "type": "class",
+    "signature": "(fd)",
+    "doc": "Context-manager that temporarily redirects C / C++ std::cerr (i.e. the C `stderr` file descriptor 2) to a given Python file-like object's fd.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.redirect_stdout",
+    "short_name": "redirect_stdout",
+    "type": "class",
+    "signature": "(new_target)",
+    "doc": "Context manager for temporarily redirecting stdout to another file.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.options.morphs.Box",
+    "short_name": "Box",
+    "type": "class",
+    "signature": "(**data)",
+    "doc": "Morph defined by a box shape.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Box.copy",
+    "short_name": "copy",
+    "type": "method",
+    "signature": "()",
+    "doc": "Returns a copy of the model.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Box.copy_attributes_from",
+    "short_name": "copy_attributes_from",
+    "type": "method",
+    "signature": "(options, override=False)",
+    "doc": "No description.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.CoacdOptions",
+    "short_name": "CoacdOptions",
+    "type": "class",
+    "signature": "(**data)",
+    "doc": "Options for configuring coacd convex decomposition. Reference: https://github.com/SarahWeiii/CoACD",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.CoacdOptions.copy",
+    "short_name": "copy",
+    "type": "method",
+    "signature": "()",
+    "doc": "Returns a copy of the model.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.CoacdOptions.copy_attributes_from",
+    "short_name": "copy_attributes_from",
+    "type": "method",
+    "signature": "(options, override=False)",
+    "doc": "No description.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Cylinder",
+    "short_name": "Cylinder",
+    "type": "class",
+    "signature": "(**data)",
+    "doc": "Morph defined by a cylinder shape.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Cylinder.copy",
+    "short_name": "copy",
+    "type": "method",
+    "signature": "()",
+    "doc": "Returns a copy of the model.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Cylinder.copy_attributes_from",
+    "short_name": "copy_attributes_from",
+    "type": "method",
+    "signature": "(options, override=False)",
+    "doc": "No description.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Drone",
+    "short_name": "Drone",
+    "type": "class",
+    "signature": "(**data)",
+    "doc": "Morph loaded from a URDF file for creating a `DroneEntity`.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Drone.copy",
+    "short_name": "copy",
+    "type": "method",
+    "signature": "()",
+    "doc": "Returns a copy of the model.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Drone.copy_attributes_from",
+    "short_name": "copy_attributes_from",
+    "type": "method",
+    "signature": "(options, override=False)",
+    "doc": "No description.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Drone.is_format",
+    "short_name": "is_format",
+    "type": "method",
+    "signature": "(format)",
+    "doc": "No description.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.FileMorph",
+    "short_name": "FileMorph",
+    "type": "class",
+    "signature": "(**data)",
+    "doc": "Morph loaded from a file.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.FileMorph.copy",
+    "short_name": "copy",
+    "type": "method",
+    "signature": "()",
+    "doc": "Returns a copy of the model.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.FileMorph.copy_attributes_from",
+    "short_name": "copy_attributes_from",
+    "type": "method",
+    "signature": "(options, override=False)",
+    "doc": "No description.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.FileMorph.is_format",
+    "short_name": "is_format",
+    "type": "method",
+    "signature": "(format)",
+    "doc": "No description.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.MJCF",
+    "short_name": "MJCF",
+    "type": "class",
+    "signature": "(**data)",
+    "doc": "Morph loaded from a MJCF file. This morph only supports `RigidEntity`",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.MJCF.copy",
+    "short_name": "copy",
+    "type": "method",
+    "signature": "()",
+    "doc": "Returns a copy of the model.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.MJCF.copy_attributes_from",
+    "short_name": "copy_attributes_from",
+    "type": "method",
+    "signature": "(options, override=False)",
+    "doc": "No description.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.MJCF.is_format",
+    "short_name": "is_format",
+    "type": "method",
+    "signature": "(format)",
+    "doc": "No description.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Mesh",
+    "short_name": "Mesh",
+    "type": "class",
+    "signature": "(**data)",
+    "doc": "Morph loaded from a mesh file.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Mesh.copy",
+    "short_name": "copy",
+    "type": "method",
+    "signature": "()",
+    "doc": "Returns a copy of the model.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Mesh.copy_attributes_from",
+    "short_name": "copy_attributes_from",
+    "type": "method",
+    "signature": "(options, override=False)",
+    "doc": "No description.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Mesh.is_format",
+    "short_name": "is_format",
+    "type": "method",
+    "signature": "(format)",
+    "doc": "No description.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.MeshSet",
+    "short_name": "MeshSet",
+    "type": "class",
+    "signature": "(**data)",
+    "doc": "Morph loaded from a mesh file.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.MeshSet.copy",
+    "short_name": "copy",
+    "type": "method",
+    "signature": "()",
+    "doc": "Returns a copy of the model.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.MeshSet.copy_attributes_from",
+    "short_name": "copy_attributes_from",
+    "type": "method",
+    "signature": "(options, override=False)",
+    "doc": "No description.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.MeshSet.is_format",
+    "short_name": "is_format",
+    "type": "method",
+    "signature": "(format)",
+    "doc": "No description.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Morph",
+    "short_name": "Morph",
+    "type": "class",
+    "signature": "(**data)",
+    "doc": "This is the base class for all genesis morphs. A morph in genesis is a hybrid concept, encapsulating both the geometry and pose information of an entity. This includes shape primitives, meshes, URDF, ",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Morph.copy",
+    "short_name": "copy",
+    "type": "method",
+    "signature": "()",
+    "doc": "Returns a copy of the model.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Morph.copy_attributes_from",
+    "short_name": "copy_attributes_from",
+    "type": "method",
+    "signature": "(options, override=False)",
+    "doc": "No description.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Nowhere",
+    "short_name": "Nowhere",
+    "type": "class",
+    "signature": "(**data)",
+    "doc": "Reserved for emitter. Internal use only.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Nowhere.copy",
+    "short_name": "copy",
+    "type": "method",
+    "signature": "()",
+    "doc": "Returns a copy of the model.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Nowhere.copy_attributes_from",
+    "short_name": "copy_attributes_from",
+    "type": "method",
+    "signature": "(options, override=False)",
+    "doc": "No description.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Options",
+    "short_name": "Options",
+    "type": "class",
+    "signature": "(**data)",
+    "doc": "This is the base class for all `gs.options.*` classes. An `Options` object is a group of parameters for setting a specific component in the scene.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Options.copy",
+    "short_name": "copy",
+    "type": "method",
+    "signature": "()",
+    "doc": "Returns a copy of the model.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Options.copy_attributes_from",
+    "short_name": "copy_attributes_from",
+    "type": "method",
+    "signature": "(options, override=False)",
+    "doc": "No description.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Plane",
+    "short_name": "Plane",
+    "type": "class",
+    "signature": "(**data)",
+    "doc": "Morph defined by a plane shape.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Plane.copy",
+    "short_name": "copy",
+    "type": "method",
+    "signature": "()",
+    "doc": "Returns a copy of the model.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Plane.copy_attributes_from",
+    "short_name": "copy_attributes_from",
+    "type": "method",
+    "signature": "(options, override=False)",
+    "doc": "No description.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Primitive",
+    "short_name": "Primitive",
+    "type": "class",
+    "signature": "(**data)",
+    "doc": "This is the base class for all shape-primitive morphs.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Primitive.copy",
+    "short_name": "copy",
+    "type": "method",
+    "signature": "()",
+    "doc": "Returns a copy of the model.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Primitive.copy_attributes_from",
+    "short_name": "copy_attributes_from",
+    "type": "method",
+    "signature": "(options, override=False)",
+    "doc": "No description.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Sphere",
+    "short_name": "Sphere",
+    "type": "class",
+    "signature": "(**data)",
+    "doc": "Morph defined by a sphere shape.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Sphere.copy",
+    "short_name": "copy",
+    "type": "method",
+    "signature": "()",
+    "doc": "Returns a copy of the model.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Sphere.copy_attributes_from",
+    "short_name": "copy_attributes_from",
+    "type": "method",
+    "signature": "(options, override=False)",
+    "doc": "No description.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Terrain",
+    "short_name": "Terrain",
+    "type": "class",
+    "signature": "(**data)",
+    "doc": "Morph for creating a rigid terrain. This can be instantiated from two choices: 1) a grid of subterrains generated using the given configurations 2) a terrain generated using the given height field.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Terrain.copy",
+    "short_name": "copy",
+    "type": "method",
+    "signature": "()",
+    "doc": "Returns a copy of the model.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Terrain.copy_attributes_from",
+    "short_name": "copy_attributes_from",
+    "type": "method",
+    "signature": "(options, override=False)",
+    "doc": "No description.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.TetGenMixin",
+    "short_name": "TetGenMixin",
+    "type": "class",
+    "signature": "(**data)",
+    "doc": "A mixin to introduce TetGen-related options into morph classes that support tetrahedralization using TetGen.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.TetGenMixin.copy",
+    "short_name": "copy",
+    "type": "method",
+    "signature": "()",
+    "doc": "Returns a copy of the model.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.TetGenMixin.copy_attributes_from",
+    "short_name": "copy_attributes_from",
+    "type": "method",
+    "signature": "(options, override=False)",
+    "doc": "No description.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.URDF",
+    "short_name": "URDF",
+    "type": "class",
+    "signature": "(**data)",
+    "doc": "Morph loaded from a URDF file. This morph only supports `RigidEntity`. If you need to create a `Drone` entity, use `gs.morphs.Drone` instead.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.URDF.copy",
+    "short_name": "copy",
+    "type": "method",
+    "signature": "()",
+    "doc": "Returns a copy of the model.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.URDF.copy_attributes_from",
+    "short_name": "copy_attributes_from",
+    "type": "method",
+    "signature": "(options, override=False)",
+    "doc": "No description.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.URDF.is_format",
+    "short_name": "is_format",
+    "type": "method",
+    "signature": "(format)",
+    "doc": "No description.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.engine.materials.Avatar",
+    "short_name": "Avatar",
+    "type": "class",
+    "signature": "(rho=200.0, friction=None, needs_coup=True, coup_friction=0.1, coup_softness=0.002, coup_restitution=0.0, sdf_cell_size=0.005, sdf_min_res=32, sdf_max_res=128, gravity_compensation=0)",
+    "doc": "The Rigid class represents a material used in rigid body simulation.",
+    "layer": "Material"
+  },
+  {
+    "name": "genesis.engine.materials.Hybrid",
+    "short_name": "Hybrid",
+    "type": "class",
+    "signature": "(material_rigid, material_soft, use_default_coupling=False, damping=0.0, thickness=0.05, soft_dv_coef=0.01, func_instantiate_rigid_from_soft=None, func_instantiate_soft_from_rigid=None, func_instantiate_rigid_soft_association=None)",
+    "doc": "The class for hybrid body material (soft skin actuated by inner rigid skeleton).",
+    "layer": "Material"
+  },
+  {
+    "name": "genesis.engine.materials.Rigid",
+    "short_name": "Rigid",
+    "type": "class",
+    "signature": "(rho=200.0, friction=None, needs_coup=True, coup_friction=0.1, coup_softness=0.002, coup_restitution=0.0, sdf_cell_size=0.005, sdf_min_res=32, sdf_max_res=128, gravity_compensation=0)",
+    "doc": "The Rigid class represents a material used in rigid body simulation.",
+    "layer": "Material"
+  },
+  {
+    "name": "genesis.engine.materials.Tool",
+    "short_name": "Tool",
+    "type": "class",
+    "signature": "(friction=0.0, coup_softness=0.01, collision=True, sdf_res=128)",
+    "doc": "The base class of materials.",
+    "layer": "Material"
+  },
+  {
+    "name": "genesis.engine.materials.MPM.Base",
+    "short_name": "Base",
+    "type": "class",
+    "signature": "(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None)",
+    "doc": "The base class of MPM materials.",
+    "layer": "Fluid"
+  },
+  {
+    "name": "genesis.engine.materials.MPM.Elastic",
+    "short_name": "Elastic",
+    "type": "class",
+    "signature": "(E=300000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, model='corotation')",
+    "doc": "The elastic material class for MPM.",
+    "layer": "Fluid"
+  },
+  {
+    "name": "genesis.engine.materials.MPM.ElastoPlastic",
+    "short_name": "ElastoPlastic",
+    "type": "class",
+    "signature": "(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, yield_lower=0.025, yield_higher=0.0045, use_von_mises=True, von_mises_yield_stress=10000.0)",
+    "doc": "The elasto-plastic material class for MPM.",
+    "layer": "Fluid"
+  },
+  {
+    "name": "genesis.engine.materials.MPM.Liquid",
+    "short_name": "Liquid",
+    "type": "class",
+    "signature": "(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, viscous=False, sampler=None)",
+    "doc": "The liquid material class for MPM.",
+    "layer": "Fluid"
+  },
+  {
+    "name": "genesis.engine.materials.MPM.Muscle",
+    "short_name": "Muscle",
+    "type": "class",
+    "signature": "(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, model='neohooken', n_groups=1)",
+    "doc": "The muscle material class for MPM.",
+    "layer": "Fluid"
+  },
+  {
+    "name": "genesis.engine.materials.MPM.Sand",
+    "short_name": "Sand",
+    "type": "class",
+    "signature": "(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler='random', friction_angle=45)",
+    "doc": "The sand material class for MPM.",
+    "layer": "Fluid"
+  },
+  {
+    "name": "genesis.engine.materials.MPM.Snow",
+    "short_name": "Snow",
+    "type": "class",
+    "signature": "(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler='random', yield_lower=0.025, yield_higher=0.0045)",
+    "doc": "The snow material class for MPM.",
+    "layer": "Fluid"
+  },
+  {
+    "name": "genesis.options.vis.Options",
+    "short_name": "Options",
+    "type": "class",
+    "signature": "(**data)",
+    "doc": "This is the base class for all `gs.options.*` classes. An `Options` object is a group of parameters for setting a specific component in the scene.",
+    "layer": "Visualization"
+  },
+  {
+    "name": "genesis.options.vis.Options.copy",
+    "short_name": "copy",
+    "type": "method",
+    "signature": "()",
+    "doc": "Returns a copy of the model.",
+    "layer": "Visualization"
+  },
+  {
+    "name": "genesis.options.vis.Options.copy_attributes_from",
+    "short_name": "copy_attributes_from",
+    "type": "method",
+    "signature": "(options, override=False)",
+    "doc": "No description.",
+    "layer": "Visualization"
+  },
+  {
+    "name": "genesis.options.vis.ViewerOptions",
+    "short_name": "ViewerOptions",
+    "type": "class",
+    "signature": "(**data)",
+    "doc": "Options configuring preperties of the interactive viewer.",
+    "layer": "Visualization"
+  },
+  {
+    "name": "genesis.options.vis.ViewerOptions.copy",
+    "short_name": "copy",
+    "type": "method",
+    "signature": "()",
+    "doc": "Returns a copy of the model.",
+    "layer": "Visualization"
+  },
+  {
+    "name": "genesis.options.vis.ViewerOptions.copy_attributes_from",
+    "short_name": "copy_attributes_from",
+    "type": "method",
+    "signature": "(options, override=False)",
+    "doc": "No description.",
+    "layer": "Visualization"
+  },
+  {
+    "name": "genesis.options.vis.VisOptions",
+    "short_name": "VisOptions",
+    "type": "class",
+    "signature": "(**data)",
+    "doc": "This configures visualization-related properties that are independent of the viewer or camera.",
+    "layer": "Visualization"
+  },
+  {
+    "name": "genesis.options.vis.VisOptions.copy",
+    "short_name": "copy",
+    "type": "method",
+    "signature": "()",
+    "doc": "Returns a copy of the model.",
+    "layer": "Visualization"
+  },
+  {
+    "name": "genesis.options.vis.VisOptions.copy_attributes_from",
+    "short_name": "copy_attributes_from",
+    "type": "method",
+    "signature": "(options, override=False)",
+    "doc": "No description.",
+    "layer": "Visualization"
+  }
+]

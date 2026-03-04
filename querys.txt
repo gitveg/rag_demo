@@ -1,0 +1,38 @@
+A rigid sphere falls onto the ground.
+
+Create a rigid sphere falling onto a static ground plane.
+
+Simulate a rigid box dropping from a height of 2 meters onto the ground.
+
+Create a scene with a rigid cylinder placed on the ground.
+
+Create a simulation of a floating rigid sphere in a gravity-free environment.
+
+Create two rigid spheres side by side falling onto the ground.
+
+Simulate a rigid box falling into the void without any ground.
+
+Create a large static rigid box and a small rigid sphere falling onto it.
+
+Create a rigid sphere thrown horizontally
+
+Simulate two rigid spheres colliding with each other in mid-air.
+
+A soft blue sphere crashed onto the ground.
+
+
+
+
+Create a soft elastic sphere falling onto the rigid ground using MPM.
+
+
+
+Create a scene with gravity set to zero and a single floating cube.
+A rigid cylinder rolls down a slope.
+Two rigid spheres bounce off each other with gravity.
+Add a ground plane and one rigid box at height 1.0.
+A soft elastic ball drops onto the ground.
+Create a simple scene with a sphere and a floor, 60 FPS viewer.
+A rigid duck or mesh falls and lands on a plane.
+Pour water or liquid into a container.
+A rigid arm or robot hand picks up a small box.

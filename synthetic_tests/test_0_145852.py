@@ -1,0 +1,59 @@
+"""
+User Query: Create a soft body mesh from an OBJ file and set anisotropic stiffness values (e.g., stretch stiffness 0.8, bend stiffness 0.3) to simulate a cloth-like material that resists stretching more than bending.
+"""
+
+import argparse
+import sys
+import os
+import genesis as gs
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-c", "--cpu", action="store_true", default=(sys.platform == "darwin"))
+    parser.add_argument("-v", "--vis", action="store_true", default=False)
+    parser.add_argument("--obj", type=str, default="cloth.obj", help="Path to OBJ file")
+    args = parser.parse_args()
+
+    n_steps = 200 if "PYTEST_VERSION" not in os.environ else 2
+
+    gs.init(backend=gs.cpu if args.cpu else gs.gpu, precision="64")
+
+    scene = gs.Scene(
+        sim_options=gs.options.SimOptions(
+            dt=1 / 60,
+            substeps=2,
+        ),
+        fem_options=gs.options.FEMOptions(
+            use_implicit_solver=True,
+        ),
+        coupler_options=gs.options.SAPCouplerOptions(),
+        viewer_options=gs.options.ViewerOptions(
+            camera_pos=(1.5, -1.5, 1.5),
+            camera_lookat=(0, 0, 0),
+            max_FPS=60,
+        ),
+        show_viewer=args.vis,
+    )
+
+    mesh_morph = gs.morphs.Mesh(
+        path=args.obj,
+        order=1,
+    )
+
+    cloth_material = gs.materials.FEM.Cloth(
+        stretch_stiffness=0.8,
+        bend_stiffness=0.3,
+    )
+
+    scene.add_entity(
+        morph=mesh_morph,
+        material=cloth_material,
+    )
+
+    scene.build()
+
+    for _ in range(n_steps):
+        scene.step()
+
+if __name__ == "__main__":
+    main()

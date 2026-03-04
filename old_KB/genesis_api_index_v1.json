@@ -1,0 +1,331 @@
+[
+  {
+    "name": "genesis.CTRL_MODE",
+    "short_name": "CTRL_MODE",
+    "signature": "(/, *args, **kwargs)",
+    "doc": "An enumeration.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.EQUALITY_TYPE",
+    "short_name": "EQUALITY_TYPE",
+    "signature": "(/, *args, **kwargs)",
+    "doc": "An enumeration.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.GEOM_TYPE",
+    "short_name": "GEOM_TYPE",
+    "signature": "(/, *args, **kwargs)",
+    "doc": "An enumeration.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.GenesisException",
+    "short_name": "GenesisException",
+    "signature": "(/, *args, **kwargs)",
+    "doc": "Common base class for all non-exit exceptions.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.IntEnum",
+    "short_name": "IntEnum",
+    "signature": "(/, *args, **kwargs)",
+    "doc": "An enumeration.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.JOINT_TYPE",
+    "short_name": "JOINT_TYPE",
+    "signature": "(/, *args, **kwargs)",
+    "doc": "An enumeration.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.List",
+    "short_name": "List",
+    "signature": "(/, *args, **kwargs)",
+    "doc": "Custom list with more informative repr.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Logger",
+    "short_name": "Logger",
+    "signature": "(logging_level, verbose_time)",
+    "doc": "No description.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Mesh",
+    "short_name": "Mesh",
+    "signature": "(mesh, surface: genesis.options.surfaces.Surface | None = None, uvs: 'np.typing.NDArray | None' = None, convexify=False, decimate=False, decimate_face_num=500, decimate_aggressiveness=0, metadata=None)",
+    "doc": "Genesis's own triangle mesh object.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.PARA_LEVEL",
+    "short_name": "PARA_LEVEL",
+    "signature": "(/, *args, **kwargs)",
+    "doc": "An enumeration.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Scene",
+    "short_name": "Scene",
+    "signature": "(sim_options: genesis.options.solvers.SimOptions | None = None, coupler_options: genesis.options.solvers.BaseCouplerOptions | None = None, tool_options: genesis.options.solvers.ToolOptions | None = None, rigid_options: genesis.options.solvers.RigidOptions | None = None, avatar_options: genesis.options.solvers.AvatarOptions | None = None, mpm_options: genesis.options.solvers.MPMOptions | None = None, sph_options: genesis.options.solvers.SPHOptions | None = None, fem_options: genesis.options.solvers.FEMOptions | None = None, sf_options: genesis.options.solvers.SFOptions | None = None, pbd_options: genesis.options.solvers.PBDOptions | None = None, vis_options: genesis.options.vis.VisOptions | None = None, viewer_options: genesis.options.vis.ViewerOptions | None = None, profiling_options: genesis.options.profiling.ProfilingOptions | None = None, renderer: genesis.options.renderers.RendererOptions | None = None, show_viewer: bool | None = None, show_FPS: bool | None = None)",
+    "doc": "A ``genesis.Scene`` object wraps all components in a simulation environment, including a simulator (containing multiple physics solvers), entities, and a visualizer (controlling both the viewer and all the cameras).",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.SpatialHasher",
+    "short_name": "SpatialHasher",
+    "signature": "(cell_size, grid_res, n_slots=None)",
+    "doc": "No description.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.Tensor",
+    "short_name": "Tensor",
+    "signature": "(/, *args, **kwargs)",
+    "doc": "This is the genesis customization of torch's Tensor datatype. This allows our customizations, a few safety checks and also more elegant end-to-end gradient flow.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.UID",
+    "short_name": "UID",
+    "signature": "() -> None",
+    "doc": "REPR Base Class.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.constraint_solver",
+    "short_name": "constraint_solver",
+    "signature": "(/, *args, **kwargs)",
+    "doc": "An enumeration.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.gs_backend",
+    "short_name": "gs_backend",
+    "signature": "(/, *args, **kwargs)",
+    "doc": "An enumeration.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.integrator",
+    "short_name": "integrator",
+    "signature": "(/, *args, **kwargs)",
+    "doc": "An enumeration.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.redirect_libc_stderr",
+    "short_name": "redirect_libc_stderr",
+    "signature": "(fd)",
+    "doc": "Context-manager that temporarily redirects C / C++ std::cerr (i.e. the C `stderr` file descriptor 2) to a given",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.redirect_stdout",
+    "short_name": "redirect_stdout",
+    "signature": "(new_target)",
+    "doc": "Context manager for temporarily redirecting stdout to another file.",
+    "layer": "Core"
+  },
+  {
+    "name": "genesis.options.morphs.Box",
+    "short_name": "Box",
+    "signature": "(**data)",
+    "doc": "Morph defined by a box shape.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.CoacdOptions",
+    "short_name": "CoacdOptions",
+    "signature": "(**data)",
+    "doc": "Options for configuring coacd convex decomposition.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Cylinder",
+    "short_name": "Cylinder",
+    "signature": "(**data)",
+    "doc": "Morph defined by a cylinder shape.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Drone",
+    "short_name": "Drone",
+    "signature": "(**data)",
+    "doc": "Morph loaded from a URDF file for creating a `DroneEntity`.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.FileMorph",
+    "short_name": "FileMorph",
+    "signature": "(**data)",
+    "doc": "Morph loaded from a file.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.MJCF",
+    "short_name": "MJCF",
+    "signature": "(**data)",
+    "doc": "Morph loaded from a MJCF file. This morph only supports `RigidEntity`",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Mesh",
+    "short_name": "Mesh",
+    "signature": "(**data)",
+    "doc": "Morph loaded from a mesh file.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.MeshSet",
+    "short_name": "MeshSet",
+    "signature": "(**data)",
+    "doc": "Morph loaded from a mesh file.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Morph",
+    "short_name": "Morph",
+    "signature": "(**data)",
+    "doc": "This is the base class for all genesis morphs.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Nowhere",
+    "short_name": "Nowhere",
+    "signature": "(**data)",
+    "doc": "Reserved for emitter. Internal use only.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Options",
+    "short_name": "Options",
+    "signature": "(**data)",
+    "doc": "This is the base class for all `gs.options.*` classes. An `Options` object is a group of parameters for setting a specific component in the scene.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Plane",
+    "short_name": "Plane",
+    "signature": "(**data)",
+    "doc": "Morph defined by a plane shape.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Primitive",
+    "short_name": "Primitive",
+    "signature": "(**data)",
+    "doc": "This is the base class for all shape-primitive morphs.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Sphere",
+    "short_name": "Sphere",
+    "signature": "(**data)",
+    "doc": "Morph defined by a sphere shape.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.Terrain",
+    "short_name": "Terrain",
+    "signature": "(**data)",
+    "doc": "Morph for creating a rigid terrain. This can be instantiated from two choices:",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.TetGenMixin",
+    "short_name": "TetGenMixin",
+    "signature": "(**data)",
+    "doc": "A mixin to introduce TetGen-related options into morph classes that support tetrahedralization using TetGen.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.options.morphs.URDF",
+    "short_name": "URDF",
+    "signature": "(**data)",
+    "doc": "Morph loaded from a URDF file. This morph only supports `RigidEntity`.",
+    "layer": "Geometry"
+  },
+  {
+    "name": "genesis.engine.materials.Avatar",
+    "short_name": "Avatar",
+    "signature": "(rho=200.0, friction=None, needs_coup=True, coup_friction=0.1, coup_softness=0.002, coup_restitution=0.0, sdf_cell_size=0.005, sdf_min_res=32, sdf_max_res=128, gravity_compensation=0)",
+    "doc": "The Rigid class represents a material used in rigid body simulation.",
+    "layer": "Material"
+  },
+  {
+    "name": "genesis.engine.materials.Hybrid",
+    "short_name": "Hybrid",
+    "signature": "(material_rigid, material_soft, use_default_coupling=False, damping=0.0, thickness=0.05, soft_dv_coef=0.01, func_instantiate_rigid_from_soft=None, func_instantiate_soft_from_rigid=None, func_instantiate_rigid_soft_association=None)",
+    "doc": "The class for hybrid body material (soft skin actuated by inner rigid skeleton).",
+    "layer": "Material"
+  },
+  {
+    "name": "genesis.engine.materials.Rigid",
+    "short_name": "Rigid",
+    "signature": "(rho=200.0, friction=None, needs_coup=True, coup_friction=0.1, coup_softness=0.002, coup_restitution=0.0, sdf_cell_size=0.005, sdf_min_res=32, sdf_max_res=128, gravity_compensation=0)",
+    "doc": "The Rigid class represents a material used in rigid body simulation.",
+    "layer": "Material"
+  },
+  {
+    "name": "genesis.engine.materials.Tool",
+    "short_name": "Tool",
+    "signature": "(friction=0.0, coup_softness=0.01, collision=True, sdf_res=128)",
+    "doc": "The base class of materials.",
+    "layer": "Material"
+  },
+  {
+    "name": "genesis.engine.materials.MPM.Base",
+    "short_name": "Base",
+    "signature": "(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None)",
+    "doc": "The base class of MPM materials.",
+    "layer": "Fluid"
+  },
+  {
+    "name": "genesis.engine.materials.MPM.Elastic",
+    "short_name": "Elastic",
+    "signature": "(E=300000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, model='corotation')",
+    "doc": "The elastic material class for MPM.",
+    "layer": "Fluid"
+  },
+  {
+    "name": "genesis.engine.materials.MPM.ElastoPlastic",
+    "short_name": "ElastoPlastic",
+    "signature": "(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, yield_lower=0.025, yield_higher=0.0045, use_von_mises=True, von_mises_yield_stress=10000.0)",
+    "doc": "The elasto-plastic material class for MPM.",
+    "layer": "Fluid"
+  },
+  {
+    "name": "genesis.engine.materials.MPM.Liquid",
+    "short_name": "Liquid",
+    "signature": "(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, viscous=False, sampler=None)",
+    "doc": "The liquid material class for MPM.",
+    "layer": "Fluid"
+  },
+  {
+    "name": "genesis.engine.materials.MPM.Muscle",
+    "short_name": "Muscle",
+    "signature": "(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, model='neohooken', n_groups=1)",
+    "doc": "The muscle material class for MPM.",
+    "layer": "Fluid"
+  },
+  {
+    "name": "genesis.engine.materials.MPM.Sand",
+    "short_name": "Sand",
+    "signature": "(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler='random', friction_angle=45)",
+    "doc": "The sand material class for MPM.",
+    "layer": "Fluid"
+  },
+  {
+    "name": "genesis.engine.materials.MPM.Snow",
+    "short_name": "Snow",
+    "signature": "(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler='random', yield_lower=0.025, yield_higher=0.0045)",
+    "doc": "The snow material class for MPM.",
+    "layer": "Fluid"
+  }
+]

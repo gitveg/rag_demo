@@ -1,0 +1,3 @@
+API: genesis.Scene.add_mesh_light
+Summary: Add a mesh light to the scene. Only supported by RayTracer.
+Parameters: morph: Must be an instance of `gs.morphs.Primitive` or `gs.morphs.Mesh`., revert_dir: If True, the light will be emitted towards the mesh's inside., double_sided: Whether to emit light from both sides of surface., cutoff: The cutoff angle of the light in degrees. Range: [0.0, 180.0].ÿ

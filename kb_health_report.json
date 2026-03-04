@@ -1,0 +1,107 @@
+{
+  "generated_at": "2026-03-04T19:23:47.841215",
+  "api_knowledge_base": {
+    "total": 497,
+    "summary_coverage": {
+      "count": 234,
+      "rate": 0.4708
+    },
+    "constraints_coverage": {
+      "count": 100,
+      "rate": 0.2012
+    },
+    "core_api_count": 17,
+    "type_distribution": {
+      "method": 355,
+      "class": 142
+    },
+    "module_distribution": {
+      "genesis.options": 464,
+      "genesis.Scene": 32,
+      "genesis.constraint_solver": 1
+    }
+  },
+  "code_index": {
+    "total": 101,
+    "tag_distribution": {
+      "articulated_robot": 60,
+      "scene_creation": 53,
+      "interaction": 52,
+      "rendering": 31,
+      "rigid_body": 26,
+      "motion_planning": 18,
+      "soft_body": 14,
+      "mixed_physics": 9,
+      "fluid_mpm": 9,
+      "camera_control": 8,
+      "fluid_sph": 5,
+      "tactile_sensing": 1,
+      "depth_sensing": 1
+    },
+    "key_api_distribution": {
+      "genesis.options.ViewerOptions": 72,
+      "genesis.options.SimOptions": 53,
+      "genesis.options.RigidOptions": 38,
+      "genesis.options.VisOptions": 28,
+      "genesis.options.MPMOptions": 11,
+      "genesis.options.ProfilingOptions": 7,
+      "genesis.options.FEMOptions": 6,
+      "genesis.constraint_solver": 6,
+      "genesis.options.IPCCouplerOptions": 5,
+      "genesis.options.PBDOptions": 4,
+      "genesis.options.SPHOptions": 4,
+      "genesis.options.SAPCouplerOptions": 4,
+      "genesis.options.renderers.BatchRenderer": 2,
+      "genesis.recorders.MPLLinePlot": 2,
+      "genesis.recorders.PyQtLinePlot": 2,
+      "genesis.options.SFOptions": 1,
+      "genesis.recorders.NPZFile": 1,
+      "genesis.recorders.MPLImagePlot": 1
+    },
+    "unique_tags": 13,
+    "unique_key_apis": 18
+  },
+  "code_snippets": {
+    "total": 40,
+    "manual_added": 1,
+    "auto_extracted": 39,
+    "tag_distribution": {
+      "auto_extracted": 39,
+      "manual_added": 1,
+      "recording": 1,
+      "video": 1
+    },
+    "key_api_distribution": {
+      "gs.init": 3,
+      "gs.Scene": 3,
+      "scene.add_camera": 3,
+      "gs.tensor": 3,
+      "scene.draw_debug_spheres": 3,
+      "gs.morphs.Plane": 2,
+      "gs.morphs.MJCF": 2,
+      "gs.materials.MPM.Elastic": 2,
+      "scene.build": 2,
+      "gs.morphs.Mesh": 2,
+      "gs.materials.Rigid": 2,
+      "gs_general": 1,
+      "scene.step": 1,
+      "gs.destroy": 1,
+      "gs.morphs.URDF": 1,
+      "gs.materials.Tool": 1,
+      "scene.reset": 1,
+      "scene.get_state": 1,
+      "init_pos.zero_grad": 1,
+      "gs.morphs.Sphere": 1,
+      "gs.morphs.Box": 1,
+      "scene.clear_debug_object": 1,
+      "gs.materials.PBD.Liquid": 1,
+      "start_recording": 1,
+      "stop_recording": 1,
+      "set_pose": 1,
+      "render": 1,
+      "camera_recording": 1
+    },
+    "unique_tags": 4,
+    "unique_key_apis": 28
+  }
+}

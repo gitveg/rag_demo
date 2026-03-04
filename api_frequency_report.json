@@ -1,0 +1,638 @@
+[
+  {
+    "api_name": "genesis.morphs",
+    "count": 241,
+    "frequency_score": 238.61,
+    "suggested_tag": "core"
+  },
+  {
+    "api_name": "genesis.options",
+    "count": 235,
+    "frequency_score": 232.67,
+    "suggested_tag": "core"
+  },
+  {
+    "api_name": "genesis.init",
+    "count": 194,
+    "frequency_score": 192.08,
+    "suggested_tag": "core"
+  },
+  {
+    "api_name": "genesis.Scene",
+    "count": 188,
+    "frequency_score": 186.14,
+    "suggested_tag": "core"
+  },
+  {
+    "api_name": "genesis.options.ViewerOptions",
+    "count": 144,
+    "frequency_score": 142.57,
+    "suggested_tag": "core"
+  },
+  {
+    "api_name": "genesis.morphs.Plane",
+    "count": 132,
+    "frequency_score": 130.69,
+    "suggested_tag": "core"
+  },
+  {
+    "api_name": "genesis.options.SimOptions",
+    "count": 106,
+    "frequency_score": 104.95,
+    "suggested_tag": "core"
+  },
+  {
+    "api_name": "genesis.morphs.Mesh",
+    "count": 90,
+    "frequency_score": 89.11,
+    "suggested_tag": "core"
+  },
+  {
+    "api_name": "genesis.morphs.MJCF",
+    "count": 88,
+    "frequency_score": 87.13,
+    "suggested_tag": "core"
+  },
+  {
+    "api_name": "genesis.options.RigidOptions",
+    "count": 76,
+    "frequency_score": 75.25,
+    "suggested_tag": "core"
+  },
+  {
+    "api_name": "genesis.device",
+    "count": 75,
+    "frequency_score": 74.26,
+    "suggested_tag": "core"
+  },
+  {
+    "api_name": "genesis.materials",
+    "count": 72,
+    "frequency_score": 71.29,
+    "suggested_tag": "core"
+  },
+  {
+    "api_name": "genesis.surfaces",
+    "count": 72,
+    "frequency_score": 71.29,
+    "suggested_tag": "core"
+  },
+  {
+    "api_name": "genesis.morphs.Box",
+    "count": 70,
+    "frequency_score": 69.31,
+    "suggested_tag": "core"
+  },
+  {
+    "api_name": "genesis.surfaces.Default",
+    "count": 68,
+    "frequency_score": 67.33,
+    "suggested_tag": "core"
+  },
+  {
+    "api_name": "genesis.options.VisOptions",
+    "count": 56,
+    "frequency_score": 55.45,
+    "suggested_tag": "core"
+  },
+  {
+    "api_name": "genesis.gpu",
+    "count": 54,
+    "frequency_score": 53.47,
+    "suggested_tag": "core"
+  },
+  {
+    "api_name": "genesis.materials.Rigid",
+    "count": 51,
+    "frequency_score": 50.5,
+    "suggested_tag": "core"
+  },
+  {
+    "api_name": "genesis.morphs.URDF",
+    "count": 49,
+    "frequency_score": 48.51,
+    "suggested_tag": "common"
+  },
+  {
+    "api_name": "genesis.logger.info",
+    "count": 42,
+    "frequency_score": 41.58,
+    "suggested_tag": "common"
+  },
+  {
+    "api_name": "genesis.tc_float",
+    "count": 41,
+    "frequency_score": 40.59,
+    "suggested_tag": "common"
+  },
+  {
+    "api_name": "genesis.cpu",
+    "count": 34,
+    "frequency_score": 33.66,
+    "suggested_tag": "common"
+  },
+  {
+    "api_name": "genesis.morphs.Sphere",
+    "count": 32,
+    "frequency_score": 31.68,
+    "suggested_tag": "common"
+  },
+  {
+    "api_name": "genesis.surfaces.Rough",
+    "count": 28,
+    "frequency_score": 27.72,
+    "suggested_tag": "common"
+  },
+  {
+    "api_name": "genesis.options.MPMOptions",
+    "count": 22,
+    "frequency_score": 21.78,
+    "suggested_tag": "common"
+  },
+  {
+    "api_name": "genesis.materials.FEM.Elastic",
+    "count": 22,
+    "frequency_score": 21.78,
+    "suggested_tag": "common"
+  },
+  {
+    "api_name": "genesis.logger",
+    "count": 22,
+    "frequency_score": 21.78,
+    "suggested_tag": "common"
+  },
+  {
+    "api_name": "genesis.surfaces.Plastic",
+    "count": 20,
+    "frequency_score": 19.8,
+    "suggested_tag": "common"
+  },
+  {
+    "api_name": "genesis.materials.MPM.Elastic",
+    "count": 18,
+    "frequency_score": 17.82,
+    "suggested_tag": "common"
+  },
+  {
+    "api_name": "genesis.materials.MPM",
+    "count": 18,
+    "frequency_score": 17.82,
+    "suggested_tag": "common"
+  },
+  {
+    "api_name": "genesis.materials.FEM",
+    "count": 16,
+    "frequency_score": 15.84,
+    "suggested_tag": "common"
+  },
+  {
+    "api_name": "genesis.options.ProfilingOptions",
+    "count": 14,
+    "frequency_score": 13.86,
+    "suggested_tag": "common"
+  },
+  {
+    "api_name": "genesis.tensor",
+    "count": 12,
+    "frequency_score": 11.88,
+    "suggested_tag": "common"
+  },
+  {
+    "api_name": "genesis.options.FEMOptions",
+    "count": 12,
+    "frequency_score": 11.88,
+    "suggested_tag": "common"
+  },
+  {
+    "api_name": "genesis.textures.ColorTexture",
+    "count": 10,
+    "frequency_score": 9.9,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.options.IPCCouplerOptions",
+    "count": 10,
+    "frequency_score": 9.9,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.textures",
+    "count": 9,
+    "frequency_score": 8.91,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.options.PBDOptions",
+    "count": 8,
+    "frequency_score": 7.92,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.materials.PBD.Cloth",
+    "count": 8,
+    "frequency_score": 7.92,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.options.SPHOptions",
+    "count": 8,
+    "frequency_score": 7.92,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.morphs.Drone",
+    "count": 8,
+    "frequency_score": 7.92,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.options.SAPCouplerOptions",
+    "count": 8,
+    "frequency_score": 7.92,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.sensors",
+    "count": 8,
+    "frequency_score": 7.92,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.materials.MPM.Muscle",
+    "count": 7,
+    "frequency_score": 6.93,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.materials.PBD",
+    "count": 6,
+    "frequency_score": 5.94,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.morphs.Cylinder",
+    "count": 6,
+    "frequency_score": 5.94,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.materials.MPM.Liquid",
+    "count": 6,
+    "frequency_score": 5.94,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.materials.SPH.Liquid",
+    "count": 6,
+    "frequency_score": 5.94,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.constraint_solver.Newton",
+    "count": 6,
+    "frequency_score": 5.94,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.constraint_solver",
+    "count": 6,
+    "frequency_score": 5.94,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.tc_int",
+    "count": 6,
+    "frequency_score": 5.94,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.materials.FEM.Cloth",
+    "count": 6,
+    "frequency_score": 5.94,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.surfaces.Emission",
+    "count": 6,
+    "frequency_score": 5.94,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.textures.ImageTexture",
+    "count": 6,
+    "frequency_score": 5.94,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.surfaces.Smooth",
+    "count": 6,
+    "frequency_score": 5.94,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.morphs.Terrain",
+    "count": 6,
+    "frequency_score": 5.94,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.recorders",
+    "count": 6,
+    "frequency_score": 5.94,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.surfaces.Iron",
+    "count": 4,
+    "frequency_score": 3.96,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.surfaces.Glass",
+    "count": 4,
+    "frequency_score": 3.96,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.options.renderers.BatchRenderer",
+    "count": 4,
+    "frequency_score": 3.96,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.renderers.RayTracer",
+    "count": 4,
+    "frequency_score": 3.96,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.renderers",
+    "count": 4,
+    "frequency_score": 3.96,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.surfaces.Reflective",
+    "count": 4,
+    "frequency_score": 3.96,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.renderers.Rasterizer",
+    "count": 4,
+    "frequency_score": 3.96,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.recorders.PyQtLinePlot",
+    "count": 4,
+    "frequency_score": 3.96,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.recorders.MPLLinePlot",
+    "count": 4,
+    "frequency_score": 3.96,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.materials.SPH",
+    "count": 3,
+    "frequency_score": 2.97,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.materials.FEM.Muscle",
+    "count": 3,
+    "frequency_score": 2.97,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.destroy",
+    "count": 2,
+    "frequency_score": 1.98,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.materials.Tool",
+    "count": 2,
+    "frequency_score": 1.98,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.tools.Timer",
+    "count": 2,
+    "frequency_score": 1.98,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.materials.PBD.Elastic",
+    "count": 2,
+    "frequency_score": 1.98,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.materials.PBD.Liquid",
+    "count": 2,
+    "frequency_score": 1.98,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.EPS",
+    "count": 2,
+    "frequency_score": 1.98,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.options.SFOptions",
+    "count": 2,
+    "frequency_score": 1.98,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.np_float",
+    "count": 2,
+    "frequency_score": 1.98,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.materials.MPM.Sand",
+    "count": 2,
+    "frequency_score": 1.98,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.options.renderers",
+    "count": 2,
+    "frequency_score": 1.98,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.surfaces.Aluminium",
+    "count": 2,
+    "frequency_score": 1.98,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.surfaces.Gold",
+    "count": 2,
+    "frequency_score": 1.98,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.transform_quat_by_quat",
+    "count": 2,
+    "frequency_score": 1.98,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.inv_quat",
+    "count": 2,
+    "frequency_score": 1.98,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.quat_to_rotvec",
+    "count": 2,
+    "frequency_score": 1.98,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.textures.BatchTexture.from_images",
+    "count": 2,
+    "frequency_score": 1.98,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.sensors.ContactForce",
+    "count": 2,
+    "frequency_score": 1.98,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.sensors.Contact",
+    "count": 2,
+    "frequency_score": 1.98,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.sensors.IMU",
+    "count": 2,
+    "frequency_score": 1.98,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.recorders.NPZFile",
+    "count": 2,
+    "frequency_score": 1.98,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.sensors.DepthCamera",
+    "count": 2,
+    "frequency_score": 1.98,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.sensors.DepthCameraPattern",
+    "count": 2,
+    "frequency_score": 1.98,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.recorders.MPLImagePlot",
+    "count": 2,
+    "frequency_score": 1.98,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.sensors.GridPattern",
+    "count": 2,
+    "frequency_score": 1.98,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.logger.warning",
+    "count": 2,
+    "frequency_score": 1.98,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.sensors.SphericalPattern",
+    "count": 2,
+    "frequency_score": 1.98,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.sensors.Lidar",
+    "count": 2,
+    "frequency_score": 1.98,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.materials.Hybrid",
+    "count": 2,
+    "frequency_score": 1.98,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.materials.MPM.ElastoPlastic",
+    "count": 2,
+    "frequency_score": 1.98,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.tools",
+    "count": 1,
+    "frequency_score": 0.99,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.ti_float",
+    "count": 1,
+    "frequency_score": 0.99,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.tc_bool",
+    "count": 1,
+    "frequency_score": 0.99,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.Entity",
+    "count": 1,
+    "frequency_score": 0.99,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.textures.BatchTexture",
+    "count": 1,
+    "frequency_score": 0.99,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.__file__",
+    "count": 1,
+    "frequency_score": 0.99,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.backend",
+    "count": 1,
+    "frequency_score": 0.99,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.cuda",
+    "count": 1,
+    "frequency_score": 0.99,
+    "suggested_tag": "rare"
+  },
+  {
+    "api_name": "genesis.use_zerocopy",
+    "count": 1,
+    "frequency_score": 0.99,
+    "suggested_tag": "rare"
+  }
+]
