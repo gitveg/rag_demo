@@ -18,6 +18,7 @@ CODE_FILE = "genesis_code_index.json"
 # 新增：代码片段与错误记忆文件
 SNIPPET_FILE = "genesis_code_snippets.json"
 ERROR_FILE = "genesis_error_memory.json"
+UNIT_FILE = "genesis_knowledge_units.json"
 
 # API Key 配置
 DASHSCOPE_API_KEY = os.getenv("DASHSCOPE_API_KEY", "你的_DASHSCOPE_API_KEY")
@@ -104,6 +105,12 @@ class GenesisRAG:
 
         self.error_collection = self.chroma_client.get_or_create_collection(
             name="genesis_errors",
+            embedding_function=self.embedding_fn,
+            metadata={"hnsw:space": "cosine"}
+        )
+
+        self.unit_collection = self.chroma_client.get_or_create_collection(
+            name="genesis_knowledge_units",
             embedding_function=self.embedding_fn,
             metadata={"hnsw:space": "cosine"}
         )
@@ -278,6 +285,42 @@ class GenesisRAG:
             if ids:
                 self.error_collection.add(ids=ids, documents=docs, metadatas=metas)
 
+    # ---------------- 知识单元入库 ----------------
+    def ingest_knowledge_units(self):
+        """导入知识单元（代码文件 + 内嵌 API 文档摘要的聚合体，为 HyDE 检索优化）。
+        需先运行 indexer_knowledge_units.py 生成 genesis_knowledge_units.json。
+        """
+        if not os.path.exists(UNIT_FILE):
+            print(f"❌ 找不到文件: {UNIT_FILE}，请先运行 indexer_knowledge_units.py")
+            return
+
+        with open(UNIT_FILE, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        print(f"📥 正在导入 {len(data)} 个知识单元...")
+        BATCH_SIZE = 10
+        for i in tqdm(range(0, len(data), BATCH_SIZE), desc="Ingesting Knowledge Units"):
+            batch_data = data[i: i + BATCH_SIZE]
+            ids, docs, metas = [], [], []
+            for u in batch_data:
+                ids.append(u["unit_id"])
+                docs.append(u["embedding_text"])   # 代码风格文本，用于向量化（HyDE 对齐）
+                api_summaries = "\n".join(
+                    f"{d['api_id']}: {d.get('summary', '')[:150]}"
+                    + (f"\n  Signature: {d['signature']}" if d.get("signature") else "")
+                    for d in u.get("api_docs", [])
+                )[:2000]
+                metas.append({
+                    "title":         u.get("title", ""),
+                    "desc":          u.get("desc", "")[:300],
+                    "tags":          ",".join(u.get("tags", [])),
+                    "key_apis":      ",".join(u.get("key_apis", [])),
+                    "api_summaries": api_summaries,
+                    "code_preview":  u.get("code", "")[:600],
+                })
+            if ids:
+                self.unit_collection.add(ids=ids, documents=docs, metadatas=metas)
+
     # ---------------- 检索方法 ----------------
     def search_code(self, query, n_results=3, tag_filter=None):
         """检索完整代码范例"""
@@ -342,12 +385,13 @@ if __name__ == "__main__":
     if "你的" in DASHSCOPE_API_KEY and not os.getenv("DASHSCOPE_API_KEY"):
         print("❌ 警告: 请务必先在代码开头填入你的 DASHSCOPE_API_KEY")
     else:
-        # 重置并灌入数据 (包括新的 Snippets 和 Errors)
+        # 重置并灌入数据
         rag = GenesisRAG(reset_db=True)
         rag.ingest_apis()
         rag.ingest_code()
-        rag.ingest_snippets() # 新增
-        rag.ingest_errors()   # 新增
+        rag.ingest_snippets()
+        rag.ingest_errors()
+        rag.ingest_knowledge_units()  # 新增：知识单元（HyDE 检索用）
         
         print("\n🔎 测试完整代码检索: 'Soft body simulation'")
         res = rag.search_code("Soft body simulation")

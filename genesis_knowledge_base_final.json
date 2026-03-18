@@ -206,6 +206,7 @@
       }
     ],
     "constraints": [
+      "It is definitely necessary to use it before scene.build().",
       "When 'pinhole' is used, the `aperture` and `focal_len` parameters are ignored.",
       "spp parameter is only available when using RayTracer renderer.",
       "denoise parameter is only available when using the RayTracer renderer.",
@@ -213,7 +214,8 @@
       "env_idx must be specified if and only if a non-batched renderer is being used."
     ],
     "domain_tags": [
-      "engine"
+      "engine",
+      "core"
     ]
   },
   {
