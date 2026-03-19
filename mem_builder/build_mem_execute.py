@@ -10,8 +10,11 @@ from datetime import datetime
 from tqdm import tqdm
 
 # ================= 配置 =================
-TEST_DIR = "./synthetic_tests"
-OUTPUT_FILE = "./genesis_execute_results.json"
+_BASE_DIR   = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+_KB_DIR     = os.path.join(_BASE_DIR, "knowledge_base")
+
+TEST_DIR    = os.path.join(_BASE_DIR, "tests", "synthetic_tests")
+OUTPUT_FILE = os.path.join(_KB_DIR,   "genesis_execute_results.json")
 # 成功用例可能含编译/运行，约 2 分钟，设大一些
 RUN_TIMEOUT = 150  # 秒
 

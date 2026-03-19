@@ -10,10 +10,12 @@ dotenv.load_dotenv()
 # os.environ['HTTPS_PROXY'] = 'http://127.0.0.1:7897'
 
 # ================= 配置 =================
-TEST_DIR = "./synthetic_tests"
-MEMORY_FILE = "./genesis_error_memory.json"
-# 由 build_mem_execute.py 生成的报错结果，判官只读此文件不再执行用例
-EXECUTE_RESULTS_FILE = "./genesis_execute_results.json"
+_BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+_KB_DIR   = os.path.join(_BASE_DIR, "knowledge_base")
+
+TEST_DIR             = os.path.join(_BASE_DIR, "tests", "synthetic_tests")
+MEMORY_FILE          = os.path.join(_KB_DIR,   "genesis_error_memory.json")
+EXECUTE_RESULTS_FILE = os.path.join(_KB_DIR,   "genesis_execute_results.json")
 # 报错内容超过此长度不判官，避免消耗过多 token（如 GsTaichi 长 stack trace）
 MAX_ERROR_LOG_CHARS = 8000
 

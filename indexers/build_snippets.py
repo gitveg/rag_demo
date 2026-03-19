@@ -11,8 +11,11 @@ from utils.llm_client import LLMClient
 dotenv.load_dotenv()
 
 # ================= 配置 =================
-SOURCE_DIR = "./RAG/examples"  # 官方 Examples 文件夹
-OUTPUT_FILE = "./RAG/genesis_code_snippets.json"
+_BASE_DIR  = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+_KB_DIR    = os.path.join(_BASE_DIR, "knowledge_base")
+
+SOURCE_DIR  = os.path.join(_BASE_DIR, "examples")
+OUTPUT_FILE = os.path.join(_KB_DIR,   "genesis_code_snippets.json")
 
 # ================= 人工手动添加的代码片段 =================
 # 这些片段不会从 examples 中 AST 提取，在 build 时直接合并进最终 snippets，保证 RAG 能检索到。

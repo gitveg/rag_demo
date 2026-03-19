@@ -416,11 +416,13 @@ def clean_knowledge_base():
     print("="*40)
 
 if __name__ == "__main__":
-    API_INDEX_FILE = "genesis_api_index_v6.json"         # 刚才 indexer 生成的 5683 个 API
-    FREQUENCY_FILE = "api_frequency_report.json"      # 刚才 frequency_analyzer 生成的报告
+    import os as _os
+    _BASE_DIR = _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__)))
+    _KB_DIR   = _os.path.join(_BASE_DIR, "knowledge_base")
 
-    # 2. 输出文件
-    CLEANED_KB_FILE = "genesis_knowledge_base_clean.json"
+    API_INDEX_FILE  = _os.path.join(_KB_DIR, "genesis_api_index_v6.json")
+    FREQUENCY_FILE  = _os.path.join(_KB_DIR, "api_frequency_report.json")
+    CLEANED_KB_FILE = _os.path.join(_KB_DIR, "genesis_knowledge_base_clean.json")
     STRICT_WHITELIST_PREFIXES = [
     "genesis.Scene",          # 核心场景类及其方法
     "genesis.morphs",         # 几何体

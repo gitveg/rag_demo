@@ -1,15 +1,21 @@
 import os
+import sys
 import json
 import time
 from tqdm import tqdm
-from agent import GenesisAgent # 直接复用你强大的 Agent
+
+_BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, _BASE_DIR)           # 使 llm_utils 可导入（位于 rag_demo/ 根目录）
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # 使 agent 可导入（同目录）
+
+from agent import GenesisAgent
 from llm_utils import LLMClient
 import dotenv
 
 dotenv.load_dotenv()
 
 # ================= 配置 =================
-OUTPUT_DIR = "./synthetic_tests"
+OUTPUT_DIR = os.path.join(_BASE_DIR, "tests", "synthetic_tests")
 NUM_SCENARIOS = 10 # 这一批次生成多少个测试用例
 
 # 确保目录存在

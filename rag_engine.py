@@ -13,12 +13,11 @@ dotenv.load_dotenv()
 DB_PATH = "./genesis_chroma_db"
 
 # 数据源文件
-API_FILE = "genesis_knowledge_base_final.json"
-CODE_FILE = "genesis_code_index.json" 
-# 新增：代码片段与错误记忆文件
-SNIPPET_FILE = "genesis_code_snippets.json"
-ERROR_FILE = "genesis_error_memory.json"
-UNIT_FILE = "genesis_knowledge_units.json"
+API_FILE     = "knowledge_base/genesis_knowledge_base_final.json"
+CODE_FILE    = "knowledge_base/genesis_code_index.json"
+SNIPPET_FILE = "knowledge_base/genesis_code_snippets.json"
+ERROR_FILE   = "knowledge_base/genesis_error_memory.json"
+UNIT_FILE    = "knowledge_base/genesis_knowledge_units.json"
 
 # API Key 配置
 DASHSCOPE_API_KEY = os.getenv("DASHSCOPE_API_KEY", "你的_DASHSCOPE_API_KEY")

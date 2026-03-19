@@ -1,13 +1,18 @@
 import os
+import sys
 import json
 import ast
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from llm_utils import LLMClient
 from tqdm import tqdm
 
 # ================= 配置区域 =================
-EXAMPLES_DIR = "examples"                
-OUTPUT_FILE = "genesis_code_index.json"
-API_KB_FILE = "genesis_knowledge_base_final.json" # 用于校验
+_BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+_KB_DIR   = os.path.join(_BASE_DIR, "knowledge_base")
+
+EXAMPLES_DIR = os.path.join(_BASE_DIR, "examples")
+OUTPUT_FILE  = os.path.join(_KB_DIR,   "genesis_code_index.json")
+API_KB_FILE  = os.path.join(_KB_DIR,   "genesis_knowledge_base_final.json")
 
 # --- 1. 高频 API 停用词表 (Stop Words) ---
 # 这些 API 出现在几乎所有范例中，对检索没有区分度，必须剔除

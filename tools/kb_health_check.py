@@ -24,11 +24,12 @@ if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
 
 # ─────────────────────────── 配置 ───────────────────────────
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+_KB_DIR    = os.path.join(SCRIPT_DIR, "..", "knowledge_base")
 
-KB_API      = os.path.join(SCRIPT_DIR, "genesis_knowledge_base_final.json")
-KB_CODE     = os.path.join(SCRIPT_DIR, "genesis_code_index.json")
-KB_SNIPPETS = os.path.join(SCRIPT_DIR, "genesis_code_snippets.json")
-OUTPUT_JSON = os.path.join(SCRIPT_DIR, "kb_health_report.json")
+KB_API      = os.path.join(_KB_DIR, "genesis_knowledge_base_final.json")
+KB_CODE     = os.path.join(_KB_DIR, "genesis_code_index.json")
+KB_SNIPPETS = os.path.join(_KB_DIR, "genesis_code_snippets.json")
+OUTPUT_JSON = os.path.join(_KB_DIR, "kb_health_report.json")
 
 # 控制台打印时，Tag / Key-API 最多显示的条数
 TOP_N = 15

@@ -29,7 +29,7 @@ HyDE 对齐原理：
 
 使用方式：
   cd Genesis/rag_demo
-  python indexer_knowledge_units.py
+  python indexers/indexer_knowledge_units.py
 """
 
 import json
@@ -37,11 +37,16 @@ import os
 
 # ====== 路径配置 ======
 _THIS_DIR = os.path.dirname(os.path.abspath(__file__))
-RAG_DIR = os.path.abspath(os.path.join(_THIS_DIR, "..", "..", "phys_agent", "RAG"))
+_BASE_DIR = os.path.dirname(_THIS_DIR)                                         # rag_demo/
+_KB_DIR   = os.path.join(_BASE_DIR, "knowledge_base")                          # rag_demo/knowledge_base/
+RAG_DIR   = os.path.abspath(os.path.join(_THIS_DIR, "..", "..", "..", "phys_agent", "RAG"))  # phys_agent/RAG/
 
-CODE_INDEX_FILE = os.path.join(RAG_DIR, "genesis_code_index.json")
-API_KB_FILE     = os.path.join(RAG_DIR, "genesis_knowledge_base_final.json")
-OUTPUT_FILE     = os.path.join(RAG_DIR, "genesis_knowledge_units.json")
+# 输入：从本地 knowledge_base/ 读取
+CODE_INDEX_FILE   = os.path.join(_KB_DIR, "genesis_code_index.json")
+API_KB_FILE       = os.path.join(_KB_DIR, "genesis_knowledge_base_final.json")
+# 输出：同时写入 phys_agent/RAG/（供 agent 直接使用）和本地 knowledge_base/（备份）
+OUTPUT_FILE       = os.path.join(RAG_DIR, "genesis_knowledge_units.json")
+LOCAL_OUTPUT_FILE = os.path.join(_KB_DIR,  "genesis_knowledge_units.json")
 
 # embedding_text 中代码预览的最大字符数（保持代码风格，但控制长度）
 CODE_PREVIEW_CHARS = 800
@@ -154,9 +159,12 @@ def build_knowledge_units():
             missing_apis_set.update(missing)
         units.append(unit)
 
-    # --- 保存 ---
+    # --- 保存（写入 phys_agent/RAG/ 供 agent 使用，同时备份到本地 knowledge_base/）---
     os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+        json.dump(units, f, indent=2, ensure_ascii=False)
+    os.makedirs(_KB_DIR, exist_ok=True)
+    with open(LOCAL_OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(units, f, indent=2, ensure_ascii=False)
 
     # --- 统计报告 ---
@@ -176,7 +184,8 @@ def build_knowledge_units():
             print(f"     - {k}")
         if len(missing_sorted) > MAX_SHOW:
             print(f"     ... 还有 {len(missing_sorted) - MAX_SHOW} 个未显示")
-    print(f"   输出文件:           {OUTPUT_FILE}")
+    print(f"   输出文件 (agent):   {OUTPUT_FILE}")
+    print(f"   输出文件 (local):   {LOCAL_OUTPUT_FILE}")
 
     if units:
         sample = units[0]

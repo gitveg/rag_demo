@@ -4,9 +4,11 @@ import json
 import collections
 from pathlib import Path
 
-# 设定范例文件夹路径
-EXAMPLES_DIR = "examples" 
-OUTPUT_FILE = "api_frequency_report.json"
+_BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+_KB_DIR   = os.path.join(_BASE_DIR, "knowledge_base")
+
+EXAMPLES_DIR = os.path.join(_BASE_DIR, "examples")
+OUTPUT_FILE  = os.path.join(_KB_DIR,   "api_frequency_report.json")
 
 class GenesisVisitor(ast.NodeVisitor):
     """

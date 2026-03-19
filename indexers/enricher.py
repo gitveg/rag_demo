@@ -5,8 +5,11 @@ from llm_utils import LLMClient
 from tqdm import tqdm
 
 # ================= 配置 =================
-INPUT_FILE = "genesis_knowledge_base_clean.json"
-OUTPUT_FILE = "genesis_knowledge_base_final.json"
+_BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+_KB_DIR   = os.path.join(_BASE_DIR, "knowledge_base")
+
+INPUT_FILE  = os.path.join(_KB_DIR, "genesis_knowledge_base_clean.json")
+OUTPUT_FILE = os.path.join(_KB_DIR, "genesis_knowledge_base_final.json")
 
 class Colors:
     HEADER = '\033[95m'
