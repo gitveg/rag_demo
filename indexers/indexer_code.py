@@ -2,8 +2,11 @@ import os
 import sys
 import json
 import ast
+from typing import Dict, FrozenSet, List, Optional
+
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from llm_utils import LLMClient
+from api_id_normalize import resolve_api_to_known, normalize_api_id_for_kb
 from tqdm import tqdm
 
 # ================= 配置区域 =================
@@ -14,18 +17,7 @@ EXAMPLES_DIR = os.path.join(_BASE_DIR, "examples")
 OUTPUT_FILE  = os.path.join(_KB_DIR,   "genesis_code_index.json")
 API_KB_FILE  = os.path.join(_KB_DIR,   "genesis_knowledge_base_final.json")
 
-# --- 1. 高频 API 停用词表 (Stop Words) ---
-# 这些 API 出现在几乎所有范例中，对检索没有区分度，必须剔除
-COMMON_API_BLOCKLIST = {
-    "genesis.init",
-    "genesis.Scene",           # 只是类名，太泛
-    "genesis.Scene.__init__",
-    "genesis.Scene.build",     # 必调用的
-    "genesis.Scene.step",      # 必调用的
-    "genesis.Scene.reset",
-}
-
-# --- 2. 统一标签池 (扁平化) ---
+# --- 1. 统一标签池 (扁平化) ---
 # 混合了物理类型和任务类型，供 LLM 选择
 ALLOWED_TAGS = [
     # Physics (What is it?)
@@ -35,7 +27,7 @@ ALLOWED_TAGS = [
     "vis_export", "depth_sensing", "tactile_sensing"
 ]
 
-# --- 3. Prompt ---
+# --- 2. Prompt ---
 SYSTEM_PROMPT = f"""
 You are a Code Analysis Agent for Genesis Physics Engine.
 Analyze the script and generate concise metadata.
@@ -52,9 +44,26 @@ Response Format: Pure JSON.
 
 # ================= AST 分析器 =================
 class GenesisImportVisitor(ast.NodeVisitor):
-    def __init__(self):
-        self.api_calls = set()
-        self.imports = {} 
+    """
+    提取 genesis.* API 引用。
+    除 gs.morphs.Sphere 等静态链外，通过「构造绑定」解析 scene.add_entity → genesis.Scene.add_entity：
+    变量被赋值为 KB 中标记为 class 的构造调用（如 gs.Scene(...)）时，记录 var → 该类的 api_id。
+    """
+
+    def __init__(self, kb_class_ids: FrozenSet[str]):
+        self.api_calls: set = set()
+        self.imports: Dict[str, str] = {}
+        self.kb_class_ids = kb_class_ids
+        self.scope_stack: List[Dict[str, str]] = [{}]
+
+    def _scope(self) -> Dict[str, str]:
+        return self.scope_stack[-1]
+
+    def _var_type_prefix(self, name: str) -> Optional[str]:
+        for frame in reversed(self.scope_stack):
+            if name in frame:
+                return frame[name]
+        return None
 
     def visit_Import(self, node):
         for alias in node.names:
@@ -68,6 +77,71 @@ class GenesisImportVisitor(ast.NodeVisitor):
                 self.imports[alias.asname or alias.name] = f"{node.module}.{alias.name}"
         self.generic_visit(node)
 
+    def visit_FunctionDef(self, node):
+        self.scope_stack.append({})
+        self.generic_visit(node)
+        self.scope_stack.pop()
+
+    def visit_AsyncFunctionDef(self, node):
+        self.scope_stack.append({})
+        self.generic_visit(node)
+        self.scope_stack.pop()
+
+    def visit_ClassDef(self, node):
+        self.scope_stack.append({})
+        self.generic_visit(node)
+        self.scope_stack.pop()
+
+    def visit_Assign(self, node):
+        ctype = None
+        if isinstance(node.value, ast.Call):
+            ctype = self._constructor_class_api_id(node.value)
+        sc = self._scope()
+        for t in node.targets:
+            if isinstance(t, ast.Name):
+                if ctype:
+                    sc[t.id] = ctype
+                else:
+                    sc.pop(t.id, None)
+        self.generic_visit(node)
+
+    def visit_AnnAssign(self, node):
+        if node.value is not None and isinstance(node.value, ast.Call):
+            ctype = self._constructor_class_api_id(node.value)
+            if isinstance(node.target, ast.Name):
+                sc = self._scope()
+                if ctype:
+                    sc[node.target.id] = ctype
+                else:
+                    sc.pop(node.target.id, None)
+        self.generic_visit(node)
+
+    def _constructor_class_api_id(self, call: ast.Call) -> Optional[str]:
+        fn = call.func
+        base = None
+        if isinstance(fn, ast.Attribute):
+            base = self._get_full_name(fn)
+        elif isinstance(fn, ast.Name):
+            base = self.imports.get(fn.id)
+        if base and base in self.kb_class_ids:
+            return base
+        return None
+
+    def _get_full_name(self, node: ast.AST) -> Optional[str]:
+        if isinstance(node, ast.Attribute):
+            prefix = self._get_full_name(node.value)
+            if prefix:
+                return f"{prefix}.{node.attr}"
+            if isinstance(node.value, ast.Name):
+                vbase = self._var_type_prefix(node.value.id)
+                if vbase:
+                    return f"{vbase}.{node.attr}"
+            return None
+        if isinstance(node, ast.Name):
+            if node.id in self.imports:
+                return self.imports[node.id]
+        return None
+
     def visit_Attribute(self, node):
         full_name = self._get_full_name(node)
         if full_name and full_name.startswith("genesis."):
@@ -79,16 +153,11 @@ class GenesisImportVisitor(ast.NodeVisitor):
             full_name = self._get_full_name(node.func)
             if full_name and full_name.startswith("genesis."):
                 self.api_calls.add(full_name)
+        elif isinstance(node.func, ast.Name):
+            base = self.imports.get(node.func.id)
+            if base and base.startswith("genesis."):
+                self.api_calls.add(base)
         self.generic_visit(node)
-
-    def _get_full_name(self, node):
-        if isinstance(node, ast.Attribute):
-            prefix = self._get_full_name(node.value)
-            if prefix: return f"{prefix}.{node.attr}"
-        elif isinstance(node, ast.Name):
-            if node.id in self.imports:
-                return self.imports[node.id]
-        return None
 
 # ================= 主程序 =================
 def build_code_index():
@@ -100,13 +169,20 @@ def build_code_index():
         model="deepseek-chat"
     )
 
-    # 2. 加载知识库白名单
+    # 2. 加载知识库白名单 + 可构造类 id（用于 scene.add_entity 等实例方法解析）
     known_apis = set()
+    kb_class_ids = frozenset()
     if os.path.exists(API_KB_FILE):
         with open(API_KB_FILE, 'r', encoding='utf-8') as f:
             api_data = json.load(f)
             known_apis = set(item['api_id'] for item in api_data)
+            kb_class_ids = frozenset(
+                item['api_id']
+                for item in api_data
+                if item.get('type') == 'class' and item.get('api_id')
+            )
         print(f"📚 已加载白名单，包含 {len(known_apis)} 个标准 API。")
+        print(f"📚 其中 class 条目 {len(kb_class_ids)} 个（用于构造绑定）。")
     else:
         print("⚠️ 未找到知识库，将跳过白名单校验。")
 
@@ -138,21 +214,20 @@ def build_code_index():
 
             # --- A. AST 静态提取 Key APIs ---
             tree = ast.parse(code_content)
-            visitor = GenesisImportVisitor()
+            visitor = GenesisImportVisitor(kb_class_ids)
             visitor.visit(tree)
             
             raw_apis = list(visitor.api_calls)
             filtered_apis = []
 
             for api in raw_apis:
-                # 过滤器 1: 必须在 API 知识库里 (保证是正规军)
-                if known_apis and api not in known_apis:
-                    continue
-                # 过滤器 2: 不能是高频停用词 (保证是关键特征)
-                if api in COMMON_API_BLOCKLIST:
-                    continue
-                
-                filtered_apis.append(api)
+                if known_apis:
+                    canonical = resolve_api_to_known(api, known_apis)
+                    if canonical is None:
+                        continue
+                else:
+                    canonical = normalize_api_id_for_kb(api)
+                filtered_apis.append(canonical)
             
             # 去重并排序
             key_apis = sorted(list(set(filtered_apis)))
@@ -178,7 +253,7 @@ def build_code_index():
                     "title": meta_data.get("title", file_name),
                     "desc": meta_data.get("description", "No description."),
                     "tags": meta_data.get("tags", []),
-                    "key_apis": key_apis  # 这里的 API 都是“干货”
+                    "key_apis": key_apis  # 与 KB api_id 对齐（含 options 前缀归一化）
                 }
             }
             

@@ -1,0 +1,2419 @@
+{
+  "generated_at": "2026-03-28T21:51:16",
+  "methodology_note": "【重要说明】本报告对比的是「每条范例 metadata.key_apis」与「API 库 api_id」两个字符串集合。\nkey_apis 由 indexer_code.py 的 AST 访问器生成：只有调用链能从 import 映射到 genesis.* 时才会\n记录。例如 gs.Scene(...) 会得到 genesis.Scene；但 scene.add_entity(...)、scene.build() 里左侧\n是局部变量 scene，AST 无法解析出类型，因此不会写入 genesis.Scene.add_entity / genesis.Scene.build。\n同理，实体上的 .set_velocity、.get_state 等实例方法也大量不会被记入 key_apis。\n因此下列「未覆盖」只表示：没有任何范例的 key_apis 字段出现过该 api_id；不代表 examples 源码里\n没有调用这些 API。若要做「源码级」覆盖，需要对 AST 做简单的 defs/赋值追踪或补充正则扫描。",
+  "paths": {
+    "api_kb": "C:\\Users\\zijun\\Desktop\\scai_project\\Genesis\\rag_demo\\knowledge_base\\genesis_knowledge_base_final.json",
+    "code_index": "C:\\Users\\zijun\\Desktop\\scai_project\\Genesis\\rag_demo\\knowledge_base\\genesis_code_index.json"
+  },
+  "counts": {
+    "api_kb_distinct": 497,
+    "code_index_entries": 101,
+    "code_index_distinct_key_apis": 46,
+    "key_apis_total_mentions": 604,
+    "covered_apis": 46,
+    "missing_apis": 451,
+    "orphan_key_apis": 0
+  },
+  "coverage_rate": 0.092555,
+  "missing_api_ids": [
+    "genesis.Scene.add_camera",
+    "genesis.Scene.add_emitter",
+    "genesis.Scene.add_entity",
+    "genesis.Scene.add_force_field",
+    "genesis.Scene.add_light",
+    "genesis.Scene.add_mesh_light",
+    "genesis.Scene.add_sensor",
+    "genesis.Scene.build",
+    "genesis.Scene.clear_debug_object",
+    "genesis.Scene.clear_debug_objects",
+    "genesis.Scene.destroy",
+    "genesis.Scene.draw_debug_arrow",
+    "genesis.Scene.draw_debug_box",
+    "genesis.Scene.draw_debug_frame",
+    "genesis.Scene.draw_debug_frames",
+    "genesis.Scene.draw_debug_line",
+    "genesis.Scene.draw_debug_mesh",
+    "genesis.Scene.draw_debug_path",
+    "genesis.Scene.draw_debug_points",
+    "genesis.Scene.draw_debug_sphere",
+    "genesis.Scene.draw_debug_spheres",
+    "genesis.Scene.dump_ckpt_to_numpy",
+    "genesis.Scene.get_state",
+    "genesis.Scene.load_checkpoint",
+    "genesis.Scene.render_all_cameras",
+    "genesis.Scene.reset",
+    "genesis.Scene.save_checkpoint",
+    "genesis.Scene.start_recording",
+    "genesis.Scene.step",
+    "genesis.Scene.stop_recording",
+    "genesis.Scene.viewer.save_video",
+    "genesis.options.AvatarOptions",
+    "genesis.options.AvatarOptions.copy_attributes_from",
+    "genesis.options.BaseCouplerOptions",
+    "genesis.options.BaseCouplerOptions.copy_attributes_from",
+    "genesis.options.CoacdOptions",
+    "genesis.options.CoacdOptions.copy_attributes_from",
+    "genesis.options.FEMOptions.copy_attributes_from",
+    "genesis.options.FoamOptions",
+    "genesis.options.FoamOptions.copy_attributes_from",
+    "genesis.options.IPCCouplerOptions.copy_attributes_from",
+    "genesis.options.LegacyCouplerOptions",
+    "genesis.options.LegacyCouplerOptions.copy_attributes_from",
+    "genesis.options.MPMOptions.copy_attributes_from",
+    "genesis.options.PBDOptions.copy_attributes_from",
+    "genesis.options.ProfilingOptions.copy_attributes_from",
+    "genesis.options.RigidOptions.copy_attributes_from",
+    "genesis.options.SAPCouplerOptions.copy_attributes_from",
+    "genesis.options.SFOptions.copy_attributes_from",
+    "genesis.options.SPHOptions.copy_attributes_from",
+    "genesis.options.SimOptions.copy_attributes_from",
+    "genesis.options.ToolOptions",
+    "genesis.options.ToolOptions.copy_attributes_from",
+    "genesis.options.ViewerOptions.copy_attributes_from",
+    "genesis.options.VisOptions.copy_attributes_from",
+    "genesis.options.misc.CoacdOptions",
+    "genesis.options.misc.CoacdOptions.copy_attributes_from",
+    "genesis.options.misc.FoamOptions",
+    "genesis.options.misc.FoamOptions.copy_attributes_from",
+    "genesis.options.misc.Options",
+    "genesis.options.misc.Options.copy_attributes_from",
+    "genesis.options.morphs.Box.copy_attributes_from",
+    "genesis.options.morphs.CoacdOptions",
+    "genesis.options.morphs.CoacdOptions.copy_attributes_from",
+    "genesis.options.morphs.Cylinder.copy_attributes_from",
+    "genesis.options.morphs.Drone.copy_attributes_from",
+    "genesis.options.morphs.Drone.is_format",
+    "genesis.options.morphs.FileMorph",
+    "genesis.options.morphs.FileMorph.copy_attributes_from",
+    "genesis.options.morphs.FileMorph.is_format",
+    "genesis.options.morphs.MJCF.copy_attributes_from",
+    "genesis.options.morphs.MJCF.is_format",
+    "genesis.options.morphs.Mesh.copy_attributes_from",
+    "genesis.options.morphs.Mesh.is_format",
+    "genesis.options.morphs.MeshSet",
+    "genesis.options.morphs.MeshSet.copy_attributes_from",
+    "genesis.options.morphs.MeshSet.is_format",
+    "genesis.options.morphs.Morph",
+    "genesis.options.morphs.Morph.copy_attributes_from",
+    "genesis.options.morphs.Nowhere",
+    "genesis.options.morphs.Nowhere.copy_attributes_from",
+    "genesis.options.morphs.Options",
+    "genesis.options.morphs.Options.copy_attributes_from",
+    "genesis.options.morphs.Plane.copy_attributes_from",
+    "genesis.options.morphs.Primitive",
+    "genesis.options.morphs.Primitive.copy_attributes_from",
+    "genesis.options.morphs.Sphere.copy_attributes_from",
+    "genesis.options.morphs.Terrain.copy_attributes_from",
+    "genesis.options.morphs.TetGenMixin",
+    "genesis.options.morphs.TetGenMixin.copy_attributes_from",
+    "genesis.options.morphs.URDF.copy_attributes_from",
+    "genesis.options.morphs.URDF.is_format",
+    "genesis.options.options.Options",
+    "genesis.options.options.Options.copy_attributes_from",
+    "genesis.options.options.RBC",
+    "genesis.options.profiling.Options",
+    "genesis.options.profiling.Options.copy_attributes_from",
+    "genesis.options.profiling.ProfilingOptions",
+    "genesis.options.profiling.ProfilingOptions.copy_attributes_from",
+    "genesis.options.recorders.BaseFileWriterOptions",
+    "genesis.options.recorders.BaseFileWriterOptions.copy_attributes_from",
+    "genesis.options.recorders.BaseFileWriterOptions.model_post_init",
+    "genesis.options.recorders.BasePlotterOptions",
+    "genesis.options.recorders.BasePlotterOptions.copy_attributes_from",
+    "genesis.options.recorders.BasePlotterOptions.model_post_init",
+    "genesis.options.recorders.CSVFile",
+    "genesis.options.recorders.CSVFile.copy_attributes_from",
+    "genesis.options.recorders.CSVFile.model_post_init",
+    "genesis.options.recorders.LinePlotterMixinOptions",
+    "genesis.options.recorders.MPLImagePlot",
+    "genesis.options.recorders.MPLImagePlot.copy_attributes_from",
+    "genesis.options.recorders.MPLImagePlot.model_post_init",
+    "genesis.options.recorders.MPLLinePlot",
+    "genesis.options.recorders.MPLLinePlot.copy_attributes_from",
+    "genesis.options.recorders.MPLLinePlot.model_post_init",
+    "genesis.options.recorders.NPZFile",
+    "genesis.options.recorders.NPZFile.copy_attributes_from",
+    "genesis.options.recorders.NPZFile.model_post_init",
+    "genesis.options.recorders.Options",
+    "genesis.options.recorders.Options.copy_attributes_from",
+    "genesis.options.recorders.PyQtLinePlot",
+    "genesis.options.recorders.PyQtLinePlot.copy_attributes_from",
+    "genesis.options.recorders.PyQtLinePlot.model_post_init",
+    "genesis.options.recorders.RecorderOptions",
+    "genesis.options.recorders.RecorderOptions.copy_attributes_from",
+    "genesis.options.recorders.RecorderOptions.model_post_init",
+    "genesis.options.recorders.VideoFile",
+    "genesis.options.recorders.VideoFile.copy_attributes_from",
+    "genesis.options.recorders.VideoFile.model_post_init",
+    "genesis.options.renderers.BatchRenderer.copy_attributes_from",
+    "genesis.options.renderers.Options",
+    "genesis.options.renderers.Options.copy_attributes_from",
+    "genesis.options.renderers.Rasterizer.copy_attributes_from",
+    "genesis.options.renderers.RayTracer.copy_attributes_from",
+    "genesis.options.renderers.RendererOptions",
+    "genesis.options.renderers.RendererOptions.copy_attributes_from",
+    "genesis.options.renderers.Surface",
+    "genesis.options.renderers.Surface.copy_attributes_from",
+    "genesis.options.renderers.Surface.get_emission",
+    "genesis.options.renderers.Surface.get_rgba",
+    "genesis.options.renderers.Surface.get_texture",
+    "genesis.options.renderers.Surface.requires_uv",
+    "genesis.options.renderers.Surface.set_texture",
+    "genesis.options.renderers.Surface.shortcut_info",
+    "genesis.options.renderers.Surface.update_texture",
+    "genesis.options.sensors.BaseCameraOptions",
+    "genesis.options.sensors.BaseCameraOptions.copy_attributes_from",
+    "genesis.options.sensors.BaseCameraOptions.model_post_init",
+    "genesis.options.sensors.BatchRendererCameraOptions",
+    "genesis.options.sensors.BatchRendererCameraOptions.copy_attributes_from",
+    "genesis.options.sensors.BatchRendererCameraOptions.model_post_init",
+    "genesis.options.sensors.Contact.copy_attributes_from",
+    "genesis.options.sensors.ContactForce.copy_attributes_from",
+    "genesis.options.sensors.ContactForce.model_post_init",
+    "genesis.options.sensors.DepthCamera.copy_attributes_from",
+    "genesis.options.sensors.DepthCamera.model_post_init",
+    "genesis.options.sensors.DepthCameraPattern.compute_ray_dirs",
+    "genesis.options.sensors.DepthCameraPattern.compute_ray_starts",
+    "genesis.options.sensors.GridPattern.compute_ray_dirs",
+    "genesis.options.sensors.GridPattern.compute_ray_starts",
+    "genesis.options.sensors.IMU.copy_attributes_from",
+    "genesis.options.sensors.IMU.model_post_init",
+    "genesis.options.sensors.Lidar.copy_attributes_from",
+    "genesis.options.sensors.Lidar.model_post_init",
+    "genesis.options.sensors.NoisySensorOptionsMixin",
+    "genesis.options.sensors.NoisySensorOptionsMixin.model_post_init",
+    "genesis.options.sensors.Options",
+    "genesis.options.sensors.Options.copy_attributes_from",
+    "genesis.options.sensors.RasterizerCameraOptions",
+    "genesis.options.sensors.RasterizerCameraOptions.copy_attributes_from",
+    "genesis.options.sensors.RasterizerCameraOptions.model_post_init",
+    "genesis.options.sensors.RaycastPattern",
+    "genesis.options.sensors.RaycastPattern.compute_ray_dirs",
+    "genesis.options.sensors.RaycastPattern.compute_ray_starts",
+    "genesis.options.sensors.Raycaster",
+    "genesis.options.sensors.Raycaster.copy_attributes_from",
+    "genesis.options.sensors.Raycaster.model_post_init",
+    "genesis.options.sensors.RaytracerCameraOptions",
+    "genesis.options.sensors.RaytracerCameraOptions.copy_attributes_from",
+    "genesis.options.sensors.RaytracerCameraOptions.model_post_init",
+    "genesis.options.sensors.RigidSensorOptionsMixin",
+    "genesis.options.sensors.SensorOptions",
+    "genesis.options.sensors.SensorOptions.copy_attributes_from",
+    "genesis.options.sensors.SphericalPattern.compute_ray_dirs",
+    "genesis.options.sensors.SphericalPattern.compute_ray_starts",
+    "genesis.options.sensors.camera.BaseCameraOptions",
+    "genesis.options.sensors.camera.BaseCameraOptions.copy_attributes_from",
+    "genesis.options.sensors.camera.BaseCameraOptions.model_post_init",
+    "genesis.options.sensors.camera.BatchRendererCameraOptions",
+    "genesis.options.sensors.camera.BatchRendererCameraOptions.copy_attributes_from",
+    "genesis.options.sensors.camera.BatchRendererCameraOptions.model_post_init",
+    "genesis.options.sensors.camera.RasterizerCameraOptions",
+    "genesis.options.sensors.camera.RasterizerCameraOptions.copy_attributes_from",
+    "genesis.options.sensors.camera.RasterizerCameraOptions.model_post_init",
+    "genesis.options.sensors.camera.RaytracerCameraOptions",
+    "genesis.options.sensors.camera.RaytracerCameraOptions.copy_attributes_from",
+    "genesis.options.sensors.camera.RaytracerCameraOptions.model_post_init",
+    "genesis.options.sensors.camera.RigidSensorOptionsMixin",
+    "genesis.options.sensors.camera.SensorOptions",
+    "genesis.options.sensors.camera.SensorOptions.copy_attributes_from",
+    "genesis.options.sensors.options.Contact",
+    "genesis.options.sensors.options.Contact.copy_attributes_from",
+    "genesis.options.sensors.options.ContactForce",
+    "genesis.options.sensors.options.ContactForce.copy_attributes_from",
+    "genesis.options.sensors.options.ContactForce.model_post_init",
+    "genesis.options.sensors.options.DepthCamera",
+    "genesis.options.sensors.options.DepthCamera.copy_attributes_from",
+    "genesis.options.sensors.options.DepthCamera.model_post_init",
+    "genesis.options.sensors.options.DepthCameraPattern",
+    "genesis.options.sensors.options.DepthCameraPattern.compute_ray_dirs",
+    "genesis.options.sensors.options.DepthCameraPattern.compute_ray_starts",
+    "genesis.options.sensors.options.IMU",
+    "genesis.options.sensors.options.IMU.copy_attributes_from",
+    "genesis.options.sensors.options.IMU.model_post_init",
+    "genesis.options.sensors.options.NoisySensorOptionsMixin",
+    "genesis.options.sensors.options.NoisySensorOptionsMixin.model_post_init",
+    "genesis.options.sensors.options.Options",
+    "genesis.options.sensors.options.Options.copy_attributes_from",
+    "genesis.options.sensors.options.RaycastPattern",
+    "genesis.options.sensors.options.RaycastPattern.compute_ray_dirs",
+    "genesis.options.sensors.options.RaycastPattern.compute_ray_starts",
+    "genesis.options.sensors.options.Raycaster",
+    "genesis.options.sensors.options.Raycaster.copy_attributes_from",
+    "genesis.options.sensors.options.Raycaster.model_post_init",
+    "genesis.options.sensors.options.RigidSensorOptionsMixin",
+    "genesis.options.sensors.options.SensorOptions",
+    "genesis.options.sensors.options.SensorOptions.copy_attributes_from",
+    "genesis.options.sensors.raycaster.DepthCameraPattern",
+    "genesis.options.sensors.raycaster.DepthCameraPattern.compute_ray_dirs",
+    "genesis.options.sensors.raycaster.DepthCameraPattern.compute_ray_starts",
+    "genesis.options.sensors.raycaster.GridPattern",
+    "genesis.options.sensors.raycaster.GridPattern.compute_ray_dirs",
+    "genesis.options.sensors.raycaster.GridPattern.compute_ray_starts",
+    "genesis.options.sensors.raycaster.RaycastPattern",
+    "genesis.options.sensors.raycaster.RaycastPattern.compute_ray_dirs",
+    "genesis.options.sensors.raycaster.RaycastPattern.compute_ray_starts",
+    "genesis.options.sensors.raycaster.SphericalPattern",
+    "genesis.options.sensors.raycaster.SphericalPattern.compute_ray_dirs",
+    "genesis.options.sensors.raycaster.SphericalPattern.compute_ray_starts",
+    "genesis.options.solvers.AvatarOptions",
+    "genesis.options.solvers.AvatarOptions.copy_attributes_from",
+    "genesis.options.solvers.BaseCouplerOptions",
+    "genesis.options.solvers.BaseCouplerOptions.copy_attributes_from",
+    "genesis.options.solvers.FEMOptions",
+    "genesis.options.solvers.FEMOptions.copy_attributes_from",
+    "genesis.options.solvers.IPCCouplerOptions",
+    "genesis.options.solvers.IPCCouplerOptions.copy_attributes_from",
+    "genesis.options.solvers.LegacyCouplerOptions",
+    "genesis.options.solvers.LegacyCouplerOptions.copy_attributes_from",
+    "genesis.options.solvers.MPMOptions",
+    "genesis.options.solvers.MPMOptions.copy_attributes_from",
+    "genesis.options.solvers.Options",
+    "genesis.options.solvers.Options.copy_attributes_from",
+    "genesis.options.solvers.PBDOptions",
+    "genesis.options.solvers.PBDOptions.copy_attributes_from",
+    "genesis.options.solvers.RigidOptions",
+    "genesis.options.solvers.RigidOptions.copy_attributes_from",
+    "genesis.options.solvers.SAPCouplerOptions",
+    "genesis.options.solvers.SAPCouplerOptions.copy_attributes_from",
+    "genesis.options.solvers.SFOptions",
+    "genesis.options.solvers.SFOptions.copy_attributes_from",
+    "genesis.options.solvers.SPHOptions",
+    "genesis.options.solvers.SPHOptions.copy_attributes_from",
+    "genesis.options.solvers.SimOptions",
+    "genesis.options.solvers.SimOptions.copy_attributes_from",
+    "genesis.options.solvers.ToolOptions",
+    "genesis.options.solvers.ToolOptions.copy_attributes_from",
+    "genesis.options.surfaces.Aluminium.copy_attributes_from",
+    "genesis.options.surfaces.Aluminium.get_emission",
+    "genesis.options.surfaces.Aluminium.get_rgba",
+    "genesis.options.surfaces.Aluminium.get_texture",
+    "genesis.options.surfaces.Aluminium.requires_uv",
+    "genesis.options.surfaces.Aluminium.set_texture",
+    "genesis.options.surfaces.Aluminium.shortcut_info",
+    "genesis.options.surfaces.Aluminium.update_texture",
+    "genesis.options.surfaces.BSDF",
+    "genesis.options.surfaces.BSDF.copy_attributes_from",
+    "genesis.options.surfaces.BSDF.get_emission",
+    "genesis.options.surfaces.BSDF.get_rgba",
+    "genesis.options.surfaces.BSDF.get_texture",
+    "genesis.options.surfaces.BSDF.requires_uv",
+    "genesis.options.surfaces.BSDF.set_texture",
+    "genesis.options.surfaces.BSDF.shortcut_info",
+    "genesis.options.surfaces.BSDF.update_texture",
+    "genesis.options.surfaces.Collision",
+    "genesis.options.surfaces.Collision.copy_attributes_from",
+    "genesis.options.surfaces.Collision.get_emission",
+    "genesis.options.surfaces.Collision.get_rgba",
+    "genesis.options.surfaces.Collision.get_texture",
+    "genesis.options.surfaces.Collision.requires_uv",
+    "genesis.options.surfaces.Collision.set_texture",
+    "genesis.options.surfaces.Collision.shortcut_info",
+    "genesis.options.surfaces.Collision.update_texture",
+    "genesis.options.surfaces.ColorTexture",
+    "genesis.options.surfaces.ColorTexture.apply_cutoff",
+    "genesis.options.surfaces.ColorTexture.check_dim",
+    "genesis.options.surfaces.ColorTexture.check_simplify",
+    "genesis.options.surfaces.ColorTexture.copy_attributes_from",
+    "genesis.options.surfaces.ColorTexture.is_black",
+    "genesis.options.surfaces.Copper",
+    "genesis.options.surfaces.Copper.copy_attributes_from",
+    "genesis.options.surfaces.Copper.get_emission",
+    "genesis.options.surfaces.Copper.get_rgba",
+    "genesis.options.surfaces.Copper.get_texture",
+    "genesis.options.surfaces.Copper.requires_uv",
+    "genesis.options.surfaces.Copper.set_texture",
+    "genesis.options.surfaces.Copper.shortcut_info",
+    "genesis.options.surfaces.Copper.update_texture",
+    "genesis.options.surfaces.Default.copy_attributes_from",
+    "genesis.options.surfaces.Default.get_emission",
+    "genesis.options.surfaces.Default.get_rgba",
+    "genesis.options.surfaces.Default.get_texture",
+    "genesis.options.surfaces.Default.requires_uv",
+    "genesis.options.surfaces.Default.set_texture",
+    "genesis.options.surfaces.Default.shortcut_info",
+    "genesis.options.surfaces.Default.update_texture",
+    "genesis.options.surfaces.Emission.copy_attributes_from",
+    "genesis.options.surfaces.Emission.get_emission",
+    "genesis.options.surfaces.Emission.get_rgba",
+    "genesis.options.surfaces.Emission.get_texture",
+    "genesis.options.surfaces.Emission.requires_uv",
+    "genesis.options.surfaces.Emission.set_texture",
+    "genesis.options.surfaces.Emission.shortcut_info",
+    "genesis.options.surfaces.Emission.update_texture",
+    "genesis.options.surfaces.FoamOptions",
+    "genesis.options.surfaces.FoamOptions.copy_attributes_from",
+    "genesis.options.surfaces.Glass.copy_attributes_from",
+    "genesis.options.surfaces.Glass.get_emission",
+    "genesis.options.surfaces.Glass.get_rgba",
+    "genesis.options.surfaces.Glass.get_texture",
+    "genesis.options.surfaces.Glass.requires_uv",
+    "genesis.options.surfaces.Glass.set_texture",
+    "genesis.options.surfaces.Glass.shortcut_info",
+    "genesis.options.surfaces.Glass.update_texture",
+    "genesis.options.surfaces.Gold.copy_attributes_from",
+    "genesis.options.surfaces.Gold.get_emission",
+    "genesis.options.surfaces.Gold.get_rgba",
+    "genesis.options.surfaces.Gold.get_texture",
+    "genesis.options.surfaces.Gold.requires_uv",
+    "genesis.options.surfaces.Gold.set_texture",
+    "genesis.options.surfaces.Gold.shortcut_info",
+    "genesis.options.surfaces.Gold.update_texture",
+    "genesis.options.surfaces.ImageTexture",
+    "genesis.options.surfaces.ImageTexture.apply_cutoff",
+    "genesis.options.surfaces.ImageTexture.channel",
+    "genesis.options.surfaces.ImageTexture.check_dim",
+    "genesis.options.surfaces.ImageTexture.check_simplify",
+    "genesis.options.surfaces.ImageTexture.copy_attributes_from",
+    "genesis.options.surfaces.ImageTexture.is_black",
+    "genesis.options.surfaces.ImageTexture.mean_color",
+    "genesis.options.surfaces.Iron.copy_attributes_from",
+    "genesis.options.surfaces.Iron.get_emission",
+    "genesis.options.surfaces.Iron.get_rgba",
+    "genesis.options.surfaces.Iron.get_texture",
+    "genesis.options.surfaces.Iron.requires_uv",
+    "genesis.options.surfaces.Iron.set_texture",
+    "genesis.options.surfaces.Iron.shortcut_info",
+    "genesis.options.surfaces.Iron.update_texture",
+    "genesis.options.surfaces.Metal",
+    "genesis.options.surfaces.Metal.copy_attributes_from",
+    "genesis.options.surfaces.Metal.get_emission",
+    "genesis.options.surfaces.Metal.get_rgba",
+    "genesis.options.surfaces.Metal.get_texture",
+    "genesis.options.surfaces.Metal.requires_uv",
+    "genesis.options.surfaces.Metal.set_texture",
+    "genesis.options.surfaces.Metal.shortcut_info",
+    "genesis.options.surfaces.Metal.update_texture",
+    "genesis.options.surfaces.Options",
+    "genesis.options.surfaces.Options.copy_attributes_from",
+    "genesis.options.surfaces.Plastic.copy_attributes_from",
+    "genesis.options.surfaces.Plastic.get_emission",
+    "genesis.options.surfaces.Plastic.get_rgba",
+    "genesis.options.surfaces.Plastic.get_texture",
+    "genesis.options.surfaces.Plastic.requires_uv",
+    "genesis.options.surfaces.Plastic.set_texture",
+    "genesis.options.surfaces.Plastic.shortcut_info",
+    "genesis.options.surfaces.Plastic.update_texture",
+    "genesis.options.surfaces.Reflective.copy_attributes_from",
+    "genesis.options.surfaces.Reflective.get_emission",
+    "genesis.options.surfaces.Reflective.get_rgba",
+    "genesis.options.surfaces.Reflective.get_texture",
+    "genesis.options.surfaces.Reflective.requires_uv",
+    "genesis.options.surfaces.Reflective.set_texture",
+    "genesis.options.surfaces.Reflective.shortcut_info",
+    "genesis.options.surfaces.Reflective.update_texture",
+    "genesis.options.surfaces.Rough.copy_attributes_from",
+    "genesis.options.surfaces.Rough.get_emission",
+    "genesis.options.surfaces.Rough.get_rgba",
+    "genesis.options.surfaces.Rough.get_texture",
+    "genesis.options.surfaces.Rough.requires_uv",
+    "genesis.options.surfaces.Rough.set_texture",
+    "genesis.options.surfaces.Rough.shortcut_info",
+    "genesis.options.surfaces.Rough.update_texture",
+    "genesis.options.surfaces.Smooth.copy_attributes_from",
+    "genesis.options.surfaces.Smooth.get_emission",
+    "genesis.options.surfaces.Smooth.get_rgba",
+    "genesis.options.surfaces.Smooth.get_texture",
+    "genesis.options.surfaces.Smooth.requires_uv",
+    "genesis.options.surfaces.Smooth.set_texture",
+    "genesis.options.surfaces.Smooth.shortcut_info",
+    "genesis.options.surfaces.Smooth.update_texture",
+    "genesis.options.surfaces.Surface",
+    "genesis.options.surfaces.Surface.copy_attributes_from",
+    "genesis.options.surfaces.Surface.get_emission",
+    "genesis.options.surfaces.Surface.get_rgba",
+    "genesis.options.surfaces.Surface.get_texture",
+    "genesis.options.surfaces.Surface.requires_uv",
+    "genesis.options.surfaces.Surface.set_texture",
+    "genesis.options.surfaces.Surface.shortcut_info",
+    "genesis.options.surfaces.Surface.update_texture",
+    "genesis.options.surfaces.Texture",
+    "genesis.options.surfaces.Texture.apply_cutoff",
+    "genesis.options.surfaces.Texture.check_dim",
+    "genesis.options.surfaces.Texture.check_simplify",
+    "genesis.options.surfaces.Texture.copy_attributes_from",
+    "genesis.options.surfaces.Texture.is_black",
+    "genesis.options.surfaces.Water",
+    "genesis.options.surfaces.Water.copy_attributes_from",
+    "genesis.options.surfaces.Water.get_emission",
+    "genesis.options.surfaces.Water.get_rgba",
+    "genesis.options.surfaces.Water.get_texture",
+    "genesis.options.surfaces.Water.requires_uv",
+    "genesis.options.surfaces.Water.set_texture",
+    "genesis.options.surfaces.Water.shortcut_info",
+    "genesis.options.surfaces.Water.update_texture",
+    "genesis.options.textures.ColorTexture.apply_cutoff",
+    "genesis.options.textures.ColorTexture.check_dim",
+    "genesis.options.textures.ColorTexture.check_simplify",
+    "genesis.options.textures.ColorTexture.copy_attributes_from",
+    "genesis.options.textures.ColorTexture.is_black",
+    "genesis.options.textures.ImageTexture.apply_cutoff",
+    "genesis.options.textures.ImageTexture.channel",
+    "genesis.options.textures.ImageTexture.check_dim",
+    "genesis.options.textures.ImageTexture.check_simplify",
+    "genesis.options.textures.ImageTexture.copy_attributes_from",
+    "genesis.options.textures.ImageTexture.is_black",
+    "genesis.options.textures.ImageTexture.mean_color",
+    "genesis.options.textures.Options",
+    "genesis.options.textures.Options.copy_attributes_from",
+    "genesis.options.textures.Texture",
+    "genesis.options.textures.Texture.apply_cutoff",
+    "genesis.options.textures.Texture.check_dim",
+    "genesis.options.textures.Texture.check_simplify",
+    "genesis.options.textures.Texture.copy_attributes_from",
+    "genesis.options.textures.Texture.is_black",
+    "genesis.options.vis.Options",
+    "genesis.options.vis.Options.copy_attributes_from",
+    "genesis.options.vis.ViewerOptions",
+    "genesis.options.vis.ViewerOptions.copy_attributes_from",
+    "genesis.options.vis.VisOptions",
+    "genesis.options.vis.VisOptions.copy_attributes_from"
+  ],
+  "missing_detail": [
+    {
+      "api_id": "genesis.Scene.add_camera",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.Scene.add_emitter",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.Scene.add_entity",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.Scene.add_force_field",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.Scene.add_light",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.Scene.add_mesh_light",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.Scene.add_sensor",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.Scene.build",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.Scene.clear_debug_object",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.Scene.clear_debug_objects",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.Scene.destroy",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.Scene.draw_debug_arrow",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.Scene.draw_debug_box",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.Scene.draw_debug_frame",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.Scene.draw_debug_frames",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.Scene.draw_debug_line",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.Scene.draw_debug_mesh",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.Scene.draw_debug_path",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.Scene.draw_debug_points",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.Scene.draw_debug_sphere",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.Scene.draw_debug_spheres",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.Scene.dump_ckpt_to_numpy",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.Scene.get_state",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.Scene.load_checkpoint",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.Scene.render_all_cameras",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.Scene.reset",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.Scene.save_checkpoint",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.Scene.start_recording",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.Scene.step",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.Scene.stop_recording",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.Scene.viewer.save_video",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.AvatarOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.AvatarOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.BaseCouplerOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.BaseCouplerOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.CoacdOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.CoacdOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.FEMOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.FoamOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.FoamOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.IPCCouplerOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.LegacyCouplerOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.LegacyCouplerOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.MPMOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.PBDOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.ProfilingOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.RigidOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.SAPCouplerOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.SFOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.SPHOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.SimOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.ToolOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.ToolOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.ViewerOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.VisOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.misc.CoacdOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.misc.CoacdOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.misc.FoamOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.misc.FoamOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.misc.Options",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.misc.Options.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.morphs.Box.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.morphs.CoacdOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.morphs.CoacdOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.morphs.Cylinder.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.morphs.Drone.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.morphs.Drone.is_format",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.morphs.FileMorph",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.morphs.FileMorph.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.morphs.FileMorph.is_format",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.morphs.MJCF.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.morphs.MJCF.is_format",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.morphs.Mesh.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.morphs.Mesh.is_format",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.morphs.MeshSet",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.morphs.MeshSet.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.morphs.MeshSet.is_format",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.morphs.Morph",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.morphs.Morph.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.morphs.Nowhere",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.morphs.Nowhere.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.morphs.Options",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.morphs.Options.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.morphs.Plane.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.morphs.Primitive",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.morphs.Primitive.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.morphs.Sphere.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.morphs.Terrain.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.morphs.TetGenMixin",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.morphs.TetGenMixin.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.morphs.URDF.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.morphs.URDF.is_format",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.options.Options",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.options.Options.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.options.RBC",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.profiling.Options",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.profiling.Options.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.profiling.ProfilingOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.profiling.ProfilingOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.recorders.BaseFileWriterOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.recorders.BaseFileWriterOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.recorders.BaseFileWriterOptions.model_post_init",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.recorders.BasePlotterOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.recorders.BasePlotterOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.recorders.BasePlotterOptions.model_post_init",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.recorders.CSVFile",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.recorders.CSVFile.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.recorders.CSVFile.model_post_init",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.recorders.LinePlotterMixinOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.recorders.MPLImagePlot",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.recorders.MPLImagePlot.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.recorders.MPLImagePlot.model_post_init",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.recorders.MPLLinePlot",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.recorders.MPLLinePlot.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.recorders.MPLLinePlot.model_post_init",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.recorders.NPZFile",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.recorders.NPZFile.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.recorders.NPZFile.model_post_init",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.recorders.Options",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.recorders.Options.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.recorders.PyQtLinePlot",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.recorders.PyQtLinePlot.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.recorders.PyQtLinePlot.model_post_init",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.recorders.RecorderOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.recorders.RecorderOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.recorders.RecorderOptions.model_post_init",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.recorders.VideoFile",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.recorders.VideoFile.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.recorders.VideoFile.model_post_init",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.renderers.BatchRenderer.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.renderers.Options",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.renderers.Options.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.renderers.Rasterizer.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.renderers.RayTracer.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.renderers.RendererOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.renderers.RendererOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.renderers.Surface",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.renderers.Surface.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.renderers.Surface.get_emission",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.renderers.Surface.get_rgba",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.renderers.Surface.get_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.renderers.Surface.requires_uv",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.renderers.Surface.set_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.renderers.Surface.shortcut_info",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.renderers.Surface.update_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.BaseCameraOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.sensors.BaseCameraOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.BaseCameraOptions.model_post_init",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.BatchRendererCameraOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.sensors.BatchRendererCameraOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.BatchRendererCameraOptions.model_post_init",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.Contact.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.ContactForce.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.ContactForce.model_post_init",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.DepthCamera.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.DepthCamera.model_post_init",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.DepthCameraPattern.compute_ray_dirs",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.DepthCameraPattern.compute_ray_starts",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.GridPattern.compute_ray_dirs",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.GridPattern.compute_ray_starts",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.IMU.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.IMU.model_post_init",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.Lidar.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.Lidar.model_post_init",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.NoisySensorOptionsMixin",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.sensors.NoisySensorOptionsMixin.model_post_init",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.Options",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.sensors.Options.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.RasterizerCameraOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.sensors.RasterizerCameraOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.RasterizerCameraOptions.model_post_init",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.RaycastPattern",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.sensors.RaycastPattern.compute_ray_dirs",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.RaycastPattern.compute_ray_starts",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.Raycaster",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.sensors.Raycaster.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.Raycaster.model_post_init",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.RaytracerCameraOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.sensors.RaytracerCameraOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.RaytracerCameraOptions.model_post_init",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.RigidSensorOptionsMixin",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.sensors.SensorOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.sensors.SensorOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.SphericalPattern.compute_ray_dirs",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.SphericalPattern.compute_ray_starts",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.camera.BaseCameraOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.sensors.camera.BaseCameraOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.camera.BaseCameraOptions.model_post_init",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.camera.BatchRendererCameraOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.sensors.camera.BatchRendererCameraOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.camera.BatchRendererCameraOptions.model_post_init",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.camera.RasterizerCameraOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.sensors.camera.RasterizerCameraOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.camera.RasterizerCameraOptions.model_post_init",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.camera.RaytracerCameraOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.sensors.camera.RaytracerCameraOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.camera.RaytracerCameraOptions.model_post_init",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.camera.RigidSensorOptionsMixin",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.sensors.camera.SensorOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.sensors.camera.SensorOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.options.Contact",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.sensors.options.Contact.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.options.ContactForce",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.sensors.options.ContactForce.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.options.ContactForce.model_post_init",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.options.DepthCamera",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.sensors.options.DepthCamera.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.options.DepthCamera.model_post_init",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.options.DepthCameraPattern",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.sensors.options.DepthCameraPattern.compute_ray_dirs",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.options.DepthCameraPattern.compute_ray_starts",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.options.IMU",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.sensors.options.IMU.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.options.IMU.model_post_init",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.options.NoisySensorOptionsMixin",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.sensors.options.NoisySensorOptionsMixin.model_post_init",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.options.Options",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.sensors.options.Options.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.options.RaycastPattern",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.sensors.options.RaycastPattern.compute_ray_dirs",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.options.RaycastPattern.compute_ray_starts",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.options.Raycaster",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.sensors.options.Raycaster.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.options.Raycaster.model_post_init",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.options.RigidSensorOptionsMixin",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.sensors.options.SensorOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.sensors.options.SensorOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.raycaster.DepthCameraPattern",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.sensors.raycaster.DepthCameraPattern.compute_ray_dirs",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.raycaster.DepthCameraPattern.compute_ray_starts",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.raycaster.GridPattern",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.sensors.raycaster.GridPattern.compute_ray_dirs",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.raycaster.GridPattern.compute_ray_starts",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.raycaster.RaycastPattern",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.sensors.raycaster.RaycastPattern.compute_ray_dirs",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.raycaster.RaycastPattern.compute_ray_starts",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.raycaster.SphericalPattern",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.sensors.raycaster.SphericalPattern.compute_ray_dirs",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.sensors.raycaster.SphericalPattern.compute_ray_starts",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.solvers.AvatarOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.solvers.AvatarOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.solvers.BaseCouplerOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.solvers.BaseCouplerOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.solvers.FEMOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.solvers.FEMOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.solvers.IPCCouplerOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.solvers.IPCCouplerOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.solvers.LegacyCouplerOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.solvers.LegacyCouplerOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.solvers.MPMOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.solvers.MPMOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.solvers.Options",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.solvers.Options.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.solvers.PBDOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.solvers.PBDOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.solvers.RigidOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.solvers.RigidOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.solvers.SAPCouplerOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.solvers.SAPCouplerOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.solvers.SFOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.solvers.SFOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.solvers.SPHOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.solvers.SPHOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.solvers.SimOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.solvers.SimOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.solvers.ToolOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.solvers.ToolOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Aluminium.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Aluminium.get_emission",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Aluminium.get_rgba",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Aluminium.get_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Aluminium.requires_uv",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Aluminium.set_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Aluminium.shortcut_info",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Aluminium.update_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.BSDF",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.surfaces.BSDF.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.BSDF.get_emission",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.BSDF.get_rgba",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.BSDF.get_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.BSDF.requires_uv",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.BSDF.set_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.BSDF.shortcut_info",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.BSDF.update_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Collision",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Collision.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Collision.get_emission",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Collision.get_rgba",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Collision.get_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Collision.requires_uv",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Collision.set_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Collision.shortcut_info",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Collision.update_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.ColorTexture",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.surfaces.ColorTexture.apply_cutoff",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.ColorTexture.check_dim",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.ColorTexture.check_simplify",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.ColorTexture.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.ColorTexture.is_black",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Copper",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Copper.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Copper.get_emission",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Copper.get_rgba",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Copper.get_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Copper.requires_uv",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Copper.set_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Copper.shortcut_info",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Copper.update_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Default.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Default.get_emission",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Default.get_rgba",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Default.get_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Default.requires_uv",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Default.set_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Default.shortcut_info",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Default.update_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Emission.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Emission.get_emission",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Emission.get_rgba",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Emission.get_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Emission.requires_uv",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Emission.set_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Emission.shortcut_info",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Emission.update_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.FoamOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.surfaces.FoamOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Glass.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Glass.get_emission",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Glass.get_rgba",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Glass.get_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Glass.requires_uv",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Glass.set_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Glass.shortcut_info",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Glass.update_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Gold.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Gold.get_emission",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Gold.get_rgba",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Gold.get_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Gold.requires_uv",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Gold.set_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Gold.shortcut_info",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Gold.update_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.ImageTexture",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.surfaces.ImageTexture.apply_cutoff",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.ImageTexture.channel",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.ImageTexture.check_dim",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.ImageTexture.check_simplify",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.ImageTexture.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.ImageTexture.is_black",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.ImageTexture.mean_color",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Iron.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Iron.get_emission",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Iron.get_rgba",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Iron.get_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Iron.requires_uv",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Iron.set_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Iron.shortcut_info",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Iron.update_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Metal",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Metal.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Metal.get_emission",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Metal.get_rgba",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Metal.get_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Metal.requires_uv",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Metal.set_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Metal.shortcut_info",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Metal.update_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Options",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Options.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Plastic.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Plastic.get_emission",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Plastic.get_rgba",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Plastic.get_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Plastic.requires_uv",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Plastic.set_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Plastic.shortcut_info",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Plastic.update_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Reflective.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Reflective.get_emission",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Reflective.get_rgba",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Reflective.get_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Reflective.requires_uv",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Reflective.set_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Reflective.shortcut_info",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Reflective.update_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Rough.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Rough.get_emission",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Rough.get_rgba",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Rough.get_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Rough.requires_uv",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Rough.set_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Rough.shortcut_info",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Rough.update_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Smooth.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Smooth.get_emission",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Smooth.get_rgba",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Smooth.get_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Smooth.requires_uv",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Smooth.set_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Smooth.shortcut_info",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Smooth.update_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Surface",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Surface.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Surface.get_emission",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Surface.get_rgba",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Surface.get_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Surface.requires_uv",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Surface.set_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Surface.shortcut_info",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Surface.update_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Texture",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Texture.apply_cutoff",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Texture.check_dim",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Texture.check_simplify",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Texture.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Texture.is_black",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Water",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Water.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Water.get_emission",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Water.get_rgba",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Water.get_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Water.requires_uv",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Water.set_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Water.shortcut_info",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.surfaces.Water.update_texture",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.textures.ColorTexture.apply_cutoff",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.textures.ColorTexture.check_dim",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.textures.ColorTexture.check_simplify",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.textures.ColorTexture.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.textures.ColorTexture.is_black",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.textures.ImageTexture.apply_cutoff",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.textures.ImageTexture.channel",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.textures.ImageTexture.check_dim",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.textures.ImageTexture.check_simplify",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.textures.ImageTexture.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.textures.ImageTexture.is_black",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.textures.ImageTexture.mean_color",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.textures.Options",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.textures.Options.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.textures.Texture",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.textures.Texture.apply_cutoff",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.textures.Texture.check_dim",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.textures.Texture.check_simplify",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.textures.Texture.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.textures.Texture.is_black",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.vis.Options",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.vis.Options.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.vis.ViewerOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.vis.ViewerOptions.copy_attributes_from",
+      "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.vis.VisOptions",
+      "kb_type": "class"
+    },
+    {
+      "api_id": "genesis.options.vis.VisOptions.copy_attributes_from",
+      "kb_type": "method"
+    }
+  ],
+  "orphan_key_apis": [],
+  "sample_covered_files": {
+    "genesis.Scene": [
+      "ddp_multi_gpu.py",
+      "differentiable_push.py",
+      "elastic_dragon.py",
+      "fem_hard_and_soft_constraint.py",
+      "keyboard_teleop.py"
+    ],
+    "genesis.options.ViewerOptions": [
+      "ddp_multi_gpu.py",
+      "differentiable_push.py",
+      "elastic_dragon.py",
+      "keyboard_teleop.py",
+      "pbd_liquid.py"
+    ],
+    "genesis.options.morphs.Plane": [
+      "ddp_multi_gpu.py",
+      "fem_hard_and_soft_constraint.py",
+      "keyboard_teleop.py",
+      "render_async.py",
+      "contype.py"
+    ],
+    "genesis.options.SimOptions": [
+      "differentiable_push.py",
+      "elastic_dragon.py",
+      "fem_hard_and_soft_constraint.py",
+      "keyboard_teleop.py",
+      "pbd_liquid.py"
+    ],
+    "genesis.options.morphs.MJCF": [
+      "ddp_multi_gpu.py",
+      "keyboard_teleop.py",
+      "render_async.py",
+      "fem_cube_linked_with_arm.py",
+      "grasp_soft_cube.py"
+    ],
+    "genesis.options.RigidOptions": [
+      "keyboard_teleop.py",
+      "render_async.py",
+      "tower.py",
+      "hover_env.py",
+      "ipc_arm_cloth.py"
+    ],
+    "genesis.options.morphs.Box": [
+      "differentiable_push.py",
+      "fem_hard_and_soft_constraint.py",
+      "keyboard_teleop.py",
+      "pbd_liquid.py",
+      "contype.py"
+    ],
+    "genesis.options.morphs.Mesh": [
+      "differentiable_push.py",
+      "elastic_dragon.py",
+      "keyboard_teleop.py",
+      "contype.py",
+      "tower.py"
+    ],
+    "genesis.options.VisOptions": [
+      "cloth_attached_to_rigid.py",
+      "cloth_on_rigid.py",
+      "cut_dragon.py",
+      "flush_cubes.py",
+      "grasp_soft_cube.py"
+    ],
+    "genesis.options.surfaces.Default": [
+      "differentiable_push.py",
+      "elastic_dragon.py",
+      "keyboard_teleop.py",
+      "contype.py",
+      "cloth_attached_to_rigid.py"
+    ],
+    "genesis.options.morphs.URDF": [
+      "differentiable_push.py",
+      "cut_dragon.py",
+      "sand_wheel.py",
+      "water_wheel.py",
+      "ipc_twist_cloth_band.py"
+    ],
+    "genesis.options.morphs.Sphere": [
+      "fem_hard_and_soft_constraint.py",
+      "tower.py",
+      "cloth_on_rigid.py",
+      "flush_cubes.py",
+      "genesis_ipc_motion_test.py"
+    ],
+    "genesis.options.MPMOptions": [
+      "differentiable_push.py",
+      "cut_dragon.py",
+      "flush_cubes.py",
+      "grasp_soft_cube.py",
+      "sand_wheel.py"
+    ],
+    "genesis.options.surfaces.Rough": [
+      "cut_dragon.py",
+      "flush_cubes.py",
+      "sand_wheel.py",
+      "hover_env.py",
+      "grasp_env.py"
+    ],
+    "genesis.options.ProfilingOptions": [
+      "fem_hard_and_soft_constraint.py",
+      "fem_cube_linked_with_arm.py",
+      "grasp_env.py",
+      "follow_entity.py",
+      "contact_force_go2.py"
+    ],
+    "genesis.options.surfaces.Plastic": [
+      "genesis_ipc_motion_test.py",
+      "ipc_arm_cloth.py",
+      "ipc_cloth.py",
+      "ipc_grasp.py",
+      "ipc_twist_cloth_band.py"
+    ],
+    "genesis.options.FEMOptions": [
+      "fem_hard_and_soft_constraint.py",
+      "fem_cube_linked_with_arm.py",
+      "fem_fixed_constraint.py",
+      "fem_sphere_and_cube.py",
+      "franka_grasp_fem_sphere.py"
+    ],
+    "genesis.constraint_solver": [
+      "hover_env.py",
+      "grasp_env.py",
+      "domain_randomization.py",
+      "terrain_height_field.py",
+      "terrain_subterrain.py"
+    ],
+    "genesis.options.IPCCouplerOptions": [
+      "genesis_ipc_motion_test.py",
+      "ipc_arm_cloth.py",
+      "ipc_cloth.py",
+      "ipc_grasp.py",
+      "ipc_twist_cloth_band.py"
+    ],
+    "genesis.options.morphs.Drone": [
+      "fly.py",
+      "fly_route.py",
+      "hover_env.py",
+      "interactive_drone.py"
+    ]
+  }
+}
