@@ -75,7 +75,11 @@ def build_unit(code_entry: dict, api_lookup: dict) -> dict:
     title     = meta.get("title", file_id)
     desc      = meta.get("desc", "")
     tags      = meta.get("tags", [])
-    key_apis  = meta.get("key_apis", [])   # 已是 genesis.* 前缀，直接匹配
+    all_apis  = meta.get("all_apis", [])   # 全量 API（含 core）
+    key_apis  = meta.get("key_apis", [])   # 关键 API（去 core）
+    if not all_apis:
+        # 兼容旧版 code_index（仅有 key_apis）
+        all_apis = key_apis
     code      = code_entry.get("code", "")
 
     # --- 关联 API 文档（精简摘要） ---
@@ -119,6 +123,7 @@ def build_unit(code_entry: dict, api_lookup: dict) -> dict:
         "title":         title,
         "desc":          desc,
         "tags":          tags,
+        "all_apis":      all_apis,
         "key_apis":      key_apis,
         "api_docs":      api_docs,
         "code":          code,
@@ -151,9 +156,9 @@ def build_knowledge_units():
     missing_apis_set = set()
     for entry in code_index:
         unit = build_unit(entry, api_lookup)
-        # 统计有多少 key_api 在 API KB 里找不到（用于质量评估）
-        key_apis = entry.get("metadata", {}).get("key_apis", [])
-        missing = [k for k in key_apis if k not in api_lookup]
+        # 统计有多少 all_api 在 API KB 里找不到（用于质量评估）
+        all_apis = entry.get("metadata", {}).get("all_apis", []) or entry.get("metadata", {}).get("key_apis", [])
+        missing = [k for k in all_apis if k not in api_lookup]
         if missing:
             missing_apis_total += len(missing)
             missing_apis_set.update(missing)
@@ -174,12 +179,12 @@ def build_knowledge_units():
     print(f"   总单元数:           {len(units)}")
     print(f"   有 API 文档关联的:  {units_with_api} / {len(units)}")
     print(f"   总 API 文档链接数:  {total_api_links}")
-    print(f"   未找到的 key_apis:  {missing_apis_total}（可能是 AST 提取的 gs.alias，已忽略）")
+    print(f"   未找到的 all_apis:  {missing_apis_total}（可能是 AST 提取的 gs.alias，已忽略）")
     if missing_apis_set:
         missing_sorted = sorted(missing_apis_set)
         MAX_SHOW = 30
         shown = missing_sorted[:MAX_SHOW]
-        print(f"   未找到的 key_apis 列表（去重后 {len(missing_sorted)} 个，最多显示 {MAX_SHOW} 个）:")
+        print(f"   未找到的 all_apis 列表（去重后 {len(missing_sorted)} 个，最多显示 {MAX_SHOW} 个）:")
         for k in shown:
             print(f"     - {k}")
         if len(missing_sorted) > MAX_SHOW:
@@ -191,6 +196,7 @@ def build_knowledge_units():
         sample = units[0]
         print(f"\n🔎 样例预览（{sample['unit_id']}）:")
         print(f"   title:    {sample['title']}")
+        print(f"   all_apis: {sample.get('all_apis', [])}")
         print(f"   key_apis: {sample['key_apis']}")
         print(f"   api_docs: {len(sample['api_docs'])} 条")
         print(f"   embedding_text 前 200 chars:")

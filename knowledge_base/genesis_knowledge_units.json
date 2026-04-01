@@ -8,6 +8,15 @@
       "mixed_physics",
       "rendering"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Plane"
+    ],
     "key_apis": [
       "genesis.options.morphs.MJCF",
       "genesis.options.morphs.Plane"
@@ -37,6 +46,22 @@
       "fluid_mpm",
       "scene_creation",
       "interaction"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_camera",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.get_state",
+      "genesis.Scene.reset",
+      "genesis.Scene.step",
+      "genesis.options.MPMOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.Box",
+      "genesis.options.morphs.Mesh",
+      "genesis.options.morphs.URDF",
+      "genesis.options.surfaces.Default"
     ],
     "key_apis": [
       "genesis.Scene.get_state",
@@ -96,6 +121,16 @@
       "scene_creation",
       "rendering"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.Mesh",
+      "genesis.options.surfaces.Default"
+    ],
     "key_apis": [
       "genesis.options.morphs.Mesh",
       "genesis.options.surfaces.Default"
@@ -125,6 +160,21 @@
       "soft_body",
       "scene_creation",
       "interaction"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_camera",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.clear_debug_object",
+      "genesis.Scene.draw_debug_spheres",
+      "genesis.Scene.step",
+      "genesis.options.FEMOptions",
+      "genesis.options.ProfilingOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.morphs.Box",
+      "genesis.options.morphs.Plane",
+      "genesis.options.morphs.Sphere"
     ],
     "key_apis": [
       "genesis.Scene.clear_debug_object",
@@ -184,6 +234,19 @@
       "interaction",
       "scene_creation"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.options.RigidOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.Box",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Mesh",
+      "genesis.options.morphs.Plane",
+      "genesis.options.surfaces.Default"
+    ],
     "key_apis": [
       "genesis.options.morphs.Box",
       "genesis.options.morphs.MJCF",
@@ -234,6 +297,16 @@
       "fluid_sph",
       "scene_creation"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.PBDOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.Box"
+    ],
     "key_apis": [
       "genesis.options.morphs.Box"
     ],
@@ -256,6 +329,15 @@
       "articulated_robot",
       "rigid_body",
       "scene_creation"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.options.RigidOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Plane"
     ],
     "key_apis": [
       "genesis.options.morphs.MJCF",
@@ -287,6 +369,13 @@
       "scene_creation",
       "rendering"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.SFOptions",
+      "genesis.options.SimOptions"
+    ],
     "key_apis": [
       "genesis.options.SFOptions"
     ],
@@ -309,6 +398,17 @@
       "rigid_body",
       "scene_creation",
       "interaction"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.Box",
+      "genesis.options.morphs.Mesh",
+      "genesis.options.morphs.Plane",
+      "genesis.options.surfaces.Default"
     ],
     "key_apis": [
       "genesis.options.morphs.Box",
@@ -354,6 +454,16 @@
       "scene_creation",
       "interaction"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.Box",
+      "genesis.options.morphs.Plane"
+    ],
     "key_apis": [
       "genesis.options.morphs.Box",
       "genesis.options.morphs.Plane"
@@ -383,6 +493,20 @@
       "rigid_body",
       "scene_creation",
       "interaction"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.RigidOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.Box",
+      "genesis.options.morphs.Cylinder",
+      "genesis.options.morphs.Mesh",
+      "genesis.options.morphs.Plane",
+      "genesis.options.morphs.Sphere"
     ],
     "key_apis": [
       "genesis.options.morphs.Box",
@@ -435,6 +559,20 @@
       "soft_body",
       "interaction"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.PBDOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.VisOptions",
+      "genesis.options.morphs.Box",
+      "genesis.options.morphs.Mesh",
+      "genesis.options.morphs.Plane",
+      "genesis.options.surfaces.Default"
+    ],
     "key_apis": [
       "genesis.options.morphs.Box",
       "genesis.options.morphs.Mesh",
@@ -478,6 +616,20 @@
       "soft_body",
       "scene_creation",
       "rendering"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.PBDOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.VisOptions",
+      "genesis.options.morphs.Mesh",
+      "genesis.options.morphs.Plane",
+      "genesis.options.morphs.Sphere",
+      "genesis.options.surfaces.Default"
     ],
     "key_apis": [
       "genesis.options.morphs.Mesh",
@@ -523,6 +675,20 @@
       "mixed_physics",
       "scene_creation"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.MPMOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.VisOptions",
+      "genesis.options.morphs.Mesh",
+      "genesis.options.morphs.URDF",
+      "genesis.options.surfaces.Iron",
+      "genesis.options.surfaces.Rough"
+    ],
     "key_apis": [
       "genesis.options.morphs.Mesh",
       "genesis.options.morphs.URDF",
@@ -566,6 +732,20 @@
       "articulated_robot",
       "soft_body",
       "interaction"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_camera",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.draw_debug_spheres",
+      "genesis.Scene.step",
+      "genesis.options.FEMOptions",
+      "genesis.options.ProfilingOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.morphs.Box",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Plane"
     ],
     "key_apis": [
       "genesis.Scene.draw_debug_spheres",
@@ -617,6 +797,22 @@
       "fluid_mpm",
       "scene_creation",
       "rendering"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_emitter",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.MPMOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.VisOptions",
+      "genesis.options.morphs.Box",
+      "genesis.options.morphs.Cylinder",
+      "genesis.options.morphs.Plane",
+      "genesis.options.morphs.Sphere",
+      "genesis.options.surfaces.Rough"
     ],
     "key_apis": [
       "genesis.Scene.add_emitter",
@@ -676,6 +872,20 @@
       "fluid_mpm",
       "interaction"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.MPMOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.VisOptions",
+      "genesis.options.morphs.Box",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Plane",
+      "genesis.options.surfaces.Default"
+    ],
     "key_apis": [
       "genesis.options.morphs.Box",
       "genesis.options.morphs.MJCF",
@@ -720,6 +930,19 @@
       "scene_creation",
       "interaction"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_emitter",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.MPMOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.VisOptions",
+      "genesis.options.morphs.URDF",
+      "genesis.options.surfaces.Rough"
+    ],
     "key_apis": [
       "genesis.Scene.add_emitter",
       "genesis.options.morphs.URDF",
@@ -756,6 +979,20 @@
       "fluid_sph",
       "soft_body",
       "mixed_physics"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.MPMOptions",
+      "genesis.options.SPHOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.VisOptions",
+      "genesis.options.morphs.Box",
+      "genesis.options.morphs.Mesh",
+      "genesis.options.surfaces.Default"
     ],
     "key_apis": [
       "genesis.options.morphs.Box",
@@ -794,6 +1031,19 @@
       "rigid_body",
       "interaction"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.SPHOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.VisOptions",
+      "genesis.options.morphs.Box",
+      "genesis.options.morphs.Plane",
+      "genesis.options.surfaces.Default"
+    ],
     "key_apis": [
       "genesis.options.morphs.Box",
       "genesis.options.morphs.Plane",
@@ -830,6 +1080,22 @@
       "fluid_sph",
       "fluid_mpm",
       "interaction"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_emitter",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.MPMOptions",
+      "genesis.options.PBDOptions",
+      "genesis.options.SPHOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.VisOptions",
+      "genesis.options.morphs.Plane",
+      "genesis.options.morphs.URDF",
+      "genesis.options.surfaces.Glass"
     ],
     "key_apis": [
       "genesis.Scene.add_emitter",
@@ -875,6 +1141,16 @@
       "scene_creation",
       "rendering"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.Drone",
+      "genesis.options.morphs.Plane"
+    ],
     "key_apis": [
       "genesis.options.morphs.Drone",
       "genesis.options.morphs.Plane"
@@ -905,6 +1181,15 @@
       "motion_planning",
       "camera_control"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_camera",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.options.SimOptions",
+      "genesis.options.morphs.Drone",
+      "genesis.options.morphs.Plane"
+    ],
     "key_apis": [
       "genesis.options.morphs.Drone",
       "genesis.options.morphs.Plane"
@@ -934,6 +1219,19 @@
       "rigid_body",
       "scene_creation",
       "interaction"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.constraint_solver",
+      "genesis.options.RigidOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.VisOptions",
+      "genesis.options.morphs.Drone",
+      "genesis.options.morphs.Mesh",
+      "genesis.options.morphs.Plane",
+      "genesis.options.surfaces.Rough",
+      "genesis.options.textures.ColorTexture"
     ],
     "key_apis": [
       "genesis.options.morphs.Drone",
@@ -986,6 +1284,7 @@
       "interaction",
       "vis_export"
     ],
+    "all_apis": [],
     "key_apis": [],
     "api_docs": [],
     "code": "import argparse\nimport os\nimport pickle\nfrom importlib import metadata\n\nimport torch\n\ntry:\n    try:\n        if metadata.version(\"rsl-rl\"):\n            raise ImportError\n    except metadata.PackageNotFoundError:\n        if metadata.version(\"rsl-rl-lib\") != \"2.2.4\":\n            raise ImportError\nexcept (metadata.PackageNotFoundError, ImportError) as e:\n    raise ImportError(\"Please uninstall 'rsl_rl' and install 'rsl-rl-lib==2.2.4'.\") from e\nfrom rsl_rl.runners import OnPolicyRunner\n\nimport genesis as gs\n\nfrom hover_env import HoverEnv\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-e\", \"--exp_name\", type=str, default=\"drone-hovering\")\n    parser.add_argument(\"--ckpt\", type=int, default=300)\n    parser.add_argument(\"--record\", action=\"store_true\", default=False)\n    args = parser.parse_args()\n\n    gs.init()\n\n    log_dir = f\"logs/{args.exp_name}\"\n    env_cfg, obs_cfg, reward_cfg, command_cfg, train_cfg = pickle.load(open(f\"logs/{args.exp_name}/cfgs.pkl\", \"rb\"))\n    reward_cfg[\"reward_scales\"] = {}\n\n    # visualize the target\n    env_cfg[\"visualize_target\"] = True\n    # for video recording\n    env_cfg[\"visualize_camera\"] = args.record\n    # set the max FPS for visualization\n    env_cfg[\"max_visualize_FPS\"] = 60\n\n    env = HoverEnv(\n        num_envs=1,\n        env_cfg=env_cfg,\n        obs_cfg=obs_cfg,\n        reward_cfg=reward_cfg,\n        command_cfg=command_cfg,\n        show_viewer=True,\n    )\n\n    runner = OnPolicyRunner(env, train_cfg, log_dir, device=gs.device)\n    resume_path = os.path.join(log_dir, f\"model_{args.ckpt}.pt\")\n    runner.load(resume_path)\n    policy = runner.get_inference_policy(device=gs.device)\n\n    obs, _ = env.reset()\n\n    max_sim_step = int(env_cfg[\"episode_length_s\"] * env_cfg[\"max_visualize_FPS\"])\n    with torch.no_grad():\n        if args.record:\n            env.cam.start_recording()\n            for _ in range(max_sim_step):\n                actions = policy(obs)\n                obs, rews, dones, infos = env.step(actions)\n                env.cam.render()\n            env.cam.stop_recording(save_to_filename=\"video.mp4\", fps=env_cfg[\"max_visualize_FPS\"])\n        else:\n            for _ in range(max_sim_step):\n                actions = policy(obs)\n                obs, rews, dones, infos = env.step(actions)\n\n\nif __name__ == \"__main__\":\n    main()\n\n\"\"\"\n# evaluation\npython examples/drone/hover_eval.py\n\n# Note\nIf you experience slow performance or encounter other issues\nduring evaluation, try removing the --record option.\n\"\"\"\n",
@@ -1000,6 +1299,7 @@
       "motion_planning",
       "interaction"
     ],
+    "all_apis": [],
     "key_apis": [],
     "api_docs": [],
     "code": "import argparse\nimport os\nimport pickle\nimport shutil\nfrom importlib import metadata\n\ntry:\n    try:\n        if metadata.version(\"rsl-rl\"):\n            raise ImportError\n    except metadata.PackageNotFoundError:\n        if metadata.version(\"rsl-rl-lib\") != \"2.2.4\":\n            raise ImportError\nexcept (metadata.PackageNotFoundError, ImportError) as e:\n    raise ImportError(\"Please uninstall 'rsl_rl' and install 'rsl-rl-lib==2.2.4'.\") from e\nfrom rsl_rl.runners import OnPolicyRunner\n\nimport genesis as gs\n\nfrom hover_env import HoverEnv\n\n\ndef get_train_cfg(exp_name, max_iterations):\n    train_cfg_dict = {\n        \"algorithm\": {\n            \"class_name\": \"PPO\",\n            \"clip_param\": 0.2,\n            \"desired_kl\": 0.01,\n            \"entropy_coef\": 0.004,\n            \"gamma\": 0.99,\n            \"lam\": 0.95,\n            \"learning_rate\": 0.0003,\n            \"max_grad_norm\": 1.0,\n            \"num_learning_epochs\": 5,\n            \"num_mini_batches\": 4,\n            \"schedule\": \"adaptive\",\n            \"use_clipped_value_loss\": True,\n            \"value_loss_coef\": 1.0,\n        },\n        \"init_member_classes\": {},\n        \"policy\": {\n            \"activation\": \"tanh\",\n            \"actor_hidden_dims\": [128, 128],\n            \"critic_hidden_dims\": [128, 128],\n            \"init_noise_std\": 1.0,\n            \"class_name\": \"ActorCritic\",\n        },\n        \"runner\": {\n            \"checkpoint\": -1,\n            \"experiment_name\": exp_name,\n            \"load_run\": -1,\n            \"log_interval\": 1,\n            \"max_iterations\": max_iterations,\n            \"record_interval\": -1,\n            \"resume\": False,\n            \"resume_path\": None,\n            \"run_name\": \"\",\n        },\n        \"runner_class_name\": \"OnPolicyRunner\",\n        \"num_steps_per_env\": 100,\n        \"save_interval\": 100,\n        \"empirical_normalization\": None,\n        \"seed\": 1,\n    }\n\n    return train_cfg_dict\n\n\ndef get_cfgs():\n    env_cfg = {\n        \"num_actions\": 4,\n        # termination\n        \"termination_if_roll_greater_than\": 180,  # degree\n        \"termination_if_pitch_greater_than\": 180,\n        \"termination_if_close_to_ground\": 0.1,\n        \"termination_if_x_greater_than\": 3.0,\n        \"termination_if_y_greater_than\": 3.0,\n        \"termination_if_z_greater_than\": 2.0,\n        # base pose\n        \"base_init_pos\": [0.0, 0.0, 1.0],\n        \"base_init_quat\": [1.0, 0.0, 0.0, 0.0],\n        \"episode_length_s\": 15.0,\n        \"at_target_threshold\": 0.1,\n        \"resampling_time_s\": 3.0,\n        \"simulate_action_latency\": True,\n        \"clip_actions\": 1.0,\n        # visualization\n        \"visualize_target\": False,\n        \"visualize_camera\": False,\n        \"max_visualize_FPS\": 60,\n    }\n    obs_cfg = {\n        \"num_obs\": 17,\n        \"obs_scales\": {\n            \"rel_pos\": 1 / 3.0,\n            \"lin_vel\": 1 / 3.0,\n            \"ang_vel\": 1 / 3.14159,\n        },\n    }\n    reward_cfg = {\n        \"yaw_lambda\": -10.0,\n        \"reward_scales\": {\n            \"target\": 10.0,\n            \"smooth\": -1e-4,\n            \"yaw\": 0.01,\n            \"angular\": -2e-4,\n            \"crash\": -10.0,\n        },\n    }\n    command_cfg = {\n        \"num_commands\": 3,\n        \"pos_x_range\": [-1.0, 1.0],\n        \"pos_y_range\": [-1.0, 1.0],\n        \"pos_z_range\": [1.0, 1.0],\n    }\n\n    return env_cfg, obs_cfg, reward_cfg, command_cfg\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-e\", \"--exp_name\", type=str, default=\"drone-hovering\")\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=False)\n    parser.add_argument(\"-B\", \"--num_envs\", type=int, default=8192)\n    parser.add_argument(\"--max_iterations\", type=int, default=301)\n    args = parser.parse_args()\n\n    gs.init(backend=gs.gpu, precision=\"32\", logging_level=\"warning\", performance_mode=True)\n\n    log_dir = f\"logs/{args.exp_name}\"\n    env_cfg, obs_cfg, reward_cfg, command_cfg = get_cfgs()\n    train_cfg = get_train_cfg(args.exp_name, args.max_iterations)\n\n    if os.path.exists(log_dir):\n        shutil.rmtree(log_dir)\n    os.makedirs(log_dir, exist_ok=True)\n\n    if args.vis:\n        env_cfg[\"visualize_target\"] = True\n\n    pickle.dump(\n        [env_cfg, obs_cfg, reward_cfg, command_cfg, train_cfg],\n        open(f\"{log_dir}/cfgs.pkl\", \"wb\"),\n    )\n\n    env = HoverEnv(\n        num_envs=args.num_envs,\n        env_cfg=env_cfg,\n        obs_cfg=obs_cfg,\n        reward_cfg=reward_cfg,\n        command_cfg=command_cfg,\n        show_viewer=args.vis,\n    )\n\n    runner = OnPolicyRunner(env, train_cfg, log_dir, device=gs.device)\n\n    runner.learn(num_learning_iterations=args.max_iterations, init_at_random_ep_len=True)\n\n\nif __name__ == \"__main__\":\n    main()\n\n\"\"\"\n# training\npython examples/drone/hover_train.py\n\"\"\"\n",
@@ -1013,6 +1313,16 @@
       "rigid_body",
       "interaction",
       "scene_creation"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.VisOptions",
+      "genesis.options.morphs.Drone",
+      "genesis.options.morphs.Plane"
     ],
     "key_apis": [
       "genesis.options.morphs.Drone",
@@ -1043,6 +1353,7 @@
       "articulated_robot",
       "motion_planning"
     ],
+    "all_apis": [],
     "key_apis": [],
     "api_docs": [],
     "code": "from typing import TYPE_CHECKING\n\nimport torch\nimport numpy as np\n\nfrom genesis.utils.geom import quat_to_xyz\n\nif TYPE_CHECKING:\n    from genesis.engine.entities.drone_entity import DroneEntity\n\n\nclass PIDController:\n    def __init__(self, kp, ki, kd):\n        self.kp = kp\n        self.ki = ki\n        self.kd = kd\n        self.integral = 0.0\n        self.prev_error = 0.0\n\n    def update(self, error, dt):\n        self.integral += error * dt\n        derivative = (error - self.prev_error) / dt\n        self.prev_error = error\n\n        return (self.kp * error) + (self.ki * self.integral) + (self.kd * derivative)\n\n\nclass DronePIDController:\n    def __init__(self, drone: \"DroneEntity\", dt, base_rpm, pid_params):\n        self.__pid_pos_x = PIDController(kp=pid_params[0][0], ki=pid_params[0][1], kd=pid_params[0][2])\n        self.__pid_pos_y = PIDController(kp=pid_params[1][0], ki=pid_params[1][1], kd=pid_params[1][2])\n        self.__pid_pos_z = PIDController(kp=pid_params[2][0], ki=pid_params[2][1], kd=pid_params[2][2])\n\n        self.__pid_vel_x = PIDController(kp=pid_params[3][0], ki=pid_params[3][1], kd=pid_params[3][2])\n        self.__pid_vel_y = PIDController(kp=pid_params[4][0], ki=pid_params[4][1], kd=pid_params[4][2])\n        self.__pid_vel_z = PIDController(kp=pid_params[5][0], ki=pid_params[5][1], kd=pid_params[5][2])\n\n        self.__pid_att_roll = PIDController(kp=pid_params[6][0], ki=pid_params[6][1], kd=pid_params[6][2])\n        self.__pid_att_pitch = PIDController(kp=pid_params[7][0], ki=pid_params[7][1], kd=pid_params[7][2])\n        self.__pid_att_yaw = PIDController(kp=pid_params[8][0], ki=pid_params[8][1], kd=pid_params[8][2])\n\n        self.drone = drone\n        self.__dt = dt\n        self.__base_rpm = base_rpm\n\n    def __get_drone_pos(self) -> torch.Tensor:\n        return self.drone.get_pos()\n\n    def __get_drone_vel(self) -> torch.Tensor:\n        return self.drone.get_vel()\n\n    def __get_drone_att(self) -> torch.Tensor:\n        quat = self.drone.get_quat()\n        return quat_to_xyz(quat, rpy=True, degrees=True)\n\n    def __mixer(self, thrust, roll, pitch, yaw, x_vel, y_vel) -> torch.Tensor:\n        M1 = self.__base_rpm + (thrust - roll - pitch - yaw - x_vel + y_vel)\n        M2 = self.__base_rpm + (thrust - roll + pitch + yaw + x_vel + y_vel)\n        M3 = self.__base_rpm + (thrust + roll + pitch - yaw + x_vel - y_vel)\n        M4 = self.__base_rpm + (thrust + roll - pitch + yaw - x_vel - y_vel)\n        return torch.Tensor([M1, M2, M3, M4])\n\n    def update(self, target) -> np.ndarray:\n        curr_pos = self.__get_drone_pos()\n        curr_vel = self.__get_drone_vel()\n        curr_att = self.__get_drone_att()\n\n        err_pos_x = target[0] - curr_pos[0]\n        err_pos_y = target[1] - curr_pos[1]\n        err_pos_z = target[2] - curr_pos[2]\n\n        vel_des_x = self.__pid_pos_x.update(err_pos_x, self.__dt)\n        vel_des_y = self.__pid_pos_y.update(err_pos_y, self.__dt)\n        vel_des_z = self.__pid_pos_z.update(err_pos_z, self.__dt)\n\n        error_vel_x = vel_des_x - curr_vel[0]\n        error_vel_y = vel_des_y - curr_vel[1]\n        error_vel_z = vel_des_z - curr_vel[2]\n\n        x_vel_del = self.__pid_vel_x.update(error_vel_x, self.__dt)\n        y_vel_del = self.__pid_vel_y.update(error_vel_y, self.__dt)\n        thrust_des = self.__pid_vel_z.update(error_vel_z, self.__dt)\n\n        err_roll = 0.0 - curr_att[0]\n        err_pitch = 0.0 - curr_att[1]\n        err_yaw = 0.0 - curr_att[2]\n\n        roll_del = self.__pid_att_roll.update(err_roll, self.__dt)\n        pitch_del = self.__pid_att_pitch.update(err_pitch, self.__dt)\n        yaw_del = self.__pid_att_yaw.update(err_yaw, self.__dt)\n\n        prop_rpms = self.__mixer(thrust_des, roll_del, pitch_del, yaw_del, x_vel_del, y_vel_del)\n\n        return prop_rpms.cpu().numpy()\n",
@@ -1056,6 +1367,18 @@
       "mixed_physics",
       "rigid_body",
       "interaction"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.IPCCouplerOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.morphs.Box",
+      "genesis.options.morphs.Plane",
+      "genesis.options.morphs.Sphere",
+      "genesis.options.surfaces.Plastic"
     ],
     "key_apis": [
       "genesis.options.morphs.Box",
@@ -1100,6 +1423,21 @@
       "articulated_robot",
       "interaction",
       "mixed_physics"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.options.IPCCouplerOptions",
+      "genesis.options.RigidOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.Box",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Mesh",
+      "genesis.options.morphs.Plane",
+      "genesis.options.surfaces.Default",
+      "genesis.options.surfaces.Plastic"
     ],
     "key_apis": [
       "genesis.options.morphs.Box",
@@ -1159,6 +1497,19 @@
       "mixed_physics",
       "interaction"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.IPCCouplerOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.morphs.Box",
+      "genesis.options.morphs.Mesh",
+      "genesis.options.morphs.Plane",
+      "genesis.options.morphs.Sphere",
+      "genesis.options.surfaces.Plastic"
+    ],
     "key_apis": [
       "genesis.options.morphs.Box",
       "genesis.options.morphs.Mesh",
@@ -1210,6 +1561,18 @@
       "interaction",
       "mixed_physics"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.IPCCouplerOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.morphs.Box",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Plane",
+      "genesis.options.surfaces.Plastic"
+    ],
     "key_apis": [
       "genesis.options.morphs.Box",
       "genesis.options.morphs.MJCF",
@@ -1254,6 +1617,17 @@
       "articulated_robot",
       "interaction"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.IPCCouplerOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.morphs.Mesh",
+      "genesis.options.morphs.URDF",
+      "genesis.options.surfaces.Plastic"
+    ],
     "key_apis": [
       "genesis.options.morphs.Mesh",
       "genesis.options.morphs.URDF",
@@ -1291,6 +1665,7 @@
       "motion_planning",
       "interaction"
     ],
+    "all_apis": [],
     "key_apis": [],
     "api_docs": [],
     "code": "import argparse\nimport os\nimport pickle\n\nimport torch\nfrom go2_env import Go2Env\n\nimport genesis as gs\n\n\ndef get_cfgs():\n    env_cfg = {\n        \"num_actions\": 12,\n        # joint/link names\n        \"default_joint_angles\": {  # [rad]\n            \"FL_hip_joint\": 0.0,\n            \"FR_hip_joint\": 0.0,\n            \"RL_hip_joint\": 0.0,\n            \"RR_hip_joint\": 0.0,\n            \"FL_thigh_joint\": 0.8,\n            \"FR_thigh_joint\": 0.8,\n            \"RL_thigh_joint\": 1.0,\n            \"RR_thigh_joint\": 1.0,\n            \"FL_calf_joint\": -1.5,\n            \"FR_calf_joint\": -1.5,\n            \"RL_calf_joint\": -1.5,\n            \"RR_calf_joint\": -1.5,\n        },\n        \"joint_names\": [\n            \"FR_hip_joint\",\n            \"FR_thigh_joint\",\n            \"FR_calf_joint\",\n            \"FL_hip_joint\",\n            \"FL_thigh_joint\",\n            \"FL_calf_joint\",\n            \"RR_hip_joint\",\n            \"RR_thigh_joint\",\n            \"RR_calf_joint\",\n            \"RL_hip_joint\",\n            \"RL_thigh_joint\",\n            \"RL_calf_joint\",\n        ],\n        # PD\n        \"kp\": 70.0,\n        \"kd\": 3.0,\n        # termination\n        \"termination_if_roll_greater_than\": 1000,  # degree\n        \"termination_if_pitch_greater_than\": 1000,\n        # base pose\n        \"base_init_pos\": [0.0, 0.0, 0.35],\n        \"base_init_quat\": [0.0, 0.0, 0.0, 1.0],\n        \"episode_length_s\": 20.0,\n        \"resampling_time_s\": 4.0,\n        \"action_scale\": 0.5,\n        \"simulate_action_latency\": True,\n        \"clip_actions\": 100.0,\n    }\n    obs_cfg = {\n        \"num_obs\": 60,\n        \"obs_scales\": {\n            \"lin_vel\": 2.0,\n            \"ang_vel\": 0.25,\n            \"dof_pos\": 1.0,\n            \"dof_vel\": 0.05,\n        },\n    }\n    reward_cfg = {\n        \"reward_scales\": {},\n    }\n    command_cfg = {\n        \"num_commands\": 3,\n        \"lin_vel_x_range\": [0, 0],\n        \"lin_vel_y_range\": [0, 0],\n        \"ang_vel_range\": [0, 0],\n    }\n\n    return env_cfg, obs_cfg, reward_cfg, command_cfg\n\n\nclass BackflipEnv(Go2Env):\n    def get_observations(self):\n        phase = torch.pi * self.episode_length_buf[:, None] / self.max_episode_length\n        self.obs_buf = torch.cat(\n            [\n                self.base_ang_vel * self.obs_scales[\"ang_vel\"],  # 3\n                self.projected_gravity,  # 3\n                (self.dof_pos - self.default_dof_pos) * self.obs_scales[\"dof_pos\"],  # 12\n                self.dof_vel * self.obs_scales[\"dof_vel\"],  # 12\n                self.actions,  # 12\n                self.last_actions,  # 12\n                torch.sin(phase),\n                torch.cos(phase),\n                torch.sin(phase / 2),\n                torch.cos(phase / 2),\n                torch.sin(phase / 4),\n                torch.cos(phase / 4),\n            ],\n            axis=-1,\n        )\n\n        return self.obs_buf\n\n    def step(self, actions):\n        super().step(actions)\n        self.get_observations()\n        return self.obs_buf, self.rew_buf, self.reset_buf, self.extras\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-e\", \"--exp_name\", type=str, default=\"single\")\n    args = parser.parse_args()\n\n    gs.init()\n\n    env_cfg, obs_cfg, reward_cfg, command_cfg = get_cfgs()\n\n    if args.exp_name == \"single\":\n        env_cfg[\"episode_length_s\"] = 2\n    elif args.exp_name == \"double\":\n        env_cfg[\"episode_length_s\"] = 3\n    else:\n        raise RuntimeError\n\n    env = BackflipEnv(\n        num_envs=1,\n        env_cfg=env_cfg,\n        obs_cfg=obs_cfg,\n        reward_cfg=reward_cfg,\n        command_cfg=command_cfg,\n        show_viewer=True,\n    )\n\n    policy = torch.jit.load(f\"./backflip/{args.exp_name}.pt\")\n    policy.to(device=gs.device)\n\n    obs, _ = env.reset()\n    with torch.no_grad():\n        while True:\n            actions = policy(obs)\n            obs, rews, dones, infos = env.step(actions)\n\n\nif __name__ == \"__main__\":\n    main()\n\n\"\"\"\n# evaluation\npython examples/locomotion/go2_backflip.py -e single\npython examples/locomotion/go2_backflip.py -e double\n\"\"\"\n",
@@ -1304,6 +1679,14 @@
       "articulated_robot",
       "motion_planning",
       "interaction"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.options.RigidOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.VisOptions",
+      "genesis.options.morphs.URDF"
     ],
     "key_apis": [
       "genesis.options.morphs.URDF"
@@ -1328,6 +1711,7 @@
       "motion_planning",
       "interaction"
     ],
+    "all_apis": [],
     "key_apis": [],
     "api_docs": [],
     "code": "import argparse\nimport os\nimport pickle\nfrom importlib import metadata\n\nimport torch\n\ntry:\n    try:\n        if metadata.version(\"rsl-rl\"):\n            raise ImportError\n    except metadata.PackageNotFoundError:\n        if metadata.version(\"rsl-rl-lib\") != \"2.2.4\":\n            raise ImportError\nexcept (metadata.PackageNotFoundError, ImportError) as e:\n    raise ImportError(\"Please uninstall 'rsl_rl' and install 'rsl-rl-lib==2.2.4'.\") from e\nfrom rsl_rl.runners import OnPolicyRunner\n\nimport genesis as gs\n\nfrom go2_env import Go2Env\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-e\", \"--exp_name\", type=str, default=\"go2-walking\")\n    parser.add_argument(\"--ckpt\", type=int, default=100)\n    args = parser.parse_args()\n\n    gs.init(backend=gs.cpu)\n\n    log_dir = f\"logs/{args.exp_name}\"\n    env_cfg, obs_cfg, reward_cfg, command_cfg, train_cfg = pickle.load(open(f\"logs/{args.exp_name}/cfgs.pkl\", \"rb\"))\n    reward_cfg[\"reward_scales\"] = {}\n\n    env = Go2Env(\n        num_envs=1,\n        env_cfg=env_cfg,\n        obs_cfg=obs_cfg,\n        reward_cfg=reward_cfg,\n        command_cfg=command_cfg,\n        show_viewer=True,\n    )\n\n    runner = OnPolicyRunner(env, train_cfg, log_dir, device=gs.device)\n    resume_path = os.path.join(log_dir, f\"model_{args.ckpt}.pt\")\n    runner.load(resume_path)\n    policy = runner.get_inference_policy(device=gs.device)\n\n    obs, _ = env.reset()\n    with torch.no_grad():\n        while True:\n            actions = policy(obs)\n            obs, rews, dones, infos = env.step(actions)\n\n\nif __name__ == \"__main__\":\n    main()\n\n\"\"\"\n# evaluation\npython examples/locomotion/go2_eval.py -e go2-walking -v --ckpt 100\n\"\"\"\n",
@@ -1342,6 +1726,7 @@
       "motion_planning",
       "interaction"
     ],
+    "all_apis": [],
     "key_apis": [],
     "api_docs": [],
     "code": "import argparse\nimport os\nimport pickle\nimport shutil\nfrom importlib import metadata\n\ntry:\n    try:\n        if metadata.version(\"rsl-rl\"):\n            raise ImportError\n    except metadata.PackageNotFoundError:\n        if metadata.version(\"rsl-rl-lib\") != \"2.2.4\":\n            raise ImportError\nexcept (metadata.PackageNotFoundError, ImportError) as e:\n    raise ImportError(\"Please uninstall 'rsl_rl' and install 'rsl-rl-lib==2.2.4'.\") from e\nfrom rsl_rl.runners import OnPolicyRunner\n\nimport genesis as gs\n\nfrom go2_env import Go2Env\n\n\ndef get_train_cfg(exp_name, max_iterations):\n    train_cfg_dict = {\n        \"algorithm\": {\n            \"class_name\": \"PPO\",\n            \"clip_param\": 0.2,\n            \"desired_kl\": 0.01,\n            \"entropy_coef\": 0.01,\n            \"gamma\": 0.99,\n            \"lam\": 0.95,\n            \"learning_rate\": 0.001,\n            \"max_grad_norm\": 1.0,\n            \"num_learning_epochs\": 5,\n            \"num_mini_batches\": 4,\n            \"schedule\": \"adaptive\",\n            \"use_clipped_value_loss\": True,\n            \"value_loss_coef\": 1.0,\n        },\n        \"init_member_classes\": {},\n        \"policy\": {\n            \"activation\": \"elu\",\n            \"actor_hidden_dims\": [512, 256, 128],\n            \"critic_hidden_dims\": [512, 256, 128],\n            \"init_noise_std\": 1.0,\n            \"class_name\": \"ActorCritic\",\n        },\n        \"runner\": {\n            \"checkpoint\": -1,\n            \"experiment_name\": exp_name,\n            \"load_run\": -1,\n            \"log_interval\": 1,\n            \"max_iterations\": max_iterations,\n            \"record_interval\": -1,\n            \"resume\": False,\n            \"resume_path\": None,\n            \"run_name\": \"\",\n        },\n        \"runner_class_name\": \"OnPolicyRunner\",\n        \"num_steps_per_env\": 24,\n        \"save_interval\": 100,\n        \"empirical_normalization\": None,\n        \"seed\": 1,\n    }\n\n    return train_cfg_dict\n\n\ndef get_cfgs():\n    env_cfg = {\n        \"num_actions\": 12,\n        # joint/link names\n        \"default_joint_angles\": {  # [rad]\n            \"FL_hip_joint\": 0.0,\n            \"FR_hip_joint\": 0.0,\n            \"RL_hip_joint\": 0.0,\n            \"RR_hip_joint\": 0.0,\n            \"FL_thigh_joint\": 0.8,\n            \"FR_thigh_joint\": 0.8,\n            \"RL_thigh_joint\": 1.0,\n            \"RR_thigh_joint\": 1.0,\n            \"FL_calf_joint\": -1.5,\n            \"FR_calf_joint\": -1.5,\n            \"RL_calf_joint\": -1.5,\n            \"RR_calf_joint\": -1.5,\n        },\n        \"joint_names\": [\n            \"FR_hip_joint\",\n            \"FR_thigh_joint\",\n            \"FR_calf_joint\",\n            \"FL_hip_joint\",\n            \"FL_thigh_joint\",\n            \"FL_calf_joint\",\n            \"RR_hip_joint\",\n            \"RR_thigh_joint\",\n            \"RR_calf_joint\",\n            \"RL_hip_joint\",\n            \"RL_thigh_joint\",\n            \"RL_calf_joint\",\n        ],\n        # PD\n        \"kp\": 20.0,\n        \"kd\": 0.5,\n        # termination\n        \"termination_if_roll_greater_than\": 10,  # degree\n        \"termination_if_pitch_greater_than\": 10,\n        # base pose\n        \"base_init_pos\": [0.0, 0.0, 0.42],\n        \"base_init_quat\": [1.0, 0.0, 0.0, 0.0],\n        \"episode_length_s\": 20.0,\n        \"resampling_time_s\": 4.0,\n        \"action_scale\": 0.25,\n        \"simulate_action_latency\": True,\n        \"clip_actions\": 100.0,\n    }\n    obs_cfg = {\n        \"num_obs\": 45,\n        \"obs_scales\": {\n            \"lin_vel\": 2.0,\n            \"ang_vel\": 0.25,\n            \"dof_pos\": 1.0,\n            \"dof_vel\": 0.05,\n        },\n    }\n    reward_cfg = {\n        \"tracking_sigma\": 0.25,\n        \"base_height_target\": 0.3,\n        \"feet_height_target\": 0.075,\n        \"reward_scales\": {\n            \"tracking_lin_vel\": 1.0,\n            \"tracking_ang_vel\": 0.2,\n            \"lin_vel_z\": -1.0,\n            \"base_height\": -50.0,\n            \"action_rate\": -0.005,\n            \"similar_to_default\": -0.1,\n        },\n    }\n    command_cfg = {\n        \"num_commands\": 3,\n        \"lin_vel_x_range\": [0.5, 0.5],\n        \"lin_vel_y_range\": [0, 0],\n        \"ang_vel_range\": [0, 0],\n    }\n\n    return env_cfg, obs_cfg, reward_cfg, command_cfg\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-e\", \"--exp_name\", type=str, default=\"go2-walking\")\n    parser.add_argument(\"-B\", \"--num_envs\", type=int, default=4096)\n    parser.add_argument(\"--max_iterations\", type=int, default=101)\n    args = parser.parse_args()\n\n    gs.init(backend=gs.gpu, precision=\"32\", logging_level=\"warning\", performance_mode=True)\n\n    log_dir = f\"logs/{args.exp_name}\"\n    env_cfg, obs_cfg, reward_cfg, command_cfg = get_cfgs()\n    train_cfg = get_train_cfg(args.exp_name, args.max_iterations)\n\n    if os.path.exists(log_dir):\n        shutil.rmtree(log_dir)\n    os.makedirs(log_dir, exist_ok=True)\n\n    pickle.dump(\n        [env_cfg, obs_cfg, reward_cfg, command_cfg, train_cfg],\n        open(f\"{log_dir}/cfgs.pkl\", \"wb\"),\n    )\n\n    env = Go2Env(\n        num_envs=args.num_envs, env_cfg=env_cfg, obs_cfg=obs_cfg, reward_cfg=reward_cfg, command_cfg=command_cfg\n    )\n\n    runner = OnPolicyRunner(env, train_cfg, log_dir, device=gs.device)\n\n    runner.learn(num_learning_iterations=args.max_iterations, init_at_random_ep_len=True)\n\n\nif __name__ == \"__main__\":\n    main()\n\n\"\"\"\n# training\npython examples/locomotion/go2_train.py\n\"\"\"\n",
@@ -1356,6 +1741,7 @@
       "interaction",
       "rendering"
     ],
+    "all_apis": [],
     "key_apis": [],
     "api_docs": [],
     "code": "import os\nimport time\nfrom collections import deque\nfrom collections.abc import Iterator\n\nimport numpy as np\nimport torch\nimport torch.nn as nn\nimport torch.nn.functional as F\nfrom torch.utils.tensorboard import SummaryWriter\n\n\nclass BehaviorCloning:\n    \"\"\"Multi-task behavior cloning with action prediction and object pose estimation\"\"\"\n\n    def __init__(self, env, cfg: dict, teacher: nn.Module, device: str = \"cpu\"):\n        self._env = env\n        self._cfg = cfg\n        self._device = device\n        self._teacher = teacher\n        self._num_steps_per_env = cfg[\"num_steps_per_env\"]\n\n        # Stereo rgb: 6 channels (3 left + 3 right)\n        rgb_shape = (6, env.image_height, env.image_width)\n        action_dim = env.num_actions\n\n        # Multi-task policy with action and pose heads\n        self._policy = Policy(cfg[\"policy\"], action_dim).to(device)\n\n        # Initialize optimizer\n        self._optimizer = torch.optim.Adam(self._policy.parameters(), lr=cfg[\"learning_rate\"])\n\n        # Experience buffer with pose data\n        self._buffer = ExperienceBuffer(\n            num_envs=env.num_envs,\n            max_size=self._cfg[\"buffer_size\"],\n            img_shape=rgb_shape,\n            state_dim=self._cfg[\"policy\"][\"action_head\"][\"state_obs_dim\"],\n            action_dim=action_dim,\n            device=device,\n            dtype=self._policy.dtype,\n        )\n\n        # Training state\n        self._current_iter = 0\n\n    def learn(self, num_learning_iterations: int, log_dir: str) -> None:\n        self._rewbuffer = deque(maxlen=100)\n        self._cur_reward_sum = torch.zeros(self._env.num_envs, dtype=torch.float, device=self._device)\n        self._buffer.clear()\n\n        tf_writer = SummaryWriter(log_dir)\n\n        for it in range(num_learning_iterations):\n            # Collect experience\n            start_time = time.time()\n            self._collect_with_rl_teacher()\n            end_time = time.time()\n            forward_time = end_time - start_time\n\n            # Training steps for both action and pose prediction\n            total_action_loss = 0.0\n            total_pose_loss = 0.0\n            num_batches = 0\n\n            start_time = time.time()\n            generator = self._buffer.get_batches(self._cfg.get(\"num_mini_batches\", 4), self._cfg[\"num_epochs\"])\n            for batch in generator:\n                # Forward pass for both action and pose prediction\n                pred_action = self._policy(batch[\"rgb_obs\"], batch[\"robot_pose\"])\n                pred_left_pose, pred_right_pose = self._policy.predict_pose(batch[\"rgb_obs\"])\n\n                # Compute action prediction loss\n                action_loss = F.mse_loss(pred_action, batch[\"actions\"])\n\n                # Compute pose estimation loss (position + orientation)\n                pose_left_loss = self._compute_pose_loss(pred_left_pose, batch[\"object_poses\"])\n                pose_right_loss = self._compute_pose_loss(pred_right_pose, batch[\"object_poses\"])\n                pose_loss = pose_left_loss + pose_right_loss\n\n                # Combined loss with weights\n                total_loss = action_loss + pose_loss\n\n                # Backward pass\n                self._optimizer.zero_grad()\n                total_loss.backward()\n                self._optimizer.step()\n                torch.nn.utils.clip_grad_norm_(self._policy.parameters(), self._cfg[\"max_grad_norm\"])\n\n                total_action_loss += action_loss\n                total_pose_loss += pose_loss\n                num_batches += 1\n\n            end_time = time.time()\n            backward_time = end_time - start_time\n\n            # Compute average losses\n            if num_batches == 0:\n                raise ValueError(\"No batches collected\")\n            else:\n                avg_action_loss = total_action_loss / num_batches\n                avg_pose_loss = total_pose_loss / num_batches\n\n            fps = (self._num_steps_per_env * self._env.num_envs) / (forward_time)\n            # Logging\n            if (it + 1) % self._cfg[\"log_freq\"] == 0:\n                current_lr = self._optimizer.param_groups[0][\"lr\"]\n\n                tf_writer.add_scalar(\"loss/action_loss\", avg_action_loss, it)\n                tf_writer.add_scalar(\"loss/pose_loss\", avg_pose_loss, it)\n                tf_writer.add_scalar(\"loss/total_loss\", avg_action_loss + avg_pose_loss, it)\n                tf_writer.add_scalar(\"lr\", current_lr, it)\n                tf_writer.add_scalar(\"buffer_size\", self._buffer.size, it)\n                tf_writer.add_scalar(\"speed/forward\", forward_time, it)\n                tf_writer.add_scalar(\"speed/backward\", backward_time, it)\n                tf_writer.add_scalar(\"speed/fps\", int(fps), it)\n\n                #\n                print(\"--------------------------------\")\n                info_str = f\" | Iteration:     {it + 1:04d}\\n\"\n                info_str += f\" | Action Loss:   {avg_action_loss:.6f}\\n\"\n                info_str += f\" | Pose Loss:     {avg_pose_loss:.6f}\\n\"\n                info_str += f\" | Total Loss:    {avg_action_loss + avg_pose_loss:.6f}\\n\"\n                info_str += f\" | Learning Rate: {current_lr:.6f}\\n\"\n                info_str += f\" | Forward Time:  {forward_time:.2f}s\\n\"\n                info_str += f\" | Backward Time: {backward_time:.2f}s\\n\"\n                info_str += f\" | FPS:           {int(fps)}\"\n                print(info_str)\n\n                if len(self._rewbuffer) > 0:\n                    tf_writer.add_scalar(\"reward/mean\", np.mean(self._rewbuffer), it)\n\n            # Save checkpoints periodically\n            if (it + 1) % self._cfg[\"save_freq\"] == 0:\n                self.save(os.path.join(log_dir, f\"checkpoint_{it + 1:04d}.pt\"))\n\n        tf_writer.close()\n\n    def _compute_pose_loss(self, pred_poses: torch.Tensor, target_poses: torch.Tensor) -> torch.Tensor:\n        \"\"\"Compute pose loss with separate position and orientation components.\"\"\"\n        # Split into position and orientation\n        pred_pos = pred_poses[:, :3]\n        pred_quat = pred_poses[:, 3:7]\n        target_pos = target_poses[:, :3]\n        target_quat = target_poses[:, 3:7]\n\n        # Position loss (MSE)\n        pos_loss = F.mse_loss(pred_pos, target_pos)\n\n        # Orientation loss (quaternion distance)\n        # Normalize quaternions\n        pred_quat = F.normalize(pred_quat, p=2, dim=1)\n        target_quat = F.normalize(target_quat, p=2, dim=1)\n\n        # Quaternion distance: 1 - |dot(q1, q2)|\n        # Note: we use this as a proxy for the actual distance between two quaternions\n        # because the impact of the orientation loss (auxiliary task) is not significant\n        # compared to the action loss (main task)\n        quat_dot = torch.sum(pred_quat * target_quat, dim=1)\n        quat_loss = torch.mean(1.0 - torch.abs(quat_dot))\n\n        return pos_loss + quat_loss\n\n    def _collect_with_rl_teacher(self) -> None:\n        \"\"\"Collect experience from environment using stereo rgb images and object poses.\"\"\"\n        # Get state observation\n        obs, _ = self._env.get_observations()\n        with torch.inference_mode():\n            for _ in range(self._num_steps_per_env):\n                # Get stereo rgb images\n                rgb_obs = self._env.get_stereo_rgb_images(normalize=True)\n\n                # Get teacher action\n                teacher_action = self._teacher(obs).detach()\n\n                # Get end-effector position\n                ee_pose = self._env.robot.ee_pose\n\n                # Get object pose in camera frame\n                # object_pose_camera = self._get_object_pose_in_camera_frame()\n                object_pose = torch.cat(\n                    [\n                        self._env.object.get_pos(),\n                        self._env.object.get_quat(),\n                    ],\n                    dim=-1,\n                )\n\n                # Store in buffer\n                self._buffer.add(rgb_obs, ee_pose, object_pose, teacher_action)\n\n                # Step environment with student action\n                student_action = self._policy(rgb_obs.float(), ee_pose.float())\n\n                # Simple Dagger: use student action if its difference with teacher action is less than 0.5\n                action_diff = torch.norm(student_action - teacher_action, dim=-1)\n                condition = (action_diff < 1.0).unsqueeze(-1).expand_as(student_action)\n                action = torch.where(condition, student_action, teacher_action)\n\n                next_obs, reward, done, _ = self._env.step(action)\n                self._cur_reward_sum += reward\n\n                obs = next_obs\n                new_ids = (done > 0).nonzero(as_tuple=False)\n                self._rewbuffer.extend(self._cur_reward_sum[new_ids][:, 0].cpu().numpy().tolist())\n                self._cur_reward_sum[new_ids] = 0\n\n    def save(self, path: str) -> None:\n        \"\"\"Save model checkpoint.\"\"\"\n        checkpoint = {\n            \"model_state_dict\": self._policy.state_dict(),\n            \"optimizer_state_dict\": self._optimizer.state_dict(),\n            \"current_iter\": self._current_iter,\n            \"config\": self._cfg,\n        }\n        torch.save(checkpoint, path)\n        print(f\"Model saved to {path}\")\n\n    def load(self, path: str) -> None:\n        \"\"\"Load model checkpoint.\"\"\"\n        checkpoint = torch.load(path, map_location=self._device, weights_only=False)\n        self._policy.load_state_dict(checkpoint[\"model_state_dict\"])\n        self._optimizer.load_state_dict(checkpoint[\"optimizer_state_dict\"])\n        self.current_iter = checkpoint[\"current_iter\"]\n        print(f\"Model loaded from {path}\")\n\n    def load_finetuned_model(self, path: str) -> None:\n        \"\"\"Load a fine-tuned model checkpoint.\"\"\"\n        checkpoint = torch.load(path, map_location=self._device, weights_only=False)\n        self._policy.load_state_dict(checkpoint[\"model_state_dict\"])\n        self._optimizer.load_state_dict(checkpoint[\"optimizer_state_dict\"])\n        self._current_iter = checkpoint[\"current_iter\"]\n        print(f\"Fine-tuned model loaded from {path}\")\n\n\nclass ExperienceBuffer:\n    \"\"\"A first-in-first-out buffer for experience replay.\"\"\"\n\n    def __init__(\n        self,\n        num_envs: int,\n        max_size: int,\n        img_shape: tuple[int, int, int],\n        state_dim: int,\n        action_dim: int,\n        device: str = \"cpu\",\n        dtype: torch.dtype | None = None,\n    ):\n        self._num_envs = num_envs\n        self._max_size = max_size\n        self._img_shape = img_shape\n        self._state_dim = state_dim\n        self._action_dim = action_dim\n        self._device = device\n        self._ptr = 0\n        self._size = 0\n\n        # Buffers for data\n        self._rgb_obs = torch.empty(max_size, num_envs, *img_shape, dtype=dtype, device=device)\n        self._robot_pose = torch.empty(max_size, num_envs, state_dim, dtype=dtype, device=device)\n        self._object_poses = torch.empty(max_size, num_envs, 7, dtype=dtype, device=device)\n        self._actions = torch.empty(max_size, num_envs, action_dim, dtype=dtype, device=device)\n\n    def add(\n        self,\n        rgb_obs: torch.Tensor,\n        robot_pose: torch.Tensor,\n        object_poses: torch.Tensor,\n        actions: torch.Tensor,\n    ) -> None:\n        \"\"\"Add experience to buffer.\"\"\"\n        self._ptr = (self._ptr + 1) % self._max_size\n        self._rgb_obs[self._ptr] = rgb_obs\n        self._robot_pose[self._ptr] = robot_pose\n        self._object_poses[self._ptr] = object_poses\n        self._actions[self._ptr] = actions\n        self._size = min(self._size + 1, self._max_size)\n\n    def get_batches(self, num_mini_batches: int, num_epochs: int) -> Iterator[dict[str, torch.Tensor]]:\n        \"\"\"Generate batches for training.\"\"\"\n        # calculate the size of each mini-batch\n        batch_size = self._size // num_mini_batches\n        for _ in range(num_epochs):\n            indices = torch.randperm(self._size)\n            for batch_idx in range(0, self._size, batch_size):\n                batch_indices = indices[batch_idx : batch_idx + batch_size]\n\n                # Yield a mini-batch of data\n                yield {\n                    \"rgb_obs\": self._rgb_obs[batch_indices].reshape(-1, *self._img_shape),\n                    \"robot_pose\": self._robot_pose[batch_indices].reshape(-1, self._state_dim),\n                    \"object_poses\": self._object_poses[batch_indices].reshape(-1, 7),\n                    \"actions\": self._actions[batch_indices].reshape(-1, self._action_dim),\n                }\n\n    def clear(self) -> None:\n        \"\"\"Clear the buffer.\"\"\"\n        self._rgb_obs.zero_()\n        self._robot_pose.zero_()\n        self._object_poses.zero_()\n        self._actions.zero_()\n        self._ptr = 0\n        self._size = 0\n\n    def is_full(self) -> bool:\n        \"\"\"Check if buffer is full.\"\"\"\n        return self._size == self._max_size\n\n    @property\n    def size(self) -> int:\n        \"\"\"Get buffer size.\"\"\"\n        return self._size\n\n\nclass Policy(nn.Module):\n    \"\"\"Multi-task behavior cloning policy with shared stereo encoder/decoder.\"\"\"\n\n    def __init__(self, config: dict, action_dim: int):\n        super().__init__()\n\n        # Shared encoder for both left and right cameras\n        self.shared_encoder = self._build_cnn(config[\"vision_encoder\"])\n\n        # Feature fusion layer to combine stereo features\n        vision_encoder_conv_out_channels = config[\"vision_encoder\"][\"conv_layers\"][-1][\"out_channels\"]\n        vision_encoder_output_dim = vision_encoder_conv_out_channels * 4 * 4\n\n        self.feature_fusion = nn.Sequential(\n            nn.Linear(vision_encoder_output_dim * 2, vision_encoder_output_dim),  # 2 cameras\n            nn.ReLU(),\n            nn.Dropout(0.1),\n        )\n\n        # MLP for action prediction\n        mlp_cfg = config[\"action_head\"]\n        self.state_obs_dim = config[\"action_head\"][\"state_obs_dim\"]\n        if self.state_obs_dim is not None:\n            mlp_cfg[\"input_dim\"] = vision_encoder_output_dim + self.state_obs_dim\n        else:\n            mlp_cfg[\"input_dim\"] = vision_encoder_output_dim\n        mlp_cfg[\"output_dim\"] = action_dim\n        self.mlp = self._build_mlp(mlp_cfg)\n\n        # MLP for pose prediction\n        pose_mlp_cfg = config[\"pose_head\"]\n        pose_mlp_cfg[\"input_dim\"] = vision_encoder_output_dim\n        pose_mlp_cfg[\"output_dim\"] = 7\n        self.pose_mlp = self._build_mlp(pose_mlp_cfg)\n\n    @property\n    def dtype(self):\n        \"\"\"Get the dtype of the policy's parameters.\"\"\"\n        return next(self.parameters()).dtype\n\n    @staticmethod\n    def _build_cnn(config: dict) -> nn.Sequential:\n        \"\"\"Build CNN encoder for grayscale images.\"\"\"\n        layers = []\n\n        # Build layers from configuration\n        for conv_config in config[\"conv_layers\"]:\n            layers.extend(\n                [\n                    nn.Conv2d(\n                        conv_config[\"in_channels\"],\n                        conv_config[\"out_channels\"],\n                        kernel_size=conv_config[\"kernel_size\"],\n                        stride=conv_config[\"stride\"],\n                        padding=conv_config[\"padding\"],\n                    ),\n                    nn.BatchNorm2d(conv_config[\"out_channels\"]),\n                    nn.ReLU(),\n                ]\n            )\n\n        # Add adaptive pooling if specified\n        if config.get(\"pooling\") == \"adaptive_avg\":\n            layers.append(nn.AdaptiveAvgPool2d((4, 4)))\n\n        return nn.Sequential(*layers)\n\n    @staticmethod\n    def _build_mlp(config: dict) -> nn.Sequential:\n        mlp_input_dim = config[\"input_dim\"]\n        layers = []\n        for hidden_dim in config[\"hidden_dims\"]:\n            layers.extend([nn.Linear(mlp_input_dim, hidden_dim), nn.ReLU()])\n            mlp_input_dim = hidden_dim\n        layers.append(nn.Linear(mlp_input_dim, config[\"output_dim\"]))\n        return nn.Sequential(*layers)\n\n    def get_features(self, rgb_obs: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:\n        # Split stereo rgb images\n        left_rgb = rgb_obs[:, 0:3]  # First 3 channels (RGB)\n        right_rgb = rgb_obs[:, 3:6]  # Last 3 channels (RGB)\n\n        # Use shared encoder for both images\n        left_features = self.shared_encoder(left_rgb).flatten(start_dim=1)\n        right_features = self.shared_encoder(right_rgb).flatten(start_dim=1)\n        return left_features, right_features\n\n    def forward(self, rgb_obs: torch.Tensor, state_obs: torch.Tensor | None = None) -> dict:\n        \"\"\"Forward pass with shared stereo encoder for rgb images.\"\"\"\n        # Get features\n        left_features, right_features = self.get_features(rgb_obs)\n\n        # Concatenate features (much more efficient than concatenating raw images)\n        combined_features = torch.cat([left_features, right_features], dim=-1)\n        # Feature fusion\n        fused_features = self.feature_fusion(combined_features)\n\n        # Add state information if available\n        if state_obs is not None and self.state_obs_dim is not None:\n            final_features = torch.cat([fused_features, state_obs], dim=-1)\n        else:\n            final_features = fused_features\n\n        # Predict actions\n        return self.mlp(final_features)\n\n    def predict_pose(self, rgb_obs: torch.Tensor) -> torch.Tensor:\n        \"\"\"Predict pose from rgb images and state observations.\"\"\"\n        left_features, right_features = self.get_features(rgb_obs)\n        left_pose = self.pose_mlp(left_features)\n        right_pose = self.pose_mlp(right_features)\n        return left_pose, right_pose\n",
@@ -1369,6 +1755,21 @@
       "articulated_robot",
       "interaction",
       "scene_creation"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.constraint_solver",
+      "genesis.options.ProfilingOptions",
+      "genesis.options.RigidOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.VisOptions",
+      "genesis.options.morphs.Box",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.URDF",
+      "genesis.options.renderers.BatchRenderer",
+      "genesis.options.surfaces.Rough",
+      "genesis.options.textures.ColorTexture"
     ],
     "key_apis": [
       "genesis.options.ProfilingOptions",
@@ -1428,6 +1829,7 @@
       "interaction",
       "scene_creation"
     ],
+    "all_apis": [],
     "key_apis": [],
     "api_docs": [],
     "code": "import argparse\nimport re\nimport pickle\nfrom importlib import metadata\nfrom pathlib import Path\n\nimport torch\n\ntry:\n    try:\n        if metadata.version(\"rsl-rl\"):\n            raise ImportError\n    except metadata.PackageNotFoundError:\n        if metadata.version(\"rsl-rl-lib\") != \"2.2.4\":\n            raise ImportError\nexcept (metadata.PackageNotFoundError, ImportError) as e:\n    raise ImportError(\"Please uninstall 'rsl_rl' and install 'rsl-rl-lib==2.2.4'.\") from e\nfrom rsl_rl.runners import OnPolicyRunner\n\nimport genesis as gs\n\nfrom grasp_env import GraspEnv\nfrom behavior_cloning import BehaviorCloning\n\n\ndef load_rl_policy(env, train_cfg, log_dir):\n    \"\"\"Load reinforcement learning policy.\"\"\"\n    runner = OnPolicyRunner(env, train_cfg, log_dir, device=gs.device)\n\n    # Find the latest checkpoint\n    checkpoint_files = [f for f in log_dir.iterdir() if re.match(r\"model_\\d+\\.pt\", f.name)]\n    if not checkpoint_files:\n        raise FileNotFoundError(f\"No checkpoint files found in {log_dir}\")\n\n    try:\n        *_, last_ckpt = sorted(checkpoint_files)\n    except ValueError as e:\n        raise FileNotFoundError(f\"No checkpoint files found in {log_dir}\") from e\n    runner.load(last_ckpt)\n    print(f\"Loaded RL checkpoint from {last_ckpt}\")\n\n    return runner.get_inference_policy(device=gs.device)\n\n\ndef load_bc_policy(env, bc_cfg, log_dir):\n    \"\"\"Load behavior cloning policy.\"\"\"\n    # Create behavior cloning instance\n    bc_runner = BehaviorCloning(env, bc_cfg, None, device=gs.device)\n\n    # Find the latest checkpoint\n    checkpoint_files = [f for f in log_dir.iterdir() if re.match(r\"checkpoint_\\d+\\.pt\", f.name)]\n    if not checkpoint_files:\n        raise FileNotFoundError(f\"No checkpoint files found in {log_dir}\")\n\n    try:\n        *_, last_ckpt = sorted(checkpoint_files)\n    except ValueError as e:\n        raise FileNotFoundError(f\"No checkpoint files found in {log_dir}\") from e\n    print(f\"Loaded BC checkpoint from {last_ckpt}\")\n    bc_runner.load(last_ckpt)\n\n    return bc_runner._policy\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-e\", \"--exp_name\", type=str, default=\"grasp\")\n    parser.add_argument(\n        \"--stage\",\n        type=str,\n        default=\"rl\",\n        choices=[\"rl\", \"bc\"],\n        help=\"Model type: 'rl' for reinforcement learning, 'bc' for behavior cloning\",\n    )\n    parser.add_argument(\n        \"--record\",\n        action=\"store_true\",\n        help=\"Record stereo images as video during evaluation\",\n    )\n    parser.add_argument(\n        \"--video_path\",\n        type=str,\n        default=None,\n        help=\"Path to save the video file (default: auto-generated)\",\n    )\n    args = parser.parse_args()\n\n    # Set PyTorch default dtype to float32 for better performance\n    torch.set_default_dtype(torch.float32)\n\n    gs.init()\n\n    log_dir = Path(\"logs\") / f\"{args.exp_name + '_' + args.stage}\"\n\n    # Load configurations\n    if args.stage == \"rl\":\n        # For RL, load the standard configs\n        env_cfg, reward_cfg, robot_cfg, rl_train_cfg, bc_train_cfg = pickle.load(open(log_dir / \"cfgs.pkl\", \"rb\"))\n    else:\n        # For BC, we need to load the configs and create BC config\n        env_cfg, reward_cfg, robot_cfg, rl_train_cfg, bc_train_cfg = pickle.load(open(log_dir / \"cfgs.pkl\", \"rb\"))\n\n    # set the max FPS for visualization\n    env_cfg[\"max_visualize_FPS\"] = 60\n    # set the box collision\n    env_cfg[\"box_collision\"] = True\n    # set the box fixed\n    env_cfg[\"box_fixed\"] = False\n    # set the number of envs for evaluation\n    env_cfg[\"num_envs\"] = 10\n    # for video recording\n    env_cfg[\"visualize_camera\"] = args.record\n\n    env = GraspEnv(\n        env_cfg=env_cfg,\n        reward_cfg=reward_cfg,\n        robot_cfg=robot_cfg,\n        show_viewer=True,\n    )\n\n    # Load the appropriate policy based on model type\n    if args.stage == \"rl\":\n        policy = load_rl_policy(env, rl_train_cfg, log_dir)\n    else:\n        policy = load_bc_policy(env, bc_train_cfg, log_dir)\n        policy.eval()\n\n    obs, _ = env.reset()\n\n    max_sim_step = int(env_cfg[\"episode_length_s\"] * env_cfg[\"max_visualize_FPS\"])\n\n    with torch.no_grad():\n        if args.record:\n            print(\"Recording video...\")\n            env.vis_cam.start_recording()\n            env.left_cam.start_recording()\n            env.right_cam.start_recording()\n        for step in range(max_sim_step):\n            if args.stage == \"rl\":\n                actions = policy(obs)\n            else:\n                # Get stereo grayscale images and ensure float32\n                rgb_obs = env.get_stereo_rgb_images(normalize=True).float()\n                ee_pose = env.robot.ee_pose.float()\n\n                actions = policy(rgb_obs, ee_pose)\n\n                # Collect frame for video recording\n                if args.record:\n                    env.vis_cam.render()  # render the visualization camera\n\n            obs, rews, dones, infos = env.step(actions)\n        env.grasp_and_lift_demo()\n        if args.record:\n            print(\"Stopping video recording...\")\n            env.vis_cam.stop_recording(save_to_filename=\"video.mp4\", fps=env_cfg[\"max_visualize_FPS\"])\n            env.left_cam.stop_recording(save_to_filename=\"left_cam.mp4\", fps=env_cfg[\"max_visualize_FPS\"])\n            env.right_cam.stop_recording(save_to_filename=\"right_cam.mp4\", fps=env_cfg[\"max_visualize_FPS\"])\n\n\nif __name__ == \"__main__\":\n    main()\n\n\"\"\"\n# evaluation\n# For reinforcement learning model:\npython examples/manipulation/grasp_eval.py --stage=rl\n\n# For behavior cloning model:\npython examples/manipulation/grasp_eval.py --stage=bc\n\n# With video recording:\npython examples/manipulation/grasp_eval.py --stage=bc --record\n\"\"\"\n",
@@ -1442,6 +1844,7 @@
       "motion_planning",
       "interaction"
     ],
+    "all_apis": [],
     "key_apis": [],
     "api_docs": [],
     "code": "import argparse\nimport os\nimport re\nimport pickle\nfrom importlib import metadata\nfrom pathlib import Path\n\ntry:\n    try:\n        if metadata.version(\"rsl-rl\"):\n            raise ImportError\n    except metadata.PackageNotFoundError:\n        if metadata.version(\"rsl-rl-lib\") != \"2.2.4\":\n            raise ImportError\nexcept (metadata.PackageNotFoundError, ImportError) as e:\n    raise ImportError(\"Please uninstall 'rsl_rl' and install 'rsl-rl-lib==2.2.4'.\") from e\n\nfrom rsl_rl.runners import OnPolicyRunner\nfrom behavior_cloning import BehaviorCloning\n\nimport genesis as gs\n\nfrom grasp_env import GraspEnv\n\n\ndef get_train_cfg(exp_name, max_iterations):\n    # stage 1: privileged reinforcement learning\n    rl_cfg_dict = {\n        \"algorithm\": {\n            \"class_name\": \"PPO\",\n            \"clip_param\": 0.2,\n            \"desired_kl\": 0.01,\n            \"entropy_coef\": 0.0,\n            \"gamma\": 0.99,\n            \"lam\": 0.95,\n            \"learning_rate\": 0.0003,\n            \"max_grad_norm\": 1.0,\n            \"num_learning_epochs\": 5,\n            \"num_mini_batches\": 4,\n            \"schedule\": \"adaptive\",\n            \"use_clipped_value_loss\": True,\n            \"value_loss_coef\": 1.0,\n        },\n        \"init_member_classes\": {},\n        \"policy\": {\n            \"activation\": \"relu\",\n            \"actor_hidden_dims\": [256, 256, 128],\n            \"critic_hidden_dims\": [256, 256, 128],\n            \"init_noise_std\": 1.0,\n            \"class_name\": \"ActorCritic\",\n        },\n        \"runner\": {\n            \"checkpoint\": -1,\n            \"experiment_name\": exp_name,\n            \"load_run\": -1,\n            \"log_interval\": 1,\n            \"max_iterations\": max_iterations,\n            \"record_interval\": -1,\n            \"resume\": False,\n            \"resume_path\": None,\n            \"run_name\": \"\",\n        },\n        \"runner_class_name\": \"OnPolicyRunner\",\n        \"num_steps_per_env\": 24,\n        \"save_interval\": 100,\n        \"empirical_normalization\": None,\n        \"seed\": 1,\n    }\n\n    # stage 2: vision-based behavior cloning\n    bc_cfg_dict = {\n        # Basic training parameters\n        \"num_steps_per_env\": 24,\n        \"learning_rate\": 0.001,\n        \"num_epochs\": 5,\n        \"num_mini_batches\": 10,\n        \"max_grad_norm\": 1.0,\n        # Network architecture\n        \"policy\": {\n            \"vision_encoder\": {\n                \"conv_layers\": [\n                    {\n                        \"in_channels\": 3,  # 3 channel for rgb image\n                        \"out_channels\": 8,\n                        \"kernel_size\": 3,\n                        \"stride\": 1,\n                        \"padding\": 1,\n                    },\n                    {\n                        \"in_channels\": 8,\n                        \"out_channels\": 16,\n                        \"kernel_size\": 3,\n                        \"stride\": 2,\n                        \"padding\": 1,\n                    },\n                    {\n                        \"in_channels\": 16,\n                        \"out_channels\": 32,\n                        \"kernel_size\": 3,\n                        \"stride\": 2,\n                        \"padding\": 1,\n                    },\n                ],\n                \"pooling\": \"adaptive_avg\",\n            },\n            \"action_head\": {\n                \"state_obs_dim\": 7,  # end-effector pose as additional state observation\n                \"hidden_dims\": [128, 128, 64],\n            },\n            \"pose_head\": {\n                \"hidden_dims\": [64, 64],\n            },\n        },\n        # Training settings\n        \"buffer_size\": 1000,\n        \"log_freq\": 10,\n        \"save_freq\": 50,\n        \"eval_freq\": 50,\n    }\n\n    return rl_cfg_dict, bc_cfg_dict\n\n\ndef get_task_cfgs():\n    env_cfg = {\n        \"num_envs\": 10,\n        \"num_obs\": 14,\n        \"num_actions\": 6,\n        \"action_scales\": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05],\n        \"episode_length_s\": 3.0,\n        \"ctrl_dt\": 0.01,\n        \"box_size\": [0.08, 0.03, 0.06],\n        \"box_collision\": False,\n        \"box_fixed\": True,\n        \"image_resolution\": (64, 64),\n        \"use_rasterizer\": True,\n        \"visualize_camera\": False,\n    }\n    reward_scales = {\n        \"keypoints\": 1.0,\n    }\n    # panda robot specific\n    robot_cfg = {\n        \"ee_link_name\": \"hand\",\n        \"gripper_link_names\": [\"left_finger\", \"right_finger\"],\n        \"default_arm_dof\": [0.0, -0.785, 0.0, -2.356, 0.0, 1.571, 0.785],\n        \"default_gripper_dof\": [0.04, 0.04],\n        \"ik_method\": \"dls_ik\",\n    }\n    return env_cfg, reward_scales, robot_cfg\n\n\ndef load_teacher_policy(env, rl_train_cfg, exp_name):\n    # load teacher policy\n    log_dir = Path(\"logs\") / f\"{exp_name + '_' + 'rl'}\"\n    assert log_dir.exists(), f\"Log directory {log_dir} does not exist\"\n    checkpoint_files = [f for f in log_dir.iterdir() if re.match(r\"model_\\d+\\.pt\", f.name)]\n    try:\n        *_, last_ckpt = sorted(checkpoint_files)\n    except ValueError as e:\n        raise FileNotFoundError(f\"No checkpoint files found in {log_dir}\") from e\n    assert last_ckpt is not None, f\"No checkpoint found in {log_dir}\"\n    runner = OnPolicyRunner(env, rl_train_cfg, log_dir, device=gs.device)\n    runner.load(last_ckpt)\n    print(f\"Loaded teacher policy from checkpoint {last_ckpt} from {log_dir}\")\n    teacher_policy = runner.get_inference_policy(device=gs.device)\n    return teacher_policy\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-e\", \"--exp_name\", type=str, default=\"grasp\")\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=False)\n    parser.add_argument(\"-B\", \"--num_envs\", type=int, default=2048)\n    parser.add_argument(\"--max_iterations\", type=int, default=300)\n    parser.add_argument(\"--stage\", type=str, default=\"rl\")\n    args = parser.parse_args()\n\n    # === init ===\n    gs.init(backend=gs.gpu, precision=\"32\", logging_level=\"warning\", performance_mode=True)\n\n    # === task cfgs and trainning algos cfgs ===\n    env_cfg, reward_scales, robot_cfg = get_task_cfgs()\n    rl_train_cfg, bc_train_cfg = get_train_cfg(args.exp_name, args.max_iterations)\n\n    # === log dir ===\n    log_dir = Path(\"logs\") / f\"{args.exp_name + '_' + args.stage}\"\n    log_dir.mkdir(parents=True, exist_ok=True)\n\n    with open(log_dir / \"cfgs.pkl\", \"wb\") as f:\n        pickle.dump((env_cfg, reward_scales, robot_cfg, rl_train_cfg, bc_train_cfg), f)\n\n    # === env ===\n    # BC only needs a small number of envs, e.g., 10\n    env_cfg[\"num_envs\"] = args.num_envs if args.stage == \"rl\" else 10\n    env = GraspEnv(\n        env_cfg=env_cfg,\n        reward_cfg=reward_scales,\n        robot_cfg=robot_cfg,\n        show_viewer=args.vis,\n    )\n\n    # === runner ===\n    if args.stage == \"bc\":\n        teacher_policy = load_teacher_policy(env, rl_train_cfg, args.exp_name)\n        bc_train_cfg[\"teacher_policy\"] = teacher_policy\n        runner = BehaviorCloning(env, bc_train_cfg, teacher_policy, device=gs.device)\n        runner.learn(num_learning_iterations=args.max_iterations, log_dir=log_dir)\n    else:\n        runner = OnPolicyRunner(env, rl_train_cfg, log_dir, device=gs.device)\n        runner.learn(num_learning_iterations=args.max_iterations, init_at_random_ep_len=True)\n\n\nif __name__ == \"__main__\":\n    main()\n\n\"\"\"\n# training\n\n# to train the RL policy\npython examples/manipulation/grasp_train.py --stage=rl\n\n# to train the BC policy (requires RL policy to be trained first)\npython examples/manipulation/grasp_train.py --stage=bc\n\"\"\"\n",
@@ -1454,6 +1857,28 @@
     "tags": [
       "rendering",
       "scene_creation"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_camera",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.reset",
+      "genesis.Scene.step",
+      "genesis.options.RigidOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.Mesh",
+      "genesis.options.morphs.Plane",
+      "genesis.options.renderers.RayTracer",
+      "genesis.options.surfaces.Aluminium",
+      "genesis.options.surfaces.Emission",
+      "genesis.options.surfaces.Glass",
+      "genesis.options.surfaces.Gold",
+      "genesis.options.surfaces.Iron",
+      "genesis.options.surfaces.Rough",
+      "genesis.options.surfaces.Smooth",
+      "genesis.options.textures.ColorTexture",
+      "genesis.options.textures.ImageTexture"
     ],
     "key_apis": [
       "genesis.Scene.reset",
@@ -1562,6 +1987,17 @@
       "camera_control",
       "rendering"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_camera",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.ProfilingOptions",
+      "genesis.options.VisOptions",
+      "genesis.options.morphs.Box",
+      "genesis.options.morphs.Plane"
+    ],
     "key_apis": [
       "genesis.options.ProfilingOptions",
       "genesis.options.morphs.Box",
@@ -1599,6 +2035,16 @@
       "camera_control",
       "rendering"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_camera",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Plane"
+    ],
     "key_apis": [
       "genesis.options.morphs.MJCF",
       "genesis.options.morphs.Plane"
@@ -1629,6 +2075,16 @@
       "scene_creation",
       "camera_control"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_camera",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.options.RigidOptions",
+      "genesis.options.VisOptions",
+      "genesis.options.morphs.Box",
+      "genesis.options.morphs.Plane"
+    ],
     "key_apis": [
       "genesis.options.morphs.Box",
       "genesis.options.morphs.Plane"
@@ -1658,6 +2114,19 @@
       "rigid_body",
       "scene_creation",
       "rendering"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.clear_debug_objects",
+      "genesis.Scene.draw_debug_arrow",
+      "genesis.Scene.step",
+      "genesis.options.RigidOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.VisOptions",
+      "genesis.options.morphs.Mesh",
+      "genesis.options.morphs.Plane"
     ],
     "key_apis": [
       "genesis.Scene.clear_debug_objects",
@@ -1703,6 +2172,18 @@
       "rendering",
       "interaction"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.clear_debug_objects",
+      "genesis.Scene.draw_debug_arrow",
+      "genesis.Scene.step",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Plane"
+    ],
     "key_apis": [
       "genesis.Scene.clear_debug_objects",
       "genesis.Scene.draw_debug_arrow",
@@ -1746,6 +2227,16 @@
       "rigid_body",
       "interaction"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.Box",
+      "genesis.options.morphs.Plane"
+    ],
     "key_apis": [
       "genesis.options.morphs.Box",
       "genesis.options.morphs.Plane"
@@ -1775,6 +2266,14 @@
       "articulated_robot",
       "scene_creation"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.MJCF"
+    ],
     "key_apis": [
       "genesis.options.morphs.MJCF"
     ],
@@ -1797,6 +2296,16 @@
       "articulated_robot",
       "interaction",
       "scene_creation"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Plane"
     ],
     "key_apis": [
       "genesis.options.morphs.MJCF",
@@ -1828,6 +2337,16 @@
       "scene_creation",
       "interaction"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.RigidOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.VisOptions",
+      "genesis.options.morphs.Mesh"
+    ],
     "key_apis": [
       "genesis.options.morphs.Mesh"
     ],
@@ -1850,6 +2369,15 @@
       "articulated_robot",
       "scene_creation",
       "rigid_body"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.RigidOptions",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Mesh"
     ],
     "key_apis": [
       "genesis.options.morphs.MJCF",
@@ -1880,6 +2408,18 @@
       "articulated_robot",
       "motion_planning",
       "interaction"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.RigidOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Mesh",
+      "genesis.options.morphs.Plane",
+      "genesis.options.surfaces.Default"
     ],
     "key_apis": [
       "genesis.options.morphs.MJCF",
@@ -1925,6 +2465,17 @@
       "scene_creation",
       "interaction"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.constraint_solver",
+      "genesis.options.RigidOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.Plane",
+      "genesis.options.morphs.URDF"
+    ],
     "key_apis": [
       "genesis.options.morphs.Plane",
       "genesis.options.morphs.URDF"
@@ -1954,6 +2505,18 @@
       "articulated_robot",
       "interaction",
       "rigid_body"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.RigidOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.Box",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Plane"
     ],
     "key_apis": [
       "genesis.options.morphs.Box",
@@ -1992,6 +2555,16 @@
       "interaction",
       "rigid_body"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.RigidOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.URDF"
+    ],
     "key_apis": [
       "genesis.options.morphs.MJCF",
       "genesis.options.morphs.URDF"
@@ -2020,6 +2593,15 @@
     "tags": [
       "articulated_robot",
       "scene_creation"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Plane"
     ],
     "key_apis": [
       "genesis.options.morphs.MJCF",
@@ -2050,6 +2632,19 @@
       "articulated_robot",
       "motion_planning",
       "interaction"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.reset",
+      "genesis.Scene.step",
+      "genesis.options.RigidOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.Mesh",
+      "genesis.options.morphs.URDF",
+      "genesis.options.surfaces.Default",
+      "genesis.options.surfaces.Reflective"
     ],
     "key_apis": [
       "genesis.Scene.reset",
@@ -2102,6 +2697,15 @@
       "motion_planning",
       "interaction"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.options.RigidOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.Mesh",
+      "genesis.options.surfaces.Default"
+    ],
     "key_apis": [
       "genesis.options.morphs.Mesh",
       "genesis.options.surfaces.Default"
@@ -2131,6 +2735,16 @@
       "articulated_robot",
       "motion_planning",
       "interaction"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.options.RigidOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Mesh",
+      "genesis.options.surfaces.Default"
     ],
     "key_apis": [
       "genesis.options.morphs.MJCF",
@@ -2168,6 +2782,18 @@
       "articulated_robot",
       "motion_planning",
       "interaction"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.RigidOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Mesh",
+      "genesis.options.morphs.Plane",
+      "genesis.options.surfaces.Default"
     ],
     "key_apis": [
       "genesis.options.morphs.MJCF",
@@ -2212,6 +2838,19 @@
       "articulated_robot",
       "motion_planning",
       "scene_creation"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.reset",
+      "genesis.Scene.step",
+      "genesis.options.RigidOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.Mesh",
+      "genesis.options.morphs.URDF",
+      "genesis.options.surfaces.Default",
+      "genesis.options.surfaces.Reflective"
     ],
     "key_apis": [
       "genesis.Scene.reset",
@@ -2263,6 +2902,17 @@
       "articulated_robot",
       "scene_creation"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Plane",
+      "genesis.options.morphs.URDF"
+    ],
     "key_apis": [
       "genesis.options.morphs.MJCF",
       "genesis.options.morphs.Plane",
@@ -2300,6 +2950,15 @@
       "scene_creation",
       "rendering"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Plane"
+    ],
     "key_apis": [
       "genesis.options.morphs.MJCF",
       "genesis.options.morphs.Plane"
@@ -2328,6 +2987,15 @@
     "tags": [
       "rigid_body",
       "scene_creation"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.Mesh",
+      "genesis.options.morphs.Sphere"
     ],
     "key_apis": [
       "genesis.options.morphs.Mesh",
@@ -2359,6 +3027,17 @@
       "scene_creation",
       "interaction"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.RigidOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Plane"
+    ],
     "key_apis": [
       "genesis.options.morphs.MJCF",
       "genesis.options.morphs.Plane"
@@ -2389,6 +3068,17 @@
       "scene_creation",
       "rendering"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_camera",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.RigidOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Plane"
+    ],
     "key_apis": [
       "genesis.options.morphs.MJCF",
       "genesis.options.morphs.Plane"
@@ -2418,6 +3108,20 @@
       "articulated_robot",
       "rendering",
       "scene_creation"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_camera",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.add_light",
+      "genesis.Scene.build",
+      "genesis.Scene.render_all_cameras",
+      "genesis.Scene.step",
+      "genesis.options.VisOptions",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Plane",
+      "genesis.options.renderers.BatchRenderer",
+      "genesis.options.surfaces.Default"
     ],
     "key_apis": [
       "genesis.Scene.add_light",
@@ -2470,6 +3174,18 @@
       "rendering",
       "scene_creation"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_camera",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.RigidOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.VisOptions",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Plane"
+    ],
     "key_apis": [
       "genesis.options.morphs.MJCF",
       "genesis.options.morphs.Plane"
@@ -2499,6 +3215,18 @@
       "articulated_robot",
       "rigid_body",
       "interaction"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.RigidOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.morphs.Box",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Plane",
+      "genesis.options.surfaces.Plastic"
     ],
     "key_apis": [
       "genesis.options.morphs.Box",
@@ -2543,6 +3271,15 @@
       "rigid_body",
       "scene_creation"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.Sphere",
+      "genesis.options.morphs.Terrain"
+    ],
     "key_apis": [
       "genesis.options.morphs.Sphere",
       "genesis.options.morphs.Terrain"
@@ -2571,6 +3308,17 @@
     "tags": [
       "scene_creation",
       "rendering"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.draw_debug_spheres",
+      "genesis.Scene.step",
+      "genesis.constraint_solver",
+      "genesis.options.RigidOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.Terrain"
     ],
     "key_apis": [
       "genesis.Scene.draw_debug_spheres",
@@ -2601,6 +3349,18 @@
       "scene_creation",
       "rendering",
       "rigid_body"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.draw_debug_spheres",
+      "genesis.Scene.step",
+      "genesis.constraint_solver",
+      "genesis.options.RigidOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.Sphere",
+      "genesis.options.morphs.Terrain"
     ],
     "key_apis": [
       "genesis.Scene.draw_debug_spheres",
@@ -2639,6 +3399,17 @@
       "scene_creation",
       "interaction"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.FEMOptions",
+      "genesis.options.SAPCouplerOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.Mesh"
+    ],
     "key_apis": [
       "genesis.options.morphs.Mesh"
     ],
@@ -2660,6 +3431,18 @@
     "tags": [
       "soft_body",
       "scene_creation"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.FEMOptions",
+      "genesis.options.SAPCouplerOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.Mesh",
+      "genesis.options.morphs.Sphere"
     ],
     "key_apis": [
       "genesis.options.morphs.Mesh",
@@ -2691,6 +3474,19 @@
       "soft_body",
       "interaction"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.FEMOptions",
+      "genesis.options.RigidOptions",
+      "genesis.options.SAPCouplerOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Sphere"
+    ],
     "key_apis": [
       "genesis.options.morphs.MJCF",
       "genesis.options.morphs.Sphere"
@@ -2721,6 +3517,18 @@
       "interaction",
       "rigid_body"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.RigidOptions",
+      "genesis.options.SAPCouplerOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.Box",
+      "genesis.options.morphs.MJCF"
+    ],
     "key_apis": [
       "genesis.options.morphs.Box",
       "genesis.options.morphs.MJCF"
@@ -2750,6 +3558,23 @@
       "rendering",
       "camera_control",
       "scene_creation"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.add_sensor",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.RigidOptions",
+      "genesis.options.morphs.Box",
+      "genesis.options.morphs.Plane",
+      "genesis.options.morphs.Sphere",
+      "genesis.options.renderers.Rasterizer",
+      "genesis.options.renderers.RayTracer",
+      "genesis.options.surfaces.Emission",
+      "genesis.options.surfaces.Rough",
+      "genesis.options.surfaces.Smooth",
+      "genesis.options.textures.ColorTexture"
     ],
     "key_apis": [
       "genesis.Scene.add_sensor",
@@ -2837,6 +3662,22 @@
       "interaction",
       "rigid_body"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.add_sensor",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.Scene.stop_recording",
+      "genesis.options.ProfilingOptions",
+      "genesis.options.RigidOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.VisOptions",
+      "genesis.options.morphs.Plane",
+      "genesis.options.morphs.URDF",
+      "genesis.options.sensors.Contact",
+      "genesis.options.sensors.ContactForce"
+    ],
     "key_apis": [
       "genesis.Scene.add_sensor",
       "genesis.Scene.stop_recording",
@@ -2901,6 +3742,23 @@
       "articulated_robot",
       "tactile_sensing",
       "scene_creation"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.add_sensor",
+      "genesis.Scene.build",
+      "genesis.Scene.draw_debug_sphere",
+      "genesis.Scene.start_recording",
+      "genesis.Scene.step",
+      "genesis.Scene.stop_recording",
+      "genesis.options.ProfilingOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.VisOptions",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Plane",
+      "genesis.options.sensors.IMU"
     ],
     "key_apis": [
       "genesis.Scene.add_sensor",
@@ -2973,6 +3831,26 @@
       "rendering",
       "camera_control",
       "depth_sensing"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.add_sensor",
+      "genesis.Scene.build",
+      "genesis.Scene.start_recording",
+      "genesis.Scene.step",
+      "genesis.options.ProfilingOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.Box",
+      "genesis.options.morphs.Cylinder",
+      "genesis.options.morphs.Plane",
+      "genesis.options.morphs.URDF",
+      "genesis.options.sensors.DepthCamera",
+      "genesis.options.sensors.DepthCameraPattern",
+      "genesis.options.sensors.GridPattern",
+      "genesis.options.sensors.Lidar",
+      "genesis.options.sensors.SphericalPattern"
     ],
     "key_apis": [
       "genesis.Scene.add_sensor",
@@ -3074,6 +3952,16 @@
       "scene_creation",
       "rigid_body"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.constraint_solver",
+      "genesis.options.RigidOptions",
+      "genesis.options.morphs.Plane",
+      "genesis.options.morphs.URDF"
+    ],
     "key_apis": [
       "genesis.options.morphs.Plane",
       "genesis.options.morphs.URDF"
@@ -3102,6 +3990,16 @@
     "tags": [
       "articulated_robot",
       "scene_creation"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.RigidOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Plane"
     ],
     "key_apis": [
       "genesis.options.morphs.MJCF",
@@ -3133,6 +4031,16 @@
       "rigid_body",
       "scene_creation"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.RigidOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.morphs.Plane",
+      "genesis.options.morphs.URDF"
+    ],
     "key_apis": [
       "genesis.options.morphs.Plane",
       "genesis.options.morphs.URDF"
@@ -3162,6 +4070,21 @@
       "articulated_robot",
       "mixed_physics",
       "interaction"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.reset",
+      "genesis.Scene.step",
+      "genesis.options.MPMOptions",
+      "genesis.options.RigidOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.VisOptions",
+      "genesis.options.morphs.Plane",
+      "genesis.options.morphs.Sphere",
+      "genesis.options.morphs.URDF"
     ],
     "key_apis": [
       "genesis.Scene.reset",
@@ -3207,6 +4130,17 @@
       "motion_planning",
       "rendering"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.options.RigidOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Mesh",
+      "genesis.options.morphs.Plane",
+      "genesis.options.surfaces.Default"
+    ],
     "key_apis": [
       "genesis.options.morphs.MJCF",
       "genesis.options.morphs.Mesh",
@@ -3251,6 +4185,20 @@
       "soft_body",
       "interaction"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.reset",
+      "genesis.Scene.step",
+      "genesis.options.FEMOptions",
+      "genesis.options.MPMOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.VisOptions",
+      "genesis.options.morphs.Plane",
+      "genesis.options.morphs.Sphere"
+    ],
     "key_apis": [
       "genesis.Scene.reset",
       "genesis.options.morphs.Plane",
@@ -3287,6 +4235,21 @@
       "soft_body",
       "mixed_physics",
       "scene_creation"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.reset",
+      "genesis.Scene.step",
+      "genesis.options.MPMOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.VisOptions",
+      "genesis.options.morphs.Mesh",
+      "genesis.options.morphs.Plane",
+      "genesis.options.surfaces.Default",
+      "genesis.options.textures.ImageTexture"
     ],
     "key_apis": [
       "genesis.Scene.reset",
@@ -3339,6 +4302,16 @@
       "motion_planning",
       "scene_creation"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.RigidOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Plane"
+    ],
     "key_apis": [
       "genesis.options.morphs.MJCF",
       "genesis.options.morphs.Plane"
@@ -3369,6 +4342,16 @@
       "interaction",
       "scene_creation"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Plane"
+    ],
     "key_apis": [
       "genesis.options.morphs.MJCF",
       "genesis.options.morphs.Plane"
@@ -3397,6 +4380,22 @@
     "tags": [
       "rendering",
       "scene_creation"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.clear_debug_object",
+      "genesis.Scene.clear_debug_objects",
+      "genesis.Scene.draw_debug_arrow",
+      "genesis.Scene.draw_debug_box",
+      "genesis.Scene.draw_debug_frame",
+      "genesis.Scene.draw_debug_line",
+      "genesis.Scene.draw_debug_sphere",
+      "genesis.Scene.draw_debug_spheres",
+      "genesis.Scene.step",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.Plane"
     ],
     "key_apis": [
       "genesis.Scene.clear_debug_object",
@@ -3476,6 +4475,14 @@
       "articulated_robot",
       "scene_creation"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Plane"
+    ],
     "key_apis": [
       "genesis.options.morphs.MJCF",
       "genesis.options.morphs.Plane"
@@ -3505,6 +4512,19 @@
       "articulated_robot",
       "motion_planning",
       "interaction"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.clear_debug_object",
+      "genesis.Scene.draw_debug_path",
+      "genesis.Scene.step",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.Box",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Plane"
     ],
     "key_apis": [
       "genesis.Scene.clear_debug_object",
@@ -3557,6 +4577,14 @@
       "scene_creation",
       "interaction"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_camera",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Plane"
+    ],
     "key_apis": [
       "genesis.options.morphs.MJCF",
       "genesis.options.morphs.Plane"
@@ -3586,6 +4614,20 @@
       "fluid_mpm",
       "scene_creation",
       "rendering"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.MPMOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.VisOptions",
+      "genesis.options.morphs.Box",
+      "genesis.options.morphs.Plane",
+      "genesis.options.morphs.Sphere",
+      "genesis.options.surfaces.Default"
     ],
     "key_apis": [
       "genesis.options.morphs.Box",
@@ -3630,6 +4672,16 @@
       "articulated_robot",
       "scene_creation"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.RigidOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Plane"
+    ],
     "key_apis": [
       "genesis.options.morphs.MJCF",
       "genesis.options.morphs.Plane"
@@ -3659,6 +4711,17 @@
       "soft_body",
       "scene_creation",
       "rendering"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.Mesh",
+      "genesis.options.morphs.Plane",
+      "genesis.options.surfaces.Default"
     ],
     "key_apis": [
       "genesis.options.morphs.Mesh",
@@ -3697,6 +4760,16 @@
       "motion_planning",
       "interaction"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Plane"
+    ],
     "key_apis": [
       "genesis.options.morphs.MJCF",
       "genesis.options.morphs.Plane"
@@ -3727,6 +4800,16 @@
       "scene_creation",
       "rendering"
     ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.ViewerOptions",
+      "genesis.options.VisOptions",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Plane"
+    ],
     "key_apis": [
       "genesis.options.morphs.MJCF",
       "genesis.options.morphs.Plane"
@@ -3756,6 +4839,18 @@
       "fluid_sph",
       "scene_creation",
       "rendering"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.SPHOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.VisOptions",
+      "genesis.options.morphs.Box",
+      "genesis.options.morphs.Plane",
+      "genesis.options.surfaces.Default"
     ],
     "key_apis": [
       "genesis.options.morphs.Box",
@@ -3793,6 +4888,18 @@
       "articulated_robot",
       "camera_control",
       "rendering"
+    ],
+    "all_apis": [
+      "genesis.Scene",
+      "genesis.Scene.add_camera",
+      "genesis.Scene.add_entity",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.ViewerOptions",
+      "genesis.options.VisOptions",
+      "genesis.options.morphs.MJCF",
+      "genesis.options.morphs.Plane",
+      "genesis.options.renderers.Rasterizer"
     ],
     "key_apis": [
       "genesis.options.morphs.MJCF",
