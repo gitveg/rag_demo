@@ -170,18 +170,26 @@ def build_code_index():
     )
 
     # 2. 加载知识库白名单 + 可构造类 id（用于 scene.add_entity 等实例方法解析）
+    #    以及 core API 集合（用于 all_apis/key_apis 分层）
     known_apis = set()
+    core_apis = set()
     kb_class_ids = frozenset()
     if os.path.exists(API_KB_FILE):
         with open(API_KB_FILE, 'r', encoding='utf-8') as f:
             api_data = json.load(f)
             known_apis = set(item['api_id'] for item in api_data)
+            core_apis = set(
+                item['api_id']
+                for item in api_data
+                if item.get('api_id') and ('core' in (item.get('domain_tags') or []))
+            )
             kb_class_ids = frozenset(
                 item['api_id']
                 for item in api_data
                 if item.get('type') == 'class' and item.get('api_id')
             )
         print(f"📚 已加载白名单，包含 {len(known_apis)} 个标准 API。")
+        print(f"📚 其中 core API {len(core_apis)} 个。")
         print(f"📚 其中 class 条目 {len(kb_class_ids)} 个（用于构造绑定）。")
     else:
         print("⚠️ 未找到知识库，将跳过白名单校验。")
@@ -229,8 +237,9 @@ def build_code_index():
                     canonical = normalize_api_id_for_kb(api)
                 filtered_apis.append(canonical)
             
-            # 去重并排序
-            key_apis = sorted(list(set(filtered_apis)))
+            # 去重并排序：all_apis 保留完整命中；key_apis 去掉 core API，突出任务关键信号
+            all_apis = sorted(list(set(filtered_apis)))
+            key_apis = [api for api in all_apis if api not in core_apis]
 
             # --- B. LLM 语义分析 ---
             messages = [
@@ -253,7 +262,8 @@ def build_code_index():
                     "title": meta_data.get("title", file_name),
                     "desc": meta_data.get("description", "No description."),
                     "tags": meta_data.get("tags", []),
-                    "key_apis": key_apis  # 与 KB api_id 对齐（含 options 前缀归一化）
+                    "all_apis": all_apis,  # 全量 Genesis API（含 core）
+                    "key_apis": key_apis  # 关键 API（all_apis 去除 core 后）
                 }
             }
             

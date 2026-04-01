@@ -118,6 +118,7 @@ def extract_strict_schema(obj, api_id, layer_tag):
             }
             
             # 如果是 **kwargs，特殊标记，方便后续 AI 识别并展开
+            # 审查/生成代码时：遇到 [Auto-Detect] 就不要做参数名强约束，只把它当“该 API 存在可变关键字参数，细节不确定”。
             if param.kind == inspect.Parameter.VAR_KEYWORD:
                 param_entry["desc"] = "[Auto-Detect] Variable keyword arguments. Needs LLM expansion."
                 param_entry["type"] = "Dict"
