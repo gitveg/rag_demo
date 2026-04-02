@@ -1,0 +1,4 @@
+API: genesis.options.morphs.Plane
+Summary: Morph defined by a plane shape.
+Signature: Plane(**data)
+Constraints: Plane is a primitive with infinite size, visualization and collision cannot both be False, visualization parameter only used for RigidEntity, collision parameter only used for RigidEntity, fixed parameter only used for RigidEntity, batch_fixed_verts parameter only used for RigidEntityÿÿ

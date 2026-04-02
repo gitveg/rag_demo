@@ -74,7 +74,13 @@ class GenesisRAG:
 
         # 清除旧数据逻辑
         if reset_db:
-            collections_to_reset = ["genesis_apis", "genesis_examples", "genesis_snippets", "genesis_errors"]
+            collections_to_reset = [
+                "genesis_apis",
+                "genesis_examples",
+                "genesis_snippets",
+                "genesis_errors",
+                "genesis_knowledge_units",
+            ]
             for col_name in collections_to_reset:
                 try:
                     self.chroma_client.delete_collection(col_name)
@@ -313,6 +319,7 @@ class GenesisRAG:
                     "title":         u.get("title", ""),
                     "desc":          u.get("desc", "")[:300],
                     "tags":          ",".join(u.get("tags", [])),
+                    "all_apis":      ",".join(u.get("all_apis", []) or u.get("key_apis", [])),
                     "key_apis":      ",".join(u.get("key_apis", [])),
                     "api_summaries": api_summaries,
                     "code_preview":  u.get("code", "")[:600],
