@@ -3,6 +3,9 @@
 
 genesis/__init__.py 从 genesis.options 引入 morphs、sensors 等，故 gs.morphs.* 在 AST 中
 常为 genesis.morphs.*，而 KB 条目多为 genesis.options.morphs.*。
+
+从 genesis.engine 再导出 materials、states、force_fields 到包顶层；静态分析若落在实现层路径，
+需映射到与 gs.* 一致的 genesis.materials / genesis.states / genesis.force_fields。
 """
 from __future__ import annotations
 
@@ -15,6 +18,9 @@ _PUBLIC_TO_CANONICAL_PREFIXES: tuple[tuple[str, str], ...] = (
     ("genesis.renderers.", "genesis.options.renderers."),
     ("genesis.surfaces.", "genesis.options.surfaces."),
     ("genesis.textures.", "genesis.options.textures."),
+    ("genesis.engine.materials.", "genesis.materials."),
+    ("genesis.engine.states.", "genesis.states."),
+    ("genesis.engine.force_fields.", "genesis.force_fields."),
 )
 
 

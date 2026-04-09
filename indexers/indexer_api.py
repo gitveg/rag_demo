@@ -33,6 +33,26 @@ def get_summary_from_doc(obj):
     # 简单的截断策略，保证 summary 短小
     return first_paragraph[:150] + ("..." if len(first_paragraph) > 150 else "")
 
+# genesis/__init__.py 从 genesis.engine 再导出到包顶层，用户写作 gs.<name>，api_id 应为 genesis.<name>.*
+_ENGINE_EXPORT_TO_PUBLIC_PREFIXES: tuple[tuple[str, str], ...] = (
+    # materials / states / force_fields：实现模块 genesis.engine.* → 公开 genesis.*
+    ("genesis.engine.materials", "genesis.materials"),
+    ("genesis.engine.states", "genesis.states"),
+    ("genesis.engine.force_fields", "genesis.force_fields"),
+)
+
+
+def canonicalize_public_api_id(api_id: str) -> str:
+    """
+    将实现层路径规范为与 genesis/__init__.py 顶层导出一致的 api_id，
+    以便与频率报告、清洗白名单、enricher 的 get_object_by_path(gs.*) 一致。
+    """
+    for engine_prefix, public_prefix in _ENGINE_EXPORT_TO_PUBLIC_PREFIXES:
+        if api_id.startswith(engine_prefix):
+            return public_prefix + api_id[len(engine_prefix) :]
+    return api_id
+
+
 def format_simplified_signature(name, sig):
     """
     生成极简签名，去除类型注解，只保留参数名和默认值。
@@ -169,13 +189,15 @@ def process_module(module, layer_tag, visited, recurse_submodules=True):
         if full_name in visited: continue
         visited.add(full_name)
 
+        api_id = canonicalize_public_api_id(full_name)
+
         # 2. 提取类
         if inspect.isclass(obj):
             # 过滤掉非 genesis 定义的类
             if hasattr(obj, "__module__") and obj.__module__:
                 if not obj.__module__.startswith("genesis"): continue
 
-            results.append(extract_strict_schema(obj, full_name, layer_tag))
+            results.append(extract_strict_schema(obj, api_id, layer_tag))
             
             # 3. [关键修改] 提取类方法时的严格过滤
             for method_name, method in inspect.getmembers(obj):
@@ -202,7 +224,7 @@ def process_module(module, layer_tag, visited, recurse_submodules=True):
                 except Exception:
                     pass # 如果无法解包，暂时放过，依靠名字过滤
 
-                method_id = f"{full_name}.{method_name}"
+                method_id = canonicalize_public_api_id(f"{full_name}.{method_name}")
                 results.append(extract_strict_schema(method, method_id, layer_tag))
                 
     return results
@@ -280,6 +302,8 @@ def build_index():
         (gs, "engine", False),          # 顶层：Scene/init 等（不下钻）
         (gs.morphs, "geometry", True),  # 几何体
         (gs.materials, "material", True), # 材质
+        (gs.states, "engine", True),   # 仿真状态（engine.states → gs.states）
+        (gs.force_fields, "engine", True),  # 力场（engine.force_fields → gs.force_fields）
         (gs.surfaces, "surface", True), # 表面属性
         (gs.options, "config", True),   # 配置项 (包含 Solver, Vis 等)
     ]
@@ -427,7 +451,12 @@ if __name__ == "__main__":
     STRICT_WHITELIST_PREFIXES = [
     "genesis.Scene",          # 核心场景类及其方法
     "genesis.morphs",         # 几何体
-    "genesis.materials",      # 材质
+    "genesis.materials",      # 材质（与 gs.materials 一致）
+    "genesis.states",         # 状态（与 gs.states 一致）
+    "genesis.force_fields",   # 力场（与 gs.force_fields 一致）
+    "genesis.engine.materials",  # 旧版索引未规范化时的兜底
+    "genesis.engine.states",
+    "genesis.engine.force_fields",
     "genesis.surfaces",       # 表面参数
     "genesis.options",        # 配置项
     ]
