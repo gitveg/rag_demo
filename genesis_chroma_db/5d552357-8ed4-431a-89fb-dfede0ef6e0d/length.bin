@@ -1,4 +1,0 @@
-Context: User Query: Set up a two-phase MPM simulation (e.g., water and sand) with different material parameters and a barrier to separate the initial emitter regions.
-Bad Pattern: gs.morphs.Box(center=...)
-Correction: gs.morphs.Box(pos=...)
-Explanation: The 'Box' morph constructor does not accept a 'center' attribute. To specify the location or offset of the geometry, use the 'pos' attribute.ÿÿÿÿ

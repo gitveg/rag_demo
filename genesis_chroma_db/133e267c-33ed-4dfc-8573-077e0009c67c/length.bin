@@ -1,0 +1,8 @@
+genesis.options.morphs.Box: Morph defined by a box shape.
+  Signature: Box(**data)
+genesis.options.morphs.Mesh: Morph loaded from a mesh file.
+  Signature: Mesh(**data)
+genesis.options.morphs.Plane: Morph defined by a plane shape.
+  Signature: Plane(**data)
+genesis.options.surfaces.Default: The default surface type used in Genesis. This is just an alias for `Plastic`.
+  Signature: Default(**data) 

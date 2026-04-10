@@ -1,8 +1,8 @@
 代码范例库 key_apis 对 API 知识库覆盖检测报告
 ========================================================================
-生成时间: 2026-03-28T21:51:16
-API 库文件: C:\Users\zijun\Desktop\scai_project\Genesis\rag_demo\knowledge_base\genesis_knowledge_base_final.json
-范例库文件: C:\Users\zijun\Desktop\scai_project\Genesis\rag_demo\knowledge_base\genesis_code_index.json
+生成时间: 2026-04-09T17:34:46
+API 库文件: D:\Desktop\Genesis\Genesis-main\rag_demo\knowledge_base\genesis_api_index.json
+范例库文件: D:\Desktop\Genesis\Genesis-main\rag_demo\knowledge_base\genesis_code_index.json
 
 〇、重要说明（请先读，避免误读覆盖率）
 ------------------------------------------------------------------------
@@ -18,70 +18,65 @@ API 库文件: C:\Users\zijun\Desktop\scai_project\Genesis\rag_demo\knowledge_ba
 ------------------------------------------------------------------------
   API 知识库 distinct api_id 数     : 497
   代码范例库条目数（脚本个数）       : 101
-  范例库 distinct key_apis 数         : 46
-  key_apis 字段总条数（含重复）      : 604
-  已被至少一个范例 key_apis 覆盖的 API: 46
-  知识库有、但范例库未覆盖的 API      : 451
+  范例库 distinct key_apis 数         : 50
+  key_apis 字段总条数（含重复）      : 320
+  已被至少一个范例 key_apis 覆盖的 API: 50
+  知识库有、但范例库未覆盖的 API      : 447
   范例库出现、但知识库无此 api_id     : 0
-  覆盖率（覆盖数 / API 库 distinct）  : 9.26%
+  覆盖率（覆盖数 / API 库 distinct）  : 10.06%
 
 二、知识库中有、但任一范例的 key_apis 均未出现的 api_id（完整列表）
 ------------------------------------------------------------------------
   （见上文〇节：大量 Scene 实例方法会出现在源码中但不在 key_apis 里。）
+  [class] genesis.Scene
   [method] genesis.Scene.add_camera
-  [method] genesis.Scene.add_emitter
   [method] genesis.Scene.add_entity
   [method] genesis.Scene.add_force_field
-  [method] genesis.Scene.add_light
   [method] genesis.Scene.add_mesh_light
-  [method] genesis.Scene.add_sensor
   [method] genesis.Scene.build
-  [method] genesis.Scene.clear_debug_object
-  [method] genesis.Scene.clear_debug_objects
   [method] genesis.Scene.destroy
-  [method] genesis.Scene.draw_debug_arrow
-  [method] genesis.Scene.draw_debug_box
-  [method] genesis.Scene.draw_debug_frame
   [method] genesis.Scene.draw_debug_frames
-  [method] genesis.Scene.draw_debug_line
   [method] genesis.Scene.draw_debug_mesh
-  [method] genesis.Scene.draw_debug_path
   [method] genesis.Scene.draw_debug_points
-  [method] genesis.Scene.draw_debug_sphere
-  [method] genesis.Scene.draw_debug_spheres
   [method] genesis.Scene.dump_ckpt_to_numpy
-  [method] genesis.Scene.get_state
   [method] genesis.Scene.load_checkpoint
-  [method] genesis.Scene.render_all_cameras
-  [method] genesis.Scene.reset
   [method] genesis.Scene.save_checkpoint
-  [method] genesis.Scene.start_recording
   [method] genesis.Scene.step
-  [method] genesis.Scene.stop_recording
   [method] genesis.Scene.viewer.save_video
+  [class] genesis.constraint_solver
   [class] genesis.options.AvatarOptions
   [method] genesis.options.AvatarOptions.copy_attributes_from
   [class] genesis.options.BaseCouplerOptions
   [method] genesis.options.BaseCouplerOptions.copy_attributes_from
   [class] genesis.options.CoacdOptions
   [method] genesis.options.CoacdOptions.copy_attributes_from
+  [class] genesis.options.FEMOptions
   [method] genesis.options.FEMOptions.copy_attributes_from
   [class] genesis.options.FoamOptions
   [method] genesis.options.FoamOptions.copy_attributes_from
+  [class] genesis.options.IPCCouplerOptions
   [method] genesis.options.IPCCouplerOptions.copy_attributes_from
   [class] genesis.options.LegacyCouplerOptions
   [method] genesis.options.LegacyCouplerOptions.copy_attributes_from
+  [class] genesis.options.MPMOptions
   [method] genesis.options.MPMOptions.copy_attributes_from
+  [class] genesis.options.PBDOptions
   [method] genesis.options.PBDOptions.copy_attributes_from
   [method] genesis.options.ProfilingOptions.copy_attributes_from
+  [class] genesis.options.RigidOptions
   [method] genesis.options.RigidOptions.copy_attributes_from
+  [class] genesis.options.SAPCouplerOptions
   [method] genesis.options.SAPCouplerOptions.copy_attributes_from
   [method] genesis.options.SFOptions.copy_attributes_from
+  [class] genesis.options.SPHOptions
   [method] genesis.options.SPHOptions.copy_attributes_from
+  [class] genesis.options.SimOptions
   [method] genesis.options.SimOptions.copy_attributes_from
   [class] genesis.options.ToolOptions
   [method] genesis.options.ToolOptions.copy_attributes_from
+  [class] genesis.options.ViewerOptions
   [method] genesis.options.ViewerOptions.copy_attributes_from
+  [class] genesis.options.VisOptions
   [method] genesis.options.VisOptions.copy_attributes_from
   [class] genesis.options.misc.CoacdOptions
   [method] genesis.options.misc.CoacdOptions.copy_attributes_from
@@ -157,6 +152,7 @@ API 库文件: C:\Users\zijun\Desktop\scai_project\Genesis\rag_demo\knowledge_ba
   [class] genesis.options.recorders.VideoFile
   [method] genesis.options.recorders.VideoFile.copy_attributes_from
   [method] genesis.options.recorders.VideoFile.model_post_init
+  [class] genesis.options.renderers.BatchRenderer
   [method] genesis.options.renderers.BatchRenderer.copy_attributes_from
   [class] genesis.options.renderers.Options
   [method] genesis.options.renderers.Options.copy_attributes_from
@@ -486,60 +482,30 @@ API 库文件: C:\Users\zijun\Desktop\scai_project\Genesis\rag_demo\knowledge_ba
 
 四、引用范例最多的 API 示例（每项最多列 5 个文件名）
 ------------------------------------------------------------------------
-  genesis.Scene
-      - ddp_multi_gpu.py
-      - differentiable_push.py
-      - elastic_dragon.py
-      - fem_hard_and_soft_constraint.py
-      - keyboard_teleop.py
-  genesis.options.ViewerOptions
-      - ddp_multi_gpu.py
-      - differentiable_push.py
-      - elastic_dragon.py
-      - keyboard_teleop.py
-      - pbd_liquid.py
   genesis.options.morphs.Plane
       - ddp_multi_gpu.py
       - fem_hard_and_soft_constraint.py
       - keyboard_teleop.py
       - render_async.py
       - contype.py
-  genesis.options.SimOptions
-      - differentiable_push.py
-      - elastic_dragon.py
-      - fem_hard_and_soft_constraint.py
-      - keyboard_teleop.py
-      - pbd_liquid.py
   genesis.options.morphs.MJCF
       - ddp_multi_gpu.py
       - keyboard_teleop.py
       - render_async.py
       - fem_cube_linked_with_arm.py
       - grasp_soft_cube.py
-  genesis.options.RigidOptions
-      - keyboard_teleop.py
-      - render_async.py
-      - tower.py
-      - hover_env.py
-      - ipc_arm_cloth.py
-  genesis.options.morphs.Box
-      - differentiable_push.py
-      - fem_hard_and_soft_constraint.py
-      - keyboard_teleop.py
-      - pbd_liquid.py
-      - contype.py
   genesis.options.morphs.Mesh
       - differentiable_push.py
       - elastic_dragon.py
       - keyboard_teleop.py
       - contype.py
       - tower.py
-  genesis.options.VisOptions
-      - cloth_attached_to_rigid.py
-      - cloth_on_rigid.py
-      - cut_dragon.py
-      - flush_cubes.py
-      - grasp_soft_cube.py
+  genesis.options.morphs.Box
+      - differentiable_push.py
+      - fem_hard_and_soft_constraint.py
+      - keyboard_teleop.py
+      - pbd_liquid.py
+      - contype.py
   genesis.options.surfaces.Default
       - differentiable_push.py
       - elastic_dragon.py
@@ -558,53 +524,71 @@ API 库文件: C:\Users\zijun\Desktop\scai_project\Genesis\rag_demo\knowledge_ba
       - cloth_on_rigid.py
       - flush_cubes.py
       - genesis_ipc_motion_test.py
-  genesis.options.MPMOptions
-      - differentiable_push.py
-      - cut_dragon.py
-      - flush_cubes.py
-      - grasp_soft_cube.py
-      - sand_wheel.py
-  genesis.options.surfaces.Rough
-      - cut_dragon.py
-      - flush_cubes.py
-      - sand_wheel.py
-      - hover_env.py
-      - grasp_env.py
   genesis.options.ProfilingOptions
       - fem_hard_and_soft_constraint.py
       - fem_cube_linked_with_arm.py
       - grasp_env.py
       - follow_entity.py
       - contact_force_go2.py
+  genesis.options.surfaces.Rough
+      - cut_dragon.py
+      - flush_cubes.py
+      - sand_wheel.py
+      - hover_env.py
+      - grasp_env.py
+  genesis.Scene.reset
+      - differentiable_push.py
+      - demo.py
+      - ik_custom_chain.py
+      - ik_shadow_hand.py
+      - advanced_hybrid_robot.py
   genesis.options.surfaces.Plastic
       - genesis_ipc_motion_test.py
       - ipc_arm_cloth.py
       - ipc_cloth.py
       - ipc_grasp.py
       - ipc_twist_cloth_band.py
-  genesis.options.FEMOptions
+  genesis.Scene.draw_debug_spheres
       - fem_hard_and_soft_constraint.py
       - fem_cube_linked_with_arm.py
-      - fem_fixed_constraint.py
-      - fem_sphere_and_cube.py
-      - franka_grasp_fem_sphere.py
-  genesis.constraint_solver
-      - hover_env.py
-      - grasp_env.py
-      - domain_randomization.py
       - terrain_height_field.py
       - terrain_subterrain.py
-  genesis.options.IPCCouplerOptions
-      - genesis_ipc_motion_test.py
-      - ipc_arm_cloth.py
-      - ipc_cloth.py
-      - ipc_grasp.py
-      - ipc_twist_cloth_band.py
+      - draw_debug.py
   genesis.options.morphs.Drone
       - fly.py
       - fly_route.py
       - hover_env.py
       - interactive_drone.py
+  genesis.Scene.add_sensor
+      - camera_as_sensor.py
+      - contact_force_go2.py
+      - imu_franka.py
+      - lidar_teleop.py
+  genesis.options.textures.ColorTexture
+      - hover_env.py
+      - grasp_env.py
+      - demo.py
+      - camera_as_sensor.py
+  genesis.Scene.clear_debug_objects
+      - accelerometer_duck.py
+      - accelerometer_franka.py
+      - draw_debug.py
+  genesis.Scene.add_emitter
+      - flush_cubes.py
+      - sand_wheel.py
+      - water_wheel.py
+  genesis.Scene.clear_debug_object
+      - fem_hard_and_soft_constraint.py
+      - draw_debug.py
+      - IK_motion_planning_grasp.py
+  genesis.options.morphs.Cylinder
+      - tower.py
+      - flush_cubes.py
+      - lidar_teleop.py
+  genesis.options.morphs.Terrain
+      - terrain_from_mesh.py
+      - terrain_height_field.py
+      - terrain_subterrain.py
 
 ========================================================================
 详细机器可读数据见: code_index_api_coverage_report.json

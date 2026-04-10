@@ -44,6 +44,8 @@
         "genesis.Scene.get_state",
         "genesis.Scene.reset",
         "genesis.Scene.step",
+        "genesis.materials.MPM.Elastic",
+        "genesis.materials.Tool",
         "genesis.options.MPMOptions",
         "genesis.options.SimOptions",
         "genesis.options.ViewerOptions",
@@ -53,6 +55,7 @@
         "genesis.options.surfaces.Default"
       ],
       "key_apis": [
+        "genesis.Scene.add_camera",
         "genesis.Scene.get_state",
         "genesis.Scene.reset",
         "genesis.options.morphs.Box",
@@ -78,6 +81,7 @@
         "genesis.Scene.add_entity",
         "genesis.Scene.build",
         "genesis.Scene.step",
+        "genesis.materials.PBD.Elastic",
         "genesis.options.SimOptions",
         "genesis.options.ViewerOptions",
         "genesis.options.morphs.Mesh",
@@ -108,6 +112,7 @@
         "genesis.Scene.clear_debug_object",
         "genesis.Scene.draw_debug_spheres",
         "genesis.Scene.step",
+        "genesis.materials.FEM.Elastic",
         "genesis.options.FEMOptions",
         "genesis.options.ProfilingOptions",
         "genesis.options.SimOptions",
@@ -116,9 +121,9 @@
         "genesis.options.morphs.Sphere"
       ],
       "key_apis": [
+        "genesis.Scene.add_camera",
         "genesis.Scene.clear_debug_object",
         "genesis.Scene.draw_debug_spheres",
-        "genesis.options.ProfilingOptions",
         "genesis.options.morphs.Box",
         "genesis.options.morphs.Plane",
         "genesis.options.morphs.Sphere"
@@ -140,6 +145,7 @@
         "genesis.Scene",
         "genesis.Scene.add_entity",
         "genesis.Scene.build",
+        "genesis.materials.Rigid",
         "genesis.options.RigidOptions",
         "genesis.options.SimOptions",
         "genesis.options.ViewerOptions",
@@ -173,6 +179,7 @@
         "genesis.Scene.add_entity",
         "genesis.Scene.build",
         "genesis.Scene.step",
+        "genesis.materials.PBD.Liquid",
         "genesis.options.PBDOptions",
         "genesis.options.SimOptions",
         "genesis.options.ViewerOptions",
@@ -227,9 +234,7 @@
         "genesis.options.SFOptions",
         "genesis.options.SimOptions"
       ],
-      "key_apis": [
-        "genesis.options.SFOptions"
-      ]
+      "key_apis": []
     }
   },
   {
@@ -339,6 +344,8 @@
         "genesis.Scene.add_entity",
         "genesis.Scene.build",
         "genesis.Scene.step",
+        "genesis.materials.PBD.Cloth",
+        "genesis.materials.Rigid",
         "genesis.options.PBDOptions",
         "genesis.options.SimOptions",
         "genesis.options.ViewerOptions",
@@ -372,6 +379,8 @@
         "genesis.Scene.add_entity",
         "genesis.Scene.build",
         "genesis.Scene.step",
+        "genesis.materials.PBD.Cloth",
+        "genesis.materials.Rigid",
         "genesis.options.PBDOptions",
         "genesis.options.SimOptions",
         "genesis.options.ViewerOptions",
@@ -405,6 +414,8 @@
         "genesis.Scene.add_entity",
         "genesis.Scene.build",
         "genesis.Scene.step",
+        "genesis.materials.MPM.Elastic",
+        "genesis.materials.Rigid",
         "genesis.options.MPMOptions",
         "genesis.options.SimOptions",
         "genesis.options.ViewerOptions",
@@ -440,6 +451,7 @@
         "genesis.Scene.build",
         "genesis.Scene.draw_debug_spheres",
         "genesis.Scene.step",
+        "genesis.materials.FEM.Elastic",
         "genesis.options.FEMOptions",
         "genesis.options.ProfilingOptions",
         "genesis.options.SimOptions",
@@ -448,8 +460,8 @@
         "genesis.options.morphs.Plane"
       ],
       "key_apis": [
+        "genesis.Scene.add_camera",
         "genesis.Scene.draw_debug_spheres",
-        "genesis.options.ProfilingOptions",
         "genesis.options.morphs.Box",
         "genesis.options.morphs.MJCF",
         "genesis.options.morphs.Plane"
@@ -473,6 +485,8 @@
         "genesis.Scene.add_entity",
         "genesis.Scene.build",
         "genesis.Scene.step",
+        "genesis.materials.MPM.Elastic",
+        "genesis.materials.MPM.Liquid",
         "genesis.options.MPMOptions",
         "genesis.options.SimOptions",
         "genesis.options.ViewerOptions",
@@ -509,6 +523,8 @@
         "genesis.Scene.add_entity",
         "genesis.Scene.build",
         "genesis.Scene.step",
+        "genesis.materials.MPM.Elastic",
+        "genesis.materials.Rigid",
         "genesis.options.MPMOptions",
         "genesis.options.SimOptions",
         "genesis.options.ViewerOptions",
@@ -543,6 +559,8 @@
         "genesis.Scene.add_entity",
         "genesis.Scene.build",
         "genesis.Scene.step",
+        "genesis.materials.MPM.Sand",
+        "genesis.materials.Rigid",
         "genesis.options.MPMOptions",
         "genesis.options.SimOptions",
         "genesis.options.ViewerOptions",
@@ -573,6 +591,8 @@
         "genesis.Scene.add_entity",
         "genesis.Scene.build",
         "genesis.Scene.step",
+        "genesis.materials.MPM.Elastic",
+        "genesis.materials.SPH.Liquid",
         "genesis.options.MPMOptions",
         "genesis.options.SPHOptions",
         "genesis.options.SimOptions",
@@ -605,6 +625,8 @@
         "genesis.Scene.add_entity",
         "genesis.Scene.build",
         "genesis.Scene.step",
+        "genesis.materials.Rigid",
+        "genesis.materials.SPH.Liquid",
         "genesis.options.SPHOptions",
         "genesis.options.SimOptions",
         "genesis.options.ViewerOptions",
@@ -703,6 +725,7 @@
         "genesis.options.morphs.Plane"
       ],
       "key_apis": [
+        "genesis.Scene.add_camera",
         "genesis.options.morphs.Drone",
         "genesis.options.morphs.Plane"
       ]
@@ -828,6 +851,8 @@
         "genesis.Scene.add_entity",
         "genesis.Scene.build",
         "genesis.Scene.step",
+        "genesis.materials.FEM.Elastic",
+        "genesis.materials.Rigid",
         "genesis.options.IPCCouplerOptions",
         "genesis.options.SimOptions",
         "genesis.options.morphs.Box",
@@ -858,6 +883,9 @@
         "genesis.Scene",
         "genesis.Scene.add_entity",
         "genesis.Scene.build",
+        "genesis.materials.FEM.Cloth",
+        "genesis.materials.FEM.Elastic",
+        "genesis.materials.Rigid",
         "genesis.options.IPCCouplerOptions",
         "genesis.options.RigidOptions",
         "genesis.options.SimOptions",
@@ -895,6 +923,9 @@
         "genesis.Scene.add_entity",
         "genesis.Scene.build",
         "genesis.Scene.step",
+        "genesis.materials.FEM.Cloth",
+        "genesis.materials.FEM.Elastic",
+        "genesis.materials.Rigid",
         "genesis.options.IPCCouplerOptions",
         "genesis.options.SimOptions",
         "genesis.options.morphs.Box",
@@ -928,6 +959,8 @@
         "genesis.Scene.add_entity",
         "genesis.Scene.build",
         "genesis.Scene.step",
+        "genesis.materials.FEM.Elastic",
+        "genesis.materials.Rigid",
         "genesis.options.IPCCouplerOptions",
         "genesis.options.SimOptions",
         "genesis.options.morphs.Box",
@@ -959,6 +992,7 @@
         "genesis.Scene.add_entity",
         "genesis.Scene.build",
         "genesis.Scene.step",
+        "genesis.materials.FEM.Cloth",
         "genesis.options.IPCCouplerOptions",
         "genesis.options.SimOptions",
         "genesis.options.morphs.Mesh",
@@ -1070,6 +1104,7 @@
       "all_apis": [
         "genesis.Scene",
         "genesis.constraint_solver",
+        "genesis.materials.Rigid",
         "genesis.options.ProfilingOptions",
         "genesis.options.RigidOptions",
         "genesis.options.SimOptions",
@@ -1083,7 +1118,6 @@
         "genesis.options.textures.ColorTexture"
       ],
       "key_apis": [
-        "genesis.options.ProfilingOptions",
         "genesis.options.morphs.Box",
         "genesis.options.morphs.MJCF",
         "genesis.options.morphs.URDF",
@@ -1155,6 +1189,7 @@
         "genesis.options.textures.ImageTexture"
       ],
       "key_apis": [
+        "genesis.Scene.add_camera",
         "genesis.Scene.reset",
         "genesis.options.morphs.Mesh",
         "genesis.options.morphs.Plane",
@@ -1194,7 +1229,7 @@
         "genesis.options.morphs.Plane"
       ],
       "key_apis": [
-        "genesis.options.ProfilingOptions",
+        "genesis.Scene.add_camera",
         "genesis.options.morphs.Box",
         "genesis.options.morphs.Plane"
       ]
@@ -1222,6 +1257,7 @@
         "genesis.options.morphs.Plane"
       ],
       "key_apis": [
+        "genesis.Scene.add_camera",
         "genesis.options.morphs.MJCF",
         "genesis.options.morphs.Plane"
       ]
@@ -1249,6 +1285,7 @@
         "genesis.options.morphs.Plane"
       ],
       "key_apis": [
+        "genesis.Scene.add_camera",
         "genesis.options.morphs.Box",
         "genesis.options.morphs.Plane"
       ]
@@ -1550,6 +1587,7 @@
         "genesis.Scene.add_entity",
         "genesis.Scene.build",
         "genesis.Scene.step",
+        "genesis.materials.Rigid",
         "genesis.options.RigidOptions",
         "genesis.options.ViewerOptions",
         "genesis.options.morphs.MJCF",
@@ -1576,6 +1614,7 @@
         "genesis.Scene.add_entity",
         "genesis.Scene.build",
         "genesis.Scene.step",
+        "genesis.materials.Rigid",
         "genesis.options.ViewerOptions",
         "genesis.options.morphs.MJCF",
         "genesis.options.morphs.Plane"
@@ -1867,6 +1906,7 @@
         "genesis.options.morphs.Plane"
       ],
       "key_apis": [
+        "genesis.Scene.add_camera",
         "genesis.options.morphs.MJCF",
         "genesis.options.morphs.Plane"
       ]
@@ -1898,6 +1938,7 @@
         "genesis.options.surfaces.Default"
       ],
       "key_apis": [
+        "genesis.Scene.add_camera",
         "genesis.Scene.add_light",
         "genesis.Scene.render_all_cameras",
         "genesis.options.morphs.MJCF",
@@ -1930,6 +1971,7 @@
         "genesis.options.morphs.Plane"
       ],
       "key_apis": [
+        "genesis.Scene.add_camera",
         "genesis.options.morphs.MJCF",
         "genesis.options.morphs.Plane"
       ]
@@ -2064,6 +2106,7 @@
         "genesis.Scene.add_entity",
         "genesis.Scene.build",
         "genesis.Scene.step",
+        "genesis.materials.FEM.Elastic",
         "genesis.options.FEMOptions",
         "genesis.options.SAPCouplerOptions",
         "genesis.options.SimOptions",
@@ -2090,6 +2133,7 @@
         "genesis.Scene.add_entity",
         "genesis.Scene.build",
         "genesis.Scene.step",
+        "genesis.materials.FEM.Elastic",
         "genesis.options.FEMOptions",
         "genesis.options.SAPCouplerOptions",
         "genesis.options.SimOptions",
@@ -2119,6 +2163,8 @@
         "genesis.Scene.add_entity",
         "genesis.Scene.build",
         "genesis.Scene.step",
+        "genesis.materials.FEM.Elastic",
+        "genesis.materials.Rigid",
         "genesis.options.FEMOptions",
         "genesis.options.RigidOptions",
         "genesis.options.SAPCouplerOptions",
@@ -2149,6 +2195,7 @@
         "genesis.Scene.add_entity",
         "genesis.Scene.build",
         "genesis.Scene.step",
+        "genesis.materials.Rigid",
         "genesis.options.RigidOptions",
         "genesis.options.SAPCouplerOptions",
         "genesis.options.SimOptions",
@@ -2234,7 +2281,6 @@
       "key_apis": [
         "genesis.Scene.add_sensor",
         "genesis.Scene.stop_recording",
-        "genesis.options.ProfilingOptions",
         "genesis.options.morphs.Plane",
         "genesis.options.morphs.URDF",
         "genesis.options.sensors.Contact",
@@ -2275,7 +2321,6 @@
         "genesis.Scene.draw_debug_sphere",
         "genesis.Scene.start_recording",
         "genesis.Scene.stop_recording",
-        "genesis.options.ProfilingOptions",
         "genesis.options.morphs.MJCF",
         "genesis.options.morphs.Plane",
         "genesis.options.sensors.IMU"
@@ -2316,7 +2361,6 @@
       "key_apis": [
         "genesis.Scene.add_sensor",
         "genesis.Scene.start_recording",
-        "genesis.options.ProfilingOptions",
         "genesis.options.morphs.Box",
         "genesis.options.morphs.Cylinder",
         "genesis.options.morphs.Plane",
@@ -2426,6 +2470,9 @@
         "genesis.Scene.build",
         "genesis.Scene.reset",
         "genesis.Scene.step",
+        "genesis.materials.Hybrid",
+        "genesis.materials.MPM.Muscle",
+        "genesis.materials.Rigid",
         "genesis.options.MPMOptions",
         "genesis.options.RigidOptions",
         "genesis.options.SimOptions",
@@ -2490,6 +2537,8 @@
         "genesis.Scene.build",
         "genesis.Scene.reset",
         "genesis.Scene.step",
+        "genesis.materials.FEM.Muscle",
+        "genesis.materials.MPM.Muscle",
         "genesis.options.FEMOptions",
         "genesis.options.MPMOptions",
         "genesis.options.SimOptions",
@@ -2522,6 +2571,9 @@
         "genesis.Scene.build",
         "genesis.Scene.reset",
         "genesis.Scene.step",
+        "genesis.materials.FEM.Muscle",
+        "genesis.materials.MPM.Muscle",
+        "genesis.materials.Rigid",
         "genesis.options.MPMOptions",
         "genesis.options.SimOptions",
         "genesis.options.ViewerOptions",
@@ -2710,6 +2762,7 @@
         "genesis.options.morphs.Plane"
       ],
       "key_apis": [
+        "genesis.Scene.add_camera",
         "genesis.options.morphs.MJCF",
         "genesis.options.morphs.Plane"
       ]
@@ -2731,6 +2784,9 @@
         "genesis.Scene.add_entity",
         "genesis.Scene.build",
         "genesis.Scene.step",
+        "genesis.materials.MPM.Elastic",
+        "genesis.materials.MPM.ElastoPlastic",
+        "genesis.materials.MPM.Liquid",
         "genesis.options.MPMOptions",
         "genesis.options.SimOptions",
         "genesis.options.ViewerOptions",
@@ -2790,6 +2846,7 @@
         "genesis.Scene.add_entity",
         "genesis.Scene.build",
         "genesis.Scene.step",
+        "genesis.materials.PBD.Cloth",
         "genesis.options.SimOptions",
         "genesis.options.ViewerOptions",
         "genesis.options.morphs.Mesh",
@@ -2873,6 +2930,7 @@
         "genesis.Scene.add_entity",
         "genesis.Scene.build",
         "genesis.Scene.step",
+        "genesis.materials.SPH.Liquid",
         "genesis.options.SPHOptions",
         "genesis.options.SimOptions",
         "genesis.options.VisOptions",
@@ -2911,6 +2969,7 @@
         "genesis.options.renderers.Rasterizer"
       ],
       "key_apis": [
+        "genesis.Scene.add_camera",
         "genesis.options.morphs.MJCF",
         "genesis.options.morphs.Plane",
         "genesis.options.renderers.Rasterizer"

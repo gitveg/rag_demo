@@ -11,7 +11,7 @@ HyDE 对齐原理：
     与 HyDE 伪代码语义空间一致，检索精度显著优于 API 文档向量。
 
 输入：
-  - genesis_knowledge_base_final.json  （API 知识库）
+  - genesis_api_index.json  （API 知识库）
   - genesis_code_index.json            （代码范例库）
   两者均位于 phys_agent/RAG/ 目录。
 
@@ -43,7 +43,7 @@ RAG_DIR   = os.path.abspath(os.path.join(_THIS_DIR, "..", "..", "..", "phys_agen
 
 # 输入：从本地 knowledge_base/ 读取
 CODE_INDEX_FILE   = os.path.join(_KB_DIR, "genesis_code_index.json")
-API_KB_FILE       = os.path.join(_KB_DIR, "genesis_knowledge_base_final.json")
+API_KB_FILE       = os.path.join(_KB_DIR, "genesis_api_index.json")
 # 输出：同时写入 phys_agent/RAG/（供 agent 直接使用）和本地 knowledge_base/（备份）
 OUTPUT_FILE       = os.path.join(RAG_DIR, "genesis_knowledge_units.json")
 LOCAL_OUTPUT_FILE = os.path.join(_KB_DIR,  "genesis_knowledge_units.json")

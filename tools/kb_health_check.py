@@ -4,7 +4,7 @@
 评估三个知识库的质量指标，输出控制台报告 + JSON 数据文件。
 
 知识库：
-  1. genesis_knowledge_base_final.json  —— API 知识库
+  1. genesis_api_index.json  —— API 知识库
   2. genesis_code_index.json            —— 代码范例库
   3. genesis_code_snippets.json         —— 代码片段库
 
@@ -26,7 +26,7 @@ if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _KB_DIR    = os.path.join(SCRIPT_DIR, "..", "knowledge_base")
 
-KB_API      = os.path.join(_KB_DIR, "genesis_knowledge_base_final.json")
+KB_API      = os.path.join(_KB_DIR, "genesis_api_index.json")
 KB_CODE     = os.path.join(_KB_DIR, "genesis_code_index.json")
 KB_SNIPPETS = os.path.join(_KB_DIR, "genesis_code_snippets.json")
 OUTPUT_JSON = os.path.join(_KB_DIR, "kb_health_report.json")
@@ -104,7 +104,7 @@ def analyze_api_kb(data: list) -> dict:
 
 
 def print_api_kb(result: dict):
-    print_section("1. API 知识库 (genesis_knowledge_base_final.json)")
+    print_section("1. API 知识库 (genesis_api_index.json)")
     total = result["total"]
     print(f"\n  总条目数         : {total:,}")
     print(f"  Summary 覆盖率   : {fmt_pct(result['summary_coverage']['count'], total)}")

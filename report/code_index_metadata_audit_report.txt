@@ -1,0 +1,110 @@
+genesis_code_index 元数据审计报告
+================================================================================
+生成时间: 2026-04-09T17:35:02
+代码范例库: D:\Desktop\Genesis\Genesis-main\rag_demo\knowledge_base\genesis_code_index.json
+API 知识库 : D:\Desktop\Genesis\Genesis-main\rag_demo\knowledge_base\genesis_api_index.json
+
+一、总体规模
+--------------------------------------------------------------------------------
+  范例条目数                 : 101
+  唯一 id 数                 : 101
+  重复 id 数                 : 0
+
+二、metadata 质量
+--------------------------------------------------------------------------------
+  空 title                    : 0 (0.00%)
+  空/默认 desc                : 0 (0.00%)
+  空 tags                     : 0 (0.00%)
+  tags 数量 > 3               : 0 (0.00%)
+  desc 长度统计               : {'min': 69, 'p50': 114, 'mean': 114.09, 'p90': 138, 'max': 150}
+  code 长度统计               : {'min': 314, 'p50': 2514, 'mean': 3748.16, 'p90': 7382, 'max': 20560}
+
+三、场景/标签覆盖（重点）
+--------------------------------------------------------------------------------
+  允许标签总数                : 14
+  覆盖到的允许标签            : 14 (100.00%)
+  未覆盖允许标签数            : 0
+  未覆盖允许标签              : []
+  未知标签（不在允许池）种数   : 0
+
+  Tag 分布 Top 20:
+    - articulated_robot         61
+    - scene_creation            57
+    - interaction               53
+    - rendering                 28
+    - rigid_body                24
+    - motion_planning           18
+    - soft_body                 14
+    - mixed_physics             10
+    - fluid_mpm                  7
+    - camera_control             7
+    - fluid_sph                  6
+    - vis_export                 1
+    - tactile_sensing            1
+    - depth_sensing              1
+
+四、API 字段质量
+--------------------------------------------------------------------------------
+  空 all_apis                 : 9 (8.91%)
+  空 key_apis                 : 9 (8.91%)
+  key_apis 非 all_apis 子集    : 0 (0.00%)
+  all_apis 每条统计            : {'min': 0, 'p50': 9, 'mean': 9.05, 'p90': 13, 'max': 20}
+  key_apis 每条统计            : {'min': 0, 'p50': 2, 'mean': 3.17, 'p90': 6, 'max': 13}
+  distinct all_apis           : 67
+  distinct key_apis           : 50
+
+  all_apis Top 20:
+    - genesis.Scene                               92
+    - genesis.Scene.build                         89
+    - genesis.Scene.add_entity                    88
+    - genesis.Scene.step                          79
+    - genesis.options.ViewerOptions               72
+    - genesis.options.morphs.Plane                66
+    - genesis.options.SimOptions                  53
+    - genesis.options.morphs.MJCF                 40
+    - genesis.options.RigidOptions                38
+    - genesis.options.morphs.Box                  29
+    - genesis.options.morphs.Mesh                 29
+    - genesis.options.VisOptions                  28
+    - genesis.options.surfaces.Default            22
+    - genesis.options.morphs.URDF                 17
+    - genesis.options.morphs.Sphere               15
+    - genesis.Scene.add_camera                    13
+    - genesis.options.MPMOptions                  11
+    - genesis.Scene.reset                          7
+    - genesis.options.ProfilingOptions             7
+    - genesis.options.surfaces.Rough               7
+
+  key_apis Top 20:
+    - genesis.options.morphs.Plane                66
+    - genesis.options.morphs.MJCF                 40
+    - genesis.options.morphs.Box                  29
+    - genesis.options.morphs.Mesh                 29
+    - genesis.options.surfaces.Default            22
+    - genesis.options.morphs.URDF                 17
+    - genesis.options.morphs.Sphere               15
+    - genesis.Scene.reset                          7
+    - genesis.options.ProfilingOptions             7
+    - genesis.options.surfaces.Rough               7
+    - genesis.options.surfaces.Plastic             6
+    - genesis.Scene.draw_debug_spheres             5
+    - genesis.options.morphs.Drone                 4
+    - genesis.options.textures.ColorTexture        4
+    - genesis.Scene.add_sensor                     4
+    - genesis.Scene.clear_debug_object             3
+    - genesis.options.morphs.Cylinder              3
+    - genesis.Scene.add_emitter                    3
+    - genesis.Scene.clear_debug_objects            3
+    - genesis.Scene.draw_debug_arrow               3
+
+五、与 API 知识库对齐
+--------------------------------------------------------------------------------
+  API KB distinct             : 497
+  all_apis 不在 KB 的种数      : 0
+  key_apis 不在 KB 的种数      : 0
+
+  key_apis 不在 KB Top 30:
+    - （无）
+
+================================================================================
+详细 JSON: D:\Desktop\Genesis\Genesis-main\rag_demo\report\code_index_metadata_audit_report.json

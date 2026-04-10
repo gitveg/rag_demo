@@ -13,7 +13,7 @@ dotenv.load_dotenv()
 DB_PATH = "./genesis_chroma_db"
 
 # 数据源文件
-API_FILE     = "knowledge_base/genesis_knowledge_base_final.json"
+API_FILE     = "knowledge_base/genesis_api_index.json"
 CODE_FILE    = "knowledge_base/genesis_code_index.json"
 SNIPPET_FILE = "knowledge_base/genesis_code_snippets.json"
 ERROR_FILE   = "knowledge_base/genesis_error_memory.json"
@@ -22,7 +22,7 @@ UNIT_FILE    = "knowledge_base/genesis_knowledge_units.json"
 # API Key 配置
 DASHSCOPE_API_KEY = os.getenv("DASHSCOPE_API_KEY", "你的_DASHSCOPE_API_KEY")
 
-# 人为排除的 Core API：灌库时强制不标为 core，避免重跑 indexer/enricher 后又被标回 core
+# 人为排除的 Core API：灌库时强制不标为 core，避免重跑 indexer_api 后又被标回 core
 CORE_API_BLACKLIST = [
     "genesis.options.SFOptions",
     "genesis.options.ProfilingOptions",

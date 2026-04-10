@@ -55,6 +55,8 @@
       "genesis.Scene.get_state",
       "genesis.Scene.reset",
       "genesis.Scene.step",
+      "genesis.materials.MPM.Elastic",
+      "genesis.materials.Tool",
       "genesis.options.MPMOptions",
       "genesis.options.SimOptions",
       "genesis.options.ViewerOptions",
@@ -64,6 +66,7 @@
       "genesis.options.surfaces.Default"
     ],
     "key_apis": [
+      "genesis.Scene.add_camera",
       "genesis.Scene.get_state",
       "genesis.Scene.reset",
       "genesis.options.morphs.Box",
@@ -72,6 +75,12 @@
       "genesis.options.surfaces.Default"
     ],
     "api_docs": [
+      {
+        "api_id": "genesis.Scene.add_camera",
+        "signature": "add_camera(model=pinhole, res=(320, 320), pos=(0.5, 2.5, 3.5), lookat=(0.5, 0.5, 0.5), up=(0.0, 0.0, 1.0), fov=30, aperture=2.0, focus_dist=None, GUI=False, spp=256, denoise=None, near=0.1, far=20.0, env_idx=None, debug=False)",
+        "summary": "Add a camera to the scene.",
+        "params_preview": "model: , res: "
+      },
       {
         "api_id": "genesis.Scene.get_state",
         "signature": "get_state()",
@@ -82,7 +91,7 @@
         "api_id": "genesis.Scene.reset",
         "signature": "reset(state=None, envs_idx=None)",
         "summary": "Resets the scene to its initial state.",
-        "params_preview": "state: If given, the scene's registered initial state will be updat, envs_idx: If None, all environments will be considered."
+        "params_preview": "state: , envs_idx: "
       },
       {
         "api_id": "genesis.options.morphs.Box",
@@ -110,7 +119,7 @@
       }
     ],
     "code": "import argparse\nimport os\n\nimport torch\n\nimport genesis as gs\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=False)\n    args = parser.parse_args()\n\n    ########################## init ##########################\n    gs.init(precision=\"32\", logging_level=\"warning\")\n\n    ########################## create a scene ##########################\n\n    scene = gs.Scene(\n        sim_options=gs.options.SimOptions(\n            dt=2e-3,\n            substeps=10,\n            requires_grad=True,\n        ),\n        mpm_options=gs.options.MPMOptions(\n            lower_bound=(0.0, -1.0, 0.0),\n            upper_bound=(1.0, 1.0, 0.55),\n        ),\n        viewer_options=gs.options.ViewerOptions(\n            camera_pos=(2.5, -0.15, 2.42),\n            camera_lookat=(0.5, 0.5, 0.1),\n        ),\n        show_viewer=args.vis,\n    )\n\n    ########################## entities ##########################\n    plane = scene.add_entity(gs.morphs.URDF(file=\"urdf/plane/plane.urdf\", fixed=True))\n    stick = scene.add_entity(\n        material=gs.materials.Tool(friction=8.0),\n        morph=gs.morphs.Mesh(\n            file=\"meshes/stirrer.obj\",\n            scale=0.6,\n            pos=(0.5, 0.5, 0.05),\n            euler=(90.0, 0.0, 0.0),\n        ),\n        surface=gs.surfaces.Default(\n            color=(1.0, 1.0, 1.0, 1.0),\n        ),\n    )\n    obj1 = scene.add_entity(\n        material=gs.materials.MPM.Elastic(rho=500),\n        morph=gs.morphs.Box(\n            lower=(0.2, 0.1, 0.05),\n            upper=(0.4, 0.3, 0.15),\n        ),\n        surface=gs.surfaces.Default(\n            color=(0.9, 0.9, 0.9, 1.0),\n        ),\n        vis_mode=\"particle\",\n    )\n    obj2 = scene.add_entity(\n        material=gs.materials.MPM.Elastic(rho=500),\n        morph=gs.morphs.Mesh(\n            file=\"meshes/duck.obj\",\n            pos=(0.4, 0.55, 0.056),\n            scale=0.07,\n            euler=(90.0, 0.0, 90.0),\n        ),\n        surface=gs.surfaces.Default(\n            color=(0.9, 0.8, 0.2, 1.0),\n        ),\n        vis_mode=\"particle\",\n    )\n\n    ########################## cameras ##########################\n    cam_0 = scene.add_camera(\n        pos=(1.5, 0.5, 2.42),\n        lookat=(0.5, 0.5, 0.1),\n        fov=30,\n        GUI=True,\n    )\n    cam_1 = scene.add_camera(\n        pos=(-3.0, 1.5, 2.0),\n        lookat=(0.5, 0.5, 0.1),\n        fov=30,\n        GUI=True,\n    )\n\n    ########################## build ##########################\n    scene.build(n_envs=2)\n\n    ########################## forward + backward twice ##########################\n    horizon = 150 if \"PYTEST_VERSION\" not in os.environ else 5\n    v_list = [gs.tensor([[0.0, 1.0, 0.0], [0.0, 1.0, 0.0]], requires_grad=True) for _ in range(horizon)]\n    for _ in range(2):\n        scene.reset()\n        init_pos = gs.tensor([[0.3, 0.1, 0.28], [0.3, 0.1, 0.5]], requires_grad=True)\n        stick.set_position(init_pos)\n        pos_obj1_init = gs.tensor([0.3, 0.3, 0.1], requires_grad=True)\n        obj1.set_position(pos_obj1_init)\n        v_obj1_init = gs.tensor([0.0, -1.0, 0.0], requires_grad=True)\n        obj1.set_velocity(v_obj1_init)\n\n        # forward pass\n        print(\"forward\")\n        timer = gs.tools.Timer()\n        loss = 0.0\n        for i, v_i in enumerate(v_list):\n            # uncomment this to set an angular velocity\n            # w_i = gs.tensor([2.0, 0.0, 0.0], requires_grad=True)\n            # stick.set_velocity(vel=v_i, ang=w_i)\n            stick.set_velocity(vel=v_i)\n\n            scene.step()\n\n            # uncomment this to render images\n            # img0 = cam_0.render()\n            # img1 = cam_1.render()\n\n            # you can use a scene_state\n            if i == 25:\n                # compute loss\n                goal = gs.tensor([0.5, 0.8, 0.05])\n                mpm_particles = scene.get_state().solvers_state[scene.solvers.index(scene.mpm_solver)]\n                loss += torch.pow(mpm_particles.pos[mpm_particles.active == 1] - goal, 2).sum()\n\n            # you can also use an entity's state\n            if i == horizon - 1:\n                # compute loss\n                goal = gs.tensor([0.5, 0.8, 0.05])\n                state = obj1.get_state()\n                loss += torch.pow(state.pos - goal, 2).sum()\n\n        timer.stamp(\"forward took: \")\n        # backward pass\n        print(\"backward\")\n        loss.backward()  # this lets gradient flow all the way back to tensor input\n        timer.stamp(\"backward took: \")\n        for v_i in v_list:\n            print(v_i.grad)\n            v_i.zero_grad()\n        init_pos.zero_grad()\n        print(loss.item())\n\n\nif __name__ == \"__main__\":\n    main()\n",
-    "embedding_text": "# Task: MPM Elastic Object Manipulation\n# Description: Simulates a stick manipulating two MPM elastic objects with camera views and loss computation for particle positions.\n# Domain: fluid_mpm, scene_creation, interaction\n# Genesis APIs used: genesis.Scene.get_state, genesis.Scene.reset, genesis.options.morphs.Box, genesis.options.morphs.Mesh, genesis.options.morphs.URDF, genesis.options.surfaces.Default\n\nimport argparse\nimport os\n\nimport torch\n\nimport genesis as gs\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=False)\n    args = parser.parse_args()\n\n    ########################## init ##########################\n    gs.init(precision=\"32\", logging_level=\"warning\")\n\n    ########################## create a scene ##########################\n\n    scene = gs.Scene(\n        sim_options=gs.options.SimOptions(\n            dt=2e-3,\n            substeps=10,\n            requires_grad=True,\n        ),\n        mpm_options=gs.options.MPMOptions(\n            lower_bound=(0.0, -1.0, 0.0),\n            upper_bound=(1.0, 1.0, 0.55),\n        ),\n        viewer_options=gs.options.ViewerOptions(\n            camera_pos=(2.5, -0.15, 2.42),\n   "
+    "embedding_text": "# Task: MPM Elastic Object Manipulation\n# Description: Simulates a stick manipulating two MPM elastic objects with camera views and loss computation for particle positions.\n# Domain: fluid_mpm, scene_creation, interaction\n# Genesis APIs used: genesis.Scene.add_camera, genesis.Scene.get_state, genesis.Scene.reset, genesis.options.morphs.Box, genesis.options.morphs.Mesh, genesis.options.morphs.URDF, genesis.options.surfaces.Default\n\nimport argparse\nimport os\n\nimport torch\n\nimport genesis as gs\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=False)\n    args = parser.parse_args()\n\n    ########################## init ##########################\n    gs.init(precision=\"32\", logging_level=\"warning\")\n\n    ########################## create a scene ##########################\n\n    scene = gs.Scene(\n        sim_options=gs.options.SimOptions(\n            dt=2e-3,\n            substeps=10,\n            requires_grad=True,\n        ),\n        mpm_options=gs.options.MPMOptions(\n            lower_bound=(0.0, -1.0, 0.0),\n            upper_bound=(1.0, 1.0, 0.55),\n        ),\n        viewer_options=gs.options.ViewerOptions(\n            camera_pos=(2.5, -0.15, 2.42),\n   "
   },
   {
     "unit_id": "elastic_dragon",
@@ -126,6 +135,7 @@
       "genesis.Scene.add_entity",
       "genesis.Scene.build",
       "genesis.Scene.step",
+      "genesis.materials.PBD.Elastic",
       "genesis.options.SimOptions",
       "genesis.options.ViewerOptions",
       "genesis.options.morphs.Mesh",
@@ -169,6 +179,7 @@
       "genesis.Scene.clear_debug_object",
       "genesis.Scene.draw_debug_spheres",
       "genesis.Scene.step",
+      "genesis.materials.FEM.Elastic",
       "genesis.options.FEMOptions",
       "genesis.options.ProfilingOptions",
       "genesis.options.SimOptions",
@@ -177,14 +188,20 @@
       "genesis.options.morphs.Sphere"
     ],
     "key_apis": [
+      "genesis.Scene.add_camera",
       "genesis.Scene.clear_debug_object",
       "genesis.Scene.draw_debug_spheres",
-      "genesis.options.ProfilingOptions",
       "genesis.options.morphs.Box",
       "genesis.options.morphs.Plane",
       "genesis.options.morphs.Sphere"
     ],
     "api_docs": [
+      {
+        "api_id": "genesis.Scene.add_camera",
+        "signature": "add_camera(model=pinhole, res=(320, 320), pos=(0.5, 2.5, 3.5), lookat=(0.5, 0.5, 0.5), up=(0.0, 0.0, 1.0), fov=30, aperture=2.0, focus_dist=None, GUI=False, spp=256, denoise=None, near=0.1, far=20.0, env_idx=None, debug=False)",
+        "summary": "Add a camera to the scene.",
+        "params_preview": "model: , res: "
+      },
       {
         "api_id": "genesis.Scene.clear_debug_object",
         "signature": "clear_debug_object(obj)",
@@ -195,13 +212,7 @@
         "api_id": "genesis.Scene.draw_debug_spheres",
         "signature": "draw_debug_spheres(poss, radius=0.01, color=(1.0, 0.0, 0.0, 0.5))",
         "summary": "Draws multiple spheres in the scene for visualization.",
-        "params_preview": "poss: array_like, shape (N, 3), radius: "
-      },
-      {
-        "api_id": "genesis.options.ProfilingOptions",
-        "signature": "ProfilingOptions(**data)",
-        "summary": "Profiling options",
-        "params_preview": "data: [Auto-Detect] Variable keyword arguments. Needs LLM expansio"
+        "params_preview": "poss: , radius: "
       },
       {
         "api_id": "genesis.options.morphs.Box",
@@ -223,7 +234,7 @@
       }
     ],
     "code": "import os\nimport argparse\n\nimport numpy as np\nimport torch\nfrom tqdm import tqdm\n\nimport genesis as gs\n\nSCENE_POS = np.array([0.5, 0.5, 1.0])\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\n        \"--solver\", choices=[\"explicit\", \"implicit\"], default=\"implicit\", help=\"FEM solver type (default: implicit)\"\n    )\n    parser.add_argument(\"--dt\", type=float)\n    parser.add_argument(\"--substeps\", type=int)\n    parser.add_argument(\"--seconds\", type=float, default=5)\n    parser.add_argument(\"--vis\", \"-v\", action=\"store_true\", default=False)\n\n    args = parser.parse_args()\n    args.seconds = 0.01 if \"PYTEST_VERSION\" in os.environ else args.seconds\n\n    if args.solver == \"explicit\":\n        dt = args.dt if args.dt is not None else 1e-4\n        substeps = args.substeps if args.substeps is not None else 5\n    else:  # implicit\n        dt = args.dt if args.dt is not None else 1e-3\n        substeps = args.substeps if args.substeps is not None else 1\n\n    gs.init(backend=gs.gpu)\n\n    scene = gs.Scene(\n        sim_options=gs.options.SimOptions(\n            dt=dt,\n            substeps=substeps,\n            gravity=(0, 0, -9.81),\n        ),\n        fem_options=gs.options.FEMOptions(\n            use_implicit_solver=args.solver == \"implicit\",\n            enable_vertex_constraints=True,\n        ),\n        profiling_options=gs.options.ProfilingOptions(\n            show_FPS=False,\n        ),\n        show_viewer=args.vis,\n    )\n\n    scene.add_entity(gs.morphs.Plane())\n\n    blob = scene.add_entity(\n        morph=gs.morphs.Sphere(pos=SCENE_POS + np.array([-0.3, -0.3, 0]), radius=0.1),\n        material=gs.materials.FEM.Elastic(E=1.0e4, nu=0.45, rho=1000.0, model=\"linear_corotated\"),\n    )\n\n    cube = scene.add_entity(\n        morph=gs.morphs.Box(pos=SCENE_POS + np.array([0.3, 0.3, 0]), size=(0.2, 0.2, 0.2)),\n        material=gs.materials.FEM.Elastic(E=1.0e6, nu=0.45, rho=1000.0, model=\"linear_corotated\"),\n    )\n\n    video_fps = 1 / dt\n    max_fps = 100\n    frame_interval = max(1, int(video_fps / max_fps)) if max_fps > 0 else 1\n    print(f\"video_fps: {video_fps}, frame_interval: {frame_interval}\")\n\n    cam = scene.add_camera(\n        res=(640, 480),\n        pos=(-2.0, 3.0, 2.0),\n        lookat=SCENE_POS + np.array([0.0, 0.0, -0.8]),\n        fov=30,\n    )\n\n    scene.build()\n    cam.start_recording()\n\n    pinned_idx = [0]\n    circle_radius = 0.3\n\n    circle_period = 10.0\n    angle_step = 2 * np.pi * dt / circle_period\n    current_angle = 0.0\n\n    initial_vertex_pos = cube.init_positions[pinned_idx]\n    circle_center = initial_vertex_pos - torch.tensor(\n        [-circle_radius * np.cos(current_angle), -circle_radius * np.sin(current_angle), 0.0],\n        device=cube.init_positions.device,\n        dtype=cube.init_positions.dtype,\n    )\n\n    def get_next_circle_position():\n        \"\"\"Get next position on circular path with incremental step.\"\"\"\n        nonlocal current_angle\n        offset = torch.tensor(\n            [-circle_radius * np.cos(current_angle), -circle_radius * np.sin(current_angle), 0.0],\n            device=cube.init_positions.device,\n            dtype=cube.init_positions.dtype,\n        )\n        current_angle += angle_step\n        return circle_center + offset\n\n    debug_circle = None\n    total_steps = int(args.seconds / dt)\n\n    try:\n        target_positions = blob.init_positions[pinned_idx]\n        scene.draw_debug_spheres(poss=target_positions, radius=0.02, color=(1, 0, 1, 0.8))\n        blob.set_vertex_constraints(pinned_idx, target_positions, is_soft_constraint=True, stiffness=1e4)\n\n        target_positions = get_next_circle_position()\n        debug_circle = scene.draw_debug_spheres(poss=target_positions, radius=0.02, color=(0, 1, 0, 0.8))\n        cube.set_vertex_constraints(pinned_idx, target_positions)\n\n        for step in tqdm(range(total_steps), total=total_steps):\n            if debug_circle is not None:\n                scene.clear_debug_object(debug_circle)\n\n            new_pos = get_next_circle_position()\n            debug_circle = scene.draw_debug_spheres(poss=new_pos, radius=0.02, color=(0, 1, 0, 0.8))\n            cube.update_constraint_targets(pinned_idx, new_pos)\n\n            scene.step()\n\n            if step % frame_interval == 0:\n                cam.render()\n\n    except KeyboardInterrupt:\n        gs.logger.info(\"Simulation interrupted, exiting.\")\n    finally:\n        gs.logger.info(\"Simulation finished.\")\n\n        actual_fps = video_fps / frame_interval\n        video_filename = f\"fem_hard_soft_{args.solver}_dt={dt}_substeps={substeps}.mp4\"\n        cam.stop_recording(save_to_filename=video_filename, fps=actual_fps)\n        gs.logger.info(f\"Saved video to {video_filename}\")\n\n\nif __name__ == \"__main__\":\n    main()\n",
-    "embedding_text": "# Task: FEM Soft Body Circular Motion\n# Description: Simulates a soft sphere and cube with FEM physics, applying vertex constraints to move the cube in a circular path while keeping the sphere pinned.\n# Domain: soft_body, scene_creation, interaction\n# Genesis APIs used: genesis.Scene.clear_debug_object, genesis.Scene.draw_debug_spheres, genesis.options.ProfilingOptions, genesis.options.morphs.Box, genesis.options.morphs.Plane, genesis.options.morphs.Sphere\n\nimport os\nimport argparse\n\nimport numpy as np\nimport torch\nfrom tqdm import tqdm\n\nimport genesis as gs\n\nSCENE_POS = np.array([0.5, 0.5, 1.0])\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\n        \"--solver\", choices=[\"explicit\", \"implicit\"], default=\"implicit\", help=\"FEM solver type (default: implicit)\"\n    )\n    parser.add_argument(\"--dt\", type=float)\n    parser.add_argument(\"--substeps\", type=int)\n    parser.add_argument(\"--seconds\", type=float, default=5)\n    parser.add_argument(\"--vis\", \"-v\", action=\"store_true\", default=False)\n\n    args = parser.parse_args()\n    args.seconds = 0.01 if \"PYTEST_VERSION\" in os.environ else args.seconds\n\n    if args.solver == \"explicit\":\n        dt = args.dt if args.dt is not None else 1e-4\n        substeps = args.substeps "
+    "embedding_text": "# Task: FEM Soft Body Circular Motion\n# Description: Simulates a soft sphere and cube with FEM physics, applying vertex constraints to move the cube in a circular path while keeping the sphere pinned.\n# Domain: soft_body, scene_creation, interaction\n# Genesis APIs used: genesis.Scene.add_camera, genesis.Scene.clear_debug_object, genesis.Scene.draw_debug_spheres, genesis.options.morphs.Box, genesis.options.morphs.Plane, genesis.options.morphs.Sphere\n\nimport os\nimport argparse\n\nimport numpy as np\nimport torch\nfrom tqdm import tqdm\n\nimport genesis as gs\n\nSCENE_POS = np.array([0.5, 0.5, 1.0])\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\n        \"--solver\", choices=[\"explicit\", \"implicit\"], default=\"implicit\", help=\"FEM solver type (default: implicit)\"\n    )\n    parser.add_argument(\"--dt\", type=float)\n    parser.add_argument(\"--substeps\", type=int)\n    parser.add_argument(\"--seconds\", type=float, default=5)\n    parser.add_argument(\"--vis\", \"-v\", action=\"store_true\", default=False)\n\n    args = parser.parse_args()\n    args.seconds = 0.01 if \"PYTEST_VERSION\" in os.environ else args.seconds\n\n    if args.solver == \"explicit\":\n        dt = args.dt if args.dt is not None else 1e-4\n        substeps = args.substeps "
   },
   {
     "unit_id": "keyboard_teleop",
@@ -238,6 +249,7 @@
       "genesis.Scene",
       "genesis.Scene.add_entity",
       "genesis.Scene.build",
+      "genesis.materials.Rigid",
       "genesis.options.RigidOptions",
       "genesis.options.SimOptions",
       "genesis.options.ViewerOptions",
@@ -302,6 +314,7 @@
       "genesis.Scene.add_entity",
       "genesis.Scene.build",
       "genesis.Scene.step",
+      "genesis.materials.PBD.Liquid",
       "genesis.options.PBDOptions",
       "genesis.options.SimOptions",
       "genesis.options.ViewerOptions",
@@ -376,19 +389,10 @@
       "genesis.options.SFOptions",
       "genesis.options.SimOptions"
     ],
-    "key_apis": [
-      "genesis.options.SFOptions"
-    ],
-    "api_docs": [
-      {
-        "api_id": "genesis.options.SFOptions",
-        "signature": "SFOptions(**data)",
-        "summary": "Options configuring the SFSolver.",
-        "params_preview": "data: [Auto-Detect] Variable keyword arguments. Needs LLM expansio"
-      }
-    ],
+    "key_apis": [],
+    "api_docs": [],
     "code": "import argparse\nimport math\nimport os\nfrom pathlib import Path\n\nimport numpy as np\nimport gstaichi as ti\nimport cv2\n\nimport genesis as gs\n\n\n@ti.data_oriented\nclass Jet(object):\n    def __init__(\n        self,\n        world_center,\n        jet_radius,\n        orbit_radius,\n        orbit_radius_vel,\n        orbit_init_degree,\n        orbit_tau,\n        sub_orbit_radius,\n        sub_orbit_tau,\n    ):\n        self.world_center = ti.Vector(world_center)\n        self.orbit_radius = orbit_radius\n        self.orbit_radius_vel = orbit_radius_vel\n        self.orbit_init_radian = math.radians(orbit_init_degree)\n        self.orbit_tau = orbit_tau\n\n        self.jet_radius = jet_radius\n\n        self.num_sub_jets = 3\n        self.sub_orbit_radian_delta = 2.0 * math.pi / self.num_sub_jets\n        self.sub_orbit_radius = sub_orbit_radius\n        self.sub_orbit_tau = sub_orbit_tau\n\n    @ti.func\n    def get_pos(self, t: float):\n        rel_pos = ti.Vector([self.orbit_radius + t * self.orbit_radius_vel, 0.0, 0.0])\n        rot_mat = ti.math.rot_by_axis(ti.Vector([0.0, 1.0, 0.0]), self.orbit_init_radian + t * self.orbit_tau)[:3, :3]\n        rel_pos = rot_mat @ rel_pos\n        return rel_pos\n\n    @ti.func\n    def get_factor(self, i: int, j: int, k: int, dx: float, t: float):\n        rel_pos = self.get_pos(t)\n        tan_dir = self.get_tan_dir(t)\n        ijk = ti.Vector([i, j, k], dt=gs.ti_float) * dx\n        dist = 2 * self.jet_radius\n        for q in ti.static(range(self.num_sub_jets)):\n            jet_pos = ti.Vector([0.0, self.sub_orbit_radius, 0.0])\n            rot_mat = ti.math.rot_by_axis(tan_dir, self.sub_orbit_radian_delta * q + self.sub_orbit_tau * t)[:3, :3]\n            jet_pos = (rot_mat @ jet_pos) + self.world_center + rel_pos\n            dist_q = (ijk - jet_pos).norm(gs.EPS)\n            if dist_q < dist:\n                dist = dist_q\n        factor = 0.0\n        if dist < self.jet_radius:\n            factor = 1.0\n        return factor\n\n    @ti.func\n    def get_inward_dir(self, t: float):\n        neg_pos = -self.get_pos(t)\n        return neg_pos.normalized(gs.EPS)\n\n    @ti.func\n    def get_tan_dir(self, t: float):\n        inward_dir = self.get_inward_dir(t)\n        tan_rot_mat = ti.math.rot_by_axis(ti.Vector([0.0, 1.0, 0.0]), 0.0)[:3, :3]\n        return tan_rot_mat @ inward_dir\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-n\", \"--num_steps\", type=int, default=200)\n    parser.add_argument(\"-c\", \"--cpu\", action=\"store_true\", default=False)\n    args = parser.parse_args()\n\n    args.num_steps = 1 if \"PYTEST_VERSION\" in os.environ else args.num_steps\n    substeps = 1 if \"PYTEST_VERSION\" in os.environ else 10\n    res = 32 if \"PYTEST_VERSION\" in os.environ else 384\n    args.cpu = True if \"PYTEST_VERSION\" in os.environ else args.cpu\n\n    ########################## init ##########################\n    gs.init(backend=gs.cpu if args.cpu else gs.gpu, seed=0, precision=\"32\", logging_level=\"info\")\n\n    video_path = Path(__file__).parent / \"video\"\n    video_path.mkdir(exist_ok=True, parents=True)\n\n    scene = gs.Scene(\n        sim_options=gs.options.SimOptions(\n            dt=1e-2,\n        ),\n        sf_options=gs.options.SFOptions(\n            res=res,\n            solver_iters=200,\n            decay=0.025,\n        ),\n        show_viewer=False,\n    )\n\n    orbit_tau = 0.2\n    orbit_radius = 0.3\n    orbit_radius_vel = 0.0\n\n    jet_radius = 0.02\n\n    sub_orbit_radius = 0.03\n    sub_orbit_tau = 3.0\n\n    jets = [\n        Jet(\n            world_center=[0.5, 0.5, 0.5],\n            orbit_radius=orbit_radius,\n            orbit_radius_vel=orbit_radius_vel,\n            orbit_init_degree=orbit_init_degree,\n            orbit_tau=orbit_tau,\n            sub_orbit_radius=sub_orbit_radius,\n            jet_radius=jet_radius,\n            sub_orbit_tau=sub_orbit_tau,\n        )\n        for orbit_init_degree in np.linspace(0, 360, 3, endpoint=False)\n    ]\n    scene.sim.solvers[-1].set_jets(jets)\n\n    ########################## entities ##########################\n\n    scene.build()\n\n    for i in range(args.num_steps):\n\n        scalars = scene.sim.solvers[-1].grid.q.to_numpy().astype(np.float32)  # (res, res, res, 3)\n        scalars[scalars < 1e-4] = 0\n        layer = scalars[:, res // 2, :]\n\n        rgb = (255 * layer).astype(np.uint8)\n        cv2.imwrite(str(video_path / f\"{i:04d}.png\"), cv2.cvtColor(rgb, cv2.COLOR_RGB2BGR))\n\n        for _ in range(substeps):\n            scene.step()\n\n\nif __name__ == \"__main__\":\n    main()\n",
-    "embedding_text": "# Task: Orbiting Fluid Jets Simulation\n# Description: Simulates multiple orbiting jets that inject fluid into a domain using SPH with complex orbital motion patterns.\n# Domain: fluid_sph, scene_creation, rendering\n# Genesis APIs used: genesis.options.SFOptions\n\nimport argparse\nimport math\nimport os\nfrom pathlib import Path\n\nimport numpy as np\nimport gstaichi as ti\nimport cv2\n\nimport genesis as gs\n\n\n@ti.data_oriented\nclass Jet(object):\n    def __init__(\n        self,\n        world_center,\n        jet_radius,\n        orbit_radius,\n        orbit_radius_vel,\n        orbit_init_degree,\n        orbit_tau,\n        sub_orbit_radius,\n        sub_orbit_tau,\n    ):\n        self.world_center = ti.Vector(world_center)\n        self.orbit_radius = orbit_radius\n        self.orbit_radius_vel = orbit_radius_vel\n        self.orbit_init_radian = math.radians(orbit_init_degree)\n        self.orbit_tau = orbit_tau\n\n        self.jet_radius = jet_radius\n\n        self.num_sub_jets = 3\n        self.sub_orbit_radian_delta = 2.0 * math.pi / self.num_sub_jets\n        self.sub"
+    "embedding_text": "# Task: Orbiting Fluid Jets Simulation\n# Description: Simulates multiple orbiting jets that inject fluid into a domain using SPH with complex orbital motion patterns.\n# Domain: fluid_sph, scene_creation, rendering\n# Genesis APIs used: none\n\nimport argparse\nimport math\nimport os\nfrom pathlib import Path\n\nimport numpy as np\nimport gstaichi as ti\nimport cv2\n\nimport genesis as gs\n\n\n@ti.data_oriented\nclass Jet(object):\n    def __init__(\n        self,\n        world_center,\n        jet_radius,\n        orbit_radius,\n        orbit_radius_vel,\n        orbit_init_degree,\n        orbit_tau,\n        sub_orbit_radius,\n        sub_orbit_tau,\n    ):\n        self.world_center = ti.Vector(world_center)\n        self.orbit_radius = orbit_radius\n        self.orbit_radius_vel = orbit_radius_vel\n        self.orbit_init_radian = math.radians(orbit_init_degree)\n        self.orbit_tau = orbit_tau\n\n        self.jet_radius = jet_radius\n\n        self.num_sub_jets = 3\n        self.sub_orbit_radian_delta = 2.0 * math.pi / self.num_sub_jets\n        self.sub"
   },
   {
     "unit_id": "contype",
@@ -564,6 +568,8 @@
       "genesis.Scene.add_entity",
       "genesis.Scene.build",
       "genesis.Scene.step",
+      "genesis.materials.PBD.Cloth",
+      "genesis.materials.Rigid",
       "genesis.options.PBDOptions",
       "genesis.options.SimOptions",
       "genesis.options.ViewerOptions",
@@ -622,6 +628,8 @@
       "genesis.Scene.add_entity",
       "genesis.Scene.build",
       "genesis.Scene.step",
+      "genesis.materials.PBD.Cloth",
+      "genesis.materials.Rigid",
       "genesis.options.PBDOptions",
       "genesis.options.SimOptions",
       "genesis.options.ViewerOptions",
@@ -680,6 +688,8 @@
       "genesis.Scene.add_entity",
       "genesis.Scene.build",
       "genesis.Scene.step",
+      "genesis.materials.MPM.Elastic",
+      "genesis.materials.Rigid",
       "genesis.options.MPMOptions",
       "genesis.options.SimOptions",
       "genesis.options.ViewerOptions",
@@ -740,6 +750,7 @@
       "genesis.Scene.build",
       "genesis.Scene.draw_debug_spheres",
       "genesis.Scene.step",
+      "genesis.materials.FEM.Elastic",
       "genesis.options.FEMOptions",
       "genesis.options.ProfilingOptions",
       "genesis.options.SimOptions",
@@ -748,24 +759,24 @@
       "genesis.options.morphs.Plane"
     ],
     "key_apis": [
+      "genesis.Scene.add_camera",
       "genesis.Scene.draw_debug_spheres",
-      "genesis.options.ProfilingOptions",
       "genesis.options.morphs.Box",
       "genesis.options.morphs.MJCF",
       "genesis.options.morphs.Plane"
     ],
     "api_docs": [
       {
+        "api_id": "genesis.Scene.add_camera",
+        "signature": "add_camera(model=pinhole, res=(320, 320), pos=(0.5, 2.5, 3.5), lookat=(0.5, 0.5, 0.5), up=(0.0, 0.0, 1.0), fov=30, aperture=2.0, focus_dist=None, GUI=False, spp=256, denoise=None, near=0.1, far=20.0, env_idx=None, debug=False)",
+        "summary": "Add a camera to the scene.",
+        "params_preview": "model: , res: "
+      },
+      {
         "api_id": "genesis.Scene.draw_debug_spheres",
         "signature": "draw_debug_spheres(poss, radius=0.01, color=(1.0, 0.0, 0.0, 0.5))",
         "summary": "Draws multiple spheres in the scene for visualization.",
-        "params_preview": "poss: array_like, shape (N, 3), radius: "
-      },
-      {
-        "api_id": "genesis.options.ProfilingOptions",
-        "signature": "ProfilingOptions(**data)",
-        "summary": "Profiling options",
-        "params_preview": "data: [Auto-Detect] Variable keyword arguments. Needs LLM expansio"
+        "params_preview": "poss: , radius: "
       },
       {
         "api_id": "genesis.options.morphs.Box",
@@ -787,7 +798,7 @@
       }
     ],
     "code": "import os\nimport argparse\n\nimport numpy as np\nfrom tqdm import tqdm\n\nimport genesis as gs\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\n        \"--solver\", choices=[\"explicit\", \"implicit\"], default=\"implicit\", help=\"FEM solver type (default: explicit)\"\n    )\n    parser.add_argument(\"--dt\", type=float, help=\"Time step (auto-selected based on solver if not specified)\")\n    parser.add_argument(\n        \"--substeps\", type=int, help=\"Number of substeps (auto-selected based on solver if not specified)\"\n    )\n    parser.add_argument(\"--vis\", \"-v\", action=\"store_true\", help=\"Show visualization GUI\")\n    parser.add_argument(\"-c\", \"--cpu\", action=\"store_true\", default=\"PYTEST_VERSION\" in os.environ)\n    args = parser.parse_args()\n\n    gs.init(backend=gs.cpu if args.cpu else gs.gpu, logging_level=None)\n\n    if args.solver == \"explicit\":\n        dt = args.dt if args.dt is not None else 1e-4\n        substeps = args.substeps if args.substeps is not None else 5\n    else:  # implicit\n        dt = args.dt if args.dt is not None else 1e-3\n        substeps = args.substeps if args.substeps is not None else 1\n\n    steps = int(1.0 / dt if \"PYTEST_VERSION\" not in os.environ else 5)\n\n    scene = gs.Scene(\n        sim_options=gs.options.SimOptions(\n            dt=dt,\n            substeps=substeps,\n            gravity=(0, 0, -9.81),\n        ),\n        fem_options=gs.options.FEMOptions(\n            use_implicit_solver=args.solver == \"implicit\",\n            enable_vertex_constraints=True,\n        ),\n        profiling_options=gs.options.ProfilingOptions(\n            show_FPS=False,\n        ),\n        show_viewer=args.vis,\n    )\n\n    # Setup scene entities\n    scene.add_entity(gs.morphs.Plane())\n\n    cube = scene.add_entity(\n        morph=gs.morphs.Box(\n            pos=(0.5, 0.0, 0.05),\n            size=(0.2, 0.2, 0.2),\n        ),\n        material=gs.materials.FEM.Elastic(\n            E=1.0e4,  # stiffness\n            nu=0.45,  # compressibility (0 to 0.5)\n            rho=1000.0,  # density\n            model=\"linear_corotated\",\n        ),\n    )\n    arm = scene.add_entity(\n        morph=gs.morphs.MJCF(\n            file=\"xml/franka_emika_panda/panda.xml\",\n            pos=(0, 0, 0),\n        ),\n    )\n\n    # Setup camera for recording\n    video_fps = 1 / dt\n    max_fps = 100\n    frame_interval = max(1, int(video_fps / max_fps)) if max_fps > 0 else 1\n    print(\"video_fps:\", video_fps, \"frame_interval:\", frame_interval)\n    cam = scene.add_camera(\n        res=(640, 480),\n        pos=(-2.0, 3.0, 2.0),\n        lookat=(0.5, 0.5, 0.5),\n        fov=30,\n    )\n\n    scene.build()\n    cam.start_recording()\n\n    try:\n        joint_names = [j.name for j in arm.joints]\n        dofs_idx_local = []\n        for j in arm.joints:\n            # print(\"joint name:\", j.name, \"dofs_idx_local:\", j.dofs_idx_local)\n            dofs_idx_local += j.dofs_idx_local\n        end_joint = arm.get_joint(joint_names[-1])\n\n        arm.set_dofs_kp(\n            np.array([4500, 4500, 3500, 3500, 2000, 2000, 2000, 100, 100]),\n        )\n        arm.set_dofs_kv(\n            np.array([450, 450, 350, 350, 200, 200, 200, 10, 10]),\n        )\n        arm.set_dofs_force_range(\n            np.array([-87, -87, -87, -87, -12, -12, -12, -100, -100]),\n            np.array([87, 87, 87, 87, 12, 12, 12, 100, 100]),\n        )\n\n        for i in range(100):\n            arm.set_dofs_position(\n                np.array([0.9643, -0.3213, -0.6685, -2.3139, -0.2890, 2.0335, -1.6014, 0.0306, 0.0306]), dofs_idx_local\n            )\n            scene.step()\n            if i % frame_interval == 0:\n                cam.render()\n\n        print(\"cube init pos\", cube.init_positions)\n        pin_idx = [1, 5]\n        cube.set_vertex_constraints(verts_idx_local=pin_idx, link=end_joint.link)\n        print(\"Cube initial positions:\", cube.init_positions[pin_idx])\n        scene.draw_debug_spheres(poss=cube.init_positions[pin_idx], radius=0.02, color=(1.0, 0.0, 1.0, 0.8))\n\n        arm_target_pos = (0.3, 0.2, 0.8)\n        scene.draw_debug_spheres(poss=[arm_target_pos], radius=0.02, color=(0.0, 1.0, 0.0, 0.8))\n        qpos = arm.inverse_kinematics(\n            link=end_joint.link,\n            pos=np.array(arm_target_pos, gs.np_float),\n            quat=np.array((0.0, 1.0, 0.0, 0.0), gs.np_float),\n        )\n        arm_path_waypoints = arm.plan_path(qpos_goal=qpos, num_waypoints=steps)\n\n        for i, waypoint in tqdm(enumerate(arm_path_waypoints), total=len(arm_path_waypoints)):\n            arm.control_dofs_position(waypoint)\n            scene.step()\n            if i % frame_interval == 0:\n                cam.render()\n\n        print(\"Now dropping the cube\")\n        cube.remove_vertex_constraints()\n        for i in tqdm(range(steps), total=steps):\n            arm.control_dofs_position(arm_path_waypoints[-1])\n            scene.step()\n            if i % frame_interval == 0:\n                cam.render()\n\n    except KeyboardInterrupt:\n        gs.logger.info(\"Simulation interrupted, exiting.\")\n    finally:\n        gs.logger.info(\"Simulation finished.\")\n\n        actual_fps = video_fps / frame_interval\n        video_filename = f\"cube_link_arm_{args.solver}_dt={dt}_substeps={substeps}.mp4\"\n        cam.stop_recording(save_to_filename=video_filename, fps=actual_fps)\n        gs.logger.info(f\"Saved video to {video_filename}\")\n\n\nif __name__ == \"__main__\":\n    main()\n",
-    "embedding_text": "# Task: Franka Arm Soft Cube Interaction\n# Description: Simulates a Franka robot arm interacting with a soft cube using FEM physics, with vertex constraints linking the cube to the end effector.\n# Domain: articulated_robot, soft_body, interaction\n# Genesis APIs used: genesis.Scene.draw_debug_spheres, genesis.options.ProfilingOptions, genesis.options.morphs.Box, genesis.options.morphs.MJCF, genesis.options.morphs.Plane\n\nimport os\nimport argparse\n\nimport numpy as np\nfrom tqdm import tqdm\n\nimport genesis as gs\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\n        \"--solver\", choices=[\"explicit\", \"implicit\"], default=\"implicit\", help=\"FEM solver type (default: explicit)\"\n    )\n    parser.add_argument(\"--dt\", type=float, help=\"Time step (auto-selected based on solver if not specified)\")\n    parser.add_argument(\n        \"--substeps\", type=int, help=\"Number of substeps (auto-selected based on solver if not specified)\"\n    )\n    parser.add_argument(\"--vis\", \"-v\", action=\"store_true\", help=\"Show visualization GUI\")\n    parser.add_argument(\"-c\", \"--cpu\", action=\"store_true\", default=\"PYTEST_VERSION\" in os.environ)\n    args = parser.parse_args()\n\n    gs.init(backend=gs.cpu if args.cp"
+    "embedding_text": "# Task: Franka Arm Soft Cube Interaction\n# Description: Simulates a Franka robot arm interacting with a soft cube using FEM physics, with vertex constraints linking the cube to the end effector.\n# Domain: articulated_robot, soft_body, interaction\n# Genesis APIs used: genesis.Scene.add_camera, genesis.Scene.draw_debug_spheres, genesis.options.morphs.Box, genesis.options.morphs.MJCF, genesis.options.morphs.Plane\n\nimport os\nimport argparse\n\nimport numpy as np\nfrom tqdm import tqdm\n\nimport genesis as gs\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\n        \"--solver\", choices=[\"explicit\", \"implicit\"], default=\"implicit\", help=\"FEM solver type (default: explicit)\"\n    )\n    parser.add_argument(\"--dt\", type=float, help=\"Time step (auto-selected based on solver if not specified)\")\n    parser.add_argument(\n        \"--substeps\", type=int, help=\"Number of substeps (auto-selected based on solver if not specified)\"\n    )\n    parser.add_argument(\"--vis\", \"-v\", action=\"store_true\", help=\"Show visualization GUI\")\n    parser.add_argument(\"-c\", \"--cpu\", action=\"store_true\", default=\"PYTEST_VERSION\" in os.environ)\n    args = parser.parse_args()\n\n    gs.init(backend=gs.cpu if args.cp"
   },
   {
     "unit_id": "flush_cubes",
@@ -804,6 +815,8 @@
       "genesis.Scene.add_entity",
       "genesis.Scene.build",
       "genesis.Scene.step",
+      "genesis.materials.MPM.Elastic",
+      "genesis.materials.MPM.Liquid",
       "genesis.options.MPMOptions",
       "genesis.options.SimOptions",
       "genesis.options.ViewerOptions",
@@ -827,7 +840,7 @@
         "api_id": "genesis.Scene.add_emitter",
         "signature": "add_emitter(material, max_particles=20000, surface=None)",
         "summary": "Add a fluid emitter to the scene.",
-        "params_preview": "material: Must be an instance of gs.materials.MPM.Base, gs.materials.S, max_particles: Maximum number of particles that can be emitted; particles w"
+        "params_preview": "material: , max_particles: "
       },
       {
         "api_id": "genesis.options.morphs.Box",
@@ -877,6 +890,8 @@
       "genesis.Scene.add_entity",
       "genesis.Scene.build",
       "genesis.Scene.step",
+      "genesis.materials.MPM.Elastic",
+      "genesis.materials.Rigid",
       "genesis.options.MPMOptions",
       "genesis.options.SimOptions",
       "genesis.options.ViewerOptions",
@@ -936,6 +951,8 @@
       "genesis.Scene.add_entity",
       "genesis.Scene.build",
       "genesis.Scene.step",
+      "genesis.materials.MPM.Sand",
+      "genesis.materials.Rigid",
       "genesis.options.MPMOptions",
       "genesis.options.SimOptions",
       "genesis.options.ViewerOptions",
@@ -953,7 +970,7 @@
         "api_id": "genesis.Scene.add_emitter",
         "signature": "add_emitter(material, max_particles=20000, surface=None)",
         "summary": "Add a fluid emitter to the scene.",
-        "params_preview": "material: Must be an instance of gs.materials.MPM.Base, gs.materials.S, max_particles: Maximum number of particles that can be emitted; particles w"
+        "params_preview": "material: , max_particles: "
       },
       {
         "api_id": "genesis.options.morphs.URDF",
@@ -985,6 +1002,8 @@
       "genesis.Scene.add_entity",
       "genesis.Scene.build",
       "genesis.Scene.step",
+      "genesis.materials.MPM.Elastic",
+      "genesis.materials.SPH.Liquid",
       "genesis.options.MPMOptions",
       "genesis.options.SPHOptions",
       "genesis.options.SimOptions",
@@ -1036,6 +1055,8 @@
       "genesis.Scene.add_entity",
       "genesis.Scene.build",
       "genesis.Scene.step",
+      "genesis.materials.Rigid",
+      "genesis.materials.SPH.Liquid",
       "genesis.options.SPHOptions",
       "genesis.options.SimOptions",
       "genesis.options.ViewerOptions",
@@ -1108,7 +1129,7 @@
         "api_id": "genesis.Scene.add_emitter",
         "signature": "add_emitter(material, max_particles=20000, surface=None)",
         "summary": "Add a fluid emitter to the scene.",
-        "params_preview": "material: Must be an instance of gs.materials.MPM.Base, gs.materials.S, max_particles: Maximum number of particles that can be emitted; particles w"
+        "params_preview": "material: , max_particles: "
       },
       {
         "api_id": "genesis.options.morphs.Plane",
@@ -1191,10 +1212,17 @@
       "genesis.options.morphs.Plane"
     ],
     "key_apis": [
+      "genesis.Scene.add_camera",
       "genesis.options.morphs.Drone",
       "genesis.options.morphs.Plane"
     ],
     "api_docs": [
+      {
+        "api_id": "genesis.Scene.add_camera",
+        "signature": "add_camera(model=pinhole, res=(320, 320), pos=(0.5, 2.5, 3.5), lookat=(0.5, 0.5, 0.5), up=(0.0, 0.0, 1.0), fov=30, aperture=2.0, focus_dist=None, GUI=False, spp=256, denoise=None, near=0.1, far=20.0, env_idx=None, debug=False)",
+        "summary": "Add a camera to the scene.",
+        "params_preview": "model: , res: "
+      },
       {
         "api_id": "genesis.options.morphs.Drone",
         "signature": "Drone(**data)",
@@ -1209,7 +1237,7 @@
       }
     ],
     "code": "import math\nfrom typing import TYPE_CHECKING\n\nimport genesis as gs\nfrom genesis.vis.camera import Camera\n\nfrom quadcopter_controller import DronePIDController\n\nif TYPE_CHECKING:\n    from genesis.engine.entities.drone_entity import DroneEntity\n\n\nbase_rpm = 14468.429183500699\nmin_rpm = 0.9 * base_rpm\nmax_rpm = 1.5 * base_rpm\n\n\ndef hover(drone: \"DroneEntity\"):\n    drone.set_propellels_rpm([base_rpm, base_rpm, base_rpm, base_rpm])\n\n\ndef clamp(rpm):\n    return max(min_rpm, min(int(rpm), max_rpm))\n\n\ndef fly_to_point(target, controller: \"DronePIDController\", scene: gs.Scene, cam: Camera):\n    drone = controller.drone\n    step = 0\n    x = target[0] - drone.get_pos()[0]\n    y = target[1] - drone.get_pos()[1]\n    z = target[2] - drone.get_pos()[2]\n\n    distance = math.sqrt(x**2 + y**2 + z**2)\n\n    while distance > 0.1 and step < 1000:\n        [M1, M2, M3, M4] = controller.update(target)\n        M1 = clamp(M1)\n        M2 = clamp(M2)\n        M3 = clamp(M3)\n        M4 = clamp(M4)\n        drone.set_propellels_rpm([M1, M2, M3, M4])\n        scene.step()\n        cam.render()\n        # print(\"point =\", drone.get_pos())\n        drone_pos = drone.get_pos()\n        drone_pos = drone_pos.cpu().numpy()\n        x = drone_pos[0]\n        y = drone_pos[1]\n        z = drone_pos[2]\n        cam.set_pose(lookat=(x, y, z))\n        x = target[0] - x\n        y = target[1] - y\n        z = target[2] - z\n        distance = math.sqrt(x**2 + y**2 + z**2)\n        step += 1\n\n\ndef main():\n    gs.init(backend=gs.gpu)\n\n    ##### scene #####\n    scene = gs.Scene(show_viewer=False, sim_options=gs.options.SimOptions(dt=0.01))\n\n    ##### entities #####\n    plane = scene.add_entity(morph=gs.morphs.Plane())\n\n    drone = scene.add_entity(morph=gs.morphs.Drone(file=\"urdf/drones/cf2x.urdf\", pos=(0, 0, 0.2)))\n\n    # parameters are tuned such that the\n    # drone can fly, not optimized\n    pid_params = [\n        [2.0, 0.0, 0.0],\n        [2.0, 0.0, 0.0],\n        [2.0, 0.0, 0.0],\n        [20.0, 0.0, 20.0],\n        [20.0, 0.0, 20.0],\n        [25.0, 0.0, 20.0],\n        [10.0, 0.0, 1.0],\n        [10.0, 0.0, 1.0],\n        [2.0, 0.0, 0.2],\n    ]\n\n    controller = DronePIDController(drone=drone, dt=0.01, base_rpm=base_rpm, pid_params=pid_params)\n\n    cam = scene.add_camera(pos=(1, 1, 1), lookat=drone.morph.pos, GUI=False, res=(640, 480), fov=30)\n\n    ##### build #####\n\n    scene.build()\n\n    cam.start_recording()\n\n    points = [(1, 1, 2), (-1, 2, 1), (0, 0, 0.5)]\n\n    for point in points:\n        fly_to_point(point, controller, scene, cam)\n\n    cam.stop_recording(save_to_filename=\"../../videos/fly_route.mp4\")\n\n\nif __name__ == \"__main__\":\n    main()\n",
-    "embedding_text": "# Task: Quadcopter Waypoint Navigation\n# Description: Controls a drone using PID controllers to navigate through a sequence of 3D waypoints while recording camera footage.\n# Domain: articulated_robot, motion_planning, camera_control\n# Genesis APIs used: genesis.options.morphs.Drone, genesis.options.morphs.Plane\n\nimport math\nfrom typing import TYPE_CHECKING\n\nimport genesis as gs\nfrom genesis.vis.camera import Camera\n\nfrom quadcopter_controller import DronePIDController\n\nif TYPE_CHECKING:\n    from genesis.engine.entities.drone_entity import DroneEntity\n\n\nbase_rpm = 14468.429183500699\nmin_rpm = 0.9 * base_rpm\nmax_rpm = 1.5 * base_rpm\n\n\ndef hover(drone: \"DroneEntity\"):\n    drone.set_propellels_rpm([base_rpm, base_rpm, base_rpm, base_rpm])\n\n\ndef clamp(rpm):\n    return max(min_rpm, min(int(rpm), max_rpm))\n\n\ndef fly_to_point(target, controller: \"DronePIDController\", scene: gs.Scene, cam: Camera):\n    drone = controller.drone\n    step = 0\n    x = target[0] - drone.get_pos()[0]\n    y = target[1] - drone.get_pos()[1]\n    z = target[2] - drone.get_pos()[2]\n\n    distance = math.sqrt(x**2 + y**2 + z**2)\n\n    w"
+    "embedding_text": "# Task: Quadcopter Waypoint Navigation\n# Description: Controls a drone using PID controllers to navigate through a sequence of 3D waypoints while recording camera footage.\n# Domain: articulated_robot, motion_planning, camera_control\n# Genesis APIs used: genesis.Scene.add_camera, genesis.options.morphs.Drone, genesis.options.morphs.Plane\n\nimport math\nfrom typing import TYPE_CHECKING\n\nimport genesis as gs\nfrom genesis.vis.camera import Camera\n\nfrom quadcopter_controller import DronePIDController\n\nif TYPE_CHECKING:\n    from genesis.engine.entities.drone_entity import DroneEntity\n\n\nbase_rpm = 14468.429183500699\nmin_rpm = 0.9 * base_rpm\nmax_rpm = 1.5 * base_rpm\n\n\ndef hover(drone: \"DroneEntity\"):\n    drone.set_propellels_rpm([base_rpm, base_rpm, base_rpm, base_rpm])\n\n\ndef clamp(rpm):\n    return max(min_rpm, min(int(rpm), max_rpm))\n\n\ndef fly_to_point(target, controller: \"DronePIDController\", scene: gs.Scene, cam: Camera):\n    drone = controller.drone\n    step = 0\n    x = target[0] - drone.get_pos()[0]\n    y = target[1] - drone.get_pos()[1]\n    z = target[2] - drone.get_pos()[2]\n\n    distance = math.sqrt(x**2 + y**2 + z**2)\n\n    w"
   },
   {
     "unit_id": "hover_env",
@@ -1373,6 +1401,8 @@
       "genesis.Scene.add_entity",
       "genesis.Scene.build",
       "genesis.Scene.step",
+      "genesis.materials.FEM.Elastic",
+      "genesis.materials.Rigid",
       "genesis.options.IPCCouplerOptions",
       "genesis.options.SimOptions",
       "genesis.options.morphs.Box",
@@ -1428,6 +1458,9 @@
       "genesis.Scene",
       "genesis.Scene.add_entity",
       "genesis.Scene.build",
+      "genesis.materials.FEM.Cloth",
+      "genesis.materials.FEM.Elastic",
+      "genesis.materials.Rigid",
       "genesis.options.IPCCouplerOptions",
       "genesis.options.RigidOptions",
       "genesis.options.SimOptions",
@@ -1502,6 +1535,9 @@
       "genesis.Scene.add_entity",
       "genesis.Scene.build",
       "genesis.Scene.step",
+      "genesis.materials.FEM.Cloth",
+      "genesis.materials.FEM.Elastic",
+      "genesis.materials.Rigid",
       "genesis.options.IPCCouplerOptions",
       "genesis.options.SimOptions",
       "genesis.options.morphs.Box",
@@ -1566,6 +1602,8 @@
       "genesis.Scene.add_entity",
       "genesis.Scene.build",
       "genesis.Scene.step",
+      "genesis.materials.FEM.Elastic",
+      "genesis.materials.Rigid",
       "genesis.options.IPCCouplerOptions",
       "genesis.options.SimOptions",
       "genesis.options.morphs.Box",
@@ -1622,6 +1660,7 @@
       "genesis.Scene.add_entity",
       "genesis.Scene.build",
       "genesis.Scene.step",
+      "genesis.materials.FEM.Cloth",
       "genesis.options.IPCCouplerOptions",
       "genesis.options.SimOptions",
       "genesis.options.morphs.Mesh",
@@ -1759,6 +1798,7 @@
     "all_apis": [
       "genesis.Scene",
       "genesis.constraint_solver",
+      "genesis.materials.Rigid",
       "genesis.options.ProfilingOptions",
       "genesis.options.RigidOptions",
       "genesis.options.SimOptions",
@@ -1772,7 +1812,6 @@
       "genesis.options.textures.ColorTexture"
     ],
     "key_apis": [
-      "genesis.options.ProfilingOptions",
       "genesis.options.morphs.Box",
       "genesis.options.morphs.MJCF",
       "genesis.options.morphs.URDF",
@@ -1780,12 +1819,6 @@
       "genesis.options.textures.ColorTexture"
     ],
     "api_docs": [
-      {
-        "api_id": "genesis.options.ProfilingOptions",
-        "signature": "ProfilingOptions(**data)",
-        "summary": "Profiling options",
-        "params_preview": "data: [Auto-Detect] Variable keyword arguments. Needs LLM expansio"
-      },
       {
         "api_id": "genesis.options.morphs.Box",
         "signature": "Box(**data)",
@@ -1818,7 +1851,7 @@
       }
     ],
     "code": "import torch\nimport math\nfrom typing import Literal\n\nimport genesis as gs\nfrom genesis.utils.geom import (\n    xyz_to_quat,\n    transform_quat_by_quat,\n    transform_by_quat,\n)\n\n\nclass GraspEnv:\n    def __init__(\n        self,\n        env_cfg: dict,\n        reward_cfg: dict,\n        robot_cfg: dict,\n        show_viewer: bool = False,\n    ) -> None:\n        self.num_envs = env_cfg[\"num_envs\"]\n        self.num_obs = env_cfg[\"num_obs\"]\n        self.num_privileged_obs = None\n        self.num_actions = env_cfg[\"num_actions\"]\n        self.image_width = env_cfg[\"image_resolution\"][0]\n        self.image_height = env_cfg[\"image_resolution\"][1]\n        self.rgb_image_shape = (3, self.image_height, self.image_width)\n        self.device = gs.device\n\n        self.ctrl_dt = env_cfg[\"ctrl_dt\"]\n        self.max_episode_length = math.ceil(env_cfg[\"episode_length_s\"] / self.ctrl_dt)\n\n        # configs\n        self.env_cfg = env_cfg\n        self.reward_scales = reward_cfg\n        self.action_scales = torch.tensor(env_cfg[\"action_scales\"], device=self.device)\n\n        # == setup scene ==\n        self.scene = gs.Scene(\n            sim_options=gs.options.SimOptions(dt=self.ctrl_dt, substeps=2),\n            rigid_options=gs.options.RigidOptions(\n                dt=self.ctrl_dt,\n                constraint_solver=gs.constraint_solver.Newton,\n                enable_collision=True,\n                enable_joint_limit=True,\n            ),\n            vis_options=gs.options.VisOptions(rendered_envs_idx=list(range(10))),\n            viewer_options=gs.options.ViewerOptions(\n                max_FPS=int(0.5 / self.ctrl_dt),\n                camera_pos=(2.0, 0.0, 2.5),\n                camera_lookat=(0.0, 0.0, 0.5),\n                camera_fov=40,\n            ),\n            profiling_options=gs.options.ProfilingOptions(show_FPS=False),\n            renderer=gs.options.renderers.BatchRenderer(\n                use_rasterizer=env_cfg[\"use_rasterizer\"],\n            ),\n            show_viewer=show_viewer,\n        )\n\n        # == add ground ==\n        self.scene.add_entity(gs.morphs.URDF(file=\"urdf/plane/plane.urdf\", fixed=True))\n\n        # == add robot ==\n        self.robot = Manipulator(\n            num_envs=self.num_envs,\n            scene=self.scene,\n            args=robot_cfg,\n            device=gs.device,\n        )\n\n        # == add object ==\n        self.object = self.scene.add_entity(\n            gs.morphs.Box(\n                size=env_cfg[\"box_size\"],\n                fixed=env_cfg[\"box_fixed\"],\n                collision=env_cfg[\"box_collision\"],\n                batch_fixed_verts=True,\n            ),\n            # material=gs.materials.Rigid(gravity_compensation=1),\n            surface=gs.surfaces.Rough(\n                diffuse_texture=gs.textures.ColorTexture(\n                    color=(1.0, 0.0, 0.0),\n                ),\n            ),\n        )\n        if self.env_cfg[\"visualize_camera\"]:\n            self.vis_cam = self.scene.add_camera(\n                res=(1280, 720),\n                pos=(1.5, 0.0, 0.2),\n                lookat=(0.0, 0.0, 0.2),\n                fov=60,\n                GUI=self.env_cfg[\"visualize_camera\"],\n                debug=True,\n            )\n\n        # == add stero camera ==\n        self.left_cam = self.scene.add_camera(\n            res=(self.image_width, self.image_height),\n            pos=(1.25, 0.3, 0.3),\n            lookat=(0.0, 0.0, 0.0),\n            fov=60,\n            GUI=self.env_cfg[\"visualize_camera\"],\n        )\n        self.right_cam = self.scene.add_camera(\n            res=(self.image_width, self.image_height),\n            pos=(1.25, -0.3, 0.3),\n            lookat=(0.0, 0.0, 0.0),\n            fov=60,\n            GUI=self.env_cfg[\"visualize_camera\"],\n        )\n\n        # build\n        self.scene.build(n_envs=env_cfg[\"num_envs\"])\n        # set pd gains (must be called after scene.build)\n        self.robot.set_pd_gains()\n\n        # prepare reward functions and multiply reward scales by dt\n        self.reward_functions, self.episode_sums = dict(), dict()\n        for name in self.reward_scales.keys():\n            self.reward_scales[name] *= self.ctrl_dt\n            self.reward_functions[name] = getattr(self, \"_reward_\" + name)\n            self.episode_sums[name] = torch.zeros((self.num_envs,), device=gs.device, dtype=gs.tc_float)\n\n        self.keypoints_offset = self.get_keypoint_offsets(batch_size=self.num_envs, device=self.device, unit_length=0.5)\n        # == init buffers ==\n        self._init_buffers()\n        self.reset()\n\n    def _init_buffers(self) -> None:\n        self.episode_length_buf = torch.zeros((self.num_envs,), device=gs.device, dtype=gs.tc_int)\n        self.reset_buf = torch.zeros(self.num_envs, dtype=torch.bool, device=gs.device)\n        self.goal_pose = torch.zeros(self.num_envs, 7, device=gs.device)\n        self.extras = dict()\n        self.extras[\"observations\"] = dict()\n\n    def reset_idx(self, envs_idx: torch.Tensor) -> None:\n        if len(envs_idx) == 0:\n            return\n        self.episode_length_buf[envs_idx] = 0\n\n        # reset robot\n        self.robot.reset(envs_idx)\n\n        # reset object\n        num_reset = len(envs_idx)\n        random_x = torch.rand(num_reset, device=self.device) * 0.4 + 0.2  # 0.2 ~ 0.6\n        random_y = (torch.rand(num_reset, device=self.device) - 0.5) * 0.5  # -0.25 ~ 0.25\n        random_z = torch.ones(num_reset, device=self.device) * 0.025  # 0.15 ~ 0.15\n        random_pos = torch.stack([random_x, random_y, random_z], dim=-1)\n\n        # downward facing quaternion to align with the hand\n        q_downward = torch.tensor([0.0, 1.0, 0.0, 0.0], device=self.device).repeat(num_reset, 1)\n        # randomly yaw the object\n        random_yaw = (torch.rand(num_reset, device=self.device) * 2 * math.pi - math.pi) * 0.25\n        q_yaw = torch.stack(\n            [\n                torch.cos(random_yaw / 2),\n                torch.zeros(num_reset, device=self.device),\n                torch.zeros(num_reset, device=self.device),\n                torch.sin(random_yaw / 2),\n            ],\n            dim=-1,\n        )\n        goal_yaw = transform_quat_by_quat(q_yaw, q_downward)\n\n        self.goal_pose[envs_idx] = torch.cat([random_pos, goal_yaw], dim=-1)\n        self.object.set_pos(random_pos, envs_idx=envs_idx)\n        self.object.set_quat(goal_yaw, envs_idx=envs_idx)\n\n        # fill extras\n        self.extras[\"episode\"] = {}\n        for key in self.episode_sums.keys():\n            self.extras[\"episode\"][\"rew_\" + key] = (\n                torch.mean(self.episode_sums[key][envs_idx]).item() / self.env_cfg[\"episode_length_s\"]\n            )\n            self.episode_sums[key][envs_idx] = 0.0\n\n    def reset(self) -> tuple[torch.Tensor, dict]:\n        self.reset_buf[:] = True\n        self.reset_idx(torch.arange(self.num_envs, device=gs.device))\n\n        obs, self.extras = self.get_observations()\n        return obs, self.extras\n\n    def step(self, actions: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, dict]:\n        # update time\n        self.episode_length_buf += 1\n\n        # apply action based on task\n        actions = self.rescale_action(actions)\n\n        self.robot.apply_action(actions, open_gripper=True)\n        self.scene.step()\n\n        # check termination\n        env_reset_idx = self.is_episode_complete()\n        if len(env_reset_idx) > 0:\n            self.reset_idx(env_reset_idx)\n\n        # compute reward based on task\n        reward = torch.zeros_like(self.reset_buf, device=gs.device, dtype=gs.tc_float)\n        for name, reward_func in self.reward_functions.items():\n            rew = reward_func() * self.reward_scales[name]\n            reward += rew\n            self.episode_sums[name] += rew\n\n        # get observations and fill extras\n        obs, self.extras = self.get_observations()\n\n        return obs, reward, self.reset_buf, self.extras\n\n    def get_privileged_observations(self) -> None:\n        return None\n\n    def is_episode_complete(self) -> torch.Tensor:\n        time_out_buf = self.episode_length_buf > self.max_episode_length\n\n        # check if the ee is in the valid position\n        self.reset_buf = time_out_buf\n\n        # fill time out buffer for reward/value bootstrapping\n        time_out_idx = (time_out_buf).nonzero(as_tuple=False).reshape((-1,))\n        self.extras[\"time_outs\"] = torch.zeros_like(self.reset_buf, device=gs.device, dtype=gs.tc_float)\n        self.extras[\"time_outs\"][time_out_idx] = 1.0\n        return self.reset_buf.nonzero(as_tuple=True)[0]\n\n    def get_observations(self) -> tuple[torch.Tensor, dict]:\n        # Current end-effector pose\n        finger_pos, finger_quat = (\n            self.robot.center_finger_pose[:, :3],\n            self.robot.center_finger_pose[:, 3:7],\n        )\n        obj_pos, obj_quat = self.object.get_pos(), self.object.get_quat()\n        #\n        obs_components = [\n            finger_pos - obj_pos,  # 3D position difference\n            finger_quat,  # current orientation (w, x, y, z)\n            obj_pos,  # goal position\n            obj_quat,  # goal orientation (w, x, y, z)\n        ]\n        obs_tensor = torch.cat(obs_components, dim=-1)\n        self.extras[\"observations\"][\"critic\"] = obs_tensor\n        return obs_tensor, self.extras\n\n    def rescale_action(self, action: torch.Tensor) -> torch.Tensor:\n        rescaled_action = action * self.action_scales\n        return rescaled_action\n\n    def get_stereo_rgb_images(self, normalize: bool = True) -> torch.Tensor:\n        rgb_left, _, _, _ = self.left_cam.render(rgb=True, depth=False, segmentation=False, normal=False)\n        rgb_right, _, _, _ = self.right_cam.render(rgb=True, depth=False, segmentation=False, normal=False)\n\n        # Convert to proper format\n        rgb_left = rgb_left.permute(0, 3, 1, 2)[:, :3]  # shape (B, 3, H, W)\n        rgb_right = rgb_right.permute(0, 3, 1, 2)[:, :3]  # shape (B, 3, H, W)\n\n        # Normalize if requested\n        if normalize:\n            rgb_left = torch.clamp(rgb_left, min=0.0, max=255.0) / 255.0\n            rgb_right = torch.clamp(rgb_right, min=0.0, max=255.0) / 255.0\n\n        # Concatenate left and right rgb images along channel dimension\n        # Result: [B, 6, H, W] where channel 0 is left rgb, channel 1 is right rgb\n        stereo_rgb = torch.cat([rgb_left, rgb_right], dim=1)\n        return stereo_rgb\n\n    # ------------ begin reward functions----------------\n    def _reward_keypoints(self) -> torch.Tensor:\n        keypoints_offset = self.keypoints_offset\n        # there is a offset between the finger tip and the finger base frame\n        finger_tip_z_offset = torch.tensor(\n            [0.0, 0.0, -0.06],\n            device=self.device,\n            dtype=gs.tc_float,\n        ).repeat(self.num_envs, 1)\n        finger_pos_keypoints = self._to_world_frame(\n            self.robot.center_finger_pose[:, :3] + finger_tip_z_offset,\n            self.robot.center_finger_pose[:, 3:7],\n            keypoints_offset,\n        )\n        object_pos_keypoints = self._to_world_frame(self.object.get_pos(), self.object.get_quat(), keypoints_offset)\n        dist = torch.norm(finger_pos_keypoints - object_pos_keypoints, p=2, dim=-1).sum(-1)\n        return torch.exp(-dist)\n\n    # ------------ end reward functions----------------\n\n    def _to_world_frame(\n        self,\n        position: torch.Tensor,  # [B, 3]\n        quaternion: torch.Tensor,  # [B, 4]\n        keypoints_offset: torch.Tensor,  # [B, 7, 3]\n    ) -> torch.Tensor:\n        world = torch.zeros_like(keypoints_offset)\n        for k in range(keypoints_offset.shape[1]):\n            world[:, k] = position + transform_by_quat(keypoints_offset[:, k], quaternion)\n        return world\n\n    @staticmethod\n    def get_keypoint_offsets(batch_size: int, device: str, unit_length: float = 0.5) -> torch.Tensor:\n        \"\"\"\n        Get uniformly-spaced keypoints along a line of unit length, centered at body center.\n        \"\"\"\n        keypoint_offsets = (\n            torch.tensor(\n                [\n                    [0, 0, 0],  # origin\n                    [-1.0, 0, 0],  # x-negative\n                    [1.0, 0, 0],  # x-positive\n                    [0, -1.0, 0],  # y-negative\n                    [0, 1.0, 0],  # y-positive\n                    [0, 0, -1.0],  # z-negative\n                    [0, 0, 1.0],  # z-positive\n                ],\n                device=device,\n                dtype=torch.float32,\n            )\n            * unit_length\n        )\n        return keypoint_offsets[None].repeat((batch_size, 1, 1))\n\n    def grasp_and_lift_demo(self) -> None:\n        total_steps = 500\n        goal_pose = self.robot.ee_pose.clone()\n        # lift pose (above the object)\n        lift_height = 0.3\n        lift_pose = goal_pose.clone()\n        lift_pose[:, 2] += lift_height\n        # final pose (above the table)\n        final_pose = goal_pose.clone()\n        final_pose[:, 0] = 0.3\n        final_pose[:, 1] = 0.0\n        final_pose[:, 2] = 0.4\n        # reset pose (home pose)\n        reset_pose = torch.tensor([0.2, 0.0, 0.4, 0.0, 1.0, 0.0, 0.0], device=self.device).repeat(self.num_envs, 1)\n        for i in range(total_steps):\n            if i < total_steps / 4:  # grasping\n                self.robot.go_to_goal(goal_pose, open_gripper=False)\n            elif i < total_steps / 2:  # lifting\n                self.robot.go_to_goal(lift_pose, open_gripper=False)\n            elif i < total_steps * 3 / 4:  # final\n                self.robot.go_to_goal(final_pose, open_gripper=False)\n            else:  # reset\n                self.robot.go_to_goal(reset_pose, open_gripper=True)\n            self.scene.step()\n\n\n## ------------ robot ----------------\nclass Manipulator:\n    def __init__(self, num_envs: int, scene: gs.Scene, args: dict, device: str = \"cpu\"):\n        # == set members ==\n        self._device = device\n        self._scene = scene\n        self._num_envs = num_envs\n        self._args = args\n\n        # == Genesis configurations ==\n        material: gs.materials.Rigid = gs.materials.Rigid()\n        morph: gs.morphs.URDF = gs.morphs.MJCF(\n            file=\"xml/franka_emika_panda/panda.xml\",\n            pos=(0.0, 0.0, 0.0),\n            quat=(1.0, 0.0, 0.0, 0.0),\n        )\n        self._robot_entity: gs.Entity = scene.add_entity(material=material, morph=morph)\n\n        self._gripper_open_dof = 0.04\n        self._gripper_close_dof = 0.00\n\n        self._ik_method: Literal[\"rel_pose\", \"dls\"] = args[\"ik_method\"]\n\n        # == some buffer initialization ==\n        self._init()\n\n    def set_pd_gains(self):\n        # set control gains\n        # Note: the following values are tuned for achieving best behavior with Franka\n        # Typically, each new robot would have a different set of parameters.\n        # Sometimes high-quality URDF or XML file would also provide this and will be parsed.\n        self._robot_entity.set_dofs_kp(\n            torch.tensor([4500, 4500, 3500, 3500, 2000, 2000, 2000, 100, 100]),\n        )\n        self._robot_entity.set_dofs_kv(\n            torch.tensor([450, 450, 350, 350, 200, 200, 200, 10, 10]),\n        )\n        self._robot_entity.set_dofs_force_range(\n            torch.tensor([-87, -87, -87, -87, -12, -12, -12, -100, -100]),\n            torch.tensor([87, 87, 87, 87, 12, 12, 12, 100, 100]),\n        )\n\n    def _init(self):\n        self._arm_dof_dim = self._robot_entity.n_dofs - 2  # total number of arm: joints\n        self._gripper_dim = 2  # number of gripper joints\n\n        self._arm_dof_idx = torch.arange(self._arm_dof_dim, device=self._device)\n        self._fingers_dof = torch.arange(\n            self._arm_dof_dim,\n            self._arm_dof_dim + self._gripper_dim,\n            device=self._device,\n        )\n        self._left_finger_dof = self._fingers_dof[0]\n        self._right_finger_dof = self._fingers_dof[1]\n        self._ee_link = self._robot_entity.get_link(self._args[\"ee_link_name\"])\n        self._left_finger_link = self._robot_entity.get_link(self._args[\"gripper_link_names\"][0])\n        self._right_finger_link = self._robot_entity.get_link(self._args[\"gripper_link_names\"][1])\n        self._default_joint_angles = self._args[\"default_arm_dof\"]\n        if self._args[\"default_gripper_dof\"] is not None:\n            self._default_joint_angles += self._args[\"default_gripper_dof\"]\n\n    def reset(self, envs_idx: torch.IntTensor):\n        if len(envs_idx) == 0:\n            return\n        self.reset_home(envs_idx)\n\n    def reset_home(self, envs_idx: torch.IntTensor | None = None):\n        if envs_idx is None:\n            envs_idx = torch.arange(self._num_envs, device=self._device)\n        default_joint_angles = torch.tensor(\n            self._default_joint_angles, dtype=torch.float32, device=self._device\n        ).repeat(len(envs_idx), 1)\n        self._robot_entity.set_qpos(default_joint_angles, envs_idx=envs_idx)\n\n    def apply_action(self, action: torch.Tensor, open_gripper: bool) -> None:\n        \"\"\"\n        Apply the action to the robot.\n        \"\"\"\n        q_pos = self._robot_entity.get_qpos()\n        if self._ik_method == \"gs_ik\":\n            q_pos = self._gs_ik(action)\n        elif self._ik_method == \"dls_ik\":\n            q_pos = self._dls_ik(action)\n        else:\n            raise ValueError(f\"Invalid control mode: {self._ik_method}\")\n        # set gripper to open\n        if open_gripper:\n            q_pos[:, self._fingers_dof] = self._gripper_open_dof\n        else:\n            q_pos[:, self._fingers_dof] = self._gripper_close_dof\n        self._robot_entity.control_dofs_position(position=q_pos)\n\n    def _gs_ik(self, action: torch.Tensor) -> torch.Tensor:\n        \"\"\"\n        Genesis inverse kinematics\n        \"\"\"\n        delta_position = action[:, :3]\n        delta_orientation = action[:, 3:6]\n\n        # compute target pose\n        target_position = delta_position + self._ee_link.get_pos()\n        quat_rel = xyz_to_quat(delta_orientation, rpy=True, degrees=False)\n        target_orientation = transform_quat_by_quat(quat_rel, self._ee_link.get_quat())\n        q_pos = self._robot_entity.inverse_kinematics(\n            link=self._ee_link,\n            pos=target_position,\n            quat=target_orientation,\n            dofs_idx_local=self._arm_dof_idx,\n        )\n        return q_pos\n\n    def _dls_ik(self, action: torch.Tensor) -> torch.Tensor:\n        \"\"\"\n        Damped least squares inverse kinematics\n        \"\"\"\n        delta_pose = action[:, :6]\n        lambda_val = 0.01\n        jacobian = self._robot_entity.get_jacobian(link=self._ee_link)\n        jacobian_T = jacobian.transpose(1, 2)\n        lambda_matrix = (lambda_val**2) * torch.eye(n=jacobian.shape[1], device=self._device)\n        delta_joint_pos = (\n            jacobian_T @ torch.inverse(jacobian @ jacobian_T + lambda_matrix) @ delta_pose.unsqueeze(-1)\n        ).squeeze(-1)\n        return self._robot_entity.get_qpos() + delta_joint_pos\n\n    def go_to_goal(self, goal_pose: torch.Tensor, open_gripper: bool = True):\n        q_pos = self._robot_entity.inverse_kinematics(\n            link=self._ee_link,\n            pos=goal_pose[:, :3],\n            quat=goal_pose[:, 3:7],\n            dofs_idx_local=self._arm_dof_idx,\n        )\n        if open_gripper:\n            q_pos[:, self._fingers_dof] = self._gripper_open_dof\n        else:\n            q_pos[:, self._fingers_dof] = self._gripper_close_dof\n        self._robot_entity.control_dofs_position(position=q_pos)\n\n    @property\n    def base_pos(self):\n        return self._robot_entity.get_pos()\n\n    @property\n    def ee_pose(self) -> torch.Tensor:\n        \"\"\"\n        The end-effector pose (the hand pose)\n        \"\"\"\n        pos, quat = self._ee_link.get_pos(), self._ee_link.get_quat()\n        return torch.cat([pos, quat], dim=-1)\n\n    @property\n    def left_finger_pose(self) -> torch.Tensor:\n        pos, quat = self._left_finger_link.get_pos(), self._left_finger_link.get_quat()\n        return torch.cat([pos, quat], dim=-1)\n\n    @property\n    def right_finger_pose(self) -> torch.Tensor:\n        pos, quat = (\n            self._right_finger_link.get_pos(),\n            self._right_finger_link.get_quat(),\n        )\n        return torch.cat([pos, quat], dim=-1)\n\n    @property\n    def center_finger_pose(self) -> torch.Tensor:\n        \"\"\"\n        The center finger pose is the average of the left and right finger poses.\n        \"\"\"\n        left_finger_pose = self.left_finger_pose\n        right_finger_pose = self.right_finger_pose\n        center_finger_pos = (left_finger_pose[:, :3] + right_finger_pose[:, :3]) / 2\n        center_finger_quat = left_finger_pose[:, 3:7]\n        return torch.cat([center_finger_pos, center_finger_quat], dim=-1)\n",
-    "embedding_text": "# Task: Robotic Grasping Environment\n# Description: Simulates a robotic manipulator grasping a box using stereo cameras for visual feedback and physics-based control.\n# Domain: articulated_robot, interaction, scene_creation\n# Genesis APIs used: genesis.options.ProfilingOptions, genesis.options.morphs.Box, genesis.options.morphs.MJCF, genesis.options.morphs.URDF, genesis.options.surfaces.Rough, genesis.options.textures.ColorTexture\n\nimport torch\nimport math\nfrom typing import Literal\n\nimport genesis as gs\nfrom genesis.utils.geom import (\n    xyz_to_quat,\n    transform_quat_by_quat,\n    transform_by_quat,\n)\n\n\nclass GraspEnv:\n    def __init__(\n        self,\n        env_cfg: dict,\n        reward_cfg: dict,\n        robot_cfg: dict,\n        show_viewer: bool = False,\n    ) -> None:\n        self.num_envs = env_cfg[\"num_envs\"]\n        self.num_obs = env_cfg[\"num_obs\"]\n        self.num_privileged_obs = None\n        self.num_actions = env_cfg[\"num_actions\"]\n        self.image_width = env_cfg[\"image_resolution\"][0]\n        self.image_height = env_cfg[\"image_resolution\"][1]\n        self.rgb_image_shape = (3, self.image_height, self.image_width)\n        self.device = gs.device\n\n        self.ctrl_dt = env_cfg[\"ctrl_dt\"]\n        se"
+    "embedding_text": "# Task: Robotic Grasping Environment\n# Description: Simulates a robotic manipulator grasping a box using stereo cameras for visual feedback and physics-based control.\n# Domain: articulated_robot, interaction, scene_creation\n# Genesis APIs used: genesis.options.morphs.Box, genesis.options.morphs.MJCF, genesis.options.morphs.URDF, genesis.options.surfaces.Rough, genesis.options.textures.ColorTexture\n\nimport torch\nimport math\nfrom typing import Literal\n\nimport genesis as gs\nfrom genesis.utils.geom import (\n    xyz_to_quat,\n    transform_quat_by_quat,\n    transform_by_quat,\n)\n\n\nclass GraspEnv:\n    def __init__(\n        self,\n        env_cfg: dict,\n        reward_cfg: dict,\n        robot_cfg: dict,\n        show_viewer: bool = False,\n    ) -> None:\n        self.num_envs = env_cfg[\"num_envs\"]\n        self.num_obs = env_cfg[\"num_obs\"]\n        self.num_privileged_obs = None\n        self.num_actions = env_cfg[\"num_actions\"]\n        self.image_width = env_cfg[\"image_resolution\"][0]\n        self.image_height = env_cfg[\"image_resolution\"][1]\n        self.rgb_image_shape = (3, self.image_height, self.image_width)\n        self.device = gs.device\n\n        self.ctrl_dt = env_cfg[\"ctrl_dt\"]\n        se"
   },
   {
     "unit_id": "grasp_eval",
@@ -1881,6 +1914,7 @@
       "genesis.options.textures.ImageTexture"
     ],
     "key_apis": [
+      "genesis.Scene.add_camera",
       "genesis.Scene.reset",
       "genesis.options.morphs.Mesh",
       "genesis.options.morphs.Plane",
@@ -1897,10 +1931,16 @@
     ],
     "api_docs": [
       {
+        "api_id": "genesis.Scene.add_camera",
+        "signature": "add_camera(model=pinhole, res=(320, 320), pos=(0.5, 2.5, 3.5), lookat=(0.5, 0.5, 0.5), up=(0.0, 0.0, 1.0), fov=30, aperture=2.0, focus_dist=None, GUI=False, spp=256, denoise=None, near=0.1, far=20.0, env_idx=None, debug=False)",
+        "summary": "Add a camera to the scene.",
+        "params_preview": "model: , res: "
+      },
+      {
         "api_id": "genesis.Scene.reset",
         "signature": "reset(state=None, envs_idx=None)",
         "summary": "Resets the scene to its initial state.",
-        "params_preview": "state: If given, the scene's registered initial state will be updat, envs_idx: If None, all environments will be considered."
+        "params_preview": "state: , envs_idx: "
       },
       {
         "api_id": "genesis.options.morphs.Mesh",
@@ -1976,7 +2016,7 @@
       }
     ],
     "code": "import torch\n\nimport genesis as gs\n\n\ndef main():\n    ########################## init ##########################\n    gs.init(precision=\"32\", logging_level=\"info\")\n\n    ########################## create a scene ##########################\n    scene = gs.Scene(\n        rigid_options=gs.options.RigidOptions(enable_collision=False, gravity=(0, 0, 0)),\n        viewer_options=gs.options.ViewerOptions(\n            res=(1920, 1080),\n            camera_pos=(8.5, 0.0, 4.5),\n            camera_lookat=(3.0, 0.0, 0.5),\n            camera_fov=50,\n        ),\n        renderer=gs.renderers.RayTracer(  # type: ignore\n            env_surface=gs.surfaces.Emission(\n                emissive_texture=gs.textures.ImageTexture(\n                    image_path=\"textures/indoor_bright.png\",\n                ),\n            ),\n            env_radius=15.0,\n            env_euler=(0, 0, 180),\n            lights=[\n                {\"pos\": (0.0, 0.0, 10.0), \"radius\": 3.0, \"color\": (15.0, 15.0, 15.0)},\n            ],\n        ),\n    )\n\n    ########################## materials ##########################\n\n    ########################## entities ##########################\n    # floor\n    plane = scene.add_entity(\n        morph=gs.morphs.Plane(\n            pos=(0.0, 0.0, -0.5),\n        ),\n        surface=gs.surfaces.Aluminium(\n            ior=10.0,\n        ),\n    )\n\n    # user specified external color texture\n    scene.add_entity(\n        morph=gs.morphs.Mesh(\n            file=\"meshes/sphere.obj\",\n            scale=0.5,\n            pos=(0.0, -3, 0.0),\n        ),\n        surface=gs.surfaces.Rough(\n            diffuse_texture=gs.textures.ColorTexture(\n                color=(1.0, 0.5, 0.5),\n            ),\n        ),\n    )\n    # user specified color (using color shortcut)\n    scene.add_entity(\n        morph=gs.morphs.Mesh(\n            file=\"meshes/sphere.obj\",\n            scale=0.5,\n            pos=(0.0, -1.8, 0.0),\n        ),\n        surface=gs.surfaces.Rough(\n            color=(1.0, 1.0, 1.0),\n        ),\n    )\n    # smooth shortcut\n    scene.add_entity(\n        morph=gs.morphs.Mesh(\n            file=\"meshes/sphere.obj\",\n            scale=0.5,\n            pos=(0.0, -0.6, 0.0),\n        ),\n        surface=gs.surfaces.Smooth(\n            color=(0.6, 0.8, 1.0),\n        ),\n    )\n    # Iron\n    scene.add_entity(\n        morph=gs.morphs.Mesh(\n            file=\"meshes/sphere.obj\",\n            scale=0.5,\n            pos=(0.0, 0.6, 0.0),\n        ),\n        surface=gs.surfaces.Iron(\n            color=(1.0, 1.0, 1.0),\n        ),\n    )\n    # Gold\n    scene.add_entity(\n        morph=gs.morphs.Mesh(\n            file=\"meshes/sphere.obj\",\n            scale=0.5,\n            pos=(0.0, 1.8, 0.0),\n        ),\n        surface=gs.surfaces.Gold(\n            color=(1.0, 1.0, 1.0),\n        ),\n    )\n    # Glass\n    scene.add_entity(\n        morph=gs.morphs.Mesh(\n            file=\"meshes/sphere.obj\",\n            scale=0.5,\n            pos=(0.0, 3.0, 0.0),\n        ),\n        surface=gs.surfaces.Glass(\n            color=(1.0, 1.0, 1.0),\n        ),\n    )\n    # Opacity\n    scene.add_entity(\n        morph=gs.morphs.Mesh(\n            file=\"meshes/sphere.obj\",\n            scale=0.5,\n            pos=(2.0, -3, 0.0),\n        ),\n        surface=gs.surfaces.Smooth(color=(1.0, 1.0, 1.0, 0.5)),\n    )\n    # asset's own attributes\n    scene.add_entity(\n        morph=gs.morphs.Mesh(\n            file=\"meshes/wooden_sphere_OBJ/wooden_sphere.obj\",\n            scale=0.15,\n            pos=(2.2, -2.3, 0.0),\n        ),\n    )\n    # override asset's attributes\n    scene.add_entity(\n        morph=gs.morphs.Mesh(\n            file=\"meshes/wooden_sphere_OBJ/wooden_sphere.obj\",\n            scale=0.15,\n            pos=(2.2, -1.0, 0.0),\n        ),\n        surface=gs.surfaces.Rough(\n            diffuse_texture=gs.textures.ImageTexture(\n                image_path=\"textures/checker.png\",\n            )\n        ),\n    )\n    ########################## cameras ##########################\n    cam_0 = scene.add_camera(\n        res=(1600, 900),\n        pos=(8.5, 0.0, 1.5),\n        lookat=(3.0, 0.0, 0.7),\n        fov=60,\n        GUI=True,\n        spp=512,\n    )\n    scene.build()\n    scene.reset()\n    horizon = 10\n\n    for i in range(horizon):\n        scene.step()\n        cam_0.render()\n\n\nif __name__ == \"__main__\":\n    main()\n",
-    "embedding_text": "# Task: Material and Surface Rendering Demo\n# Description: Creates a scene with various spheres demonstrating different material surfaces and rendering properties using the Genesis physics engine.\n# Domain: rendering, scene_creation\n# Genesis APIs used: genesis.Scene.reset, genesis.options.morphs.Mesh, genesis.options.morphs.Plane, genesis.options.renderers.RayTracer, genesis.options.surfaces.Aluminium, genesis.options.surfaces.Emission, genesis.options.surfaces.Glass, genesis.options.surfaces.Gold, genesis.options.surfaces.Iron, genesis.options.surfaces.Rough, genesis.options.surfaces.Smooth, genesis.options.textures.ColorTexture, genesis.options.textures.ImageTexture\n\nimport torch\n\nimport genesis as gs\n\n\ndef main():\n    ########################## init ##########################\n    gs.init(precision=\"32\", logging_level=\"info\")\n\n    ########################## create a scene ##########################\n    scene = gs.Scene(\n        rigid_options=gs.options.RigidOptions(enable_collision=False, gravity=(0, 0, 0)),\n        viewer_options=gs.options.ViewerOptions(\n            res=(1920, 1080),\n            camera_pos=(8.5, 0.0, 4.5),\n            camera_lookat=(3.0, 0.0, 0.5),\n            camera_fov=50,\n        ),\n        renderer=gs.renderers.RayTracer(  # type: ignore\n            env_surface=gs.surfaces.Emission(\n                emissive_texture=gs.textures.ImageTexture(\n                    image_path=\"textures/indoor_bright.png\",\n                ),\n          "
+    "embedding_text": "# Task: Material and Surface Rendering Demo\n# Description: Creates a scene with various spheres demonstrating different material surfaces and rendering properties using the Genesis physics engine.\n# Domain: rendering, scene_creation\n# Genesis APIs used: genesis.Scene.add_camera, genesis.Scene.reset, genesis.options.morphs.Mesh, genesis.options.morphs.Plane, genesis.options.renderers.RayTracer, genesis.options.surfaces.Aluminium, genesis.options.surfaces.Emission, genesis.options.surfaces.Glass, genesis.options.surfaces.Gold, genesis.options.surfaces.Iron, genesis.options.surfaces.Rough, genesis.options.surfaces.Smooth, genesis.options.textures.ColorTexture, genesis.options.textures.ImageTexture\n\nimport torch\n\nimport genesis as gs\n\n\ndef main():\n    ########################## init ##########################\n    gs.init(precision=\"32\", logging_level=\"info\")\n\n    ########################## create a scene ##########################\n    scene = gs.Scene(\n        rigid_options=gs.options.RigidOptions(enable_collision=False, gravity=(0, 0, 0)),\n        viewer_options=gs.options.ViewerOptions(\n            res=(1920, 1080),\n            camera_pos=(8.5, 0.0, 4.5),\n            camera_lookat=(3.0, 0.0, 0.5),\n            camera_fov=50,\n        ),\n        renderer=gs.renderers.RayTracer(  # type: ignore\n            env_surface=gs.surfaces.Emission(\n                emissive_texture=gs.textures.ImageTexture(\n                    image_path=\"textures/indoor_bright.png\",\n                ),\n          "
   },
   {
     "unit_id": "follow_entity",
@@ -1999,16 +2039,16 @@
       "genesis.options.morphs.Plane"
     ],
     "key_apis": [
-      "genesis.options.ProfilingOptions",
+      "genesis.Scene.add_camera",
       "genesis.options.morphs.Box",
       "genesis.options.morphs.Plane"
     ],
     "api_docs": [
       {
-        "api_id": "genesis.options.ProfilingOptions",
-        "signature": "ProfilingOptions(**data)",
-        "summary": "Profiling options",
-        "params_preview": "data: [Auto-Detect] Variable keyword arguments. Needs LLM expansio"
+        "api_id": "genesis.Scene.add_camera",
+        "signature": "add_camera(model=pinhole, res=(320, 320), pos=(0.5, 2.5, 3.5), lookat=(0.5, 0.5, 0.5), up=(0.0, 0.0, 1.0), fov=30, aperture=2.0, focus_dist=None, GUI=False, spp=256, denoise=None, near=0.1, far=20.0, env_idx=None, debug=False)",
+        "summary": "Add a camera to the scene.",
+        "params_preview": "model: , res: "
       },
       {
         "api_id": "genesis.options.morphs.Box",
@@ -2024,7 +2064,7 @@
       }
     ],
     "code": "import argparse\n\nimport genesis as gs\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-f\", \"--fix\", action=\"store_true\", default=False)\n    args = parser.parse_args()\n\n    gs.init()\n\n    scene = gs.Scene(\n        vis_options=gs.options.VisOptions(\n            rendered_envs_idx=(0,),\n        ),\n        profiling_options=gs.options.ProfilingOptions(\n            show_FPS=False,\n        ),\n        show_viewer=False,\n    )\n    scene.add_entity(morph=gs.morphs.Plane())\n    cube = scene.add_entity(\n        gs.morphs.Box(\n            size=(0.1, 0.1, 0.1),\n            pos=(0.0, -0.9, 1.0),\n            euler=(15.0, 30.0, 60.0),\n        )\n    )\n\n    cam = scene.add_camera(\n        res=(640, 480),\n        pos=(2.0, 0.0, 1.5),\n        lookat=(0, 0, 0.7),\n        fov=40,\n        GUI=True,\n    )\n    cam.follow_entity(cube, fix_orientation=args.fix)\n\n    scene.build()\n\n    cube.set_dofs_velocity([0.0, 5.0, 0.0, 0.0, 0.0, 1.0])\n    for _ in range(100):\n        scene.step()\n        cam.render()\n\n\nif __name__ == \"__main__\":\n    main()\n",
-    "embedding_text": "# Task: Camera Following Moving Cube\n# Description: Creates a scene with a moving cube and a camera that follows its position, optionally fixing orientation.\n# Domain: rigid_body, camera_control, rendering\n# Genesis APIs used: genesis.options.ProfilingOptions, genesis.options.morphs.Box, genesis.options.morphs.Plane\n\nimport argparse\n\nimport genesis as gs\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-f\", \"--fix\", action=\"store_true\", default=False)\n    args = parser.parse_args()\n\n    gs.init()\n\n    scene = gs.Scene(\n        vis_options=gs.options.VisOptions(\n            rendered_envs_idx=(0,),\n        ),\n        profiling_options=gs.options.ProfilingOptions(\n            show_FPS=False,\n        ),\n        show_viewer=False,\n    )\n    scene.add_entity(morph=gs.morphs.Plane())\n    cube = scene.add_entity(\n        gs.morphs.Box(\n            size=(0.1, 0.1, 0.1),\n            pos=(0.0, -0.9, 1.0),\n            euler=(15.0, 30.0, 60.0),\n        )\n    )\n\n    cam = scene.add_camera(\n        res=(640, 480),\n        pos=(2.0, 0.0, 1.5),\n        lookat=(0, 0, 0.7),\n        fov=40,\n  "
+    "embedding_text": "# Task: Camera Following Moving Cube\n# Description: Creates a scene with a moving cube and a camera that follows its position, optionally fixing orientation.\n# Domain: rigid_body, camera_control, rendering\n# Genesis APIs used: genesis.Scene.add_camera, genesis.options.morphs.Box, genesis.options.morphs.Plane\n\nimport argparse\n\nimport genesis as gs\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-f\", \"--fix\", action=\"store_true\", default=False)\n    args = parser.parse_args()\n\n    gs.init()\n\n    scene = gs.Scene(\n        vis_options=gs.options.VisOptions(\n            rendered_envs_idx=(0,),\n        ),\n        profiling_options=gs.options.ProfilingOptions(\n            show_FPS=False,\n        ),\n        show_viewer=False,\n    )\n    scene.add_entity(morph=gs.morphs.Plane())\n    cube = scene.add_entity(\n        gs.morphs.Box(\n            size=(0.1, 0.1, 0.1),\n            pos=(0.0, -0.9, 1.0),\n            euler=(15.0, 30.0, 60.0),\n        )\n    )\n\n    cam = scene.add_camera(\n        res=(640, 480),\n        pos=(2.0, 0.0, 1.5),\n        lookat=(0, 0, 0.7),\n        fov=40,\n  "
   },
   {
     "unit_id": "moving_camera",
@@ -2046,10 +2086,17 @@
       "genesis.options.morphs.Plane"
     ],
     "key_apis": [
+      "genesis.Scene.add_camera",
       "genesis.options.morphs.MJCF",
       "genesis.options.morphs.Plane"
     ],
     "api_docs": [
+      {
+        "api_id": "genesis.Scene.add_camera",
+        "signature": "add_camera(model=pinhole, res=(320, 320), pos=(0.5, 2.5, 3.5), lookat=(0.5, 0.5, 0.5), up=(0.0, 0.0, 1.0), fov=30, aperture=2.0, focus_dist=None, GUI=False, spp=256, denoise=None, near=0.1, far=20.0, env_idx=None, debug=False)",
+        "summary": "Add a camera to the scene.",
+        "params_preview": "model: , res: "
+      },
       {
         "api_id": "genesis.options.morphs.MJCF",
         "signature": "MJCF(**data)",
@@ -2064,7 +2111,7 @@
       }
     ],
     "code": "import argparse\n\nimport genesis as gs\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=False)\n    args = parser.parse_args()\n\n    ########################## init ##########################\n    gs.init()\n\n    ########################## create a scene ##########################\n\n    scene = gs.Scene(\n        viewer_options=gs.options.ViewerOptions(\n            camera_pos=(3.5, 0.0, 2.5),\n            camera_lookat=(0.0, 0.0, 0.5),\n            camera_fov=40,\n        ),\n        show_viewer=args.vis,\n    )\n\n    ########################## entities ##########################\n    plane = scene.add_entity(\n        gs.morphs.Plane(),\n    )\n    franka = scene.add_entity(\n        gs.morphs.MJCF(file=\"xml/franka_emika_panda/panda.xml\"),\n    )\n    ########################## cameras ##########################\n    cam_0 = scene.add_camera(\n        res=(1280, 960),\n        pos=(3.5, 0.0, 2.5),\n        lookat=(0, 0, 0.5),\n        fov=30,\n        GUI=True,\n    )\n    ########################## build ##########################\n    scene.build()\n\n    for i in range(1000):\n        scene.step()\n        cam_0.set_pose(pos=(i / 100, 0, 2.5))\n        cam_0.render(\n            rgb=True,\n            # depth        = True,\n            # segmentation = True,\n        )\n\n\nif __name__ == \"__main__\":\n    main()\n",
-    "embedding_text": "# Task: Franka Arm Camera Tracking\n# Description: Creates a scene with a Franka arm and plane, then moves a camera while rendering RGB frames over simulation steps.\n# Domain: articulated_robot, camera_control, rendering\n# Genesis APIs used: genesis.options.morphs.MJCF, genesis.options.morphs.Plane\n\nimport argparse\n\nimport genesis as gs\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=False)\n    args = parser.parse_args()\n\n    ########################## init ##########################\n    gs.init()\n\n    ########################## create a scene ##########################\n\n    scene = gs.Scene(\n        viewer_options=gs.options.ViewerOptions(\n            camera_pos=(3.5, 0.0, 2.5),\n            camera_lookat=(0.0, 0.0, 0.5),\n            camera_fov=40,\n        ),\n        show_viewer=args.vis,\n    )\n\n    ########################## entities ##########################\n    plane = scene.add_entity(\n        gs.morphs.Plane(),\n    )\n    franka = scene.add_entity(\n        gs.morphs.MJCF(file=\"xml/franka_emika_panda/panda.xm"
+    "embedding_text": "# Task: Franka Arm Camera Tracking\n# Description: Creates a scene with a Franka arm and plane, then moves a camera while rendering RGB frames over simulation steps.\n# Domain: articulated_robot, camera_control, rendering\n# Genesis APIs used: genesis.Scene.add_camera, genesis.options.morphs.MJCF, genesis.options.morphs.Plane\n\nimport argparse\n\nimport genesis as gs\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=False)\n    args = parser.parse_args()\n\n    ########################## init ##########################\n    gs.init()\n\n    ########################## create a scene ##########################\n\n    scene = gs.Scene(\n        viewer_options=gs.options.ViewerOptions(\n            camera_pos=(3.5, 0.0, 2.5),\n            camera_lookat=(0.0, 0.0, 0.5),\n            camera_fov=40,\n        ),\n        show_viewer=args.vis,\n    )\n\n    ########################## entities ##########################\n    plane = scene.add_entity(\n        gs.morphs.Plane(),\n    )\n    franka = scene.add_entity(\n        gs.morphs.MJCF(file=\"xml/franka_emika_panda/panda.xm"
   },
   {
     "unit_id": "speed_test",
@@ -2086,10 +2133,17 @@
       "genesis.options.morphs.Plane"
     ],
     "key_apis": [
+      "genesis.Scene.add_camera",
       "genesis.options.morphs.Box",
       "genesis.options.morphs.Plane"
     ],
     "api_docs": [
+      {
+        "api_id": "genesis.Scene.add_camera",
+        "signature": "add_camera(model=pinhole, res=(320, 320), pos=(0.5, 2.5, 3.5), lookat=(0.5, 0.5, 0.5), up=(0.0, 0.0, 1.0), fov=30, aperture=2.0, focus_dist=None, GUI=False, spp=256, denoise=None, near=0.1, far=20.0, env_idx=None, debug=False)",
+        "summary": "Add a camera to the scene.",
+        "params_preview": "model: , res: "
+      },
       {
         "api_id": "genesis.options.morphs.Box",
         "signature": "Box(**data)",
@@ -2104,7 +2158,7 @@
       }
     ],
     "code": "import argparse\n\nimport genesis as gs\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=False)\n    args = parser.parse_args()\n\n    ########################## init ##########################\n    gs.init(backend=gs.gpu)\n\n    scene = gs.Scene(\n        show_viewer=False,\n        vis_options=gs.options.VisOptions(\n            plane_reflection=False,\n        ),\n        rigid_options=gs.options.RigidOptions(\n            dt=0.01,\n            # enable_collision=True,\n            # enable_joint_limit=True,\n        ),\n    )\n\n    ########################## entities ##########################\n    plane = scene.add_entity(\n        gs.morphs.Plane(),\n    )\n    cube = scene.add_entity(\n        gs.morphs.Box(\n            size=(0.5, 0.5, 0.5),\n            pos=(0, 0, 0),\n        ),\n    )\n    ########################## cameras ##########################\n    cam_0 = scene.add_camera(\n        res=(640, 480),\n        pos=(3.5, 0.0, 2.5),\n        lookat=(0, 0, 0.5),\n        fov=30,\n    )\n    ########################## build ##########################\n    scene.build()\n\n    from time import time\n\n    t = time()\n    for i in range(2000):\n        cam_0.render(rgb=True, depth=True)\n    print(2000 / (time() - t), \"FPS\")\n    exit()\n\n\nif __name__ == \"__main__\":\n    main()\n",
-    "embedding_text": "# Task: Camera Rendering Benchmark\n# Description: Benchmarks the rendering performance of a camera capturing RGB and depth images of a simple scene with a plane and cube.\n# Domain: rendering, scene_creation, camera_control\n# Genesis APIs used: genesis.options.morphs.Box, genesis.options.morphs.Plane\n\nimport argparse\n\nimport genesis as gs\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=False)\n    args = parser.parse_args()\n\n    ########################## init ##########################\n    gs.init(backend=gs.gpu)\n\n    scene = gs.Scene(\n        show_viewer=False,\n        vis_options=gs.options.VisOptions(\n            plane_reflection=False,\n        ),\n        rigid_options=gs.options.RigidOptions(\n            dt=0.01,\n            # enable_collision=True,\n            # enable_joint_limit=True,\n        ),\n    )\n\n    ########################## entities ##########################\n    plane = scene.add_entity(\n        gs.morphs.Plane(),\n    )\n    cube = scene.add_entity(\n        gs.morphs.Box(\n            size=(0.5, 0.5,"
+    "embedding_text": "# Task: Camera Rendering Benchmark\n# Description: Benchmarks the rendering performance of a camera capturing RGB and depth images of a simple scene with a plane and cube.\n# Domain: rendering, scene_creation, camera_control\n# Genesis APIs used: genesis.Scene.add_camera, genesis.options.morphs.Box, genesis.options.morphs.Plane\n\nimport argparse\n\nimport genesis as gs\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=False)\n    args = parser.parse_args()\n\n    ########################## init ##########################\n    gs.init(backend=gs.gpu)\n\n    scene = gs.Scene(\n        show_viewer=False,\n        vis_options=gs.options.VisOptions(\n            plane_reflection=False,\n        ),\n        rigid_options=gs.options.RigidOptions(\n            dt=0.01,\n            # enable_collision=True,\n            # enable_joint_limit=True,\n        ),\n    )\n\n    ########################## entities ##########################\n    plane = scene.add_entity(\n        gs.morphs.Plane(),\n    )\n    cube = scene.add_entity(\n        gs.morphs.Box(\n            size=(0.5, 0.5,"
   },
   {
     "unit_id": "accelerometer_duck",
@@ -2145,7 +2199,7 @@
         "api_id": "genesis.Scene.draw_debug_arrow",
         "signature": "draw_debug_arrow(pos, vec=(0, 0, 1), radius=0.01, color=(1.0, 0.0, 0.0, 0.5))",
         "summary": "Draws an arrow in the scene for visualization.",
-        "params_preview": "pos: starting position of the arrow, vec: vector of the arrow"
+        "params_preview": "pos: , vec: "
       },
       {
         "api_id": "genesis.options.morphs.Mesh",
@@ -2201,7 +2255,7 @@
         "api_id": "genesis.Scene.draw_debug_arrow",
         "signature": "draw_debug_arrow(pos, vec=(0, 0, 1), radius=0.01, color=(1.0, 0.0, 0.0, 0.5))",
         "summary": "Draws an arrow in the scene for visualization.",
-        "params_preview": "pos: starting position of the arrow, vec: vector of the arrow"
+        "params_preview": "pos: , vec: "
       },
       {
         "api_id": "genesis.options.morphs.MJCF",
@@ -2560,6 +2614,7 @@
       "genesis.Scene.add_entity",
       "genesis.Scene.build",
       "genesis.Scene.step",
+      "genesis.materials.Rigid",
       "genesis.options.RigidOptions",
       "genesis.options.ViewerOptions",
       "genesis.options.morphs.MJCF",
@@ -2599,6 +2654,7 @@
       "genesis.Scene.add_entity",
       "genesis.Scene.build",
       "genesis.Scene.step",
+      "genesis.materials.Rigid",
       "genesis.options.ViewerOptions",
       "genesis.options.morphs.MJCF",
       "genesis.options.morphs.Plane"
@@ -2658,7 +2714,7 @@
         "api_id": "genesis.Scene.reset",
         "signature": "reset(state=None, envs_idx=None)",
         "summary": "Resets the scene to its initial state.",
-        "params_preview": "state: If given, the scene's registered initial state will be updat, envs_idx: If None, all environments will be considered."
+        "params_preview": "state: , envs_idx: "
       },
       {
         "api_id": "genesis.options.morphs.Mesh",
@@ -2864,7 +2920,7 @@
         "api_id": "genesis.Scene.reset",
         "signature": "reset(state=None, envs_idx=None)",
         "summary": "Resets the scene to its initial state.",
-        "params_preview": "state: If given, the scene's registered initial state will be updat, envs_idx: If None, all environments will be considered."
+        "params_preview": "state: , envs_idx: "
       },
       {
         "api_id": "genesis.options.morphs.Mesh",
@@ -3080,10 +3136,17 @@
       "genesis.options.morphs.Plane"
     ],
     "key_apis": [
+      "genesis.Scene.add_camera",
       "genesis.options.morphs.MJCF",
       "genesis.options.morphs.Plane"
     ],
     "api_docs": [
+      {
+        "api_id": "genesis.Scene.add_camera",
+        "signature": "add_camera(model=pinhole, res=(320, 320), pos=(0.5, 2.5, 3.5), lookat=(0.5, 0.5, 0.5), up=(0.0, 0.0, 1.0), fov=30, aperture=2.0, focus_dist=None, GUI=False, spp=256, denoise=None, near=0.1, far=20.0, env_idx=None, debug=False)",
+        "summary": "Add a camera to the scene.",
+        "params_preview": "model: , res: "
+      },
       {
         "api_id": "genesis.options.morphs.MJCF",
         "signature": "MJCF(**data)",
@@ -3098,7 +3161,7 @@
       }
     ],
     "code": "import argparse\n\nimport genesis as gs\n\n\ndef main():\n\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=False)\n    parser.add_argument(\"-c\", \"--cpu\", action=\"store_true\", default=False)\n    args = parser.parse_args()\n\n    ########################## init ##########################\n    gs.init(backend=gs.cpu if args.cpu else gs.gpu)\n\n    ########################## create a scene ##########################\n    scene = gs.Scene(\n        viewer_options=gs.options.ViewerOptions(\n            camera_pos=(3.5, 0.0, 2.5),\n            camera_lookat=(0.0, 0.0, 0.5),\n            camera_fov=40,\n        ),\n        rigid_options=gs.options.RigidOptions(\n            # constraint_solver=gs.constraint_solver.Newton,\n        ),\n        show_viewer=args.vis,\n    )\n\n    ########################## entities ##########################\n    plane = scene.add_entity(\n        gs.morphs.Plane(),\n    )\n    franka = scene.add_entity(\n        gs.morphs.MJCF(file=\"xml/franka_emika_panda/panda.xml\"),\n        visualize_contact=True,\n    )\n\n    ########################## cameras ##########################\n    cam_0 = scene.add_camera(\n        res=(1280, 960),\n        pos=(3.5, 0.0, 2.5),\n        lookat=(0, 0, 0.5),\n        fov=30,\n        GUI=True,\n    )\n    ########################## build ##########################\n    scene.build()\n    for i in range(1000):\n        scene.step()\n        # cam_0.render()\n\n\nif __name__ == \"__main__\":\n    main()\n",
-    "embedding_text": "# Task: Franka Arm Scene Setup\n# Description: Creates a scene with a Franka Panda robot arm and a plane, then runs a simulation loop.\n# Domain: articulated_robot, scene_creation, rendering\n# Genesis APIs used: genesis.options.morphs.MJCF, genesis.options.morphs.Plane\n\nimport argparse\n\nimport genesis as gs\n\n\ndef main():\n\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=False)\n    parser.add_argument(\"-c\", \"--cpu\", action=\"store_true\", default=False)\n    args = parser.parse_args()\n\n    ########################## init ##########################\n    gs.init(backend=gs.cpu if args.cpu else gs.gpu)\n\n    ########################## create a scene ##########################\n    scene = gs.Scene(\n        viewer_options=gs.options.ViewerOptions(\n            camera_pos=(3.5, 0.0, 2.5),\n            camera_lookat=(0.0, 0.0, 0.5),\n            camera_fov=40,\n        ),\n        rigid_options=gs.options.RigidOptions(\n            # constraint_solver=gs.constraint_solver.Newton,\n        ),\n        show_viewer=args.v"
+    "embedding_text": "# Task: Franka Arm Scene Setup\n# Description: Creates a scene with a Franka Panda robot arm and a plane, then runs a simulation loop.\n# Domain: articulated_robot, scene_creation, rendering\n# Genesis APIs used: genesis.Scene.add_camera, genesis.options.morphs.MJCF, genesis.options.morphs.Plane\n\nimport argparse\n\nimport genesis as gs\n\n\ndef main():\n\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=False)\n    parser.add_argument(\"-c\", \"--cpu\", action=\"store_true\", default=False)\n    args = parser.parse_args()\n\n    ########################## init ##########################\n    gs.init(backend=gs.cpu if args.cpu else gs.gpu)\n\n    ########################## create a scene ##########################\n    scene = gs.Scene(\n        viewer_options=gs.options.ViewerOptions(\n            camera_pos=(3.5, 0.0, 2.5),\n            camera_lookat=(0.0, 0.0, 0.5),\n            camera_fov=40,\n        ),\n        rigid_options=gs.options.RigidOptions(\n            # constraint_solver=gs.constraint_solver.Newton,\n        ),\n        show_viewer=args.v"
   },
   {
     "unit_id": "single_franka_batch_render",
@@ -3124,6 +3187,7 @@
       "genesis.options.surfaces.Default"
     ],
     "key_apis": [
+      "genesis.Scene.add_camera",
       "genesis.Scene.add_light",
       "genesis.Scene.render_all_cameras",
       "genesis.options.morphs.MJCF",
@@ -3131,6 +3195,12 @@
       "genesis.options.surfaces.Default"
     ],
     "api_docs": [
+      {
+        "api_id": "genesis.Scene.add_camera",
+        "signature": "add_camera(model=pinhole, res=(320, 320), pos=(0.5, 2.5, 3.5), lookat=(0.5, 0.5, 0.5), up=(0.0, 0.0, 1.0), fov=30, aperture=2.0, focus_dist=None, GUI=False, spp=256, denoise=None, near=0.1, far=20.0, env_idx=None, debug=False)",
+        "summary": "Add a camera to the scene.",
+        "params_preview": "model: , res: "
+      },
       {
         "api_id": "genesis.Scene.add_light",
         "signature": "add_light(pos, dir, color=(1.0, 1.0, 1.0), intensity=1.0, directional=False, castshadow=True, cutoff=45.0, attenuation=0.0)",
@@ -3163,7 +3233,7 @@
       }
     ],
     "code": "import argparse\nimport numpy as np\n\nimport genesis as gs\nfrom genesis.utils.geom import trans_to_T\nfrom genesis.utils.image_exporter import FrameImageExporter\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=False)\n    parser.add_argument(\"-c\", \"--cpu\", action=\"store_true\", default=False)\n    parser.add_argument(\"-b\", \"--n_envs\", type=int, default=3)\n    parser.add_argument(\"-s\", \"--n_steps\", type=int, default=2)\n    parser.add_argument(\"-r\", \"--render_all_cameras\", action=\"store_true\", default=False)\n    parser.add_argument(\"-o\", \"--output_dir\", type=str, default=\"data/test\")\n    parser.add_argument(\"-u\", \"--use_rasterizer\", action=\"store_true\", default=False)\n    parser.add_argument(\"-f\", \"--use_fisheye\", action=\"store_true\", default=False)\n    parser.add_argument(\"-d\", \"--debug\", action=\"store_true\", default=False)\n    parser.add_argument(\"-l\", \"--seg_level\", type=str, default=\"link\")\n    args = parser.parse_args()\n\n    ########################## init ##########################\n    gs.init(backend=gs.cpu if args.cpu else gs.gpu)\n\n    ########################## create a scene ##########################\n    scene = gs.Scene(\n        vis_options=gs.options.VisOptions(\n            segmentation_level=args.seg_level,\n        ),\n        renderer=gs.options.renderers.BatchRenderer(\n            use_rasterizer=args.use_rasterizer,\n        ),\n    )\n\n    ########################## entities ##########################\n    plane = scene.add_entity(\n        gs.morphs.Plane(),\n        surface=gs.surfaces.Default(\n            diffuse_texture=gs.textures.BatchTexture.from_images(image_folder=\"textures\"),\n        ),\n    )\n    franka = scene.add_entity(\n        gs.morphs.MJCF(file=\"xml/franka_emika_panda/panda.xml\"),\n        visualize_contact=True,\n    )\n\n    ########################## cameras ##########################\n    debug_cam = scene.add_camera(\n        res=(720, 1280),\n        pos=(1.5, -0.5, 1.0),\n        lookat=(0.0, 0.0, 0.5),\n        fov=60,\n        GUI=args.vis,\n        debug=True,\n    )\n    cam_0 = scene.add_camera(\n        res=(512, 512),\n        pos=(1.5, 0.5, 1.5),\n        lookat=(0.0, 0.0, 0.5),\n        fov=45,\n        GUI=args.vis,\n    )\n    cam_0.attach(franka.links[6], trans_to_T(np.array([0.0, 0.5, 0.0])))\n    cam_1 = scene.add_camera(\n        res=(512, 512),\n        pos=(1.5, -0.5, 1.5),\n        lookat=(0.0, 0.0, 0.5),\n        fov=45,\n        GUI=args.vis,\n    )\n    cam_2 = scene.add_camera(\n        res=(512, 512),\n        pos=(0.0, 0.0, 5.0),\n        lookat=(0.0, 0.0, 0.0),\n        fov=70,\n        model=\"fisheye\" if args.use_fisheye else \"pinhole\",\n        GUI=args.vis,\n    )\n\n    scene.add_light(\n        pos=(0.0, 0.0, 1.5),\n        dir=(1.0, 1.0, -2.0),\n        color=(1.0, 0.0, 0.0),\n        directional=True,\n        castshadow=True,\n        cutoff=45.0,\n        intensity=0.5,\n    )\n    scene.add_light(\n        pos=(4, -4, 4),\n        dir=(0, 0, -1),\n        directional=False,\n        castshadow=True,\n        cutoff=80.0,\n        intensity=1.0,\n        attenuation=0.1,\n    )\n\n    ########################## build ##########################\n    scene.build(n_envs=args.n_envs)\n\n    # Create an image exporter\n    exporter = FrameImageExporter(args.output_dir)\n\n    if args.debug:\n        debug_cam.start_recording()\n    for i in range(args.n_steps):\n        scene.step()\n        if args.debug:\n            debug_cam.render()\n        if args.render_all_cameras:\n            color, depth, seg, normal = scene.render_all_cameras(\n                rgb=True, depth=i % 2 == 1, segmentation=i % 2 == 1, normal=True\n            )\n            exporter.export_frame_all_cameras(i, rgb=color, depth=depth, segmentation=seg, normal=normal)\n        else:\n            color, depth, seg, normal = cam_1.render(\n                rgb=False,\n                depth=True,\n                segmentation=True,\n                colorize_seg=True,\n                normal=False,\n            )\n            exporter.export_frame_single_camera(i, cam_1.idx, rgb=seg, depth=depth, segmentation=None, normal=normal)\n    if args.debug:\n        debug_cam.stop_recording(\"debug_cam.mp4\")\n\n\nif __name__ == \"__main__\":\n    main()\n",
-    "embedding_text": "# Task: Multi-Camera Franka Robot Scene\n# Description: Creates a scene with a Franka robot and multiple cameras, then renders images with optional segmentation and depth data.\n# Domain: articulated_robot, rendering, scene_creation\n# Genesis APIs used: genesis.Scene.add_light, genesis.Scene.render_all_cameras, genesis.options.morphs.MJCF, genesis.options.morphs.Plane, genesis.options.surfaces.Default\n\nimport argparse\nimport numpy as np\n\nimport genesis as gs\nfrom genesis.utils.geom import trans_to_T\nfrom genesis.utils.image_exporter import FrameImageExporter\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=False)\n    parser.add_argument(\"-c\", \"--cpu\", action=\"store_true\", default=False)\n    parser.add_argument(\"-b\", \"--n_envs\", type=int, default=3)\n    parser.add_argument(\"-s\", \"--n_steps\", type=int, default=2)\n    parser.add_argument(\"-r\", \"--render_all_cameras\", action=\"store_true\", default=False)\n    parser.add_argument(\"-o\", \"--output_dir\", type=str, default=\"data/test\")\n    parser.add_argument(\"-u\", \"--use_rasterizer\", action=\"store_true\", default=False)\n    parser.add_argument(\"-f\", \"--use_fisheye\", action=\"sto"
+    "embedding_text": "# Task: Multi-Camera Franka Robot Scene\n# Description: Creates a scene with a Franka robot and multiple cameras, then renders images with optional segmentation and depth data.\n# Domain: articulated_robot, rendering, scene_creation\n# Genesis APIs used: genesis.Scene.add_camera, genesis.Scene.add_light, genesis.Scene.render_all_cameras, genesis.options.morphs.MJCF, genesis.options.morphs.Plane, genesis.options.surfaces.Default\n\nimport argparse\nimport numpy as np\n\nimport genesis as gs\nfrom genesis.utils.geom import trans_to_T\nfrom genesis.utils.image_exporter import FrameImageExporter\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=False)\n    parser.add_argument(\"-c\", \"--cpu\", action=\"store_true\", default=False)\n    parser.add_argument(\"-b\", \"--n_envs\", type=int, default=3)\n    parser.add_argument(\"-s\", \"--n_steps\", type=int, default=2)\n    parser.add_argument(\"-r\", \"--render_all_cameras\", action=\"store_true\", default=False)\n    parser.add_argument(\"-o\", \"--output_dir\", type=str, default=\"data/test\")\n    parser.add_argument(\"-u\", \"--use_rasterizer\", action=\"store_true\", default=False)\n    parser.add_argument(\"-f\", \"--use_fisheye\", action=\"sto"
   },
   {
     "unit_id": "single_franka_envs",
@@ -3187,10 +3257,17 @@
       "genesis.options.morphs.Plane"
     ],
     "key_apis": [
+      "genesis.Scene.add_camera",
       "genesis.options.morphs.MJCF",
       "genesis.options.morphs.Plane"
     ],
     "api_docs": [
+      {
+        "api_id": "genesis.Scene.add_camera",
+        "signature": "add_camera(model=pinhole, res=(320, 320), pos=(0.5, 2.5, 3.5), lookat=(0.5, 0.5, 0.5), up=(0.0, 0.0, 1.0), fov=30, aperture=2.0, focus_dist=None, GUI=False, spp=256, denoise=None, near=0.1, far=20.0, env_idx=None, debug=False)",
+        "summary": "Add a camera to the scene.",
+        "params_preview": "model: , res: "
+      },
       {
         "api_id": "genesis.options.morphs.MJCF",
         "signature": "MJCF(**data)",
@@ -3205,7 +3282,7 @@
       }
     ],
     "code": "import argparse\n\nimport genesis as gs\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=False)\n    parser.add_argument(\"-c\", \"--cpu\", action=\"store_true\", default=False)\n    parser.add_argument(\"-s\", \"--sep\", action=\"store_true\", default=False)\n    parser.add_argument(\"-r\", \"--record\", action=\"store_true\", default=False)\n    parser.add_argument(\"-n\", \"--num_env\", type=int, default=1)\n    parser.add_argument(\"--horizon\", type=int, default=100)\n    args = parser.parse_args()\n\n    ########################## init ##########################\n    gs.init(backend=gs.cpu if args.cpu else gs.gpu)\n\n    ########################## create a scene ##########################\n    scene = gs.Scene(\n        vis_options=gs.options.VisOptions(\n            plane_reflection=True,\n            rendered_envs_idx=list(range(args.num_env)),\n            env_separate_rigid=args.sep,\n            show_world_frame=True,\n            show_link_frame=True,\n        ),\n        viewer_options=gs.options.ViewerOptions(\n            camera_pos=(3.5, 0.0, 2.5),\n            camera_lookat=(0.0, 0.0, 0.5),\n            camera_fov=40,\n        ),\n        rigid_options=gs.options.RigidOptions(\n            # constraint_solver=gs.constraint_solver.Newton,\n        ),\n        show_viewer=args.vis,\n    )\n\n    ########################## entities ##########################\n    plane = scene.add_entity(\n        gs.morphs.Plane(),\n    )\n    franka = scene.add_entity(\n        gs.morphs.MJCF(file=\"xml/franka_emika_panda/panda.xml\"),\n        visualize_contact=True,\n    )\n\n    ########################## cameras ##########################\n    cam_0 = scene.add_camera(\n        res=(1280, 960),\n        pos=(3.5, 0.0, 2.5),\n        lookat=(0, 0, 0.5),\n        fov=30,\n        GUI=args.vis,\n    )\n    ########################## build ##########################\n    scene.build(n_envs=args.num_env, env_spacing=(0.5, 0.5))\n\n    if args.record:\n        cam_0.start_recording()\n\n    for i in range(args.horizon):\n        scene.step()\n\n        color, depth, seg, normal = cam_0.render(\n            rgb=True, depth=True, segmentation=True, colorize_seg=True, normal=True\n        )\n        print(f\"Step {i}:\", args.num_env, color.shape, depth.shape, seg.shape, normal.shape)\n\n    if args.record:\n        cam_0.stop_recording(save_to_filename=\"video.mp4\")\n\n\nif __name__ == \"__main__\":\n    main()\n",
-    "embedding_text": "# Task: Franka Arm Scene with Multi-Camera Rendering\n# Description: Creates a scene with a Franka robot arm and plane, steps through simulation while capturing RGB, depth, segmentation, and normal images from a camera.\n# Domain: articulated_robot, rendering, scene_creation\n# Genesis APIs used: genesis.options.morphs.MJCF, genesis.options.morphs.Plane\n\nimport argparse\n\nimport genesis as gs\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=False)\n    parser.add_argument(\"-c\", \"--cpu\", action=\"store_true\", default=False)\n    parser.add_argument(\"-s\", \"--sep\", action=\"store_true\", default=False)\n    parser.add_argument(\"-r\", \"--record\", action=\"store_true\", default=False)\n    parser.add_argument(\"-n\", \"--num_env\", type=int, default=1)\n    parser.add_argument(\"--horizon\", type=int, default=100)\n    args = parser.parse_args()\n\n    ########################## init ##########################\n    gs.init(backend=gs.cpu if args.cpu else gs.gpu)\n\n    ########################## create a scene ##########################\n    scene = gs.Scene(\n        vis_options=gs.options.VisOptio"
+    "embedding_text": "# Task: Franka Arm Scene with Multi-Camera Rendering\n# Description: Creates a scene with a Franka robot arm and plane, steps through simulation while capturing RGB, depth, segmentation, and normal images from a camera.\n# Domain: articulated_robot, rendering, scene_creation\n# Genesis APIs used: genesis.Scene.add_camera, genesis.options.morphs.MJCF, genesis.options.morphs.Plane\n\nimport argparse\n\nimport genesis as gs\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=False)\n    parser.add_argument(\"-c\", \"--cpu\", action=\"store_true\", default=False)\n    parser.add_argument(\"-s\", \"--sep\", action=\"store_true\", default=False)\n    parser.add_argument(\"-r\", \"--record\", action=\"store_true\", default=False)\n    parser.add_argument(\"-n\", \"--num_env\", type=int, default=1)\n    parser.add_argument(\"--horizon\", type=int, default=100)\n    args = parser.parse_args()\n\n    ########################## init ##########################\n    gs.init(backend=gs.cpu if args.cpu else gs.gpu)\n\n    ########################## create a scene ##########################\n    scene = gs.Scene(\n        vis_options=gs.options.VisOptio"
   },
   {
     "unit_id": "suction_cup",
@@ -3329,7 +3406,7 @@
         "api_id": "genesis.Scene.draw_debug_spheres",
         "signature": "draw_debug_spheres(poss, radius=0.01, color=(1.0, 0.0, 0.0, 0.5))",
         "summary": "Draws multiple spheres in the scene for visualization.",
-        "params_preview": "poss: array_like, shape (N, 3), radius: "
+        "params_preview": "poss: , radius: "
       },
       {
         "api_id": "genesis.options.morphs.Terrain",
@@ -3372,7 +3449,7 @@
         "api_id": "genesis.Scene.draw_debug_spheres",
         "signature": "draw_debug_spheres(poss, radius=0.01, color=(1.0, 0.0, 0.0, 0.5))",
         "summary": "Draws multiple spheres in the scene for visualization.",
-        "params_preview": "poss: array_like, shape (N, 3), radius: "
+        "params_preview": "poss: , radius: "
       },
       {
         "api_id": "genesis.options.morphs.Sphere",
@@ -3404,6 +3481,7 @@
       "genesis.Scene.add_entity",
       "genesis.Scene.build",
       "genesis.Scene.step",
+      "genesis.materials.FEM.Elastic",
       "genesis.options.FEMOptions",
       "genesis.options.SAPCouplerOptions",
       "genesis.options.SimOptions",
@@ -3437,6 +3515,7 @@
       "genesis.Scene.add_entity",
       "genesis.Scene.build",
       "genesis.Scene.step",
+      "genesis.materials.FEM.Elastic",
       "genesis.options.FEMOptions",
       "genesis.options.SAPCouplerOptions",
       "genesis.options.SimOptions",
@@ -3479,6 +3558,8 @@
       "genesis.Scene.add_entity",
       "genesis.Scene.build",
       "genesis.Scene.step",
+      "genesis.materials.FEM.Elastic",
+      "genesis.materials.Rigid",
       "genesis.options.FEMOptions",
       "genesis.options.RigidOptions",
       "genesis.options.SAPCouplerOptions",
@@ -3522,6 +3603,7 @@
       "genesis.Scene.add_entity",
       "genesis.Scene.build",
       "genesis.Scene.step",
+      "genesis.materials.Rigid",
       "genesis.options.RigidOptions",
       "genesis.options.SAPCouplerOptions",
       "genesis.options.SimOptions",
@@ -3681,7 +3763,6 @@
     "key_apis": [
       "genesis.Scene.add_sensor",
       "genesis.Scene.stop_recording",
-      "genesis.options.ProfilingOptions",
       "genesis.options.morphs.Plane",
       "genesis.options.morphs.URDF",
       "genesis.options.sensors.Contact",
@@ -3699,12 +3780,6 @@
         "signature": "stop_recording()",
         "summary": "No summary available.",
         "params_preview": ""
-      },
-      {
-        "api_id": "genesis.options.ProfilingOptions",
-        "signature": "ProfilingOptions(**data)",
-        "summary": "Profiling options",
-        "params_preview": "data: [Auto-Detect] Variable keyword arguments. Needs LLM expansio"
       },
       {
         "api_id": "genesis.options.morphs.Plane",
@@ -3732,7 +3807,7 @@
       }
     ],
     "code": "import argparse\nimport os\n\nfrom tqdm import tqdm\n\nimport genesis as gs\nfrom genesis.recorders.plotters import IS_MATPLOTLIB_AVAILABLE, IS_PYQTGRAPH_AVAILABLE\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-dt\", \"--timestep\", type=float, default=0.01, help=\"Simulation time step\")\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=True, help=\"Show visualization GUI\")\n    parser.add_argument(\"-nv\", \"--no-vis\", action=\"store_false\", dest=\"vis\", help=\"Disable visualization GUI\")\n    parser.add_argument(\"-c\", \"--cpu\", action=\"store_true\", help=\"Use CPU instead of GPU\")\n    parser.add_argument(\"-t\", \"--seconds\", type=float, default=2.0, help=\"Number of seconds to simulate\")\n    parser.add_argument(\"-f\", \"--force\", action=\"store_true\", default=True, help=\"Use ContactForceSensor (xyz float)\")\n    parser.add_argument(\"-nf\", \"--no-force\", action=\"store_false\", dest=\"force\", help=\"Use ContactSensor (boolean)\")\n\n    args = parser.parse_args()\n\n    ########################## init ##########################\n    gs.init(backend=gs.cpu if args.cpu else gs.gpu, logging_level=None)\n\n    ########################## scene setup ##########################\n    scene = gs.Scene(\n        sim_options=gs.options.SimOptions(\n            dt=args.timestep,\n        ),\n        rigid_options=gs.options.RigidOptions(\n            constraint_timeconst=max(0.01, 2 * args.timestep),\n            use_gjk_collision=True,\n        ),\n        vis_options=gs.options.VisOptions(\n            show_world_frame=True,\n        ),\n        profiling_options=gs.options.ProfilingOptions(\n            show_FPS=False,\n        ),\n        show_viewer=args.vis,\n    )\n\n    scene.add_entity(gs.morphs.Plane())\n\n    foot_link_names = (\"FR_foot\", \"FL_foot\", \"RR_foot\", \"RL_foot\")\n    go2 = scene.add_entity(\n        gs.morphs.URDF(\n            file=\"urdf/go2/urdf/go2.urdf\",\n            pos=(0.0, 0.0, 0.2),\n            links_to_keep=foot_link_names,\n        )\n    )\n\n    for link_name in foot_link_names:\n        if args.force:\n            sensor_options = gs.sensors.ContactForce(\n                entity_idx=go2.idx,\n                link_idx_local=go2.get_link(link_name).idx_local,\n                draw_debug=True,\n            )\n            plot_kwargs = dict(\n                title=f\"{link_name} Force Sensor Data\",\n                labels=[\"force_x\", \"force_y\", \"force_z\"],\n            )\n        else:\n            sensor_options = gs.sensors.Contact(\n                entity_idx=go2.idx,\n                link_idx_local=go2.get_link(link_name).idx_local,\n                draw_debug=True,\n            )\n            plot_kwargs = dict(\n                title=f\"{link_name} Contact Sensor Data\",\n                labels=[\"in_contact\"],\n            )\n\n        sensor = scene.add_sensor(sensor_options)\n\n        if IS_PYQTGRAPH_AVAILABLE:\n            sensor.start_recording(gs.recorders.PyQtLinePlot(**plot_kwargs))\n        elif IS_MATPLOTLIB_AVAILABLE:\n            print(\"pyqtgraph not found, falling back to matplotlib.\")\n            sensor.start_recording(gs.recorders.MPLLinePlot(**plot_kwargs))\n        else:\n            print(\"matplotlib or pyqtgraph not found, skipping real-time plotting.\")\n\n    scene.build()\n\n    try:\n        steps = int(args.seconds / args.timestep) if \"PYTEST_VERSION\" not in os.environ else 5\n        for _ in tqdm(range(steps)):\n            scene.step()\n    except KeyboardInterrupt:\n        gs.logger.info(\"Simulation interrupted, exiting.\")\n    finally:\n        gs.logger.info(\"Simulation finished.\")\n\n        scene.stop_recording()\n\n\nif __name__ == \"__main__\":\n    main()\n",
-    "embedding_text": "# Task: Unitree Go2 Foot Contact Sensing\n# Description: Simulates a Unitree Go2 quadruped robot with contact or force sensors on each foot to monitor ground interaction.\n# Domain: articulated_robot, interaction, rigid_body\n# Genesis APIs used: genesis.Scene.add_sensor, genesis.Scene.stop_recording, genesis.options.ProfilingOptions, genesis.options.morphs.Plane, genesis.options.morphs.URDF, genesis.options.sensors.Contact, genesis.options.sensors.ContactForce\n\nimport argparse\nimport os\n\nfrom tqdm import tqdm\n\nimport genesis as gs\nfrom genesis.recorders.plotters import IS_MATPLOTLIB_AVAILABLE, IS_PYQTGRAPH_AVAILABLE\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-dt\", \"--timestep\", type=float, default=0.01, help=\"Simulation time step\")\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=True, help=\"Show visualization GUI\")\n    parser.add_argument(\"-nv\", \"--no-vis\", action=\"store_false\", dest=\"vis\", help=\"Disable visualization GUI\")\n    parser.add_argument(\"-c\", \"--cpu\", action=\"store_true\", help=\"Use CPU instead of GPU\")\n    parser.add_argument(\"-t\", \"--seconds\", type=float, default=2.0, help=\"Number of seconds to simulate\")\n    parser.add_argument(\"-f\", \"--force\", action=\"store_true\", default=True, "
+    "embedding_text": "# Task: Unitree Go2 Foot Contact Sensing\n# Description: Simulates a Unitree Go2 quadruped robot with contact or force sensors on each foot to monitor ground interaction.\n# Domain: articulated_robot, interaction, rigid_body\n# Genesis APIs used: genesis.Scene.add_sensor, genesis.Scene.stop_recording, genesis.options.morphs.Plane, genesis.options.morphs.URDF, genesis.options.sensors.Contact, genesis.options.sensors.ContactForce\n\nimport argparse\nimport os\n\nfrom tqdm import tqdm\n\nimport genesis as gs\nfrom genesis.recorders.plotters import IS_MATPLOTLIB_AVAILABLE, IS_PYQTGRAPH_AVAILABLE\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-dt\", \"--timestep\", type=float, default=0.01, help=\"Simulation time step\")\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=True, help=\"Show visualization GUI\")\n    parser.add_argument(\"-nv\", \"--no-vis\", action=\"store_false\", dest=\"vis\", help=\"Disable visualization GUI\")\n    parser.add_argument(\"-c\", \"--cpu\", action=\"store_true\", help=\"Use CPU instead of GPU\")\n    parser.add_argument(\"-t\", \"--seconds\", type=float, default=2.0, help=\"Number of seconds to simulate\")\n    parser.add_argument(\"-f\", \"--force\", action=\"store_true\", default=True, "
   },
   {
     "unit_id": "imu_franka",
@@ -3765,7 +3840,6 @@
       "genesis.Scene.draw_debug_sphere",
       "genesis.Scene.start_recording",
       "genesis.Scene.stop_recording",
-      "genesis.options.ProfilingOptions",
       "genesis.options.morphs.MJCF",
       "genesis.options.morphs.Plane",
       "genesis.options.sensors.IMU"
@@ -3781,25 +3855,19 @@
         "api_id": "genesis.Scene.draw_debug_sphere",
         "signature": "draw_debug_sphere(pos, radius=0.01, color=(1.0, 0.0, 0.0, 0.5))",
         "summary": "Draws a sphere in the scene for visualization.",
-        "params_preview": "pos: center position of the sphere, radius: "
+        "params_preview": "pos: , radius: "
       },
       {
         "api_id": "genesis.Scene.start_recording",
         "signature": "start_recording(data_func, rec_options)",
         "summary": "Automatically read and process data. See RecorderOptions for more details.",
-        "params_preview": "data_func: A function with no arguments that returns the data to be rec, rec_options: "
+        "params_preview": "data_func: , rec_options: "
       },
       {
         "api_id": "genesis.Scene.stop_recording",
         "signature": "stop_recording()",
         "summary": "No summary available.",
         "params_preview": ""
-      },
-      {
-        "api_id": "genesis.options.ProfilingOptions",
-        "signature": "ProfilingOptions(**data)",
-        "summary": "Profiling options",
-        "params_preview": "data: [Auto-Detect] Variable keyword arguments. Needs LLM expansio"
       },
       {
         "api_id": "genesis.options.morphs.MJCF",
@@ -3821,7 +3889,7 @@
       }
     ],
     "code": "import argparse\nimport os\n\nimport numpy as np\nfrom tqdm import tqdm\n\nimport genesis as gs\nfrom genesis.recorders.plotters import IS_MATPLOTLIB_AVAILABLE, IS_PYQTGRAPH_AVAILABLE\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-dt\", \"--timestep\", type=float, default=1e-2, help=\"Simulation time step\")\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", help=\"Show visualization GUI\", default=True)\n    parser.add_argument(\"-nv\", \"--no-vis\", action=\"store_false\", dest=\"vis\", help=\"Disable visualization GUI\")\n    parser.add_argument(\"-c\", \"--cpu\", action=\"store_true\", help=\"Use CPU instead of GPU\")\n    parser.add_argument(\"-t\", \"--seconds\", type=float, default=3, help=\"Number of seconds to simulate\")\n    args = parser.parse_args()\n\n    ########################## init ##########################\n    gs.init(backend=gs.cpu if args.cpu else gs.gpu)\n\n    ########################## create a scene ##########################\n    scene = gs.Scene(\n        sim_options=gs.options.SimOptions(\n            dt=args.timestep,\n        ),\n        vis_options=gs.options.VisOptions(\n            show_world_frame=False,\n        ),\n        viewer_options=gs.options.ViewerOptions(\n            camera_pos=(3.5, 0.0, 2.5),\n            camera_lookat=(0.0, 0.0, 0.5),\n            camera_fov=40,\n        ),\n        profiling_options=gs.options.ProfilingOptions(\n            show_FPS=False,\n        ),\n        show_viewer=args.vis,\n    )\n\n    ########################## entities ##########################\n    scene.add_entity(gs.morphs.Plane())\n    franka = scene.add_entity(\n        gs.morphs.MJCF(file=\"xml/franka_emika_panda/panda.xml\"),\n    )\n    end_effector = franka.get_link(\"hand\")\n    motors_dof = (0, 1, 2, 3, 4, 5, 6)\n\n    ########################## record sensor data ##########################\n    imu = scene.add_sensor(\n        gs.sensors.IMU(\n            entity_idx=franka.idx,\n            link_idx_local=end_effector.idx_local,\n            pos_offset=(0.0, 0.0, 0.15),\n            # noise parameters\n            acc_cross_axis_coupling=(0.0, 0.01, 0.02),\n            gyro_cross_axis_coupling=(0.03, 0.04, 0.05),\n            acc_noise=(0.01, 0.01, 0.01),\n            gyro_noise=(0.01, 0.01, 0.01),\n            acc_random_walk=(0.001, 0.001, 0.001),\n            gyro_random_walk=(0.001, 0.001, 0.001),\n            delay=0.01,\n            jitter=0.01,\n            interpolate=True,\n            # visualize\n            draw_debug=True,\n        )\n    )\n    if args.vis:\n        xyz = (\"x\", \"y\", \"z\")\n        labels = {\"lin_acc\": xyz, \"true_lin_acc\": xyz, \"ang_vel\": xyz, \"true_ang_vel\": xyz}\n\n        def data_func():\n            data = imu.read()\n            true_data = imu.read_ground_truth()\n            return {\n                \"lin_acc\": data.lin_acc,\n                \"true_lin_acc\": true_data.lin_acc,\n                \"ang_vel\": data.ang_vel,\n                \"true_ang_vel\": true_data.ang_vel,\n            }\n\n        if IS_PYQTGRAPH_AVAILABLE:\n            scene.start_recording(\n                data_func,\n                gs.recorders.PyQtLinePlot(title=\"IMU Ground Truth Data\", labels=labels),\n            )\n        elif IS_MATPLOTLIB_AVAILABLE:\n            gs.logger.info(\"pyqtgraph not found, falling back to matplotlib.\")\n            scene.start_recording(\n                data_func,\n                gs.recorders.MPLLinePlot(title=\"IMU Ground Truth Data\", labels=labels),\n            )\n        else:\n            print(\"matplotlib or pyqtgraph not found, skipping real-time plotting.\")\n\n    scene.start_recording(\n        data_func=lambda: imu.read()._asdict(),\n        rec_options=gs.recorders.NPZFile(filename=\"imu_data.npz\"),\n    )\n\n    ########################## build ##########################\n    scene.build()\n\n    franka.set_dofs_kp(\n        np.array([4500.0, 4500.0, 3500.0, 3500.0, 2000.0, 2000.0, 2000.0, 100.0, 100.0]),\n    )\n    franka.set_dofs_kv(\n        np.array([450.0, 450.0, 350.0, 350.0, 200.0, 200.0, 200.0, 10.0, 10.0]),\n    )\n    franka.set_dofs_force_range(\n        np.array([-87.0, -87.0, -87.0, -87.0, -12.0, -12.0, -12.0, -100.0, -100.0]),\n        np.array([87.0, 87.0, 87.0, 87.0, 12.0, 12.0, 12.0, 100.0, 100.0]),\n    )\n\n    circle_center = np.array([0.4, 0.0, 0.5])\n    circle_radius = 0.15\n    rate = np.deg2rad(2.0)\n\n    try:\n        steps = int(args.seconds / args.timestep) if \"PYTEST_VERSION\" not in os.environ else 5\n        for i in tqdm(range(steps)):\n            scene.step()\n\n            # control franka to move in a circle and draw the target positions\n            pos = circle_center + np.array([np.cos(i * rate), np.sin(i * rate), 0]) * circle_radius\n            qpos = franka.inverse_kinematics(\n                link=end_effector,\n                pos=pos,\n                quat=np.array([0.0, 1.0, 0.0, 0.0]),\n            )\n            franka.control_dofs_position(qpos[:-2], motors_dof)\n            scene.draw_debug_sphere(pos, radius=0.01, color=(1.0, 0.0, 0.0, 0.5))\n    except KeyboardInterrupt:\n        gs.logger.info(\"Simulation interrupted, exiting.\")\n    finally:\n        gs.logger.info(\"Simulation finished.\")\n\n        scene.stop_recording()\n\n        print(\"Ground truth data:\")\n        print(imu.read_ground_truth())\n        print(\"Measured data:\")\n        print(imu.read())\n\n\nif __name__ == \"__main__\":\n    main()\n",
-    "embedding_text": "# Task: Franka Arm IMU Sensor Simulation\n# Description: Simulates a Franka robot arm with an IMU sensor attached to its end-effector, recording and visualizing sensor data with noise modeling.\n# Domain: articulated_robot, tactile_sensing, scene_creation\n# Genesis APIs used: genesis.Scene.add_sensor, genesis.Scene.draw_debug_sphere, genesis.Scene.start_recording, genesis.Scene.stop_recording, genesis.options.ProfilingOptions, genesis.options.morphs.MJCF, genesis.options.morphs.Plane, genesis.options.sensors.IMU\n\nimport argparse\nimport os\n\nimport numpy as np\nfrom tqdm import tqdm\n\nimport genesis as gs\nfrom genesis.recorders.plotters import IS_MATPLOTLIB_AVAILABLE, IS_PYQTGRAPH_AVAILABLE\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-dt\", \"--timestep\", type=float, default=1e-2, help=\"Simulation time step\")\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", help=\"Show visualization GUI\", default=True)\n    parser.add_argument(\"-nv\", \"--no-vis\", action=\"store_false\", dest=\"vis\", help=\"Disable visualization GUI\")\n    parser.add_argument(\"-c\", \"--cpu\", action=\"store_true\", help=\"Use CPU instead of GPU\")\n    parser.add_argument(\"-t\", \"--seconds\", type=float, default=3, help=\"Number of seconds to simulate\")\n    args = parser.parse_args()\n\n    #######################"
+    "embedding_text": "# Task: Franka Arm IMU Sensor Simulation\n# Description: Simulates a Franka robot arm with an IMU sensor attached to its end-effector, recording and visualizing sensor data with noise modeling.\n# Domain: articulated_robot, tactile_sensing, scene_creation\n# Genesis APIs used: genesis.Scene.add_sensor, genesis.Scene.draw_debug_sphere, genesis.Scene.start_recording, genesis.Scene.stop_recording, genesis.options.morphs.MJCF, genesis.options.morphs.Plane, genesis.options.sensors.IMU\n\nimport argparse\nimport os\n\nimport numpy as np\nfrom tqdm import tqdm\n\nimport genesis as gs\nfrom genesis.recorders.plotters import IS_MATPLOTLIB_AVAILABLE, IS_PYQTGRAPH_AVAILABLE\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-dt\", \"--timestep\", type=float, default=1e-2, help=\"Simulation time step\")\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", help=\"Show visualization GUI\", default=True)\n    parser.add_argument(\"-nv\", \"--no-vis\", action=\"store_false\", dest=\"vis\", help=\"Disable visualization GUI\")\n    parser.add_argument(\"-c\", \"--cpu\", action=\"store_true\", help=\"Use CPU instead of GPU\")\n    parser.add_argument(\"-t\", \"--seconds\", type=float, default=3, help=\"Number of seconds to simulate\")\n    args = parser.parse_args()\n\n    #######################"
   },
   {
     "unit_id": "lidar_teleop",
@@ -3855,7 +3923,6 @@
     "key_apis": [
       "genesis.Scene.add_sensor",
       "genesis.Scene.start_recording",
-      "genesis.options.ProfilingOptions",
       "genesis.options.morphs.Box",
       "genesis.options.morphs.Cylinder",
       "genesis.options.morphs.Plane",
@@ -3877,13 +3944,7 @@
         "api_id": "genesis.Scene.start_recording",
         "signature": "start_recording(data_func, rec_options)",
         "summary": "Automatically read and process data. See RecorderOptions for more details.",
-        "params_preview": "data_func: A function with no arguments that returns the data to be rec, rec_options: "
-      },
-      {
-        "api_id": "genesis.options.ProfilingOptions",
-        "signature": "ProfilingOptions(**data)",
-        "summary": "Profiling options",
-        "params_preview": "data: [Auto-Detect] Variable keyword arguments. Needs LLM expansio"
+        "params_preview": "data_func: , rec_options: "
       },
       {
         "api_id": "genesis.options.morphs.Box",
@@ -3919,13 +3980,13 @@
         "api_id": "genesis.options.sensors.DepthCameraPattern",
         "signature": "DepthCameraPattern(res=(128, 96), fx=None, fy=None, cx=None, cy=None, fov_horizontal=90.0, fov_vertical=None)",
         "summary": "Configuration for pinhole depth camera ray casting.",
-        "params_preview": "res: in pixels, specified as (width, height), fx: in pixels, computed from fov_horizontal if None"
+        "params_preview": "res: , fx: "
       },
       {
         "api_id": "genesis.options.sensors.GridPattern",
         "signature": "GridPattern(resolution=0.1, size=(2.0, 2.0), direction=(0.0, 0.0, -1.0))",
         "summary": "Configuration for grid-based ray casting.",
-        "params_preview": "resolution: Grid spacing in meters, size: Grid dimensions (length, width) in meters"
+        "params_preview": "resolution: , size: "
       },
       {
         "api_id": "genesis.options.sensors.Lidar",
@@ -3937,11 +3998,11 @@
         "api_id": "genesis.options.sensors.SphericalPattern",
         "signature": "SphericalPattern(fov=(360.0, 60.0), n_points=(128, 64), angular_resolution=(None, None), angles=(None, None))",
         "summary": "Configuration for spherical ray pattern.",
-        "params_preview": "fov: Field of view in degrees for horizontal and vertical directi, n_points: Number of horizontal/azimuth and vertical/elevation scan lin"
+        "params_preview": "fov: , n_points: "
       }
     ],
     "code": "import argparse\nimport os\nimport threading\n\nimport numpy as np\n\nimport genesis as gs\nfrom genesis.utils.geom import euler_to_quat\n\nIS_PYNPUT_AVAILABLE = False\ntry:\n    from pynput import keyboard\n\n    IS_PYNPUT_AVAILABLE = True\nexcept ImportError:\n    pass\n\n# Position and angle increments for keyboard teleop control\nKEY_DPOS = 0.1\nKEY_DANGLE = 0.1\n\n# Movement when no keyboard control is available\nMOVE_RADIUS = 1.0\nMOVE_RATE = 1.0 / 100.0\n\n# Number of obstacles to create in a ring around the robot\nNUM_CYLINDERS = 8\nNUM_BOXES = 6\nCYLINDER_RING_RADIUS = 3.0\nBOX_RING_RADIUS = 5.0\n\n\nclass KeyboardDevice:\n    def __init__(self):\n        self.pressed_keys = set()\n        self.lock = threading.Lock()\n        self.listener = keyboard.Listener(on_press=self.on_press, on_release=self.on_release)\n\n    def start(self):\n        self.listener.start()\n\n    def stop(self):\n        try:\n            self.listener.stop()\n        except NotImplementedError:\n            # Dummy backend does not implement stop\n            pass\n        self.listener.join()\n\n    def on_press(self, key: \"keyboard.Key\"):\n        with self.lock:\n            self.pressed_keys.add(key)\n\n    def on_release(self, key: \"keyboard.Key\"):\n        with self.lock:\n            self.pressed_keys.discard(key)\n\n    def get_cmd(self):\n        return self.pressed_keys\n\n\ndef main():\n    parser = argparse.ArgumentParser(description=\"Genesis LiDAR/Depth Camera Visualization with Keyboard Teleop\")\n    parser.add_argument(\"-B\", \"--n_envs\", type=int, default=0, help=\"Number of environments to replicate\")\n    parser.add_argument(\"--cpu\", action=\"store_true\", help=\"Run on CPU instead of GPU\")\n    parser.add_argument(\"--use-box\", action=\"store_true\", help=\"Use Box as robot instead of Go2\")\n    parser.add_argument(\n        \"--pattern\", type=str, default=\"spherical\", choices=(\"spherical\", \"depth\", \"grid\"), help=\"Sensor pattern type\"\n    )\n    args = parser.parse_args()\n\n    if IS_PYNPUT_AVAILABLE:\n        kb = KeyboardDevice()\n        kb.start()\n    else:\n        print(\"Keyboard teleop is disabled since pynput is not installed. To install, run `pip install pynput`.\")\n\n    gs.init(backend=gs.cpu if args.cpu else gs.gpu, precision=\"32\", logging_level=\"info\")\n\n    scene = gs.Scene(\n        sim_options=gs.options.SimOptions(\n            gravity=(0.0, 0.0, -1.0),\n        ),\n        viewer_options=gs.options.ViewerOptions(\n            camera_pos=(-6.0, 0.0, 4.0),\n            camera_lookat=(0.0, 0.0, 0.5),\n            max_FPS=60,\n        ),\n        profiling_options=gs.options.ProfilingOptions(\n            show_FPS=False,\n        ),\n        show_viewer=True,\n    )\n\n    scene.add_entity(gs.morphs.Plane())\n\n    # create ring of obstacles to visualize raycaster sensor hits\n    for i in range(NUM_CYLINDERS):\n        angle = 2 * np.pi * i / NUM_CYLINDERS\n        x = CYLINDER_RING_RADIUS * np.cos(angle)\n        y = CYLINDER_RING_RADIUS * np.sin(angle)\n        scene.add_entity(\n            gs.morphs.Cylinder(\n                height=1.5,\n                radius=0.3,\n                pos=(x, y, 0.75),\n                fixed=True,\n            )\n        )\n\n    for i in range(NUM_BOXES):\n        angle = 2 * np.pi * i / NUM_BOXES + np.pi / 6\n        x = BOX_RING_RADIUS * np.cos(angle)\n        y = BOX_RING_RADIUS * np.sin(angle)\n        scene.add_entity(\n            gs.morphs.Box(\n                size=(0.5, 0.5, 2.0 * (i + 1) / NUM_BOXES),\n                pos=(x, y, 1.0),\n                fixed=False,\n            )\n        )\n\n    entity_kwargs = dict(\n        pos=(0.0, 0.0, 0.35),\n        quat=(1.0, 0.0, 0.0, 0.0),\n        fixed=True,\n    )\n\n    if args.use_box:\n        robot = scene.add_entity(\n            gs.morphs.Box(\n                size=(0.1, 0.1, 0.1),\n                **entity_kwargs,\n            )\n        )\n        pos_offset = (0.0, 0.0, 0.2)\n    else:\n        robot = scene.add_entity(\n            gs.morphs.URDF(\n                file=\"urdf/go2/urdf/go2.urdf\",\n                **entity_kwargs,\n            )\n        )\n        pos_offset = (0.3, 0.0, 0.1)\n\n    sensor_kwargs = dict(\n        entity_idx=robot.idx,\n        pos_offset=pos_offset,\n        euler_offset=(0.0, 0.0, 0.0),\n        return_world_frame=True,\n        draw_debug=True,\n    )\n\n    if args.pattern == \"depth\":\n        sensor = scene.add_sensor(gs.sensors.DepthCamera(pattern=gs.sensors.DepthCameraPattern(), **sensor_kwargs))\n        scene.start_recording(\n            data_func=(lambda: sensor.read_image()[0]) if args.n_envs > 0 else sensor.read_image,\n            rec_options=gs.recorders.MPLImagePlot(),\n        )\n    else:\n        if args.pattern == \"grid\":\n            pattern_cfg = gs.sensors.GridPattern()\n        else:\n            if args.pattern != \"spherical\":\n                gs.logger.warning(f\"Unrecognized raycaster pattern: {args.pattern}. Using 'spherical' instead.\")\n            pattern_cfg = gs.sensors.SphericalPattern()\n\n        sensor = scene.add_sensor(gs.sensors.Lidar(pattern=pattern_cfg, **sensor_kwargs))\n\n    scene.build(n_envs=args.n_envs)\n\n    if IS_PYNPUT_AVAILABLE:\n        # Avoid using same keys as interactive viewer keyboard controls\n        print(\"Keyboard Controls:\")\n        print(\"[↑/↓/←/→]: Move XY\")\n        print(\"[j/k]: Down/Up\")\n        print(\"[n/m]: Roll CCW/CW\")\n        print(\"[,/.]: Pitch Up/Down\")\n        print(\"[o/p]: Yaw CCW/CW\")\n        print(\"[\\\\]: Reset\")\n        print(\"[esc]: Quit\")\n\n    init_pos = np.array([0.0, 0.0, 0.35], dtype=np.float32)\n    init_euler = np.array([0.0, 0.0, 0.0], dtype=np.float32)\n\n    target_pos = init_pos.copy()\n    target_euler = init_euler.copy()\n\n    def apply_pose_to_all_envs(pos_np: np.ndarray, quat_np: np.ndarray):\n        if args.n_envs > 0:\n            pos_np = np.expand_dims(pos_np, axis=0).repeat(args.n_envs, axis=0)\n            quat_np = np.expand_dims(quat_np, axis=0).repeat(args.n_envs, axis=0)\n        robot.set_pos(pos_np)\n        robot.set_quat(quat_np)\n\n    apply_pose_to_all_envs(target_pos, euler_to_quat(target_euler))\n\n    try:\n        while True:\n            if IS_PYNPUT_AVAILABLE:\n                pressed = kb.pressed_keys.copy()\n                if keyboard.Key.esc in pressed:\n                    break\n                if keyboard.KeyCode.from_char(\"\\\\\") in pressed:\n                    target_pos[:] = init_pos\n                    target_euler[:] = init_euler\n\n                if keyboard.Key.up in pressed:\n                    target_pos[0] += KEY_DPOS\n                if keyboard.Key.down in pressed:\n                    target_pos[0] -= KEY_DPOS\n                if keyboard.Key.right in pressed:\n                    target_pos[1] -= KEY_DPOS\n                if keyboard.Key.left in pressed:\n                    target_pos[1] += KEY_DPOS\n                if keyboard.KeyCode.from_char(\"j\") in pressed:\n                    target_pos[2] -= KEY_DPOS\n                if keyboard.KeyCode.from_char(\"k\") in pressed:\n                    target_pos[2] += KEY_DPOS\n\n                if keyboard.KeyCode.from_char(\"n\") in pressed:\n                    target_euler[0] += KEY_DANGLE  # roll CCW around +X\n                if keyboard.KeyCode.from_char(\"m\") in pressed:\n                    target_euler[0] -= KEY_DANGLE  # roll CW around +X\n                if keyboard.KeyCode.from_char(\",\") in pressed:\n                    target_euler[1] += KEY_DANGLE  # pitch up around +Y\n                if keyboard.KeyCode.from_char(\".\") in pressed:\n                    target_euler[1] -= KEY_DANGLE  # pitch down around +Y\n                if keyboard.KeyCode.from_char(\"o\") in pressed:\n                    target_euler[2] += KEY_DANGLE  # yaw CCW around +Z\n                if keyboard.KeyCode.from_char(\"p\") in pressed:\n                    target_euler[2] -= KEY_DANGLE  # yaw CW around +Z\n            else:\n                # move in a circle if no keyboard control\n                target_pos[0] = MOVE_RADIUS * np.cos(scene.t * MOVE_RATE)\n                target_pos[1] = MOVE_RADIUS * np.sin(scene.t * MOVE_RATE)\n\n            apply_pose_to_all_envs(target_pos, euler_to_quat(target_euler))\n            scene.step()\n\n            if \"PYTEST_VERSION\" in os.environ:\n                break\n    except KeyboardInterrupt:\n        gs.logger.info(\"Simulation interrupted, exiting.\")\n    finally:\n        gs.logger.info(\"Simulation finished.\")\n\n\nif __name__ == \"__main__\":\n    main()\n",
-    "embedding_text": "# Task: LiDAR/Depth Camera Visualization with Keyboard Teleop\n# Description: Visualizes LiDAR/depth camera sensor patterns on a robot with keyboard teleoperation control in an obstacle-filled environment.\n# Domain: rendering, camera_control, depth_sensing\n# Genesis APIs used: genesis.Scene.add_sensor, genesis.Scene.start_recording, genesis.options.ProfilingOptions, genesis.options.morphs.Box, genesis.options.morphs.Cylinder, genesis.options.morphs.Plane, genesis.options.morphs.URDF, genesis.options.sensors.DepthCamera, genesis.options.sensors.DepthCameraPattern, genesis.options.sensors.GridPattern, genesis.options.sensors.Lidar, genesis.options.sensors.SphericalPattern\n\nimport argparse\nimport os\nimport threading\n\nimport numpy as np\n\nimport genesis as gs\nfrom genesis.utils.geom import euler_to_quat\n\nIS_PYNPUT_AVAILABLE = False\ntry:\n    from pynput import keyboard\n\n    IS_PYNPUT_AVAILABLE = True\nexcept ImportError:\n    pass\n\n# Position and angle increments for keyboard teleop control\nKEY_DPOS = 0.1\nKEY_DANGLE = 0.1\n\n# Movement when no keyboard control is available\nMOVE_RADIUS = 1.0\nMOVE_RATE = 1.0 / 100.0\n\n# Number of obstacles to create in a ring around the robot\nNUM_CYLINDERS = 8\nNUM_BOXES = 6\nCYLINDER_RING_RADIUS = 3.0\nBOX_RING_RADIUS = 5.0\n\n\nclass KeyboardDevice:\n    def __init__(self):\n        self.pressed_keys = set()\n        self.lock = threading.Lock()\n        self.listener = keyboard.Listener(on_press=self.on_press, on_release=self.on_release)\n\n   "
+    "embedding_text": "# Task: LiDAR/Depth Camera Visualization with Keyboard Teleop\n# Description: Visualizes LiDAR/depth camera sensor patterns on a robot with keyboard teleoperation control in an obstacle-filled environment.\n# Domain: rendering, camera_control, depth_sensing\n# Genesis APIs used: genesis.Scene.add_sensor, genesis.Scene.start_recording, genesis.options.morphs.Box, genesis.options.morphs.Cylinder, genesis.options.morphs.Plane, genesis.options.morphs.URDF, genesis.options.sensors.DepthCamera, genesis.options.sensors.DepthCameraPattern, genesis.options.sensors.GridPattern, genesis.options.sensors.Lidar, genesis.options.sensors.SphericalPattern\n\nimport argparse\nimport os\nimport threading\n\nimport numpy as np\n\nimport genesis as gs\nfrom genesis.utils.geom import euler_to_quat\n\nIS_PYNPUT_AVAILABLE = False\ntry:\n    from pynput import keyboard\n\n    IS_PYNPUT_AVAILABLE = True\nexcept ImportError:\n    pass\n\n# Position and angle increments for keyboard teleop control\nKEY_DPOS = 0.1\nKEY_DANGLE = 0.1\n\n# Movement when no keyboard control is available\nMOVE_RADIUS = 1.0\nMOVE_RATE = 1.0 / 100.0\n\n# Number of obstacles to create in a ring around the robot\nNUM_CYLINDERS = 8\nNUM_BOXES = 6\nCYLINDER_RING_RADIUS = 3.0\nBOX_RING_RADIUS = 5.0\n\n\nclass KeyboardDevice:\n    def __init__(self):\n        self.pressed_keys = set()\n        self.lock = threading.Lock()\n        self.listener = keyboard.Listener(on_press=self.on_press, on_release=self.on_release)\n\n   "
   },
   {
     "unit_id": "anymal_c",
@@ -4077,6 +4138,9 @@
       "genesis.Scene.build",
       "genesis.Scene.reset",
       "genesis.Scene.step",
+      "genesis.materials.Hybrid",
+      "genesis.materials.MPM.Muscle",
+      "genesis.materials.Rigid",
       "genesis.options.MPMOptions",
       "genesis.options.RigidOptions",
       "genesis.options.SimOptions",
@@ -4097,7 +4161,7 @@
         "api_id": "genesis.Scene.reset",
         "signature": "reset(state=None, envs_idx=None)",
         "summary": "Resets the scene to its initial state.",
-        "params_preview": "state: If given, the scene's registered initial state will be updat, envs_idx: If None, all environments will be considered."
+        "params_preview": "state: , envs_idx: "
       },
       {
         "api_id": "genesis.options.morphs.Plane",
@@ -4191,6 +4255,8 @@
       "genesis.Scene.build",
       "genesis.Scene.reset",
       "genesis.Scene.step",
+      "genesis.materials.FEM.Muscle",
+      "genesis.materials.MPM.Muscle",
       "genesis.options.FEMOptions",
       "genesis.options.MPMOptions",
       "genesis.options.SimOptions",
@@ -4209,7 +4275,7 @@
         "api_id": "genesis.Scene.reset",
         "signature": "reset(state=None, envs_idx=None)",
         "summary": "Resets the scene to its initial state.",
-        "params_preview": "state: If given, the scene's registered initial state will be updat, envs_idx: If None, all environments will be considered."
+        "params_preview": "state: , envs_idx: "
       },
       {
         "api_id": "genesis.options.morphs.Plane",
@@ -4242,6 +4308,9 @@
       "genesis.Scene.build",
       "genesis.Scene.reset",
       "genesis.Scene.step",
+      "genesis.materials.FEM.Muscle",
+      "genesis.materials.MPM.Muscle",
+      "genesis.materials.Rigid",
       "genesis.options.MPMOptions",
       "genesis.options.SimOptions",
       "genesis.options.ViewerOptions",
@@ -4263,7 +4332,7 @@
         "api_id": "genesis.Scene.reset",
         "signature": "reset(state=None, envs_idx=None)",
         "summary": "Resets the scene to its initial state.",
-        "params_preview": "state: If given, the scene's registered initial state will be updat, envs_idx: If None, all environments will be considered."
+        "params_preview": "state: , envs_idx: "
       },
       {
         "api_id": "genesis.options.morphs.Mesh",
@@ -4425,19 +4494,19 @@
         "api_id": "genesis.Scene.draw_debug_arrow",
         "signature": "draw_debug_arrow(pos, vec=(0, 0, 1), radius=0.01, color=(1.0, 0.0, 0.0, 0.5))",
         "summary": "Draws an arrow in the scene for visualization.",
-        "params_preview": "pos: starting position of the arrow, vec: vector of the arrow"
+        "params_preview": "pos: , vec: "
       },
       {
         "api_id": "genesis.Scene.draw_debug_box",
         "signature": "draw_debug_box(bounds, color=(1.0, 0.0, 0.0, 1.0), wireframe=True, wireframe_radius=0.0015)",
         "summary": "Draws a box in the scene for visualization.",
-        "params_preview": "bounds: specified as [[min_x, min_y, min_z], [max_x, max_y, max_z]], color: "
+        "params_preview": "bounds: , color: "
       },
       {
         "api_id": "genesis.Scene.draw_debug_frame",
         "signature": "draw_debug_frame(T, axis_length=1.0, origin_size=0.015, axis_radius=0.01)",
         "summary": "Draws a 3-axis coordinate frame in the scene for visualization.",
-        "params_preview": "T: The transformation matrix of the frame., axis_length: The length of the axes."
+        "params_preview": "T: , axis_length: "
       },
       {
         "api_id": "genesis.Scene.draw_debug_line",
@@ -4449,13 +4518,13 @@
         "api_id": "genesis.Scene.draw_debug_sphere",
         "signature": "draw_debug_sphere(pos, radius=0.01, color=(1.0, 0.0, 0.0, 0.5))",
         "summary": "Draws a sphere in the scene for visualization.",
-        "params_preview": "pos: center position of the sphere, radius: "
+        "params_preview": "pos: , radius: "
       },
       {
         "api_id": "genesis.Scene.draw_debug_spheres",
         "signature": "draw_debug_spheres(poss, radius=0.01, color=(1.0, 0.0, 0.0, 0.5))",
         "summary": "Draws multiple spheres in the scene for visualization.",
-        "params_preview": "poss: array_like, shape (N, 3), radius: "
+        "params_preview": "poss: , radius: "
       },
       {
         "api_id": "genesis.options.morphs.Plane",
@@ -4544,7 +4613,7 @@
         "api_id": "genesis.Scene.draw_debug_path",
         "signature": "draw_debug_path(qposs, entity, link_idx=-1, density=0.3, frame_scaling=1.0)",
         "summary": "Draws a planned joint trajectory in the scene for visualization.",
-        "params_preview": "qposs: shape (N, M) where N is number of configurations (trajectory, entity: "
+        "params_preview": "qposs: , entity: "
       },
       {
         "api_id": "genesis.options.morphs.Box",
@@ -4586,10 +4655,17 @@
       "genesis.options.morphs.Plane"
     ],
     "key_apis": [
+      "genesis.Scene.add_camera",
       "genesis.options.morphs.MJCF",
       "genesis.options.morphs.Plane"
     ],
     "api_docs": [
+      {
+        "api_id": "genesis.Scene.add_camera",
+        "signature": "add_camera(model=pinhole, res=(320, 320), pos=(0.5, 2.5, 3.5), lookat=(0.5, 0.5, 0.5), up=(0.0, 0.0, 1.0), fov=30, aperture=2.0, focus_dist=None, GUI=False, spp=256, denoise=None, near=0.1, far=20.0, env_idx=None, debug=False)",
+        "summary": "Add a camera to the scene.",
+        "params_preview": "model: , res: "
+      },
       {
         "api_id": "genesis.options.morphs.MJCF",
         "signature": "MJCF(**data)",
@@ -4604,7 +4680,7 @@
       }
     ],
     "code": "import genesis as gs\n\ngs.init()\n\nscene = gs.Scene(show_viewer=False)\n\nplane = scene.add_entity(gs.morphs.Plane())\nfranka = scene.add_entity(\n    gs.morphs.MJCF(file=\"xml/franka_emika_panda/panda.xml\"),\n)\n\ncam_0 = scene.add_camera()\nscene.build()\n\n# enter IPython's interactive mode\nimport IPython\n\nIPython.embed()\n",
-    "embedding_text": "# Task: Franka Panda Robot Interactive Scene\n# Description: Creates a scene with a Franka Panda robot and a plane, then enters interactive IPython mode for manual exploration.\n# Domain: articulated_robot, scene_creation, interaction\n# Genesis APIs used: genesis.options.morphs.MJCF, genesis.options.morphs.Plane\n\nimport genesis as gs\n\ngs.init()\n\nscene = gs.Scene(show_viewer=False)\n\nplane = scene.add_entity(gs.morphs.Plane())\nfranka = scene.add_entity(\n    gs.morphs.MJCF(file=\"xml/franka_emika_panda/panda.xml\"),\n)\n\ncam_0 = scene.add_camera()\nscene.build()\n\n# enter IPython's interactive mode\nimport IPython\n\nIPython.embed()\n"
+    "embedding_text": "# Task: Franka Panda Robot Interactive Scene\n# Description: Creates a scene with a Franka Panda robot and a plane, then enters interactive IPython mode for manual exploration.\n# Domain: articulated_robot, scene_creation, interaction\n# Genesis APIs used: genesis.Scene.add_camera, genesis.options.morphs.MJCF, genesis.options.morphs.Plane\n\nimport genesis as gs\n\ngs.init()\n\nscene = gs.Scene(show_viewer=False)\n\nplane = scene.add_entity(gs.morphs.Plane())\nfranka = scene.add_entity(\n    gs.morphs.MJCF(file=\"xml/franka_emika_panda/panda.xml\"),\n)\n\ncam_0 = scene.add_camera()\nscene.build()\n\n# enter IPython's interactive mode\nimport IPython\n\nIPython.embed()\n"
   },
   {
     "unit_id": "mpm",
@@ -4620,6 +4696,9 @@
       "genesis.Scene.add_entity",
       "genesis.Scene.build",
       "genesis.Scene.step",
+      "genesis.materials.MPM.Elastic",
+      "genesis.materials.MPM.ElastoPlastic",
+      "genesis.materials.MPM.Liquid",
       "genesis.options.MPMOptions",
       "genesis.options.SimOptions",
       "genesis.options.ViewerOptions",
@@ -4717,6 +4796,7 @@
       "genesis.Scene.add_entity",
       "genesis.Scene.build",
       "genesis.Scene.step",
+      "genesis.materials.PBD.Cloth",
       "genesis.options.SimOptions",
       "genesis.options.ViewerOptions",
       "genesis.options.morphs.Mesh",
@@ -4845,6 +4925,7 @@
       "genesis.Scene.add_entity",
       "genesis.Scene.build",
       "genesis.Scene.step",
+      "genesis.materials.SPH.Liquid",
       "genesis.options.SPHOptions",
       "genesis.options.SimOptions",
       "genesis.options.VisOptions",
@@ -4902,11 +4983,18 @@
       "genesis.options.renderers.Rasterizer"
     ],
     "key_apis": [
+      "genesis.Scene.add_camera",
       "genesis.options.morphs.MJCF",
       "genesis.options.morphs.Plane",
       "genesis.options.renderers.Rasterizer"
     ],
     "api_docs": [
+      {
+        "api_id": "genesis.Scene.add_camera",
+        "signature": "add_camera(model=pinhole, res=(320, 320), pos=(0.5, 2.5, 3.5), lookat=(0.5, 0.5, 0.5), up=(0.0, 0.0, 1.0), fov=30, aperture=2.0, focus_dist=None, GUI=False, spp=256, denoise=None, near=0.1, far=20.0, env_idx=None, debug=False)",
+        "summary": "Add a camera to the scene.",
+        "params_preview": "model: , res: "
+      },
       {
         "api_id": "genesis.options.morphs.MJCF",
         "signature": "MJCF(**data)",
@@ -4927,6 +5015,6 @@
       }
     ],
     "code": "import os\nimport math\nimport genesis as gs\n\ngs.init()\n\nscene = gs.Scene(\n    viewer_options=gs.options.ViewerOptions(\n        res=(1280, 960),\n        camera_pos=(3.5, 0.0, 2.5),\n        camera_lookat=(0.0, 0.0, 0.5),\n        camera_fov=40,\n        max_FPS=60,\n    ),\n    vis_options=gs.options.VisOptions(\n        show_world_frame=True,\n        world_frame_size=1.0,\n        show_link_frame=False,\n        show_cameras=False,\n        plane_reflection=True,\n        ambient_light=(0.1, 0.1, 0.1),\n    ),\n    # renderer=gs.renderers.RayTracer(),\n    renderer=gs.renderers.Rasterizer(),\n    show_viewer=True,\n)\n\nplane = scene.add_entity(\n    gs.morphs.Plane(),\n)\nfranka = scene.add_entity(\n    gs.morphs.MJCF(file=\"xml/franka_emika_panda/panda.xml\"),\n)\n\ncam = scene.add_camera(\n    res=(640, 480),\n    pos=(3.5, 0.0, 2.5),\n    lookat=(0, 0, 0.5),\n    fov=30,\n    GUI=\"PYTEST_VERSION\" not in os.environ,\n)\n\nscene.build()\n\n# render rgb, depth, segmentation, normal\nrgb, depth, segmentation, normal = cam.render(rgb=True, depth=True, segmentation=True, normal=True)\n\ncam.start_recording()\n\nhorizon = 120 if \"PYTEST_VERSION\" not in os.environ else 5\nfor i in range(120):\n    scene.step()\n    cam.set_pose(\n        pos=(3.0 * math.sin(i / 60), 3.0 * math.cos(i / 60), 2.5),\n        lookat=(0, 0, 0.5),\n    )\n    cam.render()\ncam.stop_recording(save_to_filename=\"video.mp4\", fps=60)\n",
-    "embedding_text": "# Task: Franka Robot with Orbiting Camera\n# Description: Simulates a Franka robot while orbiting a camera around the scene and recording video.\n# Domain: articulated_robot, camera_control, rendering\n# Genesis APIs used: genesis.options.morphs.MJCF, genesis.options.morphs.Plane, genesis.options.renderers.Rasterizer\n\nimport os\nimport math\nimport genesis as gs\n\ngs.init()\n\nscene = gs.Scene(\n    viewer_options=gs.options.ViewerOptions(\n        res=(1280, 960),\n        camera_pos=(3.5, 0.0, 2.5),\n        camera_lookat=(0.0, 0.0, 0.5),\n        camera_fov=40,\n        max_FPS=60,\n    ),\n    vis_options=gs.options.VisOptions(\n        show_world_frame=True,\n        world_frame_size=1.0,\n        show_link_frame=False,\n        show_cameras=False,\n        plane_reflection=True,\n        ambient_light=(0.1, 0.1, 0.1),\n    ),\n    # renderer=gs.renderers.RayTracer(),\n    renderer=gs.renderers.Rasterizer(),\n    show_viewer=True,\n)\n\nplane = scene.add_entity(\n    gs.morphs.Plane(),\n)\nfranka = scene.add_entity(\n    gs.morphs.MJCF(file=\"xml/franka_emika_panda/panda.xml\"),\n)\n\ncam = scene.add_camera(\n    res=(640, 480),\n    "
+    "embedding_text": "# Task: Franka Robot with Orbiting Camera\n# Description: Simulates a Franka robot while orbiting a camera around the scene and recording video.\n# Domain: articulated_robot, camera_control, rendering\n# Genesis APIs used: genesis.Scene.add_camera, genesis.options.morphs.MJCF, genesis.options.morphs.Plane, genesis.options.renderers.Rasterizer\n\nimport os\nimport math\nimport genesis as gs\n\ngs.init()\n\nscene = gs.Scene(\n    viewer_options=gs.options.ViewerOptions(\n        res=(1280, 960),\n        camera_pos=(3.5, 0.0, 2.5),\n        camera_lookat=(0.0, 0.0, 0.5),\n        camera_fov=40,\n        max_FPS=60,\n    ),\n    vis_options=gs.options.VisOptions(\n        show_world_frame=True,\n        world_frame_size=1.0,\n        show_link_frame=False,\n        show_cameras=False,\n        plane_reflection=True,\n        ambient_light=(0.1, 0.1, 0.1),\n    ),\n    # renderer=gs.renderers.RayTracer(),\n    renderer=gs.renderers.Rasterizer(),\n    show_viewer=True,\n)\n\nplane = scene.add_entity(\n    gs.morphs.Plane(),\n)\nfranka = scene.add_entity(\n    gs.morphs.MJCF(file=\"xml/franka_emika_panda/panda.xml\"),\n)\n\ncam = scene.add_camera(\n    res=(640, 480),\n    "
   }
 ]

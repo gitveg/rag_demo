@@ -2,7 +2,7 @@
 代码范例库 vs API 知识库 —— 覆盖检测报告
 ========================================
 对比 genesis_code_index.json 中全部 metadata.key_apis 与
-genesis_knowledge_base_final.json 中的 api_id：
+genesis_api_index.json 中的 api_id：
   - API 库中有多少 api_id 至少出现在某一范例的 key_apis 中（精确匹配，经归一化）
   - 缺失列表、范例库中多出的 id、按文件统计
 
@@ -34,7 +34,7 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _RAG_DEMO = os.path.normpath(os.path.join(SCRIPT_DIR, ".."))
 _KB_DIR = os.path.join(_RAG_DEMO, "knowledge_base")
 
-KB_API = os.path.join(_KB_DIR, "genesis_knowledge_base_final.json")
+KB_API = os.path.join(_KB_DIR, "genesis_api_index.json")
 KB_CODE = os.path.join(_KB_DIR, "genesis_code_index.json")
 OUT_TXT = os.path.join(_KB_DIR, "code_index_api_coverage_report.txt")
 OUT_JSON = os.path.join(_KB_DIR, "code_index_api_coverage_report.json")

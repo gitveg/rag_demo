@@ -66,7 +66,7 @@ def gs_refs_in_code(code: str) -> set:
 
 def main():
     base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    kb_path = os.path.join(base, "knowledge_base", "genesis_knowledge_base_final.json")
+    kb_path = os.path.join(base, "knowledge_base", "genesis_api_index.json")
     units_path = os.path.join(base, "knowledge_base", "genesis_knowledge_units.json")
 
     with open(kb_path, encoding="utf-8") as f:

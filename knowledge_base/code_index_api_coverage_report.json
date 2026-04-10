@@ -1,75 +1,70 @@
 {
-  "generated_at": "2026-03-28T21:51:16",
+  "generated_at": "2026-04-09T17:34:46",
   "methodology_note": "【重要说明】本报告对比的是「每条范例 metadata.key_apis」与「API 库 api_id」两个字符串集合。\nkey_apis 由 indexer_code.py 的 AST 访问器生成：只有调用链能从 import 映射到 genesis.* 时才会\n记录。例如 gs.Scene(...) 会得到 genesis.Scene；但 scene.add_entity(...)、scene.build() 里左侧\n是局部变量 scene，AST 无法解析出类型，因此不会写入 genesis.Scene.add_entity / genesis.Scene.build。\n同理，实体上的 .set_velocity、.get_state 等实例方法也大量不会被记入 key_apis。\n因此下列「未覆盖」只表示：没有任何范例的 key_apis 字段出现过该 api_id；不代表 examples 源码里\n没有调用这些 API。若要做「源码级」覆盖，需要对 AST 做简单的 defs/赋值追踪或补充正则扫描。",
   "paths": {
-    "api_kb": "C:\\Users\\zijun\\Desktop\\scai_project\\Genesis\\rag_demo\\knowledge_base\\genesis_knowledge_base_final.json",
-    "code_index": "C:\\Users\\zijun\\Desktop\\scai_project\\Genesis\\rag_demo\\knowledge_base\\genesis_code_index.json"
+    "api_kb": "D:\\Desktop\\Genesis\\Genesis-main\\rag_demo\\knowledge_base\\genesis_api_index.json",
+    "code_index": "D:\\Desktop\\Genesis\\Genesis-main\\rag_demo\\knowledge_base\\genesis_code_index.json"
   },
   "counts": {
     "api_kb_distinct": 497,
     "code_index_entries": 101,
-    "code_index_distinct_key_apis": 46,
-    "key_apis_total_mentions": 604,
-    "covered_apis": 46,
-    "missing_apis": 451,
+    "code_index_distinct_key_apis": 50,
+    "key_apis_total_mentions": 320,
+    "covered_apis": 50,
+    "missing_apis": 447,
     "orphan_key_apis": 0
   },
-  "coverage_rate": 0.092555,
+  "coverage_rate": 0.100604,
   "missing_api_ids": [
+    "genesis.Scene",
     "genesis.Scene.add_camera",
-    "genesis.Scene.add_emitter",
     "genesis.Scene.add_entity",
     "genesis.Scene.add_force_field",
-    "genesis.Scene.add_light",
     "genesis.Scene.add_mesh_light",
-    "genesis.Scene.add_sensor",
     "genesis.Scene.build",
-    "genesis.Scene.clear_debug_object",
-    "genesis.Scene.clear_debug_objects",
     "genesis.Scene.destroy",
-    "genesis.Scene.draw_debug_arrow",
-    "genesis.Scene.draw_debug_box",
-    "genesis.Scene.draw_debug_frame",
     "genesis.Scene.draw_debug_frames",
-    "genesis.Scene.draw_debug_line",
     "genesis.Scene.draw_debug_mesh",
-    "genesis.Scene.draw_debug_path",
     "genesis.Scene.draw_debug_points",
-    "genesis.Scene.draw_debug_sphere",
-    "genesis.Scene.draw_debug_spheres",
     "genesis.Scene.dump_ckpt_to_numpy",
-    "genesis.Scene.get_state",
     "genesis.Scene.load_checkpoint",
-    "genesis.Scene.render_all_cameras",
-    "genesis.Scene.reset",
     "genesis.Scene.save_checkpoint",
-    "genesis.Scene.start_recording",
     "genesis.Scene.step",
-    "genesis.Scene.stop_recording",
     "genesis.Scene.viewer.save_video",
+    "genesis.constraint_solver",
     "genesis.options.AvatarOptions",
     "genesis.options.AvatarOptions.copy_attributes_from",
     "genesis.options.BaseCouplerOptions",
     "genesis.options.BaseCouplerOptions.copy_attributes_from",
     "genesis.options.CoacdOptions",
     "genesis.options.CoacdOptions.copy_attributes_from",
+    "genesis.options.FEMOptions",
     "genesis.options.FEMOptions.copy_attributes_from",
     "genesis.options.FoamOptions",
     "genesis.options.FoamOptions.copy_attributes_from",
+    "genesis.options.IPCCouplerOptions",
     "genesis.options.IPCCouplerOptions.copy_attributes_from",
     "genesis.options.LegacyCouplerOptions",
     "genesis.options.LegacyCouplerOptions.copy_attributes_from",
+    "genesis.options.MPMOptions",
     "genesis.options.MPMOptions.copy_attributes_from",
+    "genesis.options.PBDOptions",
     "genesis.options.PBDOptions.copy_attributes_from",
     "genesis.options.ProfilingOptions.copy_attributes_from",
+    "genesis.options.RigidOptions",
     "genesis.options.RigidOptions.copy_attributes_from",
+    "genesis.options.SAPCouplerOptions",
     "genesis.options.SAPCouplerOptions.copy_attributes_from",
     "genesis.options.SFOptions.copy_attributes_from",
+    "genesis.options.SPHOptions",
     "genesis.options.SPHOptions.copy_attributes_from",
+    "genesis.options.SimOptions",
     "genesis.options.SimOptions.copy_attributes_from",
     "genesis.options.ToolOptions",
     "genesis.options.ToolOptions.copy_attributes_from",
+    "genesis.options.ViewerOptions",
     "genesis.options.ViewerOptions.copy_attributes_from",
+    "genesis.options.VisOptions",
     "genesis.options.VisOptions.copy_attributes_from",
     "genesis.options.misc.CoacdOptions",
     "genesis.options.misc.CoacdOptions.copy_attributes_from",
@@ -145,6 +140,7 @@
     "genesis.options.recorders.VideoFile",
     "genesis.options.recorders.VideoFile.copy_attributes_from",
     "genesis.options.recorders.VideoFile.model_post_init",
+    "genesis.options.renderers.BatchRenderer",
     "genesis.options.renderers.BatchRenderer.copy_attributes_from",
     "genesis.options.renderers.Options",
     "genesis.options.renderers.Options.copy_attributes_from",
@@ -470,11 +466,11 @@
   ],
   "missing_detail": [
     {
-      "api_id": "genesis.Scene.add_camera",
-      "kb_type": "method"
+      "api_id": "genesis.Scene",
+      "kb_type": "class"
     },
     {
-      "api_id": "genesis.Scene.add_emitter",
+      "api_id": "genesis.Scene.add_camera",
       "kb_type": "method"
     },
     {
@@ -486,15 +482,7 @@
       "kb_type": "method"
     },
     {
-      "api_id": "genesis.Scene.add_light",
-      "kb_type": "method"
-    },
-    {
       "api_id": "genesis.Scene.add_mesh_light",
-      "kb_type": "method"
-    },
-    {
-      "api_id": "genesis.Scene.add_sensor",
       "kb_type": "method"
     },
     {
@@ -502,27 +490,7 @@
       "kb_type": "method"
     },
     {
-      "api_id": "genesis.Scene.clear_debug_object",
-      "kb_type": "method"
-    },
-    {
-      "api_id": "genesis.Scene.clear_debug_objects",
-      "kb_type": "method"
-    },
-    {
       "api_id": "genesis.Scene.destroy",
-      "kb_type": "method"
-    },
-    {
-      "api_id": "genesis.Scene.draw_debug_arrow",
-      "kb_type": "method"
-    },
-    {
-      "api_id": "genesis.Scene.draw_debug_box",
-      "kb_type": "method"
-    },
-    {
-      "api_id": "genesis.Scene.draw_debug_frame",
       "kb_type": "method"
     },
     {
@@ -530,15 +498,7 @@
       "kb_type": "method"
     },
     {
-      "api_id": "genesis.Scene.draw_debug_line",
-      "kb_type": "method"
-    },
-    {
       "api_id": "genesis.Scene.draw_debug_mesh",
-      "kb_type": "method"
-    },
-    {
-      "api_id": "genesis.Scene.draw_debug_path",
       "kb_type": "method"
     },
     {
@@ -546,19 +506,7 @@
       "kb_type": "method"
     },
     {
-      "api_id": "genesis.Scene.draw_debug_sphere",
-      "kb_type": "method"
-    },
-    {
-      "api_id": "genesis.Scene.draw_debug_spheres",
-      "kb_type": "method"
-    },
-    {
       "api_id": "genesis.Scene.dump_ckpt_to_numpy",
-      "kb_type": "method"
-    },
-    {
-      "api_id": "genesis.Scene.get_state",
       "kb_type": "method"
     },
     {
@@ -566,19 +514,7 @@
       "kb_type": "method"
     },
     {
-      "api_id": "genesis.Scene.render_all_cameras",
-      "kb_type": "method"
-    },
-    {
-      "api_id": "genesis.Scene.reset",
-      "kb_type": "method"
-    },
-    {
       "api_id": "genesis.Scene.save_checkpoint",
-      "kb_type": "method"
-    },
-    {
-      "api_id": "genesis.Scene.start_recording",
       "kb_type": "method"
     },
     {
@@ -586,12 +522,12 @@
       "kb_type": "method"
     },
     {
-      "api_id": "genesis.Scene.stop_recording",
+      "api_id": "genesis.Scene.viewer.save_video",
       "kb_type": "method"
     },
     {
-      "api_id": "genesis.Scene.viewer.save_video",
-      "kb_type": "method"
+      "api_id": "genesis.constraint_solver",
+      "kb_type": "class"
     },
     {
       "api_id": "genesis.options.AvatarOptions",
@@ -618,6 +554,10 @@
       "kb_type": "method"
     },
     {
+      "api_id": "genesis.options.FEMOptions",
+      "kb_type": "class"
+    },
+    {
       "api_id": "genesis.options.FEMOptions.copy_attributes_from",
       "kb_type": "method"
     },
@@ -628,6 +568,10 @@
     {
       "api_id": "genesis.options.FoamOptions.copy_attributes_from",
       "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.IPCCouplerOptions",
+      "kb_type": "class"
     },
     {
       "api_id": "genesis.options.IPCCouplerOptions.copy_attributes_from",
@@ -642,8 +586,16 @@
       "kb_type": "method"
     },
     {
+      "api_id": "genesis.options.MPMOptions",
+      "kb_type": "class"
+    },
+    {
       "api_id": "genesis.options.MPMOptions.copy_attributes_from",
       "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.PBDOptions",
+      "kb_type": "class"
     },
     {
       "api_id": "genesis.options.PBDOptions.copy_attributes_from",
@@ -654,8 +606,16 @@
       "kb_type": "method"
     },
     {
+      "api_id": "genesis.options.RigidOptions",
+      "kb_type": "class"
+    },
+    {
       "api_id": "genesis.options.RigidOptions.copy_attributes_from",
       "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.SAPCouplerOptions",
+      "kb_type": "class"
     },
     {
       "api_id": "genesis.options.SAPCouplerOptions.copy_attributes_from",
@@ -666,8 +626,16 @@
       "kb_type": "method"
     },
     {
+      "api_id": "genesis.options.SPHOptions",
+      "kb_type": "class"
+    },
+    {
       "api_id": "genesis.options.SPHOptions.copy_attributes_from",
       "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.SimOptions",
+      "kb_type": "class"
     },
     {
       "api_id": "genesis.options.SimOptions.copy_attributes_from",
@@ -682,8 +650,16 @@
       "kb_type": "method"
     },
     {
+      "api_id": "genesis.options.ViewerOptions",
+      "kb_type": "class"
+    },
+    {
       "api_id": "genesis.options.ViewerOptions.copy_attributes_from",
       "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.VisOptions",
+      "kb_type": "class"
     },
     {
       "api_id": "genesis.options.VisOptions.copy_attributes_from",
@@ -984,6 +960,10 @@
     {
       "api_id": "genesis.options.recorders.VideoFile.model_post_init",
       "kb_type": "method"
+    },
+    {
+      "api_id": "genesis.options.renderers.BatchRenderer",
+      "kb_type": "class"
     },
     {
       "api_id": "genesis.options.renderers.BatchRenderer.copy_attributes_from",
@@ -2276,33 +2256,12 @@
   ],
   "orphan_key_apis": [],
   "sample_covered_files": {
-    "genesis.Scene": [
-      "ddp_multi_gpu.py",
-      "differentiable_push.py",
-      "elastic_dragon.py",
-      "fem_hard_and_soft_constraint.py",
-      "keyboard_teleop.py"
-    ],
-    "genesis.options.ViewerOptions": [
-      "ddp_multi_gpu.py",
-      "differentiable_push.py",
-      "elastic_dragon.py",
-      "keyboard_teleop.py",
-      "pbd_liquid.py"
-    ],
     "genesis.options.morphs.Plane": [
       "ddp_multi_gpu.py",
       "fem_hard_and_soft_constraint.py",
       "keyboard_teleop.py",
       "render_async.py",
       "contype.py"
-    ],
-    "genesis.options.SimOptions": [
-      "differentiable_push.py",
-      "elastic_dragon.py",
-      "fem_hard_and_soft_constraint.py",
-      "keyboard_teleop.py",
-      "pbd_liquid.py"
     ],
     "genesis.options.morphs.MJCF": [
       "ddp_multi_gpu.py",
@@ -2311,20 +2270,6 @@
       "fem_cube_linked_with_arm.py",
       "grasp_soft_cube.py"
     ],
-    "genesis.options.RigidOptions": [
-      "keyboard_teleop.py",
-      "render_async.py",
-      "tower.py",
-      "hover_env.py",
-      "ipc_arm_cloth.py"
-    ],
-    "genesis.options.morphs.Box": [
-      "differentiable_push.py",
-      "fem_hard_and_soft_constraint.py",
-      "keyboard_teleop.py",
-      "pbd_liquid.py",
-      "contype.py"
-    ],
     "genesis.options.morphs.Mesh": [
       "differentiable_push.py",
       "elastic_dragon.py",
@@ -2332,12 +2277,12 @@
       "contype.py",
       "tower.py"
     ],
-    "genesis.options.VisOptions": [
-      "cloth_attached_to_rigid.py",
-      "cloth_on_rigid.py",
-      "cut_dragon.py",
-      "flush_cubes.py",
-      "grasp_soft_cube.py"
+    "genesis.options.morphs.Box": [
+      "differentiable_push.py",
+      "fem_hard_and_soft_constraint.py",
+      "keyboard_teleop.py",
+      "pbd_liquid.py",
+      "contype.py"
     ],
     "genesis.options.surfaces.Default": [
       "differentiable_push.py",
@@ -2360,12 +2305,12 @@
       "flush_cubes.py",
       "genesis_ipc_motion_test.py"
     ],
-    "genesis.options.MPMOptions": [
-      "differentiable_push.py",
-      "cut_dragon.py",
-      "flush_cubes.py",
-      "grasp_soft_cube.py",
-      "sand_wheel.py"
+    "genesis.options.ProfilingOptions": [
+      "fem_hard_and_soft_constraint.py",
+      "fem_cube_linked_with_arm.py",
+      "grasp_env.py",
+      "follow_entity.py",
+      "contact_force_go2.py"
     ],
     "genesis.options.surfaces.Rough": [
       "cut_dragon.py",
@@ -2374,12 +2319,12 @@
       "hover_env.py",
       "grasp_env.py"
     ],
-    "genesis.options.ProfilingOptions": [
-      "fem_hard_and_soft_constraint.py",
-      "fem_cube_linked_with_arm.py",
-      "grasp_env.py",
-      "follow_entity.py",
-      "contact_force_go2.py"
+    "genesis.Scene.reset": [
+      "differentiable_push.py",
+      "demo.py",
+      "ik_custom_chain.py",
+      "ik_shadow_hand.py",
+      "advanced_hybrid_robot.py"
     ],
     "genesis.options.surfaces.Plastic": [
       "genesis_ipc_motion_test.py",
@@ -2388,32 +2333,55 @@
       "ipc_grasp.py",
       "ipc_twist_cloth_band.py"
     ],
-    "genesis.options.FEMOptions": [
+    "genesis.Scene.draw_debug_spheres": [
       "fem_hard_and_soft_constraint.py",
       "fem_cube_linked_with_arm.py",
-      "fem_fixed_constraint.py",
-      "fem_sphere_and_cube.py",
-      "franka_grasp_fem_sphere.py"
-    ],
-    "genesis.constraint_solver": [
-      "hover_env.py",
-      "grasp_env.py",
-      "domain_randomization.py",
       "terrain_height_field.py",
-      "terrain_subterrain.py"
-    ],
-    "genesis.options.IPCCouplerOptions": [
-      "genesis_ipc_motion_test.py",
-      "ipc_arm_cloth.py",
-      "ipc_cloth.py",
-      "ipc_grasp.py",
-      "ipc_twist_cloth_band.py"
+      "terrain_subterrain.py",
+      "draw_debug.py"
     ],
     "genesis.options.morphs.Drone": [
       "fly.py",
       "fly_route.py",
       "hover_env.py",
       "interactive_drone.py"
+    ],
+    "genesis.Scene.add_sensor": [
+      "camera_as_sensor.py",
+      "contact_force_go2.py",
+      "imu_franka.py",
+      "lidar_teleop.py"
+    ],
+    "genesis.options.textures.ColorTexture": [
+      "hover_env.py",
+      "grasp_env.py",
+      "demo.py",
+      "camera_as_sensor.py"
+    ],
+    "genesis.Scene.clear_debug_objects": [
+      "accelerometer_duck.py",
+      "accelerometer_franka.py",
+      "draw_debug.py"
+    ],
+    "genesis.Scene.add_emitter": [
+      "flush_cubes.py",
+      "sand_wheel.py",
+      "water_wheel.py"
+    ],
+    "genesis.Scene.clear_debug_object": [
+      "fem_hard_and_soft_constraint.py",
+      "draw_debug.py",
+      "IK_motion_planning_grasp.py"
+    ],
+    "genesis.options.morphs.Cylinder": [
+      "tower.py",
+      "flush_cubes.py",
+      "lidar_teleop.py"
+    ],
+    "genesis.options.morphs.Terrain": [
+      "terrain_from_mesh.py",
+      "terrain_height_field.py",
+      "terrain_subterrain.py"
     ]
   }
 }

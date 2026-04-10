@@ -15,7 +15,7 @@ _KB_DIR   = os.path.join(_BASE_DIR, "knowledge_base")
 
 EXAMPLES_DIR = os.path.join(_BASE_DIR, "examples")
 OUTPUT_FILE  = os.path.join(_KB_DIR,   "genesis_code_index.json")
-API_KB_FILE  = os.path.join(_KB_DIR,   "genesis_knowledge_base_final.json")
+API_KB_FILE  = os.path.join(_KB_DIR,   "genesis_api_index.json")
 
 # --- 1. 统一标签池 (扁平化) ---
 # 混合了物理类型和任务类型，供 LLM 选择
@@ -41,6 +41,34 @@ Output Requirements:
 
 Response Format: Pure JSON.
 """
+
+# 重跑时若已有 LLM 生成的 title/desc，默认跳过 LLM；强制全部重生成：INDEXER_CODE_FORCE_LLM=1
+_FORCE_LLM = os.environ.get("INDEXER_CODE_FORCE_LLM", "").strip().lower() in ("1", "true", "yes")
+
+
+def _load_existing_code_index(path: str) -> Dict[str, dict]:
+    if not os.path.exists(path):
+        return {}
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        if not isinstance(data, list):
+            return {}
+        return {e["id"]: e for e in data if isinstance(e, dict) and e.get("id")}
+    except Exception:
+        return {}
+
+
+def _has_reusable_llm_metadata(meta: dict) -> bool:
+    """判断 metadata 是否已有可用的 LLM 产物（避免重复调用）。"""
+    if not meta:
+        return False
+    desc = (meta.get("desc") or "").strip()
+    if not desc or desc == "No description.":
+        return False
+    title = (meta.get("title") or "").strip()
+    return bool(title)
+
 
 # ================= AST 分析器 =================
 class GenesisImportVisitor(ast.NodeVisitor):
@@ -161,13 +189,25 @@ class GenesisImportVisitor(ast.NodeVisitor):
 
 # ================= 主程序 =================
 def build_code_index():
-    # 1. 初始化 LLM
-    llm = LLMClient(
-        provider="openai",
-        api_key="sk-061e03c70f63402bb363bcd2960622d2", # 请确保 Key 正确
-        base_url="https://api.deepseek.com",
-        model="deepseek-chat"
-    )
+    # 1. 已有范例库（用于复用 title/desc/tags，跳过 LLM）
+    existing_by_id = _load_existing_code_index(OUTPUT_FILE)
+    if existing_by_id:
+        print(f"📂 已加载既有 code_index：{len(existing_by_id)} 条（将按需跳过 LLM）")
+    if _FORCE_LLM:
+        print("⚡ INDEXER_CODE_FORCE_LLM=1：将对所有文件重新调用 LLM")
+
+    llm = None  # 延迟初始化，若全部跳过则不发请求
+
+    def _get_llm() -> LLMClient:
+        nonlocal llm
+        if llm is None:
+            llm = LLMClient(
+                provider="openai",
+                api_key="sk-061e03c70f63402bb363bcd2960622d2",  # 请确保 Key 正确
+                base_url="https://api.deepseek.com",
+                model="deepseek-chat",
+            )
+        return llm
 
     # 2. 加载知识库白名单 + 可构造类 id（用于 scene.add_entity 等实例方法解析）
     #    以及 core API 集合（用于 all_apis/key_apis 分层）
@@ -210,8 +250,10 @@ def build_code_index():
     process_files = script_files
     
     print(f"🚀 开始构建范例库 (Target: {len(process_files)} files)...")
-    
+
     cookbook = []
+    llm_skipped = 0
+    llm_called = 0
 
     for file_path in tqdm(process_files, desc="Indexing Code"):
         file_name = os.path.basename(file_path)
@@ -241,18 +283,29 @@ def build_code_index():
             all_apis = sorted(list(set(filtered_apis)))
             key_apis = [api for api in all_apis if api not in core_apis]
 
-            # --- B. LLM 语义分析 ---
-            messages = [
-                {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": code_content[:4000]} # 截断
-            ]
-            
-            try:
-                response = llm.chat(messages, temperature=0.1)
-                response = response.replace("```json", "").replace("```", "").strip()
-                meta_data = json.loads(response)
-            except Exception:
-                meta_data = {}
+            # --- B. LLM 语义分析（已有有效 title/desc 则跳过，仅刷新 AST 的 all_apis/key_apis）---
+            prev_entry = existing_by_id.get(file_name)
+            prev_meta = (prev_entry or {}).get("metadata") or {}
+            if not _FORCE_LLM and _has_reusable_llm_metadata(prev_meta):
+                meta_data = {
+                    "title": prev_meta.get("title", file_name),
+                    "description": prev_meta.get("desc", "No description."),
+                    "tags": prev_meta.get("tags") or [],
+                }
+                llm_skipped += 1
+            else:
+                messages = [
+                    {"role": "system", "content": SYSTEM_PROMPT},
+                    {"role": "user", "content": code_content[:4000]},
+                ]
+                try:
+                    response = _get_llm().chat(messages, temperature=0.1)
+                    response = (response or "").replace("```json", "").replace("```", "").strip()
+                    meta_data = json.loads(response)
+                    llm_called += 1
+                except Exception:
+                    meta_data = {}
+                    llm_called += 1
 
             # --- C. 组装 v2.0 Schema ---
             entry = {
@@ -277,6 +330,7 @@ def build_code_index():
         json.dump(cookbook, f, indent=2, ensure_ascii=False)
 
     print(f"\n✅ 构建完成！范例库已保存至: {OUTPUT_FILE}")
+    print(f"   LLM 调用: {llm_called} 次，跳过（复用元数据）: {llm_skipped} 次")
     if cookbook:
         print("🔎 Sample Entry:")
         print(json.dumps(cookbook[0]["metadata"], indent=2))

@@ -1,0 +1,203 @@
+{
+  "generated_at": "2026-04-09T17:35:02",
+  "paths": {
+    "code_index": "D:\\Desktop\\Genesis\\Genesis-main\\rag_demo\\knowledge_base\\genesis_code_index.json",
+    "api_kb": "D:\\Desktop\\Genesis\\Genesis-main\\rag_demo\\knowledge_base\\genesis_api_index.json",
+    "output_txt": "D:\\Desktop\\Genesis\\Genesis-main\\rag_demo\\report\\code_index_metadata_audit_report.txt",
+    "output_json": "D:\\Desktop\\Genesis\\Genesis-main\\rag_demo\\report\\code_index_metadata_audit_report.json"
+  },
+  "counts": {
+    "entries": 101,
+    "distinct_ids": 101,
+    "duplicate_id_count": 0,
+    "duplicate_ids": []
+  },
+  "metadata_quality": {
+    "empty_title": {
+      "count": 0,
+      "rate": 0.0
+    },
+    "empty_or_default_desc": {
+      "count": 0,
+      "rate": 0.0
+    },
+    "empty_tags": {
+      "count": 0,
+      "rate": 0.0
+    },
+    "tag_count_gt_3": {
+      "count": 0,
+      "rate": 0.0
+    },
+    "description_length": {
+      "min": 69,
+      "p50": 114,
+      "mean": 114.09,
+      "p90": 138,
+      "max": 150
+    },
+    "code_length": {
+      "min": 314,
+      "p50": 2514,
+      "mean": 3748.16,
+      "p90": 7382,
+      "max": 20560
+    }
+  },
+  "tag_coverage": {
+    "allowed_tags_total": 14,
+    "covered_allowed_tags": 14,
+    "covered_allowed_rate": 1.0,
+    "covered_allowed_tags_list": [
+      "articulated_robot",
+      "camera_control",
+      "depth_sensing",
+      "fluid_mpm",
+      "fluid_sph",
+      "interaction",
+      "mixed_physics",
+      "motion_planning",
+      "rendering",
+      "rigid_body",
+      "scene_creation",
+      "soft_body",
+      "tactile_sensing",
+      "vis_export"
+    ],
+    "uncovered_allowed_tags_list": [],
+    "unknown_tags": {},
+    "tag_distribution": {
+      "articulated_robot": 61,
+      "scene_creation": 57,
+      "interaction": 53,
+      "rendering": 28,
+      "rigid_body": 24,
+      "motion_planning": 18,
+      "soft_body": 14,
+      "mixed_physics": 10,
+      "fluid_mpm": 7,
+      "camera_control": 7,
+      "fluid_sph": 6,
+      "vis_export": 1,
+      "tactile_sensing": 1,
+      "depth_sensing": 1
+    },
+    "tag_presence_by_entry_top20": {
+      "articulated_robot": 61,
+      "scene_creation": 57,
+      "interaction": 53,
+      "rendering": 28,
+      "rigid_body": 24,
+      "motion_planning": 18,
+      "soft_body": 14,
+      "mixed_physics": 10,
+      "fluid_mpm": 7,
+      "camera_control": 7,
+      "fluid_sph": 6,
+      "vis_export": 1,
+      "tactile_sensing": 1,
+      "depth_sensing": 1
+    }
+  },
+  "api_field_quality": {
+    "empty_all_apis": {
+      "count": 9,
+      "rate": 0.089109
+    },
+    "empty_key_apis": {
+      "count": 9,
+      "rate": 0.089109
+    },
+    "key_not_subset_of_all": {
+      "count": 0,
+      "rate": 0.0
+    },
+    "all_apis_per_entry": {
+      "min": 0,
+      "p50": 9,
+      "mean": 9.05,
+      "p90": 13,
+      "max": 20
+    },
+    "key_apis_per_entry": {
+      "min": 0,
+      "p50": 2,
+      "mean": 3.17,
+      "p90": 6,
+      "max": 13
+    },
+    "distinct_all_apis": 67,
+    "distinct_key_apis": 50,
+    "top_all_apis": {
+      "genesis.Scene": 92,
+      "genesis.Scene.build": 89,
+      "genesis.Scene.add_entity": 88,
+      "genesis.Scene.step": 79,
+      "genesis.options.ViewerOptions": 72,
+      "genesis.options.morphs.Plane": 66,
+      "genesis.options.SimOptions": 53,
+      "genesis.options.morphs.MJCF": 40,
+      "genesis.options.RigidOptions": 38,
+      "genesis.options.morphs.Box": 29,
+      "genesis.options.morphs.Mesh": 29,
+      "genesis.options.VisOptions": 28,
+      "genesis.options.surfaces.Default": 22,
+      "genesis.options.morphs.URDF": 17,
+      "genesis.options.morphs.Sphere": 15,
+      "genesis.Scene.add_camera": 13,
+      "genesis.options.MPMOptions": 11,
+      "genesis.Scene.reset": 7,
+      "genesis.options.ProfilingOptions": 7,
+      "genesis.options.surfaces.Rough": 7,
+      "genesis.options.FEMOptions": 6,
+      "genesis.constraint_solver": 6,
+      "genesis.options.surfaces.Plastic": 6,
+      "genesis.Scene.draw_debug_spheres": 5,
+      "genesis.options.IPCCouplerOptions": 5,
+      "genesis.options.PBDOptions": 4,
+      "genesis.options.SPHOptions": 4,
+      "genesis.options.morphs.Drone": 4,
+      "genesis.options.textures.ColorTexture": 4,
+      "genesis.options.SAPCouplerOptions": 4
+    },
+    "top_key_apis": {
+      "genesis.options.morphs.Plane": 66,
+      "genesis.options.morphs.MJCF": 40,
+      "genesis.options.morphs.Box": 29,
+      "genesis.options.morphs.Mesh": 29,
+      "genesis.options.surfaces.Default": 22,
+      "genesis.options.morphs.URDF": 17,
+      "genesis.options.morphs.Sphere": 15,
+      "genesis.Scene.reset": 7,
+      "genesis.options.ProfilingOptions": 7,
+      "genesis.options.surfaces.Rough": 7,
+      "genesis.options.surfaces.Plastic": 6,
+      "genesis.Scene.draw_debug_spheres": 5,
+      "genesis.options.morphs.Drone": 4,
+      "genesis.options.textures.ColorTexture": 4,
+      "genesis.Scene.add_sensor": 4,
+      "genesis.Scene.clear_debug_object": 3,
+      "genesis.options.morphs.Cylinder": 3,
+      "genesis.Scene.add_emitter": 3,
+      "genesis.Scene.clear_debug_objects": 3,
+      "genesis.Scene.draw_debug_arrow": 3,
+      "genesis.options.morphs.Terrain": 3,
+      "genesis.options.surfaces.Iron": 2,
+      "genesis.options.surfaces.Glass": 2,
+      "genesis.options.renderers.RayTracer": 2,
+      "genesis.options.surfaces.Emission": 2,
+      "genesis.options.surfaces.Smooth": 2,
+      "genesis.options.textures.ImageTexture": 2,
+      "genesis.options.surfaces.Reflective": 2,
+      "genesis.options.renderers.Rasterizer": 2,
+      "genesis.Scene.stop_recording": 2
+    }
+  },
+  "kb_alignment": {
+    "api_kb_distinct": 497,
+    "all_apis_not_in_kb_distinct": 0,
+    "key_apis_not_in_kb_distinct": 0,
+    "all_apis_not_in_kb_top50": {},
+    "key_apis_not_in_kb_top50": {}
+  }
+}
