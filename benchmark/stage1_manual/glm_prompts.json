@@ -1,0 +1,218 @@
+[
+  {
+    "task_id": "s1_fem_elastic_simple_001",
+    "complexity": "simple",
+    "domain": "fem_elastic",
+    "query": "A soft elastic ball bounces on the ground."
+  },
+  {
+    "task_id": "s1_fem_elastic_medium_001",
+    "complexity": "medium",
+    "domain": "fem_elastic",
+    "query": "Create a soft elastic cube sitting on a flat surface, then drop a rigid sphere onto it from above. The cube should visibly deform under the impact."
+  },
+  {
+    "task_id": "s1_fem_elastic_complex_001",
+    "complexity": "complex",
+    "domain": "fem_elastic",
+    "query": "Build a scene with a soft elastic beam fixed at one end and free at the other. Release it and let it oscillate under gravity while a second soft elastic sphere bounces off the beam's free end."
+  },
+  {
+    "task_id": "s1_fem_cloth_simple_001",
+    "complexity": "simple",
+    "domain": "fem_cloth",
+    "query": "A piece of cloth falls and drapes over a box."
+  },
+  {
+    "task_id": "s1_fem_cloth_medium_001",
+    "complexity": "medium",
+    "domain": "fem_cloth",
+    "query": "Create a rectangular piece of cloth pinned at its four corners. Let it sag under gravity, then release two corners and watch it swing down."
+  },
+  {
+    "task_id": "s1_fem_cloth_complex_001",
+    "complexity": "complex",
+    "domain": "fem_cloth",
+    "query": "Simulate a cloth curtain hanging from a horizontal rod. A rigid sphere is thrown horizontally into the curtain, pushing it aside and passing through."
+  },
+  {
+    "task_id": "s1_sph_fluid_simple_001",
+    "complexity": "simple",
+    "domain": "sph_fluid",
+    "query": "A blob of water falls into a shallow basin."
+  },
+  {
+    "task_id": "s1_sph_fluid_medium_001",
+    "complexity": "medium",
+    "domain": "sph_fluid",
+    "query": "Simulate a stream of water pouring from above onto a slanted surface, letting it flow down and pool at the bottom."
+  },
+  {
+    "task_id": "s1_sph_fluid_complex_001",
+    "complexity": "complex",
+    "domain": "sph_fluid",
+    "query": "Create a scene with a rigid sphere dropped from height into a container filled with water. The sphere should splash into the water and sink to the bottom while water splashes outward."
+  },
+  {
+    "task_id": "s1_mpm_sand_simple_001",
+    "complexity": "simple",
+    "domain": "mpm_sand",
+    "query": "A pile of sand collapses and spreads on the ground."
+  },
+  {
+    "task_id": "s1_mpm_sand_medium_001",
+    "complexity": "medium",
+    "domain": "mpm_sand",
+    "query": "Simulate sand particles being released from a container that tips over, causing the sand to pour out and form a pile on the ground."
+  },
+  {
+    "task_id": "s1_mpm_sand_complex_001",
+    "complexity": "complex",
+    "domain": "mpm_sand",
+    "query": "Build an hourglass scene: sand fills the upper half and flows through a narrow opening into the lower half. Include glass walls so the sand stays contained."
+  },
+  {
+    "task_id": "s1_surface_simple_001",
+    "complexity": "simple",
+    "domain": "surface",
+    "query": "Create a blue sphere on the ground."
+  },
+  {
+    "task_id": "s1_surface_medium_001",
+    "complexity": "medium",
+    "domain": "surface",
+    "query": "Place a red metallic sphere and a yellow matte box next to each other on a gray ground plane. Both should have smooth, realistic-looking surfaces."
+  },
+  {
+    "task_id": "s1_surface_complex_001",
+    "complexity": "complex",
+    "domain": "surface",
+    "query": "Load a robot arm from an MJCF file and give it a polished metallic appearance. Place a translucent red box on the ground in front of it with a slightly rough surface texture."
+  },
+  {
+    "task_id": "s1_camera_simple_001",
+    "complexity": "simple",
+    "domain": "camera",
+    "query": "Set up a scene with a falling sphere and render it from a top-down view."
+  },
+  {
+    "task_id": "s1_camera_medium_001",
+    "complexity": "medium",
+    "domain": "camera",
+    "query": "Create a scene with a red sphere falling onto a plane. Add a camera looking at the sphere from a 45-degree angle and record the simulation as a video."
+  },
+  {
+    "task_id": "s1_camera_complex_001",
+    "complexity": "complex",
+    "domain": "camera",
+    "query": "Simulate a rigid box tumbling down a slope. Set up two cameras: one tracking the box from the side, and one from above. Record both views simultaneously as separate video files."
+  },
+  {
+    "task_id": "s1_force_field_simple_001",
+    "complexity": "simple",
+    "domain": "force_field",
+    "query": "A rigid sphere is pushed sideways by a constant wind force while falling."
+  },
+  {
+    "task_id": "s1_force_field_medium_001",
+    "complexity": "medium",
+    "domain": "force_field",
+    "query": "Create a scene where three rigid spheres are dropped from different heights. A strong upward force is applied only to the middle sphere, causing it to float while the others fall."
+  },
+  {
+    "task_id": "s1_force_field_complex_001",
+    "complexity": "complex",
+    "domain": "force_field",
+    "query": "Simulate a rigid ball inside a box. Apply a rotating force field around the vertical axis so the ball rolls in a circular path along the bottom of the box."
+  },
+  {
+    "task_id": "s1_terrain_simple_001",
+    "complexity": "simple",
+    "domain": "terrain",
+    "query": "Generate a hilly terrain and place a rigid sphere at the top of a hill to roll down."
+  },
+  {
+    "task_id": "s1_terrain_medium_001",
+    "complexity": "medium",
+    "domain": "terrain",
+    "query": "Create a bumpy terrain with multiple peaks and valleys. Drop three rigid spheres at different locations and watch them roll into the valleys."
+  },
+  {
+    "task_id": "s1_terrain_complex_001",
+    "complexity": "complex",
+    "domain": "terrain",
+    "query": "Generate a terrain with a steep cliff on one side and a gentle slope on the other. Simulate a rigid box sliding down the cliff and a sphere rolling down the slope simultaneously."
+  },
+  {
+    "task_id": "s1_drone_simple_001",
+    "complexity": "simple",
+    "domain": "drone",
+    "query": "Spawn a drone hovering in place above the ground."
+  },
+  {
+    "task_id": "s1_drone_medium_001",
+    "complexity": "medium",
+    "domain": "drone",
+    "query": "Create a drone that takes off from the ground, hovers at a height of 2 meters for a few seconds, then lands back down."
+  },
+  {
+    "task_id": "s1_drone_complex_001",
+    "complexity": "complex",
+    "domain": "drone",
+    "query": "Simulate a drone flying a square path at constant altitude: move forward 3 meters, turn right, repeat four times to complete the loop, then land."
+  },
+  {
+    "task_id": "s1_sensor_simple_001",
+    "complexity": "simple",
+    "domain": "sensor",
+    "query": "Attach a depth camera to a static sphere and render the depth map of the scene."
+  },
+  {
+    "task_id": "s1_sensor_medium_001",
+    "complexity": "medium",
+    "domain": "sensor",
+    "query": "Place a robot arm on the ground and attach an IMU sensor to its end-effector. Move the arm and record the IMU readings during the motion."
+  },
+  {
+    "task_id": "s1_sensor_complex_001",
+    "complexity": "complex",
+    "domain": "sensor",
+    "query": "Build a scene with a rotating rigid box on the ground. Mount a Lidar sensor on a fixed pole pointing at the box. Run the simulation and capture the point cloud data as the box rotates."
+  },
+  {
+    "task_id": "s1_robot_simple_001",
+    "complexity": "simple",
+    "domain": "robot",
+    "query": "Load a robot arm and move its first joint to a 45-degree angle."
+  },
+  {
+    "task_id": "s1_robot_medium_001",
+    "complexity": "medium",
+    "domain": "robot",
+    "query": "Load a Franka robot arm and command it to reach a target position in front of it. The end-effector should move smoothly from the home position to the target."
+  },
+  {
+    "task_id": "s1_robot_complex_001",
+    "complexity": "complex",
+    "domain": "robot",
+    "query": "Load a robot arm with a gripper. Place a small rigid box on a table in front of it. Command the robot to pick up the box, lift it, and place it at a new location on the table."
+  },
+  {
+    "task_id": "s1_cross_domain_medium_001",
+    "complexity": "medium",
+    "domain": "cross_domain",
+    "query": "A rigid sphere falls onto a soft elastic sheet stretched horizontally, causing the sheet to deform."
+  },
+  {
+    "task_id": "s1_cross_domain_complex_001",
+    "complexity": "complex",
+    "domain": "cross_domain",
+    "query": "Simulate a robot arm pushing a rigid box off a table into a pool of water below. The box should splash into the water and sink."
+  },
+  {
+    "task_id": "s1_cross_domain_complex_002",
+    "complexity": "complex",
+    "domain": "cross_domain",
+    "query": "Create a scene where sand pours from above onto a cloth sheet. The cloth sags under the weight of the accumulating sand."
+  }
+]

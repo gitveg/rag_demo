@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<robot name="table">
+  <link name="base_link">
+    <inertial>
+      <mass value="100.0"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+    <collision>
+      <geometry>
+        <box size="0.8 0.8 0.5"/>
+      </geometry>
+    </collision>
+    <visual>
+      <geometry>
+        <box size="0.8 0.8 0.5"/>
+      </geometry>
+    </visual>
+  </link>
+</robot>

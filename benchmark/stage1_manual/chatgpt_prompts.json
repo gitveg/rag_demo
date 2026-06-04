@@ -1,0 +1,219 @@
+[
+    {
+    "task_id": "s1_fem_elastic_simple_001",
+    "complexity": "simple",
+    "domain": "fem_elastic",
+    "query": "A soft elastic ball drops onto the ground and bounces several times while visibly deforming."
+    },
+    {
+    "task_id": "s1_fem_elastic_medium_002",
+    "complexity": "medium",
+    "domain": "fem_elastic",
+    "query": "Place two soft elastic cubes with different stiffness values above the floor and let them fall at the same time to compare how much they deform after impact."
+    },
+    {
+    "task_id": "s1_fem_elastic_complex_003",
+    "complexity": "complex",
+    "domain": "fem_elastic",
+    "query": "Create a scene with a large soft rubber bunny model resting on a platform. Drop several rigid metal spheres onto it from different heights and show the bunny compressing, wobbling, and recovering its original shape after the collisions."
+    },
+    {
+    "task_id": "s1_fem_cloth_simple_001",
+    "complexity": "simple",
+    "domain": "fem_cloth",
+    "query": "A square piece of cloth falls onto a rigid box and drapes naturally over it."
+    },
+    {
+    "task_id": "s1_fem_cloth_medium_002",
+    "complexity": "medium",
+    "domain": "fem_cloth",
+    "query": "Hang a rectangular cloth by its two top corners above the ground and apply a gentle sideways wind so the fabric swings back and forth."
+    },
+    {
+    "task_id": "s1_fem_cloth_complex_003",
+    "complexity": "complex",
+    "domain": "fem_cloth",
+    "query": "Create a dining table scene with a detailed tablecloth model covering the table. Drop several rigid objects such as cups and plates onto the cloth and simulate realistic folds, sliding, and cloth deformation."
+    },
+    {
+    "task_id": "s1_sph_fluid_simple_001",
+    "complexity": "simple",
+    "domain": "sph_fluid",
+    "query": "Pour water from a small height into an empty container and simulate realistic splashing."
+    },
+    {
+    "task_id": "s1_sph_fluid_medium_002",
+    "complexity": "medium",
+    "domain": "sph_fluid",
+    "query": "Create two streams of colored liquid flowing from opposite sides into a bowl and show the liquids mixing together."
+    },
+    {
+    "task_id": "s1_sph_fluid_complex_003",
+    "complexity": "complex",
+    "domain": "sph_fluid",
+    "query": "Build a kitchen sink scene where water continuously flows from a faucet into a transparent glass container, eventually overflowing onto the floor with visible splashes and fluid interaction."
+    },
+    {
+    "task_id": "s1_mpm_sand_simple_001",
+    "complexity": "simple",
+    "domain": "mpm_sand",
+    "query": "Release a pile of dry sand above the ground and let it form a natural cone-shaped heap."
+    },
+    {
+    "task_id": "s1_mpm_sand_medium_002",
+    "complexity": "medium",
+    "domain": "mpm_sand",
+    "query": "Drop a rigid sphere onto a flat layer of sand and simulate the sand scattering and forming a crater."
+    },
+    {
+    "task_id": "s1_mpm_sand_complex_003",
+    "complexity": "complex",
+    "domain": "mpm_sand",
+    "query": "Create a sandcastle on uneven terrain and simulate part of the structure collapsing when a heavy rigid block rolls into it from a slope."
+    },
+    {
+    "task_id": "s1_surface_simple_001",
+    "complexity": "simple",
+    "domain": "surface",
+    "query": "Place a shiny metallic sphere on the ground with a reflective silver appearance."
+    },
+    {
+    "task_id": "s1_surface_medium_002",
+    "complexity": "medium",
+    "domain": "surface",
+    "query": "Create three cubes side by side with different surface appearances: matte red plastic, rough concrete, and polished gold metal."
+    },
+    {
+    "task_id": "s1_surface_complex_003",
+    "complexity": "complex",
+    "domain": "surface",
+    "query": "Build a showroom scene containing a sports car model with glossy paint, reflective windows, metallic wheels, and a polished floor that reflects the environment lighting."
+    },
+    {
+    "task_id": "s1_camera_simple_001",
+    "complexity": "simple",
+    "domain": "camera",
+    "query": "Record a video of a rigid ball falling onto the ground from a fixed side view camera."
+    },
+    {
+    "task_id": "s1_camera_medium_002",
+    "complexity": "medium",
+    "domain": "camera",
+    "query": "Create a scene with two moving rigid cubes and place one camera above the scene and another at ground level to record the motion from different perspectives."
+    },
+    {
+    "task_id": "s1_camera_complex_003",
+    "complexity": "complex",
+    "domain": "camera",
+    "query": "Load a humanoid robot walking across a room and create a cinematic recording with a moving camera that follows the robot while also capturing a wide-angle overview of the environment."
+    },
+    {
+    "task_id": "s1_force_field_simple_001",
+    "complexity": "simple",
+    "domain": "force_field",
+    "query": "Apply a constant sideways wind force to a lightweight sphere suspended in the air."
+    },
+    {
+    "task_id": "s1_force_field_medium_002",
+    "complexity": "medium",
+    "domain": "force_field",
+    "query": "Place several boxes on the ground and apply a pulsing upward force field that periodically lifts the lighter boxes into the air."
+    },
+    {
+    "task_id": "s1_force_field_complex_003",
+    "complexity": "complex",
+    "domain": "force_field",
+    "query": "Create a storm scene with strong turbulent wind affecting hanging cloth, rolling rigid barrels, and falling debris at the same time."
+    },
+    {
+    "task_id": "s1_terrain_simple_001",
+    "complexity": "simple",
+    "domain": "terrain",
+    "query": "Place a rigid sphere on a gently sloped terrain and let it roll downhill."
+    },
+    {
+    "task_id": "s1_terrain_medium_002",
+    "complexity": "medium",
+    "domain": "terrain",
+    "query": "Generate uneven rocky terrain with hills and valleys, then drop several rigid cubes onto different locations to observe how they settle."
+    },
+    {
+    "task_id": "s1_terrain_complex_003",
+    "complexity": "complex",
+    "domain": "terrain",
+    "query": "Create a large outdoor environment with mountainous terrain, scattered rocks, and rough paths. Simulate an off-road vehicle driving across the terrain while reacting realistically to bumps and slopes."
+    },
+    {
+    "task_id": "s1_drone_simple_001",
+    "complexity": "simple",
+    "domain": "drone",
+    "query": "Simulate a quadcopter hovering steadily at a fixed height above the ground."
+    },
+    {
+    "task_id": "s1_drone_medium_002",
+    "complexity": "medium",
+    "domain": "drone",
+    "query": "Create a drone that takes off, flies through several floating checkpoints, and lands at a target position."
+    },
+    {
+    "task_id": "s1_drone_complex_003",
+    "complexity": "complex",
+    "domain": "drone",
+    "query": "Build an urban obstacle course with buildings and moving barriers. Simulate a drone autonomously navigating through the environment while avoiding collisions and maintaining stable flight."
+    },
+    {
+    "task_id": "s1_sensor_simple_001",
+    "complexity": "simple",
+    "domain": "sensor",
+    "query": "Attach a depth sensor to a moving cube and visualize the measured distance to the ground."
+    },
+    {
+    "task_id": "s1_sensor_medium_002",
+    "complexity": "medium",
+    "domain": "sensor",
+    "query": "Place a mobile robot in a room with obstacles and simulate a lidar sensor scanning the environment while the robot moves forward."
+    },
+    {
+    "task_id": "s1_sensor_complex_003",
+    "complexity": "complex",
+    "domain": "sensor",
+    "query": "Load an autonomous vehicle model equipped with lidar, an IMU, and a forward-facing camera. Drive the vehicle through a cluttered environment and record synchronized sensor data during the motion."
+    },
+    {
+    "task_id": "s1_robot_simple_001",
+    "complexity": "simple",
+    "domain": "robot",
+    "query": "Load a robotic arm and move its end effector to a target position above a table."
+    },
+    {
+    "task_id": "s1_robot_medium_002",
+    "complexity": "medium",
+    "domain": "robot",
+    "query": "Create a robotic arm that picks up a small cube from one location and places it onto a nearby platform."
+    },
+    {
+    "task_id": "s1_robot_complex_003",
+    "complexity": "complex",
+    "domain": "robot",
+    "query": "Load a humanoid robot in a warehouse environment and make it walk toward a shelf, grasp a box with both hands, and carry it to another location without dropping it."
+    },
+    {
+    "task_id": "s1_cross_domain_simple_001",
+    "complexity": "simple",
+    "domain": "cross_domain",
+    "query": "Drop a rigid sphere into a container filled with water and simulate the splash."
+    },
+    {
+    "task_id": "s1_cross_domain_medium_002",
+    "complexity": "medium",
+    "domain": "cross_domain",
+    "query": "Create a robotic arm that lifts a piece of cloth and drapes it over a rigid sphere resting on a table."
+    },
+    {
+    "task_id": "s1_cross_domain_complex_003",
+    "complexity": "complex",
+    "domain": "cross_domain",
+    "query": "Build a disaster response scene where a drone scans uneven terrain while a humanoid robot walks through shallow water and pushes soft debris out of the way to reach a target object."
+    }
+    ]
+    

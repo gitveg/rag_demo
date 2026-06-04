@@ -7,6 +7,13 @@ from typing import Dict, FrozenSet, List, Optional
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from llm_utils import LLMClient
 from api_id_normalize import resolve_api_to_known, normalize_api_id_for_kb
+
+try:
+    import dotenv
+    dotenv.load_dotenv(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".env"))
+except ImportError:
+    pass
+
 from tqdm import tqdm
 
 # ================= 配置区域 =================
@@ -203,7 +210,7 @@ def build_code_index():
         if llm is None:
             llm = LLMClient(
                 provider="openai",
-                api_key="sk-061e03c70f63402bb363bcd2960622d2",  # 请确保 Key 正确
+                api_key=os.getenv("DEEPSEEK_API_KEY"),
                 base_url="https://api.deepseek.com",
                 model="deepseek-chat",
             )

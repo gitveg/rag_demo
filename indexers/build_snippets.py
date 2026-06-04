@@ -1,4 +1,5 @@
 import os
+import sys
 import ast
 import json
 import hashlib
@@ -7,8 +8,9 @@ import dotenv
 from tqdm import tqdm
 
 # 加载环境变量 (如果需要最后一步AI标注)
-from utils.llm_client import LLMClient 
-dotenv.load_dotenv()
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from llm_utils import LLMClient
+dotenv.load_dotenv(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".env"))
 
 # ================= 配置 =================
 _BASE_DIR  = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -159,11 +161,14 @@ def build_snippets_db():
     
     all_raw_snippets = []
     
-    file_list = [f for f in os.listdir(SOURCE_DIR) if f.endswith('.py')]
-    
-    for fname in tqdm(file_list, desc="Parsing Files"):
-        path = os.path.join(SOURCE_DIR, fname)
-        with open(path, 'r', encoding='utf-8') as f:
+    file_list = []
+    for root, dirs, files in os.walk(SOURCE_DIR):
+        for f in files:
+            if f.endswith('.py'):
+                file_list.append(os.path.join(root, f))
+
+    for fpath in tqdm(file_list, desc="Parsing Files"):
+        with open(fpath, 'r', encoding='utf-8') as f:
             source = f.read()
         
         try:
@@ -243,11 +248,33 @@ def build_snippets_db():
 
 # ================= 3. AI 标注 (逻辑复用) =================
 def enrich_with_llm(snippets):
-    """(保持原样)"""
+    """用 LLM 为每个 snippet 生成一句话 task 描述。"""
     if not snippets: return []
-    print("🧠 Enriching snippets with LLM...")
-    # ... 这里复用之前的 LLM 代码 ...
-    # 为了演示简洁，此处省略具体 LLM 调用代码，直接返回
+    api_key = os.getenv("DEEPSEEK_API_KEY")
+    if not api_key:
+        print("⚠️ DEEPSEEK_API_KEY 未设置，跳过 LLM 标注。")
+        return snippets
+    llm = LLMClient(
+        provider="openai",
+        api_key=api_key,
+        base_url="https://api.deepseek.com",
+        model="deepseek-chat",
+    )
+    print(f"🧠 Enriching {len(snippets)} snippets with LLM...")
+    for s in tqdm(snippets, desc="LLM Enrich"):
+        code_text = s.get("code", "")[:800]
+        prompt = (
+            "You are a code analysis assistant. Given a code snippet, "
+            "generate a ONE-SENTENCE task description (in English) "
+            "describing what this code does. Output ONLY the sentence, no extra text.\n\n"
+            f"Code:\n{code_text}"
+        )
+        try:
+            resp = llm.chat([{"role": "user", "content": prompt}], temperature=0.1)
+            if resp and resp.strip():
+                s["task"] = resp.strip()
+        except Exception:
+            pass
     return snippets
 
 if __name__ == "__main__":
@@ -262,8 +289,7 @@ if __name__ == "__main__":
     if MANUAL_SNIPPETS:
         print(f"   📌 已合并 {len(MANUAL_SNIPPETS)} 个人工添加片段 (MANUAL_SNIPPETS)")
 
-    # 记得把这行取消注释，真正跑的时候需要 LLM 润色 Task 描述
-    # snippets = enrich_with_llm(snippets)
+    snippets = enrich_with_llm(snippets)
 
     with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
         json.dump(snippets, f, indent=2, ensure_ascii=False)

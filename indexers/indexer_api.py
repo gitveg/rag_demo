@@ -428,10 +428,16 @@ def enrich_knowledge_base() -> bool:
 
     print(f"🚀 开始精准增强 {len(kb_data)} 个 API...")
     enriched_data = []
+    skipped_no_summary = 0
 
     for entry in tqdm(kb_data, desc="Enriching", unit="api"):
         api_id = entry["api_id"]
-        needs_summary = entry.get("summary", "No summary available.") == "No summary available."
+        current_summary = entry.get("summary", "No summary available.")
+        if current_summary == "No summary available.":
+            # 仅 enrich 已有 summary 的 API；无 summary 的条目直接跳过
+            skipped_no_summary += 1
+            enriched_data.append(entry)
+            continue
 
         obj = get_object_by_path(api_id)
         raw_doc = inspect.getdoc(obj) if obj is not None else None
@@ -446,7 +452,7 @@ def enrich_knowledge_base() -> bool:
                 "raw_docstring": raw_doc,
                 "parameter_list": [p["name"] for p in entry["parameters"]],
                 "tasks": {
-                    "generate_summary": needs_summary,
+                    "generate_summary": False,
                     "extract_parameter_descs": True,
                     "extract_constraints": True,
                 },
@@ -463,9 +469,6 @@ def enrich_knowledge_base() -> bool:
             if response is None:
                 raise ValueError("LLM 返回空")
             ai_result = _parse_llm_json_response(response)
-
-            if needs_summary and ai_result.get("summary"):
-                entry["summary"] = ai_result["summary"]
 
             ai_param_descs = ai_result.get("parameter_descs", {})
             for param in entry["parameters"]:
@@ -486,6 +489,7 @@ def enrich_knowledge_base() -> bool:
         json.dump(enriched_data, f, indent=2, ensure_ascii=False)
 
     print(f"\n✅ 增强完成！结果已写回: {GENESIS_API_INDEX_FILE}")
+    print(f"   跳过（summary=No summary available.）: {skipped_no_summary}")
     return True
 
 

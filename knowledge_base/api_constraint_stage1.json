@@ -1,0 +1,1616 @@
+{
+  "generated_at": "2026-05-21T17:00:58",
+  "summary": {
+    "api_count": 18,
+    "mapped_event_count": 56
+  },
+  "apis": [
+    {
+      "api_id": "genesis.Scene",
+      "constraints": [
+        "Ensure LuisaRenderer is installed (e.g., pip install luisarender) before creating any Genesis Scene; failure to import LuisaRenderer prevents Scene initialization."
+      ],
+      "error_examples": [
+        "Failed to import LuisaRenderer."
+      ],
+      "event_count": 2,
+      "sources": [
+        "s1_surface_complex_002",
+        "s1_surface_complex_003"
+      ]
+    },
+    {
+      "api_id": "genesis.Scene.add_camera",
+      "constraints": [
+        "add_camera must be called before scene.build(); calling it after scene.build() triggers 'Scene is already built' error."
+      ],
+      "error_examples": [
+        "Scene is already built."
+      ],
+      "event_count": 1,
+      "sources": [
+        "s1_camera_medium_003"
+      ]
+    },
+    {
+      "api_id": "genesis.Scene.add_entity",
+      "constraints": [
+        "Scene.add_entity() does not accept a 'fixed_particles' parameter; use the correct surface or material arguments for fixing particles.",
+        "When adding entities to an MPM solver, ensure the entity's entire particle extent fits within the solver's effective boundary (which is slightly tighter than the specified domain).",
+        "When using cloth material with add_entity, the morph must be a Mesh, not Box or other primitive shapes."
+      ],
+      "error_examples": [
+        "Scene.add_entity() got an unexpected keyword argument 'fixed_particles'",
+        "Entity has particles outside solver boundary. Note that for MPMSolver, boundary is slightly tighter than the specified domain due to safety padding.",
+        "Cloth material only supports Mesh morph. Got: <gs.morphs.Box>."
+      ],
+      "event_count": 7,
+      "sources": [
+        "s1_cross_domain_complex_001",
+        "s1_cross_domain_medium_001",
+        "s1_fem_cloth_complex_001",
+        "s1_mpm_sand_complex_002",
+        "s1_mpm_sand_medium_002",
+        "s1_mpm_sand_medium_003",
+        "s1_mpm_sand_simple_001"
+      ]
+    },
+    {
+      "api_id": "genesis.Scene.add_force_field",
+      "constraints": [
+        "Must add force fields before calling scene.build(); adding after the scene is built causes GenesisException."
+      ],
+      "error_examples": [
+        "Scene is already built."
+      ],
+      "event_count": 1,
+      "sources": [
+        "s1_force_field_simple_003"
+      ]
+    },
+    {
+      "api_id": "genesis.Scene.build",
+      "constraints": [
+        "Before calling scene.build(), ensure the raycaster/lidar sensor has at least one offset configured (e.g., by attaching it to an entity link or setting scan rays); empty offsets tensor causes IndexError when accessed at offsets_pos[0, -1, :]."
+      ],
+      "error_examples": [
+        "index 0 is out of bounds for dimension 0 with size 0"
+      ],
+      "event_count": 1,
+      "sources": [
+        "s1_sensor_medium_002"
+      ]
+    },
+    {
+      "api_id": "genesis.Scene.render_all_cameras",
+      "constraints": [
+        "render_all_cameras() is exclusive to BatchRenderer; for default rasterizer, use scene.render(camera=cam) to render individual camera outputs.",
+        "To call render_all_cameras(), initialize Scene with renderer='batch' (e.g., genesis.Scene(renderer='batch'))."
+      ],
+      "error_examples": [
+        "Method only supported by 'BatchRenderer'"
+      ],
+      "event_count": 1,
+      "sources": [
+        "s1_sensor_simple_001"
+      ]
+    },
+    {
+      "api_id": "genesis.Scene.start_recording",
+      "constraints": [
+        "Call scene.start_recording() before scene.build() – calling it after build raises GenesisException(\"Scene is already built.\")."
+      ],
+      "error_examples": [
+        "Scene is already built."
+      ],
+      "event_count": 2,
+      "sources": [
+        "s1_camera_medium_001",
+        "s1_camera_simple_002"
+      ]
+    },
+    {
+      "api_id": "genesis.Scene.step",
+      "constraints": [
+        "Soft elastic bodies must use a Mesh morph (e.g., tetrahedral mesh), not primitive Box/Sphere morphs, to avoid CUDA illegal memory access during simulation.",
+        "When creating elastic objects, ensure the mesh has tetrahedral elements suitable for FEM; using a non-mesh morph causes memory corruption in the rigid solver.",
+        "Material stiffness parameters for soft bodies must be positive and within physically reasonable bounds; extreme values can destabilize the solver and trigger CUDA errors.",
+        "All entities must be added and configured before calling scene.build(); calling step() on an improperly built scene can lead to illegal memory access."
+      ],
+      "error_examples": [
+        "CUDA error: an illegal memory access was encountered"
+      ],
+      "event_count": 1,
+      "sources": [
+        "s1_fem_elastic_medium_002"
+      ]
+    },
+    {
+      "api_id": "genesis.materials.MPM.Liquid",
+      "constraints": [
+        "Before adding an MPM Liquid entity, ensure that the morph's world-space bounding box lies entirely within the MPM solver's effective boundary, which is tighter than the specified domain due to safety padding (approx. one cell); verify using the boundary's lower/upper limits.",
+        "If the liquid source must be placed outside the current solver domain (e.g., pouring from above), enlarge the MPM simulation domain via scene configuration prior to adding the entity so that the padded boundary contains the intended particle volume.",
+        "Do not place MPM Liquid morphs with any dimension below the solver's minimum boundary or far beyond the solver's maximum boundary; check the entity's min/max against the solver's boundary (as printed in errors) and adjust the morph position or domain size accordingly."
+      ],
+      "error_examples": [
+        "Entity has particles outside solver boundary. Note that for MPMSolver, boundary is slightly tighter than the specified domain due to safety padding."
+      ],
+      "event_count": 1,
+      "sources": [
+        "s1_sph_fluid_medium_001"
+      ]
+    },
+    {
+      "api_id": "genesis.options.morphs.Box",
+      "constraints": [
+        "The `gs.morphs.Box` morph does not accept a `vel` argument; set initial velocity via `entity.set_velocity()` or `scene.add_entity(...)` arguments instead of on the morph."
+      ],
+      "error_examples": [
+        "Unrecognized attribute: vel"
+      ],
+      "event_count": 1,
+      "sources": [
+        "s1_camera_medium_002"
+      ]
+    },
+    {
+      "api_id": "genesis.options.morphs.Drone",
+      "constraints": [
+        "Always pass a `file` argument to gs.morphs.Drone() that is a valid path to an existing .urdf file, not a directory. The default file is not a URDF file."
+      ],
+      "error_examples": [
+        "Drone only supports `.urdf` extension: D:\\Desktop\\Genesis\\Genesis-main\\rag_demo\\workspace\\constraint_build"
+      ],
+      "event_count": 10,
+      "sources": [
+        "s1_cross_domain_complex_003",
+        "s1_cross_domain_complex_006",
+        "s1_drone_complex_001",
+        "s1_drone_complex_002",
+        "s1_drone_complex_003",
+        "s1_drone_medium_001",
+        "s1_drone_medium_002",
+        "s1_drone_medium_003",
+        "s1_drone_simple_001",
+        "s1_drone_simple_002"
+      ]
+    },
+    {
+      "api_id": "genesis.options.morphs.MJCF",
+      "constraints": [
+        "MJCF file path must be an existing relative or absolute .xml file; Genesis looks in the current directory and assets directory, so verify the file is present at the given path.",
+        "MJCF morphs only work with RigidEntity; do not apply them to deformable entities like cloth or soft bodies."
+      ],
+      "error_examples": [
+        "File not found in either current directory or assets directory: 'xml/humanoid/humanoid.xml'.",
+        "File not found in either current directory or assets directory: 'franka_lab/franka_alt_obj.xml'."
+      ],
+      "event_count": 2,
+      "sources": [
+        "s1_cross_domain_medium_002",
+        "s1_robot_complex_002"
+      ]
+    },
+    {
+      "api_id": "genesis.options.morphs.Mesh",
+      "constraints": [
+        "When using gs.options.morphs.Mesh(file=...), provide a path to an existing mesh file (e.g., .obj) in the current or Genesis assets directory; never use fabricated names like 'cube.obj'.",
+        "gs.options.morphs.Mesh only accepts arguments such as 'file', 'pos', 'euler', 'scale'; do not pass raw geometry data like 'vertices' or 'faces'."
+      ],
+      "error_examples": [
+        "File not found in either current directory or assets directory: 'cube.obj'.",
+        "File not found in either current directory or assets directory: 'duck.obj'.",
+        "Unrecognized attribute: vertices",
+        "File not found in either current directory or assets directory: 'cloth.obj'.",
+        "File not found in either current directory or assets directory: 'cylinder.obj'.",
+        "File not found in either current directory or assets directory: 'cloth_rectangle.obj'."
+      ],
+      "event_count": 12,
+      "sources": [
+        "s1_cross_domain_complex_002",
+        "s1_fem_cloth_complex_003",
+        "s1_fem_cloth_medium_001",
+        "s1_fem_cloth_medium_002",
+        "s1_fem_cloth_medium_003",
+        "s1_fem_cloth_simple_001",
+        "s1_fem_elastic_complex_003",
+        "s1_fem_elastic_medium_001",
+        "s1_force_field_complex_002",
+        "s1_mpm_sand_complex_001",
+        "s1_mpm_sand_medium_001",
+        "s1_surface_medium_001"
+      ]
+    },
+    {
+      "api_id": "genesis.options.morphs.Sphere",
+      "constraints": [
+        "When creating a Sphere morph, use the `radius` attribute; `size` is not recognized and will cause a GenesisException."
+      ],
+      "error_examples": [
+        "Unrecognized attribute: size"
+      ],
+      "event_count": 1,
+      "sources": [
+        "s1_camera_complex_003"
+      ]
+    },
+    {
+      "api_id": "genesis.options.morphs.Terrain",
+      "constraints": [
+        "If providing `subterrain_types` to Terrain morph, it must be a string or a 2D list of strings with shape exactly matching `n_subterrains`; shape mismatch causes runtime error.",
+        "Do not pass `terrain_config` to Terrain morph; it is not a valid attribute.",
+        "Do not pass `mesh` to Terrain morph; use procedural generation parameters like `n_subterrains` instead.",
+        "Do not pass `subterrains` to Terrain morph; use `n_subterrains` to specify grid dimensions.",
+        "Do not pass `heightfield` to Terrain morph; the morph generates terrain procedurally without an explicit heightfield attribute."
+      ],
+      "error_examples": [
+        "`subterrain_types` should be either a string or a 2D list of strings with the same shape as `n_subterrains`.",
+        "Unrecognized attribute: terrain_config",
+        "Unrecognized attribute: mesh",
+        "Unrecognized attribute: subterrains",
+        "Unrecognized attribute: heightfield"
+      ],
+      "event_count": 5,
+      "sources": [
+        "s1_cross_domain_complex_005",
+        "s1_terrain_complex_001",
+        "s1_terrain_complex_002",
+        "s1_terrain_medium_001",
+        "s1_terrain_medium_003"
+      ]
+    },
+    {
+      "api_id": "genesis.options.morphs.URDF",
+      "constraints": [
+        "When using `gs.morphs.URDF`, provide a valid absolute or relative path to an existing .urdf file; do not fabricate or assume filenames like 'humanoid.urdf', 'robot.urdf', or placeholder paths (e.g., 'path/to/robot.urdf')."
+      ],
+      "error_examples": [
+        "File not found in either current directory or assets directory: 'humanoid.urdf'.",
+        "File not found in either current directory or assets directory: 'franka_emika_panda/panda.urdf'.",
+        "File not found in either current directory or assets directory: 'vehicle.urdf'.",
+        "File not found in either current directory or assets directory: 'path/to/robot.urdf'.",
+        "File not found in either current directory or assets directory: 'robot.urdf'."
+      ],
+      "event_count": 5,
+      "sources": [
+        "s1_camera_complex_002",
+        "s1_robot_simple_001",
+        "s1_robot_simple_003",
+        "s1_sensor_complex_002",
+        "s1_sensor_medium_001"
+      ]
+    },
+    {
+      "api_id": "genesis.options.sensors.IMU",
+      "constraints": [
+        "Do not pass `attach_to` to `gs.options.sensors.IMU(...)`; the IMU options object does not accept that attribute.",
+        "Attach the IMU sensor to a rigid entity link using `entity.add_sensor(imu_sensor_opts)` or `gs.add_sensor(sensor_options, entity=entity, link=link)`, not by specifying `attach_to` in the options constructor."
+      ],
+      "error_examples": [
+        "Unrecognized attribute: attach_to"
+      ],
+      "event_count": 1,
+      "sources": [
+        "s1_sensor_medium_003"
+      ]
+    },
+    {
+      "api_id": "genesis.options.sensors.Lidar",
+      "constraints": [
+        "When constructing a Lidar sensor via `gs.options.sensors.Lidar()`, do not provide arguments `pose` or `entity`; use `scene.add_sensor()` with sensor configuration to set its position and attach to an entity."
+      ],
+      "error_examples": [
+        "Unrecognized attribute: pose",
+        "Unrecognized attribute: entity"
+      ],
+      "event_count": 2,
+      "sources": [
+        "s1_sensor_complex_001",
+        "s1_sensor_complex_003"
+      ]
+    }
+  ],
+  "run_meta": [
+    {
+      "task_id": "s1_fem_elastic_simple_001",
+      "return_code": 0,
+      "code_length": 1163,
+      "key_apis": [
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Sphere"
+      ],
+      "event_count": 0,
+      "mapped_count": 0,
+      "elapsed_s": 81.3
+    },
+    {
+      "task_id": "s1_fem_elastic_simple_002",
+      "return_code": 0,
+      "code_length": 1257,
+      "key_apis": [
+        "genesis.options.morphs.Box",
+        "genesis.options.morphs.Plane"
+      ],
+      "event_count": 0,
+      "mapped_count": 0,
+      "elapsed_s": 49.6
+    },
+    {
+      "task_id": "s1_fem_elastic_medium_001",
+      "return_code": 1,
+      "code_length": 1371,
+      "key_apis": [
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Sphere"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 43.0
+    },
+    {
+      "task_id": "s1_fem_elastic_medium_002",
+      "return_code": 3221226505,
+      "code_length": 1868,
+      "key_apis": [
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Sphere"
+      ],
+      "event_count": 2,
+      "mapped_count": 1,
+      "elapsed_s": 73.6
+    },
+    {
+      "task_id": "s1_fem_elastic_medium_003",
+      "return_code": 0,
+      "code_length": 1275,
+      "key_apis": [
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Sphere"
+      ],
+      "event_count": 0,
+      "mapped_count": 0,
+      "elapsed_s": 83.6
+    },
+    {
+      "task_id": "s1_fem_elastic_complex_001",
+      "return_code": 1,
+      "code_length": 1894,
+      "key_apis": [
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Sphere"
+      ],
+      "event_count": 1,
+      "mapped_count": 0,
+      "elapsed_s": 75.5
+    },
+    {
+      "task_id": "s1_fem_elastic_complex_002",
+      "return_code": 0,
+      "code_length": 1892,
+      "key_apis": [
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Sphere"
+      ],
+      "event_count": 0,
+      "mapped_count": 0,
+      "elapsed_s": 145.6
+    },
+    {
+      "task_id": "s1_fem_elastic_complex_003",
+      "return_code": 1,
+      "code_length": 2143,
+      "key_apis": [
+        "genesis.Scene.clear_debug_objects",
+        "genesis.Scene.draw_debug_arrow",
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Plane"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 58.3
+    },
+    {
+      "task_id": "s1_fem_cloth_simple_001",
+      "return_code": 1,
+      "code_length": 2332,
+      "key_apis": [
+        "genesis.options.morphs.Box",
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Plane",
+        "genesis.options.surfaces.Default"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 52.5
+    },
+    {
+      "task_id": "s1_fem_cloth_simple_002",
+      "return_code": 0,
+      "code_length": 1482,
+      "key_apis": [
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Plane",
+        "genesis.options.surfaces.Default"
+      ],
+      "event_count": 0,
+      "mapped_count": 0,
+      "elapsed_s": 183.9
+    },
+    {
+      "task_id": "s1_fem_cloth_medium_001",
+      "return_code": 1,
+      "code_length": 1418,
+      "key_apis": [
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Plane",
+        "genesis.options.surfaces.Default"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 49.7
+    },
+    {
+      "task_id": "s1_fem_cloth_medium_002",
+      "return_code": 1,
+      "code_length": 756,
+      "key_apis": [
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Plane",
+        "genesis.options.surfaces.Default"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 113.7
+    },
+    {
+      "task_id": "s1_fem_cloth_medium_003",
+      "return_code": 1,
+      "code_length": 1292,
+      "key_apis": [
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Plane",
+        "genesis.options.surfaces.Default"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 62.1
+    },
+    {
+      "task_id": "s1_fem_cloth_complex_001",
+      "return_code": 1,
+      "code_length": 1338,
+      "key_apis": [
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Plane",
+        "genesis.options.surfaces.Default"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 66.3
+    },
+    {
+      "task_id": "s1_fem_cloth_complex_002",
+      "return_code": 0,
+      "code_length": 4701,
+      "key_apis": [
+        "genesis.options.morphs.Box",
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Plane",
+        "genesis.options.surfaces.Default"
+      ],
+      "event_count": 0,
+      "mapped_count": 0,
+      "elapsed_s": 150.3
+    },
+    {
+      "task_id": "s1_fem_cloth_complex_003",
+      "return_code": 1,
+      "code_length": 1736,
+      "key_apis": [
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Plane",
+        "genesis.options.surfaces.Default"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 96.8
+    },
+    {
+      "task_id": "s1_sph_fluid_simple_001",
+      "return_code": 0,
+      "code_length": 759,
+      "key_apis": [
+        "genesis.options.morphs.Box",
+        "genesis.options.morphs.Plane",
+        "genesis.options.surfaces.Default"
+      ],
+      "event_count": 0,
+      "mapped_count": 0,
+      "elapsed_s": 98.9
+    },
+    {
+      "task_id": "s1_sph_fluid_simple_002",
+      "return_code": 0,
+      "code_length": 789,
+      "key_apis": [
+        "genesis.options.morphs.Box",
+        "genesis.options.morphs.Plane",
+        "genesis.options.surfaces.Default"
+      ],
+      "event_count": 0,
+      "mapped_count": 0,
+      "elapsed_s": 119.0
+    },
+    {
+      "task_id": "s1_sph_fluid_simple_003",
+      "return_code": 0,
+      "code_length": 850,
+      "key_apis": [
+        "genesis.options.morphs.Box",
+        "genesis.options.morphs.Plane",
+        "genesis.options.surfaces.Default"
+      ],
+      "event_count": 0,
+      "mapped_count": 0,
+      "elapsed_s": 84.3
+    },
+    {
+      "task_id": "s1_sph_fluid_medium_001",
+      "return_code": 1,
+      "code_length": 1381,
+      "key_apis": [
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Sphere"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 52.6
+    },
+    {
+      "task_id": "s1_sph_fluid_medium_002",
+      "return_code": 0,
+      "code_length": 1241,
+      "key_apis": [
+        "genesis.options.morphs.Box",
+        "genesis.options.morphs.Plane",
+        "genesis.options.surfaces.Default"
+      ],
+      "event_count": 0,
+      "mapped_count": 0,
+      "elapsed_s": 110.4
+    },
+    {
+      "task_id": "s1_sph_fluid_medium_003",
+      "return_code": -999,
+      "code_length": 626,
+      "key_apis": [
+        "genesis.options.morphs.Box",
+        "genesis.options.morphs.Plane",
+        "genesis.options.surfaces.Default"
+      ],
+      "event_count": 0,
+      "mapped_count": 0,
+      "elapsed_s": 634.8
+    },
+    {
+      "task_id": "s1_sph_fluid_complex_001",
+      "return_code": 0,
+      "code_length": 595,
+      "key_apis": [
+        "genesis.options.morphs.Box",
+        "genesis.options.morphs.Plane",
+        "genesis.options.surfaces.Default"
+      ],
+      "event_count": 0,
+      "mapped_count": 0,
+      "elapsed_s": 121.2
+    },
+    {
+      "task_id": "s1_sph_fluid_complex_002",
+      "return_code": 0,
+      "code_length": 874,
+      "key_apis": [
+        "genesis.options.morphs.Box",
+        "genesis.options.morphs.Plane",
+        "genesis.options.surfaces.Default"
+      ],
+      "event_count": 0,
+      "mapped_count": 0,
+      "elapsed_s": 165.1
+    },
+    {
+      "task_id": "s1_sph_fluid_complex_003",
+      "return_code": 0,
+      "code_length": 1418,
+      "key_apis": [
+        "genesis.options.morphs.Box",
+        "genesis.options.morphs.Plane",
+        "genesis.options.surfaces.Default"
+      ],
+      "event_count": 0,
+      "mapped_count": 0,
+      "elapsed_s": 136.6
+    },
+    {
+      "task_id": "s1_mpm_sand_simple_001",
+      "return_code": 1,
+      "code_length": 1639,
+      "key_apis": [
+        "genesis.Scene.add_emitter",
+        "genesis.options.morphs.URDF",
+        "genesis.options.surfaces.Rough"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 40.5
+    },
+    {
+      "task_id": "s1_mpm_sand_simple_002",
+      "return_code": 0,
+      "code_length": 1327,
+      "key_apis": [
+        "genesis.Scene.add_emitter",
+        "genesis.options.morphs.URDF",
+        "genesis.options.surfaces.Rough"
+      ],
+      "event_count": 0,
+      "mapped_count": 0,
+      "elapsed_s": 106.3
+    },
+    {
+      "task_id": "s1_mpm_sand_medium_001",
+      "return_code": 1,
+      "code_length": 1765,
+      "key_apis": [
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Sphere"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 68.1
+    },
+    {
+      "task_id": "s1_mpm_sand_medium_002",
+      "return_code": 1,
+      "code_length": 1585,
+      "key_apis": [
+        "genesis.Scene.add_emitter",
+        "genesis.options.morphs.URDF",
+        "genesis.options.surfaces.Rough"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 33.5
+    },
+    {
+      "task_id": "s1_mpm_sand_medium_003",
+      "return_code": 1,
+      "code_length": 1264,
+      "key_apis": [
+        "genesis.Scene.add_emitter",
+        "genesis.options.morphs.URDF",
+        "genesis.options.surfaces.Rough"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 43.9
+    },
+    {
+      "task_id": "s1_mpm_sand_complex_001",
+      "return_code": 1,
+      "code_length": 1682,
+      "key_apis": [
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Sphere"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 50.0
+    },
+    {
+      "task_id": "s1_mpm_sand_complex_002",
+      "return_code": 1,
+      "code_length": 1624,
+      "key_apis": [
+        "genesis.options.morphs.Sphere",
+        "genesis.options.morphs.Terrain"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 61.4
+    },
+    {
+      "task_id": "s1_surface_simple_001",
+      "return_code": 0,
+      "code_length": 1333,
+      "key_apis": [
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Sphere"
+      ],
+      "event_count": 0,
+      "mapped_count": 0,
+      "elapsed_s": 160.2
+    },
+    {
+      "task_id": "s1_surface_simple_002",
+      "return_code": 1,
+      "code_length": 513,
+      "key_apis": [
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Sphere"
+      ],
+      "event_count": 1,
+      "mapped_count": 0,
+      "elapsed_s": 78.9
+    },
+    {
+      "task_id": "s1_surface_simple_003",
+      "return_code": 1,
+      "code_length": 1157,
+      "key_apis": [
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Sphere"
+      ],
+      "event_count": 0,
+      "mapped_count": 0,
+      "elapsed_s": 42.9
+    },
+    {
+      "task_id": "s1_surface_medium_001",
+      "return_code": 1,
+      "code_length": 604,
+      "key_apis": [
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Sphere"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 78.3
+    },
+    {
+      "task_id": "s1_surface_medium_002",
+      "return_code": 0,
+      "code_length": 904,
+      "key_apis": [
+        "genesis.Scene.add_camera",
+        "genesis.options.morphs.Box",
+        "genesis.options.morphs.Plane"
+      ],
+      "event_count": 0,
+      "mapped_count": 0,
+      "elapsed_s": 106.4
+    },
+    {
+      "task_id": "s1_surface_medium_003",
+      "return_code": 0,
+      "code_length": 656,
+      "key_apis": [
+        "genesis.options.morphs.Sphere",
+        "genesis.options.morphs.Terrain"
+      ],
+      "event_count": 0,
+      "mapped_count": 0,
+      "elapsed_s": 117.6
+    },
+    {
+      "task_id": "s1_surface_complex_001",
+      "return_code": 1,
+      "code_length": 622,
+      "key_apis": [
+        "genesis.options.morphs.MJCF",
+        "genesis.options.morphs.Plane"
+      ],
+      "event_count": 1,
+      "mapped_count": 0,
+      "elapsed_s": 47.6
+    },
+    {
+      "task_id": "s1_surface_complex_002",
+      "return_code": 1,
+      "code_length": 2582,
+      "key_apis": [
+        "genesis.Scene.add_camera",
+        "genesis.Scene.reset",
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Plane",
+        "genesis.options.renderers.RayTracer",
+        "genesis.options.surfaces.Aluminium",
+        "genesis.options.surfaces.Emission",
+        "genesis.options.surfaces.Glass",
+        "genesis.options.surfaces.Gold",
+        "genesis.options.surfaces.Iron"
+      ],
+      "event_count": 2,
+      "mapped_count": 1,
+      "elapsed_s": 46.4
+    },
+    {
+      "task_id": "s1_surface_complex_003",
+      "return_code": 1,
+      "code_length": 1069,
+      "key_apis": [
+        "genesis.Scene.add_camera",
+        "genesis.Scene.reset",
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Plane",
+        "genesis.options.renderers.RayTracer",
+        "genesis.options.surfaces.Aluminium",
+        "genesis.options.surfaces.Emission",
+        "genesis.options.surfaces.Glass",
+        "genesis.options.surfaces.Gold",
+        "genesis.options.surfaces.Iron"
+      ],
+      "event_count": 2,
+      "mapped_count": 1,
+      "elapsed_s": 44.0
+    },
+    {
+      "task_id": "s1_camera_simple_001",
+      "return_code": 0,
+      "code_length": 1200,
+      "key_apis": [
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Sphere"
+      ],
+      "event_count": 0,
+      "mapped_count": 0,
+      "elapsed_s": 100.9
+    },
+    {
+      "task_id": "s1_camera_simple_002",
+      "return_code": 1,
+      "code_length": 1390,
+      "key_apis": [
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Sphere"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 176.9
+    },
+    {
+      "task_id": "s1_camera_medium_001",
+      "return_code": 1,
+      "code_length": 1149,
+      "key_apis": [
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Sphere"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 135.7
+    },
+    {
+      "task_id": "s1_camera_medium_002",
+      "return_code": 1,
+      "code_length": 641,
+      "key_apis": [
+        "genesis.Scene.add_camera",
+        "genesis.options.morphs.Box",
+        "genesis.options.morphs.Plane"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 48.7
+    },
+    {
+      "task_id": "s1_camera_medium_003",
+      "return_code": 1,
+      "code_length": 710,
+      "key_apis": [
+        "genesis.Scene.add_camera",
+        "genesis.options.morphs.Box",
+        "genesis.options.morphs.Plane"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 122.9
+    },
+    {
+      "task_id": "s1_camera_complex_001",
+      "return_code": 1,
+      "code_length": 2755,
+      "key_apis": [
+        "genesis.options.morphs.Sphere",
+        "genesis.options.morphs.Terrain"
+      ],
+      "event_count": 1,
+      "mapped_count": 0,
+      "elapsed_s": 119.9
+    },
+    {
+      "task_id": "s1_camera_complex_002",
+      "return_code": 1,
+      "code_length": 2499,
+      "key_apis": [
+        "genesis.Scene.add_camera",
+        "genesis.options.morphs.Box",
+        "genesis.options.morphs.Plane"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 61.7
+    },
+    {
+      "task_id": "s1_camera_complex_003",
+      "return_code": 1,
+      "code_length": 1888,
+      "key_apis": [
+        "genesis.Scene.add_camera",
+        "genesis.options.morphs.Box",
+        "genesis.options.morphs.Plane"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 54.3
+    },
+    {
+      "task_id": "s1_force_field_simple_001",
+      "return_code": 0,
+      "code_length": 1058,
+      "key_apis": [
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Sphere"
+      ],
+      "event_count": 0,
+      "mapped_count": 0,
+      "elapsed_s": 55.9
+    },
+    {
+      "task_id": "s1_force_field_simple_002",
+      "return_code": 0,
+      "code_length": 1471,
+      "key_apis": [
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Sphere"
+      ],
+      "event_count": 0,
+      "mapped_count": 0,
+      "elapsed_s": 50.1
+    },
+    {
+      "task_id": "s1_force_field_simple_003",
+      "return_code": 1,
+      "code_length": 1471,
+      "key_apis": [
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Sphere"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 46.2
+    },
+    {
+      "task_id": "s1_force_field_medium_001",
+      "return_code": 0,
+      "code_length": 1354,
+      "key_apis": [
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Sphere"
+      ],
+      "event_count": 0,
+      "mapped_count": 0,
+      "elapsed_s": 119.0
+    },
+    {
+      "task_id": "s1_force_field_medium_002",
+      "return_code": 1,
+      "code_length": 1957,
+      "key_apis": [
+        "genesis.options.morphs.Box",
+        "genesis.options.morphs.Plane"
+      ],
+      "event_count": 1,
+      "mapped_count": 0,
+      "elapsed_s": 104.9
+    },
+    {
+      "task_id": "s1_force_field_medium_003",
+      "return_code": 0,
+      "code_length": 1333,
+      "key_apis": [
+        "genesis.options.morphs.Box",
+        "genesis.options.morphs.Plane"
+      ],
+      "event_count": 0,
+      "mapped_count": 0,
+      "elapsed_s": 107.4
+    },
+    {
+      "task_id": "s1_force_field_complex_001",
+      "return_code": 1,
+      "code_length": 1930,
+      "key_apis": [
+        "genesis.options.morphs.Box",
+        "genesis.options.morphs.Plane"
+      ],
+      "event_count": 1,
+      "mapped_count": 0,
+      "elapsed_s": 163.0
+    },
+    {
+      "task_id": "s1_force_field_complex_002",
+      "return_code": 1,
+      "code_length": 5457,
+      "key_apis": [
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Plane",
+        "genesis.options.surfaces.Default"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 70.6
+    },
+    {
+      "task_id": "s1_force_field_complex_003",
+      "return_code": 0,
+      "code_length": 2021,
+      "key_apis": [
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Sphere"
+      ],
+      "event_count": 0,
+      "mapped_count": 0,
+      "elapsed_s": 153.9
+    },
+    {
+      "task_id": "s1_terrain_simple_001",
+      "return_code": 1,
+      "code_length": 3119,
+      "key_apis": [
+        "genesis.options.morphs.Sphere",
+        "genesis.options.morphs.Terrain"
+      ],
+      "event_count": 1,
+      "mapped_count": 0,
+      "elapsed_s": 56.5
+    },
+    {
+      "task_id": "s1_terrain_simple_002",
+      "return_code": 0,
+      "code_length": 1048,
+      "key_apis": [
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Sphere"
+      ],
+      "event_count": 0,
+      "mapped_count": 0,
+      "elapsed_s": 209.9
+    },
+    {
+      "task_id": "s1_terrain_medium_001",
+      "return_code": 1,
+      "code_length": 1996,
+      "key_apis": [
+        "genesis.options.morphs.Sphere",
+        "genesis.options.morphs.Terrain"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 56.4
+    },
+    {
+      "task_id": "s1_terrain_medium_002",
+      "return_code": 1,
+      "code_length": 3202,
+      "key_apis": [
+        "genesis.options.morphs.Sphere",
+        "genesis.options.morphs.Terrain"
+      ],
+      "event_count": 1,
+      "mapped_count": 0,
+      "elapsed_s": 56.5
+    },
+    {
+      "task_id": "s1_terrain_medium_003",
+      "return_code": 1,
+      "code_length": 1739,
+      "key_apis": [
+        "genesis.options.morphs.Sphere",
+        "genesis.options.morphs.Terrain"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 53.6
+    },
+    {
+      "task_id": "s1_terrain_complex_001",
+      "return_code": 1,
+      "code_length": 3418,
+      "key_apis": [
+        "genesis.options.morphs.Sphere",
+        "genesis.options.morphs.Terrain"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 50.7
+    },
+    {
+      "task_id": "s1_terrain_complex_002",
+      "return_code": 1,
+      "code_length": 2714,
+      "key_apis": [
+        "genesis.options.morphs.Sphere",
+        "genesis.options.morphs.Terrain"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 58.5
+    },
+    {
+      "task_id": "s1_terrain_complex_003",
+      "return_code": 1,
+      "code_length": 2829,
+      "key_apis": [
+        "genesis.options.morphs.Sphere",
+        "genesis.options.morphs.Terrain"
+      ],
+      "event_count": 1,
+      "mapped_count": 0,
+      "elapsed_s": 38.9
+    },
+    {
+      "task_id": "s1_drone_simple_001",
+      "return_code": 1,
+      "code_length": 1736,
+      "key_apis": [
+        "genesis.options.morphs.Drone",
+        "genesis.options.morphs.Plane"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 49.8
+    },
+    {
+      "task_id": "s1_drone_simple_002",
+      "return_code": 1,
+      "code_length": 1984,
+      "key_apis": [
+        "genesis.options.morphs.Drone",
+        "genesis.options.morphs.Plane"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 40.1
+    },
+    {
+      "task_id": "s1_drone_medium_001",
+      "return_code": 1,
+      "code_length": 2130,
+      "key_apis": [
+        "genesis.options.morphs.Drone",
+        "genesis.options.morphs.Plane"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 48.6
+    },
+    {
+      "task_id": "s1_drone_medium_002",
+      "return_code": 1,
+      "code_length": 4624,
+      "key_apis": [
+        "genesis.options.morphs.Drone",
+        "genesis.options.morphs.Plane"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 65.2
+    },
+    {
+      "task_id": "s1_drone_medium_003",
+      "return_code": 1,
+      "code_length": 1781,
+      "key_apis": [
+        "genesis.options.morphs.Drone",
+        "genesis.options.morphs.Plane"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 98.8
+    },
+    {
+      "task_id": "s1_drone_complex_001",
+      "return_code": 1,
+      "code_length": 3163,
+      "key_apis": [
+        "genesis.options.morphs.Drone",
+        "genesis.options.morphs.Plane"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 48.2
+    },
+    {
+      "task_id": "s1_drone_complex_002",
+      "return_code": 1,
+      "code_length": 2315,
+      "key_apis": [
+        "genesis.options.morphs.Drone",
+        "genesis.options.morphs.Plane"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 59.2
+    },
+    {
+      "task_id": "s1_drone_complex_003",
+      "return_code": 1,
+      "code_length": 3932,
+      "key_apis": [
+        "genesis.options.morphs.Drone",
+        "genesis.options.morphs.Plane"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 53.9
+    },
+    {
+      "task_id": "s1_sensor_simple_001",
+      "return_code": 1,
+      "code_length": 1108,
+      "key_apis": [
+        "genesis.Scene.add_camera",
+        "genesis.options.morphs.Box",
+        "genesis.options.morphs.Plane"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 71.9
+    },
+    {
+      "task_id": "s1_sensor_simple_002",
+      "return_code": 1,
+      "code_length": 1776,
+      "key_apis": [
+        "genesis.Scene.add_camera",
+        "genesis.options.morphs.Box",
+        "genesis.options.morphs.Plane"
+      ],
+      "event_count": 1,
+      "mapped_count": 0,
+      "elapsed_s": 140.5
+    },
+    {
+      "task_id": "s1_sensor_medium_001",
+      "return_code": 1,
+      "code_length": 1992,
+      "key_apis": [
+        "genesis.Scene.add_sensor",
+        "genesis.Scene.draw_debug_sphere",
+        "genesis.Scene.start_recording",
+        "genesis.Scene.stop_recording",
+        "genesis.options.morphs.MJCF",
+        "genesis.options.morphs.Plane",
+        "genesis.options.sensors.IMU"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 46.1
+    },
+    {
+      "task_id": "s1_sensor_medium_002",
+      "return_code": 1,
+      "code_length": 2605,
+      "key_apis": [
+        "genesis.Scene.add_sensor",
+        "genesis.Scene.start_recording",
+        "genesis.options.morphs.Box",
+        "genesis.options.morphs.Cylinder",
+        "genesis.options.morphs.Plane",
+        "genesis.options.morphs.URDF",
+        "genesis.options.sensors.DepthCamera",
+        "genesis.options.sensors.DepthCameraPattern",
+        "genesis.options.sensors.GridPattern",
+        "genesis.options.sensors.Lidar"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 51.9
+    },
+    {
+      "task_id": "s1_sensor_medium_003",
+      "return_code": 1,
+      "code_length": 1327,
+      "key_apis": [
+        "genesis.Scene.add_sensor",
+        "genesis.Scene.draw_debug_sphere",
+        "genesis.Scene.start_recording",
+        "genesis.Scene.stop_recording",
+        "genesis.options.morphs.MJCF",
+        "genesis.options.morphs.Plane",
+        "genesis.options.sensors.IMU"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 40.0
+    },
+    {
+      "task_id": "s1_sensor_complex_001",
+      "return_code": 1,
+      "code_length": 1119,
+      "key_apis": [
+        "genesis.Scene.add_sensor",
+        "genesis.Scene.start_recording",
+        "genesis.options.morphs.Box",
+        "genesis.options.morphs.Cylinder",
+        "genesis.options.morphs.Plane",
+        "genesis.options.morphs.URDF",
+        "genesis.options.sensors.DepthCamera",
+        "genesis.options.sensors.DepthCameraPattern",
+        "genesis.options.sensors.GridPattern",
+        "genesis.options.sensors.Lidar"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 87.1
+    },
+    {
+      "task_id": "s1_sensor_complex_002",
+      "return_code": 1,
+      "code_length": 4417,
+      "key_apis": [
+        "genesis.Scene.add_sensor",
+        "genesis.Scene.start_recording",
+        "genesis.options.morphs.Box",
+        "genesis.options.morphs.Cylinder",
+        "genesis.options.morphs.Plane",
+        "genesis.options.morphs.URDF",
+        "genesis.options.sensors.DepthCamera",
+        "genesis.options.sensors.DepthCameraPattern",
+        "genesis.options.sensors.GridPattern",
+        "genesis.options.sensors.Lidar"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 64.1
+    },
+    {
+      "task_id": "s1_sensor_complex_003",
+      "return_code": 1,
+      "code_length": 5217,
+      "key_apis": [
+        "genesis.Scene.add_sensor",
+        "genesis.Scene.start_recording",
+        "genesis.options.morphs.Box",
+        "genesis.options.morphs.Cylinder",
+        "genesis.options.morphs.Plane",
+        "genesis.options.morphs.URDF",
+        "genesis.options.sensors.DepthCamera",
+        "genesis.options.sensors.DepthCameraPattern",
+        "genesis.options.sensors.GridPattern",
+        "genesis.options.sensors.Lidar"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 48.9
+    },
+    {
+      "task_id": "s1_robot_simple_001",
+      "return_code": 1,
+      "code_length": 1579,
+      "key_apis": [
+        "genesis.options.morphs.Plane",
+        "genesis.options.morphs.URDF"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 55.7
+    },
+    {
+      "task_id": "s1_robot_simple_002",
+      "return_code": 0,
+      "code_length": 261,
+      "key_apis": [
+        "genesis.options.morphs.MJCF",
+        "genesis.options.morphs.Plane"
+      ],
+      "event_count": 0,
+      "mapped_count": 0,
+      "elapsed_s": 142.7
+    },
+    {
+      "task_id": "s1_robot_simple_003",
+      "return_code": 1,
+      "code_length": 1398,
+      "key_apis": [
+        "genesis.options.morphs.Plane",
+        "genesis.options.morphs.URDF"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 23.9
+    },
+    {
+      "task_id": "s1_robot_medium_001",
+      "return_code": 0,
+      "code_length": 261,
+      "key_apis": [
+        "genesis.options.morphs.MJCF",
+        "genesis.options.morphs.Plane"
+      ],
+      "event_count": 0,
+      "mapped_count": 0,
+      "elapsed_s": 113.9
+    },
+    {
+      "task_id": "s1_robot_medium_002",
+      "return_code": 0,
+      "code_length": 261,
+      "key_apis": [
+        "genesis.options.morphs.MJCF",
+        "genesis.options.morphs.Plane"
+      ],
+      "event_count": 0,
+      "mapped_count": 0,
+      "elapsed_s": 123.2
+    },
+    {
+      "task_id": "s1_robot_medium_003",
+      "return_code": 1,
+      "code_length": 820,
+      "key_apis": [
+        "genesis.options.morphs.MJCF",
+        "genesis.options.morphs.Plane"
+      ],
+      "event_count": 1,
+      "mapped_count": 0,
+      "elapsed_s": 126.0
+    },
+    {
+      "task_id": "s1_robot_complex_001",
+      "return_code": 0,
+      "code_length": 261,
+      "key_apis": [
+        "genesis.options.morphs.MJCF",
+        "genesis.options.morphs.Plane"
+      ],
+      "event_count": 0,
+      "mapped_count": 0,
+      "elapsed_s": 128.9
+    },
+    {
+      "task_id": "s1_robot_complex_002",
+      "return_code": 1,
+      "code_length": 256,
+      "key_apis": [
+        "genesis.options.morphs.MJCF",
+        "genesis.options.morphs.Plane"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 42.8
+    },
+    {
+      "task_id": "s1_robot_complex_003",
+      "return_code": 1,
+      "code_length": 3229,
+      "key_apis": [
+        "genesis.options.morphs.Plane",
+        "genesis.options.morphs.URDF"
+      ],
+      "event_count": 1,
+      "mapped_count": 0,
+      "elapsed_s": 113.1
+    },
+    {
+      "task_id": "s1_cross_domain_simple_001",
+      "return_code": 0,
+      "code_length": 726,
+      "key_apis": [
+        "genesis.options.morphs.Box",
+        "genesis.options.morphs.Plane",
+        "genesis.options.surfaces.Default"
+      ],
+      "event_count": 0,
+      "mapped_count": 0,
+      "elapsed_s": 100.9
+    },
+    {
+      "task_id": "s1_cross_domain_medium_001",
+      "return_code": 1,
+      "code_length": 1412,
+      "key_apis": [
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Sphere"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 45.4
+    },
+    {
+      "task_id": "s1_cross_domain_medium_002",
+      "return_code": 1,
+      "code_length": 3824,
+      "key_apis": [
+        "genesis.options.morphs.MJCF",
+        "genesis.options.morphs.Sphere"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 57.2
+    },
+    {
+      "task_id": "s1_cross_domain_complex_001",
+      "return_code": 1,
+      "code_length": 1513,
+      "key_apis": [
+        "genesis.options.morphs.MJCF",
+        "genesis.options.morphs.Mesh"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 75.6
+    },
+    {
+      "task_id": "s1_cross_domain_complex_002",
+      "return_code": 1,
+      "code_length": 1081,
+      "key_apis": [
+        "genesis.options.morphs.Mesh",
+        "genesis.options.morphs.Plane",
+        "genesis.options.surfaces.Default"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 83.3
+    },
+    {
+      "task_id": "s1_cross_domain_complex_003",
+      "return_code": 1,
+      "code_length": 2753,
+      "key_apis": [
+        "genesis.options.morphs.Drone",
+        "genesis.options.morphs.Plane"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 80.5
+    },
+    {
+      "task_id": "s1_cross_domain_complex_004",
+      "return_code": 0,
+      "code_length": 1976,
+      "key_apis": [
+        "genesis.options.morphs.Box",
+        "genesis.options.morphs.Plane",
+        "genesis.options.surfaces.Default"
+      ],
+      "event_count": 0,
+      "mapped_count": 0,
+      "elapsed_s": 319.9
+    },
+    {
+      "task_id": "s1_cross_domain_complex_005",
+      "return_code": 1,
+      "code_length": 2726,
+      "key_apis": [
+        "genesis.options.morphs.Sphere",
+        "genesis.options.morphs.Terrain"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 73.7
+    },
+    {
+      "task_id": "s1_cross_domain_complex_006",
+      "return_code": 1,
+      "code_length": 2417,
+      "key_apis": [
+        "genesis.options.morphs.Drone",
+        "genesis.options.morphs.Plane"
+      ],
+      "event_count": 1,
+      "mapped_count": 1,
+      "elapsed_s": 42.0
+    }
+  ],
+  "config": {
+    "prompts_file": "benchmark/stage1_manual/stage1_prompts.json",
+    "api_index_file": "D:\\Desktop\\Genesis\\Genesis-main\\rag_demo\\knowledge_base\\genesis_api_index.json",
+    "judge_provider": "openai",
+    "judge_model": "deepseek-v4-pro",
+    "run_agent": true,
+    "rewrite_mode": "hyde"
+  }
+}

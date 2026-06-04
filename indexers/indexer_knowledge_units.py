@@ -49,7 +49,7 @@ OUTPUT_FILE       = os.path.join(RAG_DIR, "genesis_knowledge_units.json")
 LOCAL_OUTPUT_FILE = os.path.join(_KB_DIR,  "genesis_knowledge_units.json")
 
 # embedding_text 中代码预览的最大字符数（保持代码风格，但控制长度）
-CODE_PREVIEW_CHARS = 800
+CODE_PREVIEW_CHARS = 1200
 # metadata 中 api_summaries 的最大字符数（Chroma metadata 值有大小限制）
 API_SUMMARIES_MAX_CHARS = 2000
 # metadata 中 code_preview 的最大字符数
@@ -59,6 +59,25 @@ CODE_META_PREVIEW_CHARS = 600
 def build_api_lookup(api_kb: list) -> dict:
     """把 API 知识库列表转换为 {api_id: entry} 字典，方便 O(1) 查询。"""
     return {entry["api_id"]: entry for entry in api_kb if entry.get("api_id")}
+
+
+def _strip_import_lines(code: str) -> str:
+    """跳过开头的 import / from ... import ... 空行，返回剩余代码体。"""
+    lines = code.splitlines(keepends=True)
+    i = 0
+    while i < len(lines):
+        stripped = lines[i].strip()
+        if stripped.startswith("import ") or stripped.startswith("from "):
+            i += 1
+            continue
+        if stripped == "":
+            if i + 1 < len(lines):
+                nxt = lines[i + 1].strip()
+                if nxt.startswith("import ") or nxt.startswith("from "):
+                    i += 1
+                    continue
+        break
+    return "".join(lines[i:])
 
 
 def build_unit(code_entry: dict, api_lookup: dict) -> dict:
@@ -84,7 +103,7 @@ def build_unit(code_entry: dict, api_lookup: dict) -> dict:
 
     # --- 关联 API 文档（精简摘要） ---
     api_docs = []
-    for api_id in key_apis:
+    for api_id in all_apis:
         entry = api_lookup.get(api_id)
         if not entry:
             continue
@@ -108,7 +127,8 @@ def build_unit(code_entry: dict, api_lookup: dict) -> dict:
     # 格式：注释式 header（自然语言信息）+ 真实代码预览（embedding 向量对齐核心）
     api_names_str = ", ".join(key_apis) if key_apis else "none"
     tags_str = ", ".join(tags) if tags else "general"
-    code_preview = code[:CODE_PREVIEW_CHARS]
+    code_body = _strip_import_lines(code)
+    code_preview = code_body[:CODE_PREVIEW_CHARS]
 
     embedding_text = (
         f"# Task: {title}\n"
@@ -117,6 +137,12 @@ def build_unit(code_entry: dict, api_lookup: dict) -> dict:
         f"# Genesis APIs used: {api_names_str}\n\n"
         f"{code_preview}"
     )
+
+    # --- 构建 rerank_text（精简版，供 cross-encoder reranking）---
+    rerank_text = f"{title} | Domain: {tags_str} | {desc}"
+    key_apis_str_r = ", ".join(key_apis[:5]) if key_apis else ""
+    if key_apis_str_r:
+        rerank_text += f" | Key APIs: {key_apis_str_r}"
 
     return {
         "unit_id":       unit_id,
@@ -128,6 +154,7 @@ def build_unit(code_entry: dict, api_lookup: dict) -> dict:
         "api_docs":      api_docs,
         "code":          code,
         "embedding_text": embedding_text,
+        "rerank_text":   rerank_text,
     }
 
 

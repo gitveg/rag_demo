@@ -8,73 +8,73 @@
       {
         "name": "sim_options",
         "type": "gs.options.solvers.SimOptions | None",
-        "desc": "",
+        "desc": "The options configuring the overarching simulator, which in turn manages all the solvers.",
         "required": false
       },
       {
         "name": "coupler_options",
         "type": "gs.options.solvers.BaseCouplerOptions | None",
-        "desc": "",
+        "desc": "The options configuring the coupler between different solvers.",
         "required": false
       },
       {
         "name": "tool_options",
         "type": "gs.options.solvers.ToolOptions | None",
-        "desc": "",
+        "desc": "The options configuring the tool_solver (scene.sim.ToolSolver).",
         "required": false
       },
       {
         "name": "rigid_options",
         "type": "gs.options.solvers.RigidOptions | None",
-        "desc": "",
+        "desc": "The options configuring the rigid_solver (scene.sim.RigidSolver).",
         "required": false
       },
       {
         "name": "avatar_options",
         "type": "gs.options.solvers.AvatarOptions | None",
-        "desc": "",
+        "desc": "The options configuring the avatar_solver (scene.sim.AvatarSolver).",
         "required": false
       },
       {
         "name": "mpm_options",
         "type": "gs.options.solvers.MPMOptions | None",
-        "desc": "",
+        "desc": "The options configuring the mpm_solver (scene.sim.MPMSolver).",
         "required": false
       },
       {
         "name": "sph_options",
         "type": "gs.options.solvers.SPHOptions | None",
-        "desc": "",
+        "desc": "The options configuring the sph_solver (scene.sim.SPHSolver).",
         "required": false
       },
       {
         "name": "fem_options",
         "type": "gs.options.solvers.FEMOptions | None",
-        "desc": "",
+        "desc": "The options configuring the fem_solver (scene.sim.FEMSolver).",
         "required": false
       },
       {
         "name": "sf_options",
         "type": "gs.options.solvers.SFOptions | None",
-        "desc": "",
+        "desc": "The options configuring the sf_solver (scene.sim.SFSolver).",
         "required": false
       },
       {
         "name": "pbd_options",
         "type": "gs.options.solvers.PBDOptions | None",
-        "desc": "",
+        "desc": "The options configuring the pbd_solver (scene.sim.PBDSolver).",
         "required": false
       },
       {
         "name": "vis_options",
         "type": "gs.options.vis.VisOptions | None",
-        "desc": "",
+        "desc": "The options configuring the visualization system (scene.visualizer). Visualizer controls both the interactive viewer and the cameras.",
         "required": false
       },
       {
         "name": "viewer_options",
         "type": "gs.options.vis.ViewerOptions | None",
-        "desc": "",
+        "desc": "The options configuring the viewer (scene.visualizer.viewer).",
         "required": false
       },
       {
@@ -86,19 +86,19 @@
       {
         "name": "renderer",
         "type": "gs.options.renderers.RendererOptions | None",
-        "desc": "",
+        "desc": "The renderer options used by camera for rendering images. This doesn't affect the behavior of the interactive viewer.",
         "required": false
       },
       {
         "name": "show_viewer",
         "type": "bool | None",
-        "desc": "",
+        "desc": "Whether to show the interactive viewer. Set it to False if you only need headless rendering.",
         "required": false
       },
       {
         "name": "show_FPS",
         "type": "bool | None",
-        "desc": "",
+        "desc": "Whether to show the FPS in the terminal.",
         "required": false
       }
     ],
@@ -117,13 +117,13 @@
       {
         "name": "model",
         "type": "Any",
-        "desc": "",
+        "desc": "Options are 'pinhole' or 'thinlens'.",
         "required": false
       },
       {
         "name": "res",
         "type": "Any",
-        "desc": "",
+        "desc": "The resolution of the camera, specified as a tuple (width, height).",
         "required": false
       },
       {
@@ -147,19 +147,19 @@
       {
         "name": "fov",
         "type": "Any",
-        "desc": "",
+        "desc": "The vertical field of view of the camera in degrees.",
         "required": false
       },
       {
         "name": "aperture",
         "type": "Any",
-        "desc": "",
+        "desc": "The aperture size of the camera, controlling depth of field.",
         "required": false
       },
       {
         "name": "focus_dist",
         "type": "Any",
-        "desc": "",
+        "desc": "If None, it will be auto-computed using `pos` and `lookat`.",
         "required": false
       },
       {
@@ -171,41 +171,47 @@
       {
         "name": "spp",
         "type": "Any",
-        "desc": "",
+        "desc": "Only available when using RayTracer renderer. Defaults to 256.",
         "required": false
       },
       {
         "name": "denoise",
         "type": "Any",
-        "desc": "",
+        "desc": "Only available when using the RayTracer renderer. Defaults to True on Linux, otherwise False.",
         "required": false
       },
       {
         "name": "near",
         "type": "Any",
-        "desc": "",
+        "desc": "Distance from camera center to near plane in meters. Only available when using rasterizer in Rasterizer and BatchRender renderer. Defaults to 0.1.",
         "required": false
       },
       {
         "name": "far",
         "type": "Any",
-        "desc": "",
+        "desc": "Distance from camera center to far plane in meters. Only available when using rasterizer in Rasterizer and BatchRender renderer. Defaults to 20.0.",
         "required": false
       },
       {
         "name": "env_idx",
         "type": "Any",
-        "desc": "",
+        "desc": "This option must be specified if and only if a non-batched renderer is being used. Default to None for batched renderers (ie BatchRender), 'rendered_envs_idx[0]' otherwise (ie Raytracer or Rasterizer).",
         "required": false
       },
       {
         "name": "debug",
         "type": "Any",
-        "desc": "",
+        "desc": "Enables cameras that can be used to monitor/debug the simulation without being part of the \"sensors\". Defaults to False.",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "When 'pinhole' is used, the `aperture` and `focal_len` parameters are ignored.",
+      "spp parameter is only available when using RayTracer renderer.",
+      "denoise parameter is only available when using the RayTracer renderer.",
+      "near and far parameters are only available when using rasterizer in Rasterizer and BatchRender renderer.",
+      "env_idx must be specified if and only if a non-batched renderer is being used."
+    ],
     "domain_tags": [
       "engine"
     ]
@@ -219,19 +225,19 @@
       {
         "name": "material",
         "type": "Material",
-        "desc": "",
+        "desc": "Must be an instance of gs.materials.MPM.Base, gs.materials.SPH.Base, gs.materials.PBD.Particle or gs.materials.PBD.Liquid",
         "required": true
       },
       {
         "name": "max_particles",
         "type": "Any",
-        "desc": "",
+        "desc": "Maximum number of particles that can be emitted; particles will be recycled once this limit is reached",
         "required": false
       },
       {
         "name": "surface",
         "type": "gs.options.surfaces.Surface | None",
-        "desc": "",
+        "desc": "If None, uses gs.surfaces.Default(color=(0.6, 0.8, 1.0, 1.0))",
         "required": false
       }
     ],
@@ -255,29 +261,31 @@
       {
         "name": "material",
         "type": "gs.engine.materials.base.Material | None",
-        "desc": "",
+        "desc": "If None, use gs.materials.Rigid()",
         "required": false
       },
       {
         "name": "surface",
         "type": "gs.options.surfaces.Surface | None",
-        "desc": "",
+        "desc": "If None, use gs.surfaces.Default()",
         "required": false
       },
       {
         "name": "visualize_contact",
         "type": "bool",
-        "desc": "",
+        "desc": "Will not be displayed in images rendered by camera using the RayTracer renderer",
         "required": false
       },
       {
         "name": "vis_mode",
         "type": "str | None",
-        "desc": "",
+        "desc": "Shortcut for setting surface.vis_mode without explicitly creating a surface object",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "visualize_contact will not be displayed in images rendered by camera using the RayTracer renderer"
+    ],
     "domain_tags": [
       "engine",
       "core"
@@ -346,17 +354,19 @@
       {
         "name": "cutoff",
         "type": "float",
-        "desc": "",
+        "desc": "Range: (0.0, 90.0) in degrees",
         "required": false
       },
       {
         "name": "attenuation",
         "type": "float",
-        "desc": "",
+        "desc": "Light intensity attenuates by distance with (1 / (1 + attenuation * distance ^ 2))",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "cutoff must be in range (0.0, 90.0) degrees"
+    ],
     "domain_tags": [
       "engine"
     ]
@@ -370,7 +380,7 @@
       {
         "name": "morph",
         "type": "gs.options.morphs.Morph | None",
-        "desc": "",
+        "desc": "Must be an instance of `gs.morphs.Primitive` or `gs.morphs.Mesh`.",
         "required": false
       },
       {
@@ -388,23 +398,25 @@
       {
         "name": "revert_dir",
         "type": "bool | None",
-        "desc": "",
+        "desc": "If True, the light will be emitted towards the mesh's inside.",
         "required": false
       },
       {
         "name": "double_sided",
         "type": "bool | None",
-        "desc": "",
+        "desc": "Whether to emit light from both sides of surface.",
         "required": false
       },
       {
         "name": "cutoff",
         "type": "float | None",
-        "desc": "",
+        "desc": "The cutoff angle of the light in degrees. Range: [0.0, 180.0].",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Only supported by RayTracer."
+    ],
     "domain_tags": [
       "engine"
     ]
@@ -436,35 +448,39 @@
       {
         "name": "n_envs",
         "type": "Any",
-        "desc": "",
+        "desc": "If 0, scene has no batching dimension; if >0, first dimension of all states becomes batch dimension.",
         "required": false
       },
       {
         "name": "env_spacing",
         "type": "Any",
-        "desc": "",
+        "desc": "Spacing between adjacent environments (visualization only, does not affect simulation poses).",
         "required": false
       },
       {
         "name": "n_envs_per_row",
         "type": "int | None",
-        "desc": "",
+        "desc": "If None, set to sqrt(n_envs).",
         "required": false
       },
       {
         "name": "center_envs_at_origin",
         "type": "Any",
-        "desc": "",
+        "desc": "For visualization only.",
         "required": false
       },
       {
         "name": "compile_kernels",
         "type": "Any",
-        "desc": "",
+        "desc": "Deprecated and will be removed in future release.",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "env_spacing is for visualization only and does not change simulation-related poses",
+      "center_envs_at_origin is for visualization only",
+      "compile_kernels is deprecated and will be removed in future release"
+    ],
     "domain_tags": [
       "engine",
       "core"
@@ -519,25 +535,25 @@
       {
         "name": "pos",
         "type": "Any",
-        "desc": "",
+        "desc": "starting position of the arrow",
         "required": true
       },
       {
         "name": "vec",
         "type": "Any",
-        "desc": "",
+        "desc": "vector of the arrow",
         "required": false
       },
       {
         "name": "radius",
         "type": "Any",
-        "desc": "",
+        "desc": "radius of the arrow body (represented as a cylinder)",
         "required": false
       },
       {
         "name": "color",
         "type": "Any",
-        "desc": "",
+        "desc": "color of the arrow in RGBA format",
         "required": false
       }
     ],
@@ -555,7 +571,7 @@
       {
         "name": "bounds",
         "type": "Any",
-        "desc": "",
+        "desc": "specified as [[min_x, min_y, min_z], [max_x, max_y, max_z]]",
         "required": true
       },
       {
@@ -591,25 +607,25 @@
       {
         "name": "T",
         "type": "Any",
-        "desc": "",
+        "desc": "The transformation matrix of the frame.",
         "required": true
       },
       {
         "name": "axis_length",
         "type": "Any",
-        "desc": "",
+        "desc": "The length of the axes.",
         "required": false
       },
       {
         "name": "origin_size",
         "type": "Any",
-        "desc": "",
+        "desc": "The size of the origin point (represented as a sphere).",
         "required": false
       },
       {
         "name": "axis_radius",
         "type": "Any",
-        "desc": "",
+        "desc": "The radius of the axes (represented as cylinders).",
         "required": false
       }
     ],
@@ -627,25 +643,25 @@
       {
         "name": "Ts",
         "type": "Any",
-        "desc": "",
+        "desc": "Transformation matrices of frames, shape (n, 4, 4)",
         "required": true
       },
       {
         "name": "axis_length",
         "type": "Any",
-        "desc": "",
+        "desc": "Length of the axes",
         "required": false
       },
       {
         "name": "origin_size",
         "type": "Any",
-        "desc": "",
+        "desc": "Size of the origin point (represented as a sphere)",
         "required": false
       },
       {
         "name": "axis_radius",
         "type": "Any",
-        "desc": "",
+        "desc": "Radius of the axes (represented as cylinders)",
         "required": false
       }
     ],
@@ -675,13 +691,13 @@
       {
         "name": "radius",
         "type": "Any",
-        "desc": "",
+        "desc": "in meters",
         "required": false
       },
       {
         "name": "color",
         "type": "Any",
-        "desc": "",
+        "desc": "in RGBA format",
         "required": false
       }
     ],
@@ -717,7 +733,7 @@
       {
         "name": "qposs",
         "type": "Any",
-        "desc": "",
+        "desc": "shape (N, M) where N is number of configurations/trajectory points, M is number of degrees of freedom/joint dimensions",
         "required": true
       },
       {
@@ -729,19 +745,19 @@
       {
         "name": "link_idx",
         "type": "Any",
-        "desc": "",
+        "desc": "link id of rigid entity to visualize, default -1",
         "required": false
       },
       {
         "name": "density",
         "type": "Any",
-        "desc": "",
+        "desc": "controls sampling density of trajectory points to visualize, 1.0 represents whole trajectory, reduces FK computational load",
         "required": false
       },
       {
         "name": "frame_scaling",
         "type": "Any",
-        "desc": "",
+        "desc": "scaling factor for visualization frames' size, affects length and thickness of debug frames",
         "required": false
       }
     ],
@@ -759,13 +775,13 @@
       {
         "name": "poss",
         "type": "Any",
-        "desc": "",
+        "desc": "array of N points with 3D coordinates",
         "required": true
       },
       {
         "name": "colors",
         "type": "Any",
-        "desc": "",
+        "desc": "RGBA color values",
         "required": false
       }
     ],
@@ -783,7 +799,7 @@
       {
         "name": "pos",
         "type": "Any",
-        "desc": "",
+        "desc": "center position of the sphere",
         "required": true
       },
       {
@@ -795,7 +811,7 @@
       {
         "name": "color",
         "type": "Any",
-        "desc": "",
+        "desc": "in RGBA format",
         "required": false
       }
     ],
@@ -813,7 +829,7 @@
       {
         "name": "poss",
         "type": "Any",
-        "desc": "",
+        "desc": "array_like, shape (N, 3)",
         "required": true
       },
       {
@@ -825,7 +841,7 @@
       {
         "name": "color",
         "type": "Any",
-        "desc": "",
+        "desc": "in RGBA format",
         "required": false
       }
     ],
@@ -865,7 +881,7 @@
       {
         "name": "path",
         "type": "str | os.PathLike",
-        "desc": "",
+        "desc": "Path to the checkpoint pickle file produced by save_checkpoint",
         "required": true
       }
     ],
@@ -937,13 +953,13 @@
       {
         "name": "state",
         "type": "gs.engine.states.solvers.SimState | None",
-        "desc": "",
+        "desc": "If given, the scene's registered initial state will be updated to this state.",
         "required": false
       },
       {
         "name": "envs_idx",
         "type": "Any",
-        "desc": "",
+        "desc": "If None, all environments will be considered.",
         "required": false
       }
     ],
@@ -961,11 +977,13 @@
       {
         "name": "path",
         "type": "str | os.PathLike",
-        "desc": "",
+        "desc": "Destination filename for the checkpoint file.",
         "required": true
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Saves the full physics state to a single file."
+    ],
     "domain_tags": [
       "engine"
     ]
@@ -979,7 +997,7 @@
       {
         "name": "data_func",
         "type": "Callable",
-        "desc": "",
+        "desc": "A function with no arguments that returns the data to be recorded.",
         "required": true
       },
       {
@@ -1068,7 +1086,11 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Either [pos and size] or [lower and upper] should be specified. The latter has a higher priority.",
+      "visualization and collision cannot both be False",
+      "quat will be ignored if euler is specified"
+    ],
     "domain_tags": [
       "geometry"
     ]
@@ -1152,7 +1174,22 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "visualization and collision cannot both be False",
+      "visualization parameter is only used for RigidEntity",
+      "collision parameter is only used for RigidEntity",
+      "requires_jac_and_IK parameter is only used for RigidEntity",
+      "fixed parameter is only used for RigidEntity",
+      "batch_fixed_verts parameter is only used for RigidEntity",
+      "order parameter is only used for FEMEntity",
+      "mindihedral parameter is only used for Volumetric Entity that requires tetraheralization",
+      "minratio parameter is only used for Volumetric Entity that requires tetraheralization",
+      "nobisect parameter is only used for Volumetric Entity that requires tetraheralization",
+      "quality parameter is only used for Volumetric Entity that requires tetraheralization",
+      "maxvolume parameter is only used for Volumetric Entity that requires tetraheralization",
+      "verbose parameter is only used for Volumetric Entity that requires tetraheralization",
+      "force_retet parameter is only used for Volumetric Entity that requires tetraheralization"
+    ],
     "domain_tags": [
       "geometry"
     ]
@@ -1194,7 +1231,17 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Visual geom in propeller links used for spinning animation",
+      "3-tuple scaling only supported for gs.morphs.Mesh",
+      "decimate, decimate_face_num, decimate_aggressiveness only used for RigidEntity",
+      "convexify defaults to True for RigidEntity, False for other deformable entities",
+      "decompose_nonconvex is deprecated",
+      "visualization and collision cannot both be False",
+      "Drone doesn't support collision checking for now",
+      "COM_link_name is deprecated",
+      "propellers_link_names is deprecated"
+    ],
     "domain_tags": [
       "geometry"
     ]
@@ -1254,7 +1301,13 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "3-tuple scaling is only supported for `gs.morphs.Mesh`",
+      "`visualization` and `collision` cannot both be False",
+      "`decimate`, `decimate_face_num`, `decimate_aggressiveness`, `visualization`, `collision`, `batch_fixed_verts`, and `requires_jac_and_IK` are only used for RigidEntity",
+      "`decompose_nonconvex` is deprecated - use 'convexify' and 'decompose_(robot|object)_error_threshold' instead",
+      "`convexify` defaults to `True` for `RigidEntity` and `False` for other deformable entities"
+    ],
     "domain_tags": [
       "geometry"
     ]
@@ -1314,7 +1367,16 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "MJCF morph only supports RigidEntity",
+      "MJCF world body is added to kinematic tree but only defines initial root pose",
+      "MJCF processed as single entity with stretched kinematic chain definition (multiple root links)",
+      "Global/world options in MJCF (timestep, integrator, solver) are ignored",
+      "MJCF collision filters are local (only apply within the entity)",
+      "No collision filtering between primitive and MJCF entity currently",
+      "visualization and collision cannot both be False",
+      "3-tuple scaling only supported for gs.morphs.Mesh"
+    ],
     "domain_tags": [
       "geometry"
     ]
@@ -1374,7 +1436,15 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Mesh will be decimated and convexified by default to speed up simulation (for collision mesh only)",
+      "3-tuple scaling is only supported for gs.morphs.Mesh",
+      "decimate, decimate_face_num, decimate_aggressiveness, merge_submeshes_for_collision, visualization, collision, requires_jac_and_IK, fixed, batch_fixed_verts, group_by_material are only used for RigidEntity",
+      "visualization and collision cannot both be False",
+      "order is only used for FEMEntity",
+      "mindihedral, minratio, nobisect, quality, maxvolume, verbose, force_retet are only used for Volumetric Entity that requires tetraheralization",
+      "decompose_nonconvex parameter is deprecated"
+    ],
     "domain_tags": [
       "geometry"
     ]
@@ -1434,7 +1504,15 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Mesh will be decimated and convexified by default to speed up simulation",
+      "3-tuple scaling is only supported for `gs.morphs.Mesh`",
+      "`visualization` and `collision` cannot both be False",
+      "`decimate`, `decimate_face_num`, `decimate_aggressiveness`, `merge_submeshes_for_collision`, `visualization`, `collision`, `requires_jac_and_IK`, `fixed`, `batch_fixed_verts`, and `group_by_material` are only used for RigidEntity",
+      "`order` is only used for FEMEntity",
+      "`mindihedral`, `minratio`, `nobisect`, `quality`, `maxvolume`, `verbose`, and `force_retet` are only used for Volumetric Entity that requires tetraheralization",
+      "`decompose_nonconvex` parameter is deprecated"
+    ],
     "domain_tags": [
       "geometry"
     ]
@@ -1494,7 +1572,14 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly",
+      "visualization and collision cannot both be False",
+      "visualization parameter is only used for RigidEntity",
+      "collision parameter is only used for RigidEntity",
+      "requires_jac_and_IK parameter is only used for RigidEntity",
+      "is_free parameter is deprecated"
+    ],
     "domain_tags": [
       "geometry"
     ]
@@ -1536,7 +1621,9 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Reserved for emitter. Internal use only."
+    ],
     "domain_tags": [
       "geometry"
     ]
@@ -1578,7 +1665,9 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly."
+    ],
     "domain_tags": [
       "geometry"
     ]
@@ -1620,7 +1709,14 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Plane is a primitive with infinite size",
+      "visualization and collision cannot both be False",
+      "visualization parameter is only used for RigidEntity",
+      "collision parameter is only used for RigidEntity",
+      "fixed parameter is only used for RigidEntity",
+      "batch_fixed_verts parameter is only used for RigidEntity"
+    ],
     "domain_tags": [
       "geometry"
     ]
@@ -1662,7 +1758,15 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly",
+      "visualization and collision cannot both be False",
+      "visualization parameter is only used for RigidEntity",
+      "collision parameter is only used for RigidEntity",
+      "requires_jac_and_IK parameter is only used for RigidEntity",
+      "fixed parameter is only used for RigidEntity",
+      "batch_fixed_verts parameter is only used for RigidEntity"
+    ],
     "domain_tags": [
       "geometry"
     ]
@@ -1704,7 +1808,22 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "visualization and collision cannot both be False",
+      "visualization parameter only used for RigidEntity",
+      "collision parameter only used for RigidEntity",
+      "requires_jac_and_IK parameter only used for RigidEntity",
+      "fixed parameter only used for RigidEntity",
+      "batch_fixed_verts parameter only used for RigidEntity",
+      "order parameter only used for FEMEntity",
+      "mindihedral parameter only used for Volumetric Entity that requires tetraheralization",
+      "minratio parameter only used for Volumetric Entity that requires tetraheralization",
+      "nobisect parameter only used for Volumetric Entity that requires tetraheralization",
+      "quality parameter only used for Volumetric Entity that requires tetraheralization",
+      "maxvolume parameter only used for Volumetric Entity that requires tetraheralization",
+      "verbose parameter only used for Volumetric Entity that requires tetraheralization",
+      "force_retet parameter only used for Volumetric Entity that requires tetraheralization"
+    ],
     "domain_tags": [
       "geometry"
     ]
@@ -1746,7 +1865,15 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Rigid terrain SDF resolution is auto-computed and ignores the value specified in `gs.materials.Rigid()`",
+      "`visualization` and `collision` cannot both be False",
+      "3-tuple scaling is only supported for `gs.morphs.Mesh`",
+      "If `height_field` is specified, all other configurations will be ignored",
+      "If `subterrain_types` is a 2D list, it should have the same shape as `n_subterrains`",
+      "`from_stored` parameter is deprecated",
+      "`batch_fixed_verts` is only used for RigidEntity"
+    ],
     "domain_tags": [
       "geometry"
     ]
@@ -1830,7 +1957,15 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This morph only supports RigidEntity",
+      "Do not use for Drone entities (use gs.morphs.Drone instead)",
+      "3-tuple scaling is only supported for gs.morphs.Mesh",
+      "decimate, decimate_face_num, decimate_aggressiveness, and batch_fixed_verts are only used for RigidEntity",
+      "visualization and collision cannot both be False",
+      "Links connected via fixed joints are merged by default (merge_fixed_links=True) for performance",
+      "Links in links_to_keep list are not merged even with merge_fixed_links=True"
+    ],
     "domain_tags": [
       "geometry"
     ]
@@ -1886,13 +2021,13 @@
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "density used to compute mass",
         "required": false
       },
       {
         "name": "friction",
         "type": "Any",
-        "desc": "",
+        "desc": "friction coefficient within rigid solver; if None, default of 1.0 may be used or parsed from file",
         "required": false
       },
       {
@@ -1904,47 +2039,53 @@
       {
         "name": "coup_friction",
         "type": "Any",
-        "desc": "",
+        "desc": "must be non-negative",
         "required": false
       },
       {
         "name": "coup_softness",
         "type": "Any",
-        "desc": "",
+        "desc": "must be non-negative",
         "required": false
       },
       {
         "name": "coup_restitution",
         "type": "Any",
-        "desc": "",
+        "desc": "should be between 0 and 1",
         "required": false
       },
       {
         "name": "sdf_cell_size",
         "type": "Any",
-        "desc": "",
+        "desc": "cell size in SDF grid in meters",
         "required": false
       },
       {
         "name": "sdf_min_res",
         "type": "Any",
-        "desc": "",
+        "desc": "must be at least 16",
         "required": false
       },
       {
         "name": "sdf_max_res",
         "type": "Any",
-        "desc": "",
+        "desc": "must be >= sdf_min_res",
         "required": false
       },
       {
         "name": "gravity_compensation",
         "type": "Any",
-        "desc": "",
+        "desc": "1.0 cancels gravity",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "coup_friction must be non-negative",
+      "coup_softness must be non-negative",
+      "coup_restitution should be between 0 and 1",
+      "sdf_min_res must be at least 16",
+      "sdf_max_res must be >= sdf_min_res"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -1958,41 +2099,43 @@
       {
         "name": "E",
         "type": "Any",
-        "desc": "",
+        "desc": "Young's modulus, which controls stiffness",
         "required": false
       },
       {
         "name": "nu",
         "type": "Any",
-        "desc": "",
+        "desc": "Poisson ratio, describing the material's volume change under stress",
         "required": false
       },
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "Material density in kg/m^3",
         "required": false
       },
       {
         "name": "hydroelastic_modulus",
         "type": "Any",
-        "desc": "",
+        "desc": "Hydroelastic modulus for hydroelastic contact",
         "required": false
       },
       {
         "name": "friction_mu",
         "type": "Any",
-        "desc": "",
+        "desc": "Friction coefficient",
         "required": false
       },
       {
         "name": "hessian_invariant",
         "type": "Any",
-        "desc": "",
+        "desc": "If True, Hessian is computed only once",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -2024,41 +2167,46 @@
       {
         "name": "E",
         "type": "Any",
-        "desc": "",
+        "desc": "Young's modulus in Pa, controlling stiffness",
         "required": false
       },
       {
         "name": "nu",
         "type": "Any",
-        "desc": "",
+        "desc": "Poisson's ratio, describing volume change under stress",
         "required": false
       },
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "Material density in kg/m³",
         "required": false
       },
       {
         "name": "thickness",
         "type": "Any",
-        "desc": "",
+        "desc": "Shell thickness in meters",
         "required": false
       },
       {
         "name": "bending_stiffness",
         "type": "Any",
-        "desc": "",
+        "desc": "Bending resistance coefficient; if None, no bending resistance",
         "required": false
       },
       {
         "name": "model",
         "type": "Any",
-        "desc": "",
+        "desc": "FEM material model (not used for cloth, kept for compatibility)",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Only works with IPCCoupler enabled",
+      "Requires GPU backend",
+      "Only accepts surface mesh morphs (Mesh, etc.)",
+      "Uses FEMEntity infrastructure but simulated as 2D shell in IPC"
+    ],
     "domain_tags": [
       "material",
       "core"
@@ -2091,37 +2239,37 @@
       {
         "name": "E",
         "type": "Any",
-        "desc": "",
+        "desc": "Young's modulus, which controls stiffness",
         "required": false
       },
       {
         "name": "nu",
         "type": "Any",
-        "desc": "",
+        "desc": "Poisson ratio, describing the material's volume change under stress",
         "required": false
       },
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "Material density in kg/m^3",
         "required": false
       },
       {
         "name": "hydroelastic_modulus",
         "type": "Any",
-        "desc": "",
+        "desc": "Hydroelastic modulus for hydroelastic contact",
         "required": false
       },
       {
         "name": "friction_mu",
         "type": "Any",
-        "desc": "",
+        "desc": "Friction coefficient",
         "required": false
       },
       {
         "name": "model",
         "type": "Any",
-        "desc": "",
+        "desc": "Constitutive model for stress computation: 'linear', 'stable_neohookean', or 'linear_corotated'",
         "required": false
       }
     ],
@@ -2176,31 +2324,31 @@
       {
         "name": "E",
         "type": "Any",
-        "desc": "",
+        "desc": "Young's modulus, which controls stiffness",
         "required": false
       },
       {
         "name": "nu",
         "type": "Any",
-        "desc": "",
+        "desc": "Poisson ratio, describing the material's volume change under stress",
         "required": false
       },
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "Material density in kg/m³",
         "required": false
       },
       {
         "name": "model",
         "type": "Any",
-        "desc": "",
+        "desc": "Constitutive model for stress computation. Options: 'linear' (linear elasticity) or 'stable_neohookean' (numerically stable Neo-Hookean)",
         "required": false
       },
       {
         "name": "n_groups",
         "type": "Any",
-        "desc": "",
+        "desc": "Number of muscle groups",
         "required": false
       }
     ],
@@ -2255,41 +2403,43 @@
       {
         "name": "E",
         "type": "Any",
-        "desc": "",
+        "desc": "Young's modulus, which controls stiffness",
         "required": false
       },
       {
         "name": "nu",
         "type": "Any",
-        "desc": "",
+        "desc": "Poisson ratio, describing the material's volume change under stress",
         "required": false
       },
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "Material density (kg/m^3)",
         "required": false
       },
       {
         "name": "hydroelastic_modulus",
         "type": "Any",
-        "desc": "",
+        "desc": "Hydroelastic modulus for hydroelastic contact",
         "required": false
       },
       {
         "name": "friction_mu",
         "type": "Any",
-        "desc": "",
+        "desc": "Friction coefficient",
         "required": false
       },
       {
         "name": "hessian_invariant",
         "type": "Any",
-        "desc": "",
+        "desc": "If True, Hessian is computed only once",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -2318,7 +2468,9 @@
     "signature": "Material()",
     "summary": "The base class of materials.",
     "parameters": [],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -2332,41 +2484,43 @@
       {
         "name": "E",
         "type": "Any",
-        "desc": "",
+        "desc": "Young's modulus, which controls stiffness.",
         "required": false
       },
       {
         "name": "nu",
         "type": "Any",
-        "desc": "",
+        "desc": "Poisson ratio, describing the material's volume change under stress.",
         "required": false
       },
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "Material density in kg/m^3.",
         "required": false
       },
       {
         "name": "hydroelastic_modulus",
         "type": "Any",
-        "desc": "",
+        "desc": "Hydroelastic modulus for hydroelastic contact.",
         "required": false
       },
       {
         "name": "friction_mu",
         "type": "Any",
-        "desc": "",
+        "desc": "Friction coefficient.",
         "required": false
       },
       {
         "name": "hessian_invariant",
         "type": "Any",
-        "desc": "",
+        "desc": "If True, Hessian is computed only once.",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly."
+    ],
     "domain_tags": [
       "material"
     ]
@@ -2398,41 +2552,46 @@
       {
         "name": "E",
         "type": "Any",
-        "desc": "",
+        "desc": "Young's modulus in Pa, controlling stiffness",
         "required": false
       },
       {
         "name": "nu",
         "type": "Any",
-        "desc": "",
+        "desc": "Poisson's ratio, describing volume change under stress",
         "required": false
       },
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "Material density in kg/m³",
         "required": false
       },
       {
         "name": "thickness",
         "type": "Any",
-        "desc": "",
+        "desc": "Shell thickness in meters",
         "required": false
       },
       {
         "name": "bending_stiffness",
         "type": "Any",
-        "desc": "",
+        "desc": "Bending resistance coefficient. If None, no bending resistance",
         "required": false
       },
       {
         "name": "model",
         "type": "Any",
-        "desc": "",
+        "desc": "FEM material model (not used for cloth, kept for compatibility)",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Only works with IPCCoupler enabled",
+      "Requires GPU backend",
+      "Only accepts surface mesh morphs (Mesh, etc.)",
+      "Uses FEMEntity infrastructure but simulated as 2D shell in IPC"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -2464,41 +2623,43 @@
       {
         "name": "E",
         "type": "Any",
-        "desc": "",
+        "desc": "Young's modulus, which controls stiffness",
         "required": false
       },
       {
         "name": "nu",
         "type": "Any",
-        "desc": "",
+        "desc": "Poisson ratio, describing the material's volume change under stress",
         "required": false
       },
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "Material density (kg/m^3)",
         "required": false
       },
       {
         "name": "hydroelastic_modulus",
         "type": "Any",
-        "desc": "",
+        "desc": "Hydroelastic modulus for hydroelastic contact",
         "required": false
       },
       {
         "name": "friction_mu",
         "type": "Any",
-        "desc": "",
+        "desc": "Friction coefficient",
         "required": false
       },
       {
         "name": "hessian_invariant",
         "type": "Any",
-        "desc": "",
+        "desc": "If True, Hessian is computed only once",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -2530,37 +2691,37 @@
       {
         "name": "E",
         "type": "Any",
-        "desc": "",
+        "desc": "Young's modulus, which controls stiffness.",
         "required": false
       },
       {
         "name": "nu",
         "type": "Any",
-        "desc": "",
+        "desc": "Poisson ratio, describing the material's volume change under stress.",
         "required": false
       },
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "Material density (kg/m^3).",
         "required": false
       },
       {
         "name": "hydroelastic_modulus",
         "type": "Any",
-        "desc": "",
+        "desc": "Hydroelastic modulus for hydroelastic contact.",
         "required": false
       },
       {
         "name": "friction_mu",
         "type": "Any",
-        "desc": "",
+        "desc": "Friction coefficient.",
         "required": false
       },
       {
         "name": "model",
         "type": "Any",
-        "desc": "",
+        "desc": "Constitutive model to use for stress computation. Options are: 'linear', 'stable_neohookean', 'linear_corotated'.",
         "required": false
       }
     ],
@@ -2614,37 +2775,37 @@
       {
         "name": "E",
         "type": "Any",
-        "desc": "",
+        "desc": "Young's modulus, which controls stiffness",
         "required": false
       },
       {
         "name": "nu",
         "type": "Any",
-        "desc": "",
+        "desc": "Poisson ratio, describing the material's volume change under stress",
         "required": false
       },
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "Material density (kg/m^3)",
         "required": false
       },
       {
         "name": "hydroelastic_modulus",
         "type": "Any",
-        "desc": "",
+        "desc": "Hydroelastic modulus for hydroelastic contact",
         "required": false
       },
       {
         "name": "friction_mu",
         "type": "Any",
-        "desc": "",
+        "desc": "Friction coefficient",
         "required": false
       },
       {
         "name": "model",
         "type": "Any",
-        "desc": "",
+        "desc": "Constitutive model to use for stress computation. Options are: 'linear', 'stable_neohookean', 'linear_corotated'",
         "required": false
       }
     ],
@@ -2698,31 +2859,31 @@
       {
         "name": "E",
         "type": "Any",
-        "desc": "",
+        "desc": "Young's modulus, which controls stiffness",
         "required": false
       },
       {
         "name": "nu",
         "type": "Any",
-        "desc": "",
+        "desc": "Poisson ratio, describing the material's volume change under stress",
         "required": false
       },
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "Material density (kg/m^3)",
         "required": false
       },
       {
         "name": "model",
         "type": "Any",
-        "desc": "",
+        "desc": "Constitutive model to use for stress computation. Options are: 'linear' (Linear elasticity model), 'stable_neohookean' (A numerically stable Neo-Hookean model)",
         "required": false
       },
       {
         "name": "n_groups",
         "type": "Any",
-        "desc": "",
+        "desc": "Number of muscle groups",
         "required": false
       }
     ],
@@ -2794,37 +2955,37 @@
       {
         "name": "damping",
         "type": "Any",
-        "desc": "",
+        "desc": "Damping coefficient between soft and rigid.",
         "required": false
       },
       {
         "name": "thickness",
         "type": "Any",
-        "desc": "",
+        "desc": "The thickness to instantiate soft skin.",
         "required": false
       },
       {
         "name": "soft_dv_coef",
         "type": "Any",
-        "desc": "",
+        "desc": "The coefficient to apply delta velocity from rigid to soft.",
         "required": false
       },
       {
         "name": "func_instantiate_rigid_from_soft",
         "type": "Any",
-        "desc": "",
+        "desc": "The function to instantiate rigid body from the geometry of soft body.",
         "required": false
       },
       {
         "name": "func_instantiate_soft_from_rigid",
         "type": "Any",
-        "desc": "",
+        "desc": "The function to instantiate soft body from the geometry of rigid body.",
         "required": false
       },
       {
         "name": "func_instantiate_rigid_soft_association",
         "type": "Any",
-        "desc": "",
+        "desc": "The function that determines the association of the rigid and the soft body.",
         "required": false
       }
     ],
@@ -2843,41 +3004,44 @@
       {
         "name": "E",
         "type": "Any",
-        "desc": "",
+        "desc": "Young's modulus",
         "required": false
       },
       {
         "name": "nu",
         "type": "Any",
-        "desc": "",
+        "desc": "Poisson ratio",
         "required": false
       },
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "Density in kg/m^3",
         "required": false
       },
       {
         "name": "lam",
         "type": "Any",
-        "desc": "",
+        "desc": "First Lame's parameter; if None, computed from E and nu",
         "required": false
       },
       {
         "name": "mu",
         "type": "Any",
-        "desc": "",
+        "desc": "Second Lame's parameter; if None, computed from E and nu",
         "required": false
       },
       {
         "name": "sampler",
         "type": "Any",
-        "desc": "",
+        "desc": "Particle sampler ('pbs', 'regular', 'random'); 'pbs' only supported on Linux",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly",
+      "'pbs' sampler is only supported on Linux for now"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -2891,47 +3055,50 @@
       {
         "name": "E",
         "type": "Any",
-        "desc": "",
+        "desc": "Young's modulus. Elastic objects are softened by multiplying the default E by 0.3.",
         "required": false
       },
       {
         "name": "nu",
         "type": "Any",
-        "desc": "",
+        "desc": "Poisson ratio.",
         "required": false
       },
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "Density in kg/m^3.",
         "required": false
       },
       {
         "name": "lam",
         "type": "Any",
-        "desc": "",
+        "desc": "The first Lame's parameter. If None, computed by E and nu.",
         "required": false
       },
       {
         "name": "mu",
         "type": "Any",
-        "desc": "",
+        "desc": "The second Lame's parameter. If None, computed by E and nu.",
         "required": false
       },
       {
         "name": "sampler",
         "type": "Any",
-        "desc": "",
+        "desc": "Particle sampler ('pbs', 'regular', 'random'). Note that 'pbs' is only supported on Linux for now.",
         "required": false
       },
       {
         "name": "model",
         "type": "Any",
-        "desc": "",
+        "desc": "Stress model ('corotation', 'neohooken').",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Elastic objects are softened by multiplying the default E by 0.3",
+      "Sampler 'pbs' is only supported on Linux for now"
+    ],
     "domain_tags": [
       "material",
       "core"
@@ -2946,65 +3113,69 @@
       {
         "name": "E",
         "type": "Any",
-        "desc": "",
+        "desc": "Young's modulus",
         "required": false
       },
       {
         "name": "nu",
         "type": "Any",
-        "desc": "",
+        "desc": "Poisson ratio",
         "required": false
       },
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "Density in kg/m^3",
         "required": false
       },
       {
         "name": "lam",
         "type": "Any",
-        "desc": "",
+        "desc": "First Lame's parameter; computed from E and nu if None",
         "required": false
       },
       {
         "name": "mu",
         "type": "Any",
-        "desc": "",
+        "desc": "Second Lame's parameter; computed from E and nu if None",
         "required": false
       },
       {
         "name": "sampler",
         "type": "Any",
-        "desc": "",
+        "desc": "Particle sampler ('pbs', 'regular', 'random'); 'pbs' only supported on Linux",
         "required": false
       },
       {
         "name": "yield_lower",
         "type": "Any",
-        "desc": "",
+        "desc": "Lower bound for yield clamp; ignored if using von Mises",
         "required": false
       },
       {
         "name": "yield_higher",
         "type": "Any",
-        "desc": "",
+        "desc": "Upper bound for yield clamp; ignored if using von Mises",
         "required": false
       },
       {
         "name": "use_von_mises",
         "type": "Any",
-        "desc": "",
+        "desc": "Whether to use von Mises yield criterion",
         "required": false
       },
       {
         "name": "von_mises_yield_stress",
         "type": "Any",
-        "desc": "",
+        "desc": "Yield stress for von Mises criterion",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Default yield ratio comes from SNOW material in taichi's MPM implementation",
+      "Sampler 'pbs' is only supported on Linux for now",
+      "yield_lower and yield_higher are ignored if using von Mises criterion"
+    ],
     "domain_tags": [
       "material",
       "core"
@@ -3019,47 +3190,50 @@
       {
         "name": "E",
         "type": "Any",
-        "desc": "",
+        "desc": "Young's modulus",
         "required": false
       },
       {
         "name": "nu",
         "type": "Any",
-        "desc": "",
+        "desc": "Poisson ratio",
         "required": false
       },
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "Density in kg/m^3",
         "required": false
       },
       {
         "name": "lam",
         "type": "Any",
-        "desc": "",
+        "desc": "First Lame's parameter; if None, computed by E and nu",
         "required": false
       },
       {
         "name": "mu",
         "type": "Any",
-        "desc": "",
+        "desc": "Second Lame's parameter; if None, computed by E and nu",
         "required": false
       },
       {
         "name": "viscous",
         "type": "Any",
-        "desc": "",
+        "desc": "Whether the liquid is viscous; sets mu to zero when non-viscous",
         "required": false
       },
       {
         "name": "sampler",
         "type": "Any",
-        "desc": "",
+        "desc": "Particle sampler ('pbs', 'regular', 'random'); 'pbs' only supported on Linux",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Sampler 'pbs' is only supported on Linux",
+      "If sampler is 'pbs' on unsupported platforms, defaults to 'random'"
+    ],
     "domain_tags": [
       "material",
       "core"
@@ -3074,53 +3248,55 @@
       {
         "name": "E",
         "type": "Any",
-        "desc": "",
+        "desc": "Young's modulus",
         "required": false
       },
       {
         "name": "nu",
         "type": "Any",
-        "desc": "",
+        "desc": "Poisson ratio",
         "required": false
       },
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "Density in kg/m^3",
         "required": false
       },
       {
         "name": "lam",
         "type": "Any",
-        "desc": "",
+        "desc": "First Lame's parameter; computed from E and nu if None",
         "required": false
       },
       {
         "name": "mu",
         "type": "Any",
-        "desc": "",
+        "desc": "Second Lame's parameter; computed from E and nu if None",
         "required": false
       },
       {
         "name": "sampler",
         "type": "Any",
-        "desc": "",
+        "desc": "Particle sampler ('pbs', 'regular', 'random'); 'pbs' only supported on Linux",
         "required": false
       },
       {
         "name": "model",
         "type": "Any",
-        "desc": "",
+        "desc": "Stress model ('corotation', 'neohooken')",
         "required": false
       },
       {
         "name": "n_groups",
         "type": "Any",
-        "desc": "",
+        "desc": "Number of muscle groups",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "'pbs' sampler is only supported on Linux for now"
+    ],
     "domain_tags": [
       "material",
       "core"
@@ -3135,47 +3311,49 @@
       {
         "name": "E",
         "type": "Any",
-        "desc": "",
+        "desc": "Young's modulus",
         "required": false
       },
       {
         "name": "nu",
         "type": "Any",
-        "desc": "",
+        "desc": "Poisson ratio",
         "required": false
       },
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "Density in kg/m^3",
         "required": false
       },
       {
         "name": "lam",
         "type": "Any",
-        "desc": "",
+        "desc": "First Lame's parameter; if None, computed by E and nu",
         "required": false
       },
       {
         "name": "mu",
         "type": "Any",
-        "desc": "",
+        "desc": "Second Lame's parameter; if None, computed by E and nu",
         "required": false
       },
       {
         "name": "sampler",
         "type": "Any",
-        "desc": "",
+        "desc": "Particle sampler ('pbs', 'regular', 'random'); 'pbs' only supported on Linux for now",
         "required": false
       },
       {
         "name": "friction_angle",
         "type": "Any",
-        "desc": "",
+        "desc": "Friction angle in degrees, used to compute internal pressure-dependent plasticity",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "'pbs' sampler is only supported on Linux for now"
+    ],
     "domain_tags": [
       "material",
       "core"
@@ -3190,53 +3368,57 @@
       {
         "name": "E",
         "type": "Any",
-        "desc": "",
+        "desc": "Young's modulus",
         "required": false
       },
       {
         "name": "nu",
         "type": "Any",
-        "desc": "",
+        "desc": "Poisson ratio",
         "required": false
       },
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "Density in kg/m³",
         "required": false
       },
       {
         "name": "lam",
         "type": "Any",
-        "desc": "",
+        "desc": "First Lame's parameter; computed from E and nu if None",
         "required": false
       },
       {
         "name": "mu",
         "type": "Any",
-        "desc": "",
+        "desc": "Second Lame's parameter; computed from E and nu if None",
         "required": false
       },
       {
         "name": "sampler",
         "type": "Any",
-        "desc": "",
+        "desc": "Particle sampler ('pbs', 'regular', 'random'); 'pbs' only supported on Linux",
         "required": false
       },
       {
         "name": "yield_lower",
         "type": "Any",
-        "desc": "",
+        "desc": "Lower bound of yield condition",
         "required": false
       },
       {
         "name": "yield_higher",
         "type": "Any",
-        "desc": "",
+        "desc": "Upper bound of yield condition",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Snow is a special type of ElastoPlastic that gets harder when compressed",
+      "Snow does not support von Mises yield criterion",
+      "Sampler 'pbs' is only supported on Linux"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -3250,41 +3432,44 @@
       {
         "name": "E",
         "type": "Any",
-        "desc": "",
+        "desc": "Young's modulus",
         "required": false
       },
       {
         "name": "nu",
         "type": "Any",
-        "desc": "",
+        "desc": "Poisson ratio",
         "required": false
       },
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "Density in kg/m^3",
         "required": false
       },
       {
         "name": "lam",
         "type": "Any",
-        "desc": "",
+        "desc": "First Lame's parameter; computed from E and nu if None",
         "required": false
       },
       {
         "name": "mu",
         "type": "Any",
-        "desc": "",
+        "desc": "Second Lame's parameter; computed from E and nu if None",
         "required": false
       },
       {
         "name": "sampler",
         "type": "Any",
-        "desc": "",
+        "desc": "Particle sampler ('pbs', 'regular', 'random'); 'pbs' only supported on Linux",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly",
+      "'pbs' sampler only supported on Linux"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -3295,7 +3480,9 @@
     "signature": "Material()",
     "summary": "The base class of materials.",
     "parameters": [],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -3309,41 +3496,44 @@
       {
         "name": "E",
         "type": "Any",
-        "desc": "",
+        "desc": "Young's modulus",
         "required": false
       },
       {
         "name": "nu",
         "type": "Any",
-        "desc": "",
+        "desc": "Poisson ratio",
         "required": false
       },
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "Density in kg/m^3",
         "required": false
       },
       {
         "name": "lam",
         "type": "Any",
-        "desc": "",
+        "desc": "First Lame's parameter; computed from E and nu if None",
         "required": false
       },
       {
         "name": "mu",
         "type": "Any",
-        "desc": "",
+        "desc": "Second Lame's parameter; computed from E and nu if None",
         "required": false
       },
       {
         "name": "sampler",
         "type": "Any",
-        "desc": "",
+        "desc": "Particle sampler ('pbs', 'regular', 'random'); 'pbs' only supported on Linux",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly",
+      "'pbs' sampler is only supported on Linux"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -3357,47 +3547,50 @@
       {
         "name": "E",
         "type": "Any",
-        "desc": "",
+        "desc": "Young's modulus. Elastic objects are softened by multiplying the default E by 0.3.",
         "required": false
       },
       {
         "name": "nu",
         "type": "Any",
-        "desc": "",
+        "desc": "Poisson ratio.",
         "required": false
       },
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "Density in kg/m^3.",
         "required": false
       },
       {
         "name": "lam",
         "type": "Any",
-        "desc": "",
+        "desc": "The first Lame's parameter. If None, computed by E and nu.",
         "required": false
       },
       {
         "name": "mu",
         "type": "Any",
-        "desc": "",
+        "desc": "The second Lame's parameter. If None, computed by E and nu.",
         "required": false
       },
       {
         "name": "sampler",
         "type": "Any",
-        "desc": "",
+        "desc": "Particle sampler ('pbs', 'regular', 'random'). Note that 'pbs' is only supported on Linux for now.",
         "required": false
       },
       {
         "name": "model",
         "type": "Any",
-        "desc": "",
+        "desc": "Stress model ('corotation', 'neohooken').",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Elastic objects are softened by multiplying the default E by 0.3",
+      "Sampler 'pbs' is only supported on Linux for now"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -3411,41 +3604,44 @@
       {
         "name": "E",
         "type": "Any",
-        "desc": "",
+        "desc": "Young's modulus",
         "required": false
       },
       {
         "name": "nu",
         "type": "Any",
-        "desc": "",
+        "desc": "Poisson ratio",
         "required": false
       },
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "Density in kg/m^3",
         "required": false
       },
       {
         "name": "lam",
         "type": "Any",
-        "desc": "",
+        "desc": "First Lame's parameter; computed from E and nu if None",
         "required": false
       },
       {
         "name": "mu",
         "type": "Any",
-        "desc": "",
+        "desc": "Second Lame's parameter; computed from E and nu if None",
         "required": false
       },
       {
         "name": "sampler",
         "type": "Any",
-        "desc": "",
+        "desc": "Particle sampler ('pbs', 'regular', 'random'); 'pbs' only supported on Linux",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly",
+      "'pbs' sampler is only supported on Linux"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -3459,49 +3655,49 @@
       {
         "name": "E",
         "type": "Any",
-        "desc": "",
+        "desc": "Young's modulus",
         "required": false
       },
       {
         "name": "nu",
         "type": "Any",
-        "desc": "",
+        "desc": "Poisson ratio",
         "required": false
       },
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "Density in kg/m^3",
         "required": false
       },
       {
         "name": "lam",
         "type": "Any",
-        "desc": "",
+        "desc": "First Lame's parameter; computed from E and nu if None",
         "required": false
       },
       {
         "name": "mu",
         "type": "Any",
-        "desc": "",
+        "desc": "Second Lame's parameter; computed from E and nu if None",
         "required": false
       },
       {
         "name": "sampler",
         "type": "Any",
-        "desc": "",
+        "desc": "Particle sampler ('pbs', 'regular', 'random'); 'pbs' only supported on Linux",
         "required": false
       },
       {
         "name": "yield_lower",
         "type": "Any",
-        "desc": "",
+        "desc": "Lower bound for yield clamp; ignored if using von Mises",
         "required": false
       },
       {
         "name": "yield_higher",
         "type": "Any",
-        "desc": "",
+        "desc": "Upper bound for yield clamp; ignored if using von Mises",
         "required": false
       },
       {
@@ -3513,11 +3709,14 @@
       {
         "name": "von_mises_yield_stress",
         "type": "Any",
-        "desc": "",
+        "desc": "Yield stress for von Mises criterion",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Default yield ratio from SNOW material in taichi's MPM implementation",
+      "Sampler 'pbs' only supported on Linux"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -3531,41 +3730,44 @@
       {
         "name": "E",
         "type": "Any",
-        "desc": "",
+        "desc": "Young's modulus",
         "required": false
       },
       {
         "name": "nu",
         "type": "Any",
-        "desc": "",
+        "desc": "Poisson ratio",
         "required": false
       },
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "Density in kg/m^3",
         "required": false
       },
       {
         "name": "lam",
         "type": "Any",
-        "desc": "",
+        "desc": "First Lame's parameter; if None, computed from E and nu",
         "required": false
       },
       {
         "name": "mu",
         "type": "Any",
-        "desc": "",
+        "desc": "Second Lame's parameter; if None, computed from E and nu",
         "required": false
       },
       {
         "name": "sampler",
         "type": "Any",
-        "desc": "",
+        "desc": "Particle sampler ('pbs', 'regular', 'random'); 'pbs' only supported on Linux",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly",
+      "'pbs' sampler only supported on Linux"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -3579,47 +3781,49 @@
       {
         "name": "E",
         "type": "Any",
-        "desc": "",
+        "desc": "Young's modulus",
         "required": false
       },
       {
         "name": "nu",
         "type": "Any",
-        "desc": "",
+        "desc": "Poisson ratio",
         "required": false
       },
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "Density in kg/m^3",
         "required": false
       },
       {
         "name": "lam",
         "type": "Any",
-        "desc": "",
+        "desc": "First Lame's parameter; computed from E and nu if None",
         "required": false
       },
       {
         "name": "mu",
         "type": "Any",
-        "desc": "",
+        "desc": "Second Lame's parameter; computed from E and nu if None",
         "required": false
       },
       {
         "name": "viscous",
         "type": "Any",
-        "desc": "",
+        "desc": "Whether the liquid is viscous; sets mu to zero when non-viscous",
         "required": false
       },
       {
         "name": "sampler",
         "type": "Any",
-        "desc": "",
+        "desc": "Particle sampler ('pbs', 'regular', 'random'); 'pbs' only supported on Linux",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "'pbs' sampler is only supported on Linux for now"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -3633,47 +3837,50 @@
       {
         "name": "E",
         "type": "Any",
-        "desc": "",
+        "desc": "Young's modulus. Default is 1e6.",
         "required": false
       },
       {
         "name": "nu",
         "type": "Any",
-        "desc": "",
+        "desc": "Poisson ratio. Default is 0.2.",
         "required": false
       },
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "Density (kg/m^3). Default is 1000.",
         "required": false
       },
       {
         "name": "lam",
         "type": "Any",
-        "desc": "",
+        "desc": "The first Lame's parameter. Default is None, computed by E and nu.",
         "required": false
       },
       {
         "name": "mu",
         "type": "Any",
-        "desc": "",
+        "desc": "The second Lame's parameter. Default is None, computed by E and nu.",
         "required": false
       },
       {
         "name": "sampler",
         "type": "Any",
-        "desc": "",
+        "desc": "Particle sampler ('pbs', 'regular', 'random'). Note that 'pbs' is only supported on Linux for now. Defaults to 'pbs' on supported platforms, 'random' otherwise.",
         "required": false
       },
       {
         "name": "model",
         "type": "Any",
-        "desc": "",
+        "desc": "Stress model ('corotation', 'neohooken'). Default is 'corotation'.",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Elastic objects is softened by multiplying the default E by 0.3.",
+      "Sampler 'pbs' is only supported on Linux for now."
+    ],
     "domain_tags": [
       "material"
     ]
@@ -3687,53 +3894,55 @@
       {
         "name": "E",
         "type": "Any",
-        "desc": "",
+        "desc": "Young's modulus",
         "required": false
       },
       {
         "name": "nu",
         "type": "Any",
-        "desc": "",
+        "desc": "Poisson ratio",
         "required": false
       },
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "Density in kg/m^3",
         "required": false
       },
       {
         "name": "lam",
         "type": "Any",
-        "desc": "",
+        "desc": "First Lame's parameter; if None, computed from E and nu",
         "required": false
       },
       {
         "name": "mu",
         "type": "Any",
-        "desc": "",
+        "desc": "Second Lame's parameter; if None, computed from E and nu",
         "required": false
       },
       {
         "name": "sampler",
         "type": "Any",
-        "desc": "",
+        "desc": "Particle sampler ('pbs', 'regular', 'random'); 'pbs' only supported on Linux",
         "required": false
       },
       {
         "name": "model",
         "type": "Any",
-        "desc": "",
+        "desc": "Stress model ('corotation', 'neohooken')",
         "required": false
       },
       {
         "name": "n_groups",
         "type": "Any",
-        "desc": "",
+        "desc": "Number of muscle groups",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Sampler 'pbs' is only supported on Linux"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -3747,41 +3956,44 @@
       {
         "name": "E",
         "type": "Any",
-        "desc": "",
+        "desc": "Young's modulus",
         "required": false
       },
       {
         "name": "nu",
         "type": "Any",
-        "desc": "",
+        "desc": "Poisson ratio",
         "required": false
       },
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "Density in kg/m^3",
         "required": false
       },
       {
         "name": "lam",
         "type": "Any",
-        "desc": "",
+        "desc": "First Lame's parameter; if None, computed from E and nu",
         "required": false
       },
       {
         "name": "mu",
         "type": "Any",
-        "desc": "",
+        "desc": "Second Lame's parameter; if None, computed from E and nu",
         "required": false
       },
       {
         "name": "sampler",
         "type": "Any",
-        "desc": "",
+        "desc": "Particle sampler ('pbs', 'regular', 'random'); 'pbs' only supported on Linux",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly",
+      "'pbs' sampler is only supported on Linux"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -3795,47 +4007,49 @@
       {
         "name": "E",
         "type": "Any",
-        "desc": "",
+        "desc": "Young's modulus",
         "required": false
       },
       {
         "name": "nu",
         "type": "Any",
-        "desc": "",
+        "desc": "Poisson ratio",
         "required": false
       },
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "Density in kg/m^3",
         "required": false
       },
       {
         "name": "lam",
         "type": "Any",
-        "desc": "",
+        "desc": "First Lame's parameter; if None, computed from E and nu",
         "required": false
       },
       {
         "name": "mu",
         "type": "Any",
-        "desc": "",
+        "desc": "Second Lame's parameter; if None, computed from E and nu",
         "required": false
       },
       {
         "name": "sampler",
         "type": "Any",
-        "desc": "",
+        "desc": "Particle sampler ('pbs', 'regular', 'random'); 'pbs' only supported on Linux",
         "required": false
       },
       {
         "name": "friction_angle",
         "type": "Any",
-        "desc": "",
+        "desc": "Friction angle in degrees, used to compute internal pressure-dependent plasticity",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "'pbs' sampler is only supported on Linux"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -3849,49 +4063,49 @@
       {
         "name": "E",
         "type": "Any",
-        "desc": "",
+        "desc": "Young's modulus",
         "required": false
       },
       {
         "name": "nu",
         "type": "Any",
-        "desc": "",
+        "desc": "Poisson ratio",
         "required": false
       },
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "Density in kg/m^3",
         "required": false
       },
       {
         "name": "lam",
         "type": "Any",
-        "desc": "",
+        "desc": "First Lame's parameter; computed from E and nu if None",
         "required": false
       },
       {
         "name": "mu",
         "type": "Any",
-        "desc": "",
+        "desc": "Second Lame's parameter; computed from E and nu if None",
         "required": false
       },
       {
         "name": "sampler",
         "type": "Any",
-        "desc": "",
+        "desc": "Particle sampler ('pbs', 'regular', 'random'); 'pbs' only supported on Linux",
         "required": false
       },
       {
         "name": "yield_lower",
         "type": "Any",
-        "desc": "",
+        "desc": "Lower bound for yield clamp; ignored if using von Mises",
         "required": false
       },
       {
         "name": "yield_higher",
         "type": "Any",
-        "desc": "",
+        "desc": "Upper bound for yield clamp; ignored if using von Mises",
         "required": false
       },
       {
@@ -3903,11 +4117,14 @@
       {
         "name": "von_mises_yield_stress",
         "type": "Any",
-        "desc": "",
+        "desc": "Yield stress for von Mises criterion",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Default yield ratio from SNOW material in taichi's MPM implementation",
+      "Sampler 'pbs' only supported on Linux"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -3921,53 +4138,57 @@
       {
         "name": "E",
         "type": "Any",
-        "desc": "",
+        "desc": "Young's modulus",
         "required": false
       },
       {
         "name": "nu",
         "type": "Any",
-        "desc": "",
+        "desc": "Poisson ratio",
         "required": false
       },
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "Density in kg/m^3",
         "required": false
       },
       {
         "name": "lam",
         "type": "Any",
-        "desc": "",
+        "desc": "First Lame's parameter; computed from E and nu if None",
         "required": false
       },
       {
         "name": "mu",
         "type": "Any",
-        "desc": "",
+        "desc": "Second Lame's parameter; computed from E and nu if None",
         "required": false
       },
       {
         "name": "sampler",
         "type": "Any",
-        "desc": "",
+        "desc": "Particle sampler ('pbs', 'regular', 'random'); 'pbs' only supported on Linux",
         "required": false
       },
       {
         "name": "yield_lower",
         "type": "Any",
-        "desc": "",
+        "desc": "Lower bound of yield condition",
         "required": false
       },
       {
         "name": "yield_higher",
         "type": "Any",
-        "desc": "",
+        "desc": "Upper bound of yield condition",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Snow is a special ElastoPlastic that gets harder when compressed",
+      "Does not support von Mises yield criterion",
+      "Sampler 'pbs' is only supported on Linux"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -3978,7 +4199,9 @@
     "signature": "Base()",
     "summary": "The base class of PBD materials.",
     "parameters": [],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly."
+    ],
     "domain_tags": [
       "material"
     ]
@@ -3992,49 +4215,49 @@
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "density in kg/m² (2D material, mass = rho * surface_area)",
         "required": false
       },
       {
         "name": "static_friction",
         "type": "Any",
-        "desc": "",
+        "desc": "resistance to start of sliding motion between contacting particles",
         "required": false
       },
       {
         "name": "kinetic_friction",
         "type": "Any",
-        "desc": "",
+        "desc": "resistance during sliding motion between contacting particles",
         "required": false
       },
       {
         "name": "stretch_compliance",
         "type": "Any",
-        "desc": "",
+        "desc": "controls softness of stretch constraint between particles in m/N",
         "required": false
       },
       {
         "name": "bending_compliance",
         "type": "Any",
-        "desc": "",
+        "desc": "controls how easily material bends in rad/N",
         "required": false
       },
       {
         "name": "stretch_relaxation",
         "type": "Any",
-        "desc": "",
+        "desc": "smaller value weakens stretch constraint",
         "required": false
       },
       {
         "name": "bending_relaxation",
         "type": "Any",
-        "desc": "",
+        "desc": "smaller value weakens bending constraint",
         "required": false
       },
       {
         "name": "air_resistance",
         "type": "Any",
-        "desc": "",
+        "desc": "damping force due to air drag",
         "required": false
       }
     ],
@@ -4053,55 +4276,55 @@
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "density of the elastic material in kg/m^3",
         "required": false
       },
       {
         "name": "static_friction",
         "type": "Any",
-        "desc": "",
+        "desc": "resistance to the start of sliding motion between two contacting particles; determines how much tangential force can be applied before sliding begins",
         "required": false
       },
       {
         "name": "kinetic_friction",
         "type": "Any",
-        "desc": "",
+        "desc": "resistance during sliding motion between two contacting particles; limits tangential force to simulate energy loss due to friction",
         "required": false
       },
       {
         "name": "stretch_compliance",
         "type": "Any",
-        "desc": "",
+        "desc": "controls softness of stretch constraint between particles in m/N; low values = stiff, high values = softer",
         "required": false
       },
       {
         "name": "bending_compliance",
         "type": "Any",
-        "desc": "",
+        "desc": "controls how easily material bends in rad/N; appears in inner edge constraints",
         "required": false
       },
       {
         "name": "volume_compliance",
         "type": "Any",
-        "desc": "",
+        "desc": "determines compressibility of tetrahedral element in m^3/N; used in volume preservation constraints",
         "required": false
       },
       {
         "name": "stretch_relaxation",
         "type": "Any",
-        "desc": "",
+        "desc": "smaller value weakens the stretch constraint",
         "required": false
       },
       {
         "name": "bending_relaxation",
         "type": "Any",
-        "desc": "",
+        "desc": "smaller value weakens the bending constraint",
         "required": false
       },
       {
         "name": "volume_relaxation",
         "type": "Any",
-        "desc": "",
+        "desc": "smaller value weakens the volume constraint",
         "required": false
       }
     ],
@@ -4120,29 +4343,31 @@
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "in kg/m^3",
         "required": false
       },
       {
         "name": "sampler",
         "type": "Any",
-        "desc": "",
+        "desc": "'pbs' only supported on Linux for now",
         "required": false
       },
       {
         "name": "density_relaxation",
         "type": "Any",
-        "desc": "",
+        "desc": "higher values lead to faster convergence but can cause instability",
         "required": false
       },
       {
         "name": "viscosity_relaxation",
         "type": "Any",
-        "desc": "",
+        "desc": "higher values lead to more viscous (syrupy) fluid behavior",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "sampler 'pbs' is only supported on Linux for now"
+    ],
     "domain_tags": [
       "material",
       "core"
@@ -4157,17 +4382,21 @@
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "rest density",
         "required": false
       },
       {
         "name": "sampler",
         "type": "Any",
-        "desc": "",
+        "desc": "'pbs' only supported on Linux for now; defaults to 'pbs' on supported platforms, 'random' otherwise",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Creates particle-based entities with no inter-particle interaction (only affected by external forces)",
+      "Material is handled by PBD solver but there's nothing to solve - just hosted under PBD system",
+      "Sampler 'pbs' is only supported on Linux for now"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -4178,7 +4407,9 @@
     "signature": "Base()",
     "summary": "The base class of PBD materials.",
     "parameters": [],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -4189,7 +4420,9 @@
     "signature": "Material()",
     "summary": "The base class of materials.",
     "parameters": [],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly."
+    ],
     "domain_tags": [
       "material"
     ]
@@ -4200,7 +4433,9 @@
     "signature": "Base()",
     "summary": "The base class of PBD materials.",
     "parameters": [],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly."
+    ],
     "domain_tags": [
       "material"
     ]
@@ -4214,49 +4449,49 @@
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "kg/m² (2D density), mass = rho * surface_area",
         "required": false
       },
       {
         "name": "static_friction",
         "type": "Any",
-        "desc": "",
+        "desc": "resistance to start of sliding motion",
         "required": false
       },
       {
         "name": "kinetic_friction",
         "type": "Any",
-        "desc": "",
+        "desc": "resistance during sliding motion",
         "required": false
       },
       {
         "name": "stretch_compliance",
         "type": "Any",
-        "desc": "",
+        "desc": "m/N, controls stretch softness (low=stiff, high=soft)",
         "required": false
       },
       {
         "name": "bending_compliance",
         "type": "Any",
-        "desc": "",
+        "desc": "rad/N, controls bending ease",
         "required": false
       },
       {
         "name": "stretch_relaxation",
         "type": "Any",
-        "desc": "",
+        "desc": "smaller value weakens stretch constraint",
         "required": false
       },
       {
         "name": "bending_relaxation",
         "type": "Any",
-        "desc": "",
+        "desc": "smaller value weakens bending constraint",
         "required": false
       },
       {
         "name": "air_resistance",
         "type": "Any",
-        "desc": "",
+        "desc": "damping force due to air drag",
         "required": false
       }
     ],
@@ -4271,7 +4506,9 @@
     "signature": "Base()",
     "summary": "The base class of PBD materials.",
     "parameters": [],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly."
+    ],
     "domain_tags": [
       "material"
     ]
@@ -4285,55 +4522,55 @@
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "density of the elastic material in kg/m^3",
         "required": false
       },
       {
         "name": "static_friction",
         "type": "Any",
-        "desc": "",
+        "desc": "resistance to the start of sliding motion between two contacting particles",
         "required": false
       },
       {
         "name": "kinetic_friction",
         "type": "Any",
-        "desc": "",
+        "desc": "resistance during sliding motion between two contacting particles",
         "required": false
       },
       {
         "name": "stretch_compliance",
         "type": "Any",
-        "desc": "",
+        "desc": "controls softness of stretch constraint between particles in m/N",
         "required": false
       },
       {
         "name": "bending_compliance",
         "type": "Any",
-        "desc": "",
+        "desc": "controls how easily the material bends in rad/N",
         "required": false
       },
       {
         "name": "volume_compliance",
         "type": "Any",
-        "desc": "",
+        "desc": "determines how compressible a tetrahedral element is in m^3/N",
         "required": false
       },
       {
         "name": "stretch_relaxation",
         "type": "Any",
-        "desc": "",
+        "desc": "smaller value weakens the stretch constraint",
         "required": false
       },
       {
         "name": "bending_relaxation",
         "type": "Any",
-        "desc": "",
+        "desc": "smaller value weakens the bending constraint",
         "required": false
       },
       {
         "name": "volume_relaxation",
         "type": "Any",
-        "desc": "",
+        "desc": "smaller value weakens the volume constraint",
         "required": false
       }
     ],
@@ -4348,7 +4585,9 @@
     "signature": "Base()",
     "summary": "The base class of PBD materials.",
     "parameters": [],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly."
+    ],
     "domain_tags": [
       "material"
     ]
@@ -4362,29 +4601,31 @@
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "The rest density of the fluid in kg/m^3",
         "required": false
       },
       {
         "name": "sampler",
         "type": "Any",
-        "desc": "",
+        "desc": "Particle sampler ('pbs', 'regular', 'random'). Note that 'pbs' is only supported on Linux for now",
         "required": false
       },
       {
         "name": "density_relaxation",
         "type": "Any",
-        "desc": "",
+        "desc": "Relaxation factor for solving the density constraint. Controls the strength of positional correction to enforce incompressibility. Higher values lead to faster convergence but can cause instability",
         "required": false
       },
       {
         "name": "viscosity_relaxation",
         "type": "Any",
-        "desc": "",
+        "desc": "Relaxation factor used in the viscosity solver. Influences the smoothing of relative velocities between neighboring particles. Higher values lead to more viscous (syrupy) fluid behavior",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "'pbs' sampler is only supported on Linux for now"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -4395,7 +4636,9 @@
     "signature": "Base()",
     "summary": "The base class of PBD materials.",
     "parameters": [],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly."
+    ],
     "domain_tags": [
       "material"
     ]
@@ -4409,17 +4652,20 @@
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "rest density",
         "required": false
       },
       {
         "name": "sampler",
         "type": "Any",
-        "desc": "",
+        "desc": "'pbs' only supported on Linux for now; defaults to 'pbs' on supported platforms, 'random' otherwise",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Creates particle-based entities with no inter-particle interaction (only affected by external forces)",
+      "Particle sampler 'pbs' is only supported on Linux for now"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -4439,7 +4685,7 @@
       {
         "name": "friction",
         "type": "Any",
-        "desc": "",
+        "desc": "If None, a default of 1.0 may be used or parsed from file.",
         "required": false
       },
       {
@@ -4451,47 +4697,53 @@
       {
         "name": "coup_friction",
         "type": "Any",
-        "desc": "",
+        "desc": "Must be non-negative.",
         "required": false
       },
       {
         "name": "coup_softness",
         "type": "Any",
-        "desc": "",
+        "desc": "Must be non-negative.",
         "required": false
       },
       {
         "name": "coup_restitution",
         "type": "Any",
-        "desc": "",
+        "desc": "Should be between 0 and 1.",
         "required": false
       },
       {
         "name": "sdf_cell_size",
         "type": "Any",
-        "desc": "",
+        "desc": "Cell size in SDF grid in meters.",
         "required": false
       },
       {
         "name": "sdf_min_res",
         "type": "Any",
-        "desc": "",
+        "desc": "Must be at least 16.",
         "required": false
       },
       {
         "name": "sdf_max_res",
         "type": "Any",
-        "desc": "",
+        "desc": "Must be >= sdf_min_res.",
         "required": false
       },
       {
         "name": "gravity_compensation",
         "type": "Any",
-        "desc": "",
+        "desc": "1.0 cancels gravity.",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "coup_friction must be non-negative",
+      "coup_softness must be non-negative",
+      "coup_restitution should be between 0 and 1",
+      "sdf_min_res must be at least 16",
+      "sdf_max_res must be >= sdf_min_res"
+    ],
     "domain_tags": [
       "material",
       "core"
@@ -4503,7 +4755,9 @@
     "signature": "Base()",
     "summary": "The base class of materials.",
     "parameters": [],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly."
+    ],
     "domain_tags": [
       "material"
     ]
@@ -4514,7 +4768,9 @@
     "signature": "Smoke()",
     "summary": "The base class of materials.",
     "parameters": [],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -4525,7 +4781,9 @@
     "signature": "Base()",
     "summary": "The base class of materials.",
     "parameters": [],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly."
+    ],
     "domain_tags": [
       "material"
     ]
@@ -4536,7 +4794,9 @@
     "signature": "Material()",
     "summary": "The base class of materials.",
     "parameters": [],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly."
+    ],
     "domain_tags": [
       "material"
     ]
@@ -4547,7 +4807,9 @@
     "signature": "Base()",
     "summary": "The base class of materials.",
     "parameters": [],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -4558,7 +4820,9 @@
     "signature": "Smoke()",
     "summary": "The base class of materials.",
     "parameters": [],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -4572,11 +4836,14 @@
       {
         "name": "sampler",
         "type": "Any",
-        "desc": "",
+        "desc": "Particle sampler ('pbs', 'regular', 'random'). Note that 'pbs' is only supported on Linux for now. Defaults to 'pbs' on supported platforms, 'random' otherwise.",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly",
+      "'pbs' sampler is only supported on Linux for now"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -4590,41 +4857,43 @@
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "density in kg/m³ that material tends to maintain in equilibrium",
         "required": false
       },
       {
         "name": "stiffness",
         "type": "Any",
-        "desc": "",
+        "desc": "state stiffness in N/m² controlling how pressure increases with compression",
         "required": false
       },
       {
         "name": "exponent",
         "type": "Any",
-        "desc": "",
+        "desc": "controls how nonlinearly pressure scales with density; larger values mean stiffer response to compression",
         "required": false
       },
       {
         "name": "mu",
         "type": "Any",
-        "desc": "",
+        "desc": "viscosity of the liquid; measure of internal friction",
         "required": false
       },
       {
         "name": "gamma",
         "type": "Any",
-        "desc": "",
+        "desc": "surface tension controlling how strongly material clumps together at boundaries",
         "required": false
       },
       {
         "name": "sampler",
         "type": "Any",
-        "desc": "",
+        "desc": "particle sampler; 'pbs' only supported on Linux for now",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "'pbs' sampler only supported on Linux for now"
+    ],
     "domain_tags": [
       "material",
       "core"
@@ -4639,11 +4908,14 @@
       {
         "name": "sampler",
         "type": "Any",
-        "desc": "",
+        "desc": "Particle sampler ('pbs', 'regular', 'random'). Note that 'pbs' is only supported on Linux for now. Defaults to 'pbs' on supported platforms, 'random' otherwise.",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly",
+      "'pbs' sampler is only supported on Linux for now"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -4654,7 +4926,9 @@
     "signature": "Material()",
     "summary": "The base class of materials.",
     "parameters": [],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -4668,11 +4942,14 @@
       {
         "name": "sampler",
         "type": "Any",
-        "desc": "",
+        "desc": "Particle sampler ('pbs', 'regular', 'random'). Note that 'pbs' is only supported on Linux for now. Defaults to 'pbs' on supported platforms, 'random' otherwise.",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly",
+      "'pbs' sampler is only supported on Linux for now"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -4686,41 +4963,43 @@
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "density the material tends to maintain in equilibrium (rest/undeformed state) in kg/m^3",
         "required": false
       },
       {
         "name": "stiffness",
         "type": "Any",
-        "desc": "",
+        "desc": "material constant controlling how pressure increases with compression in N/m^2",
         "required": false
       },
       {
         "name": "exponent",
         "type": "Any",
-        "desc": "",
+        "desc": "controls how nonlinearly pressure scales with density; larger values mean stiffer response to compression",
         "required": false
       },
       {
         "name": "mu",
         "type": "Any",
-        "desc": "",
+        "desc": "viscosity of the liquid; measure of internal friction",
         "required": false
       },
       {
         "name": "gamma",
         "type": "Any",
-        "desc": "",
+        "desc": "surface tension of the liquid; controls how strongly material clumps together at boundaries",
         "required": false
       },
       {
         "name": "sampler",
         "type": "Any",
-        "desc": "",
+        "desc": "particle sampler ('pbs', 'regular', 'random'); 'pbs' only supported on Linux for now",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "'pbs' sampler only supported on Linux for now"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -4756,7 +5035,9 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly."
+    ],
     "domain_tags": [
       "material",
       "core"
@@ -4771,13 +5052,13 @@
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "density used to compute mass",
         "required": false
       },
       {
         "name": "friction",
         "type": "Any",
-        "desc": "",
+        "desc": "friction coefficient within rigid solver; if None, default of 1.0 may be used or parsed from file",
         "required": false
       },
       {
@@ -4789,47 +5070,53 @@
       {
         "name": "coup_friction",
         "type": "Any",
-        "desc": "",
+        "desc": "must be non-negative",
         "required": false
       },
       {
         "name": "coup_softness",
         "type": "Any",
-        "desc": "",
+        "desc": "must be non-negative",
         "required": false
       },
       {
         "name": "coup_restitution",
         "type": "Any",
-        "desc": "",
+        "desc": "should be between 0 and 1",
         "required": false
       },
       {
         "name": "sdf_cell_size",
         "type": "Any",
-        "desc": "",
+        "desc": "cell size in SDF grid in meters",
         "required": false
       },
       {
         "name": "sdf_min_res",
         "type": "Any",
-        "desc": "",
+        "desc": "must be at least 16",
         "required": false
       },
       {
         "name": "sdf_max_res",
         "type": "Any",
-        "desc": "",
+        "desc": "must be >= sdf_min_res",
         "required": false
       },
       {
         "name": "gravity_compensation",
         "type": "Any",
-        "desc": "",
+        "desc": "1.0 cancels gravity",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "coup_friction must be non-negative",
+      "coup_softness must be non-negative",
+      "coup_restitution should be between 0 and 1",
+      "sdf_min_res must be at least 16",
+      "sdf_max_res must be >= sdf_min_res"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -4849,7 +5136,7 @@
       {
         "name": "friction",
         "type": "Any",
-        "desc": "",
+        "desc": "If None, a default of 1.0 may be used or parsed from file.",
         "required": false
       },
       {
@@ -4861,47 +5148,53 @@
       {
         "name": "coup_friction",
         "type": "Any",
-        "desc": "",
+        "desc": "Must be non-negative.",
         "required": false
       },
       {
         "name": "coup_softness",
         "type": "Any",
-        "desc": "",
+        "desc": "Must be non-negative.",
         "required": false
       },
       {
         "name": "coup_restitution",
         "type": "Any",
-        "desc": "",
+        "desc": "Should be between 0 and 1.",
         "required": false
       },
       {
         "name": "sdf_cell_size",
         "type": "Any",
-        "desc": "",
+        "desc": "Cell size in SDF grid in meters.",
         "required": false
       },
       {
         "name": "sdf_min_res",
         "type": "Any",
-        "desc": "",
+        "desc": "Must be at least 16.",
         "required": false
       },
       {
         "name": "sdf_max_res",
         "type": "Any",
-        "desc": "",
+        "desc": "Must be >= sdf_min_res.",
         "required": false
       },
       {
         "name": "gravity_compensation",
         "type": "Any",
-        "desc": "",
+        "desc": "1.0 cancels gravity.",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "coup_friction must be non-negative",
+      "coup_softness must be non-negative",
+      "coup_restitution should be between 0 and 1",
+      "sdf_min_res must be at least 16",
+      "sdf_max_res must be >= sdf_min_res"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -4912,7 +5205,9 @@
     "signature": "Material()",
     "summary": "The base class of materials.",
     "parameters": [],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly."
+    ],
     "domain_tags": [
       "material"
     ]
@@ -4968,37 +5263,37 @@
       {
         "name": "damping",
         "type": "Any",
-        "desc": "",
+        "desc": "Damping coefficient between soft and rigid.",
         "required": false
       },
       {
         "name": "thickness",
         "type": "Any",
-        "desc": "",
+        "desc": "The thickness to instantiate soft skin.",
         "required": false
       },
       {
         "name": "soft_dv_coef",
         "type": "Any",
-        "desc": "",
+        "desc": "The coefficient to apply delta velocity from rigid to soft.",
         "required": false
       },
       {
         "name": "func_instantiate_rigid_from_soft",
         "type": "Any",
-        "desc": "",
+        "desc": "The function to instantiate rigid body from the geometry of soft body.",
         "required": false
       },
       {
         "name": "func_instantiate_soft_from_rigid",
         "type": "Any",
-        "desc": "",
+        "desc": "The function to instantiate soft body from the geometry of rigid body.",
         "required": false
       },
       {
         "name": "func_instantiate_rigid_soft_association",
         "type": "Any",
-        "desc": "",
+        "desc": "The function that determines the association of the rigid and the soft body.",
         "required": false
       }
     ],
@@ -5013,7 +5308,9 @@
     "signature": "Material()",
     "summary": "The base class of materials.",
     "parameters": [],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly."
+    ],
     "domain_tags": [
       "material"
     ]
@@ -5024,7 +5321,9 @@
     "signature": "Material()",
     "summary": "The base class of materials.",
     "parameters": [],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -5038,13 +5337,13 @@
       {
         "name": "rho",
         "type": "Any",
-        "desc": "",
+        "desc": "density used to compute mass",
         "required": false
       },
       {
         "name": "friction",
         "type": "Any",
-        "desc": "",
+        "desc": "friction coefficient within rigid solver; if None, default 1.0 may be used or parsed from file",
         "required": false
       },
       {
@@ -5056,47 +5355,53 @@
       {
         "name": "coup_friction",
         "type": "Any",
-        "desc": "",
+        "desc": "must be non-negative",
         "required": false
       },
       {
         "name": "coup_softness",
         "type": "Any",
-        "desc": "",
+        "desc": "must be non-negative",
         "required": false
       },
       {
         "name": "coup_restitution",
         "type": "Any",
-        "desc": "",
+        "desc": "should be between 0 and 1",
         "required": false
       },
       {
         "name": "sdf_cell_size",
         "type": "Any",
-        "desc": "",
+        "desc": "cell size in SDF grid in meters",
         "required": false
       },
       {
         "name": "sdf_min_res",
         "type": "Any",
-        "desc": "",
+        "desc": "must be at least 16",
         "required": false
       },
       {
         "name": "sdf_max_res",
         "type": "Any",
-        "desc": "",
+        "desc": "must be >= sdf_min_res",
         "required": false
       },
       {
         "name": "gravity_compensation",
         "type": "Any",
-        "desc": "",
+        "desc": "1.0 cancels gravity",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "coup_friction must be non-negative",
+      "coup_softness must be non-negative",
+      "coup_restitution should be between 0 and 1",
+      "sdf_min_res must be at least 16",
+      "sdf_max_res must be >= sdf_min_res"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -5107,7 +5412,9 @@
     "signature": "Material()",
     "summary": "The base class of materials.",
     "parameters": [],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly"
+    ],
     "domain_tags": [
       "material"
     ]
@@ -5143,7 +5450,9 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly."
+    ],
     "domain_tags": [
       "material"
     ]
@@ -5801,7 +6110,7 @@
       {
         "name": "direction",
         "type": "Any",
-        "desc": "",
+        "desc": "Will be normalized.",
         "required": false
       },
       {
@@ -5847,7 +6156,7 @@
       {
         "name": "func",
         "type": "Any",
-        "desc": "",
+        "desc": "Must be a callable taichi function with signature `f(pos: ti.types.vector(3), vel: ti.types.vector(3), t: ti.f32) -> ti.types.vector(3)`",
         "required": true
       }
     ],
@@ -5887,13 +6196,13 @@
       {
         "name": "linear",
         "type": "Any",
-        "desc": "",
+        "desc": "linear drag coefficient",
         "required": false
       },
       {
         "name": "quadratic",
         "type": "Any",
-        "desc": "",
+        "desc": "quadratic drag coefficient",
         "required": false
       }
     ],
@@ -5930,7 +6239,9 @@
     "signature": "ForceField()",
     "summary": "Base class for all force fields. This class should not be used directly.",
     "parameters": [],
-    "constraints": [],
+    "constraints": [
+      "This class should not be used directly."
+    ],
     "domain_tags": [
       "engine"
     ]
@@ -6006,25 +6317,25 @@
       {
         "name": "wrap_size",
         "type": "Any",
-        "desc": "",
+        "desc": "size of the repeating pattern in the noise field",
         "required": false
       },
       {
         "name": "frequency",
         "type": "Any",
-        "desc": "",
+        "desc": "frequency of the noise in cycles per unit",
         "required": false
       },
       {
         "name": "seed",
         "type": "Any",
-        "desc": "",
+        "desc": "seed for random number generation; if None, uses random seed",
         "required": false
       },
       {
         "name": "seed_offset",
         "type": "Any",
-        "desc": "",
+        "desc": "offset added to the seed value",
         "required": false
       }
     ],
@@ -6042,7 +6353,7 @@
       {
         "name": "strength",
         "type": "Any",
-        "desc": "",
+        "desc": "Positive values create force towards the point, negative values create force away from the point",
         "required": false
       },
       {
@@ -6130,7 +6441,7 @@
       {
         "name": "frequency",
         "type": "Any",
-        "desc": "",
+        "desc": "spatial frequency of repeated patterns used for Perlin noise",
         "required": false
       },
       {
@@ -6142,7 +6453,7 @@
       {
         "name": "seed",
         "type": "Any",
-        "desc": "",
+        "desc": "seed for the Perlin noise",
         "required": false
       }
     ],
@@ -6194,13 +6505,13 @@
       {
         "name": "strength_perpendicular",
         "type": "Any",
-        "desc": "",
+        "desc": "Positive for counterclockwise, negative for clockwise.",
         "required": false
       },
       {
         "name": "strength_radial",
         "type": "Any",
-        "desc": "",
+        "desc": "Positive for inward, negative for outward.",
         "required": false
       },
       {
@@ -6212,13 +6523,13 @@
       {
         "name": "falloff_min",
         "type": "Any",
-        "desc": "",
+        "desc": "in meters. Under this distance, the force is effective with full strength.",
         "required": false
       },
       {
         "name": "falloff_max",
         "type": "Any",
-        "desc": "",
+        "desc": "in meters. Above this distance, the force is ineffective.",
         "required": false
       },
       {
@@ -6264,7 +6575,7 @@
       {
         "name": "direction",
         "type": "Any",
-        "desc": "",
+        "desc": "Will be normalized.",
         "required": false
       },
       {
@@ -6498,11 +6809,13 @@
       {
         "name": "force",
         "type": "Any",
-        "desc": "",
+        "desc": "When True, overrides existing textures even if they have higher priority",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Existing textures have higher priority and won't be overridden unless force=True"
+    ],
     "domain_tags": [
       "surface"
     ]
@@ -6520,7 +6833,11 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "double_sided defaults to True for Cloth material and False for others",
+      "vis_mode possible values are ['visual', 'particle', 'collision', 'sdf', 'recon']",
+      "recon_backend possible values are ['splashsurf', 'openvdb']"
+    ],
     "domain_tags": [
       "surface"
     ]
@@ -6692,11 +7009,13 @@
       {
         "name": "force",
         "type": "Any",
-        "desc": "",
+        "desc": "When True, overrides existing textures even if they have higher priority",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Existing textures have higher priority and won't be overridden unless force=True"
+    ],
     "domain_tags": [
       "surface"
     ]
@@ -6886,11 +7205,13 @@
       {
         "name": "force",
         "type": "Any",
-        "desc": "",
+        "desc": "When True, overrides existing textures even if they have higher priority",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Existing textures have higher priority and won't be overridden unless force=True"
+    ],
     "domain_tags": [
       "surface"
     ]
@@ -7180,11 +7501,13 @@
       {
         "name": "force",
         "type": "Any",
-        "desc": "",
+        "desc": "When True, overrides existing textures even if they have higher priority",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Existing textures have higher priority and won't be overridden unless force=True"
+    ],
     "domain_tags": [
       "surface"
     ]
@@ -7374,11 +7697,13 @@
       {
         "name": "force",
         "type": "Any",
-        "desc": "",
+        "desc": "When True, overrides existing textures even if they already exist",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Existing textures have higher priority and won't be overridden unless force=True"
+    ],
     "domain_tags": [
       "surface"
     ]
@@ -7568,11 +7893,13 @@
       {
         "name": "force",
         "type": "Any",
-        "desc": "",
+        "desc": "When True, enables overriding of existing textures (default behavior preserves existing textures)",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Existing textures have higher priority and won't be overridden unless force=True"
+    ],
     "domain_tags": [
       "surface"
     ]
@@ -7632,7 +7959,12 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly",
+      "double_sided defaults to True for Cloth material and False for others",
+      "vis_mode possible values: ['visual', 'particle', 'collision', 'sdf', 'recon']",
+      "recon_backend possible values: ['splashsurf', 'openvdb']"
+    ],
     "domain_tags": [
       "surface"
     ]
@@ -7804,11 +8136,13 @@
       {
         "name": "force",
         "type": "Any",
-        "desc": "",
+        "desc": "When True, enables overriding of existing textures even if they have higher priority",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Existing textures have higher priority and won't be overridden unless force=True"
+    ],
     "domain_tags": [
       "surface"
     ]
@@ -7998,11 +8332,13 @@
       {
         "name": "force",
         "type": "Any",
-        "desc": "",
+        "desc": "When True, overrides existing textures even if they already exist",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Existing textures have higher priority and won't be overridden unless force=True"
+    ],
     "domain_tags": [
       "surface"
     ]
@@ -8314,11 +8650,13 @@
       {
         "name": "force",
         "type": "Any",
-        "desc": "",
+        "desc": "When True, overrides existing textures even if they have higher priority",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Existing textures have higher priority and won't be overridden unless force=True"
+    ],
     "domain_tags": [
       "surface"
     ]
@@ -8508,11 +8846,13 @@
       {
         "name": "force",
         "type": "Any",
-        "desc": "",
+        "desc": "When True, enables overriding existing textures even if they have higher priority",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Existing textures have higher priority and won't be overridden unless force=True"
+    ],
     "domain_tags": [
       "surface"
     ]
@@ -8530,7 +8870,9 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly."
+    ],
     "domain_tags": [
       "surface"
     ]
@@ -8572,7 +8914,10 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Plastic surface is the most basic type of surface",
+      "double_sided defaults to True for Cloth material and False for others"
+    ],
     "domain_tags": [
       "surface"
     ]
@@ -8744,11 +9089,13 @@
       {
         "name": "force",
         "type": "Any",
-        "desc": "",
+        "desc": "When True, overrides existing textures even if they have higher priority",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Existing textures have higher priority and won't be overridden unless force=True"
+    ],
     "domain_tags": [
       "surface"
     ]
@@ -8938,11 +9285,13 @@
       {
         "name": "force",
         "type": "Any",
-        "desc": "",
+        "desc": "When True, overrides existing textures even if they already exist",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Existing textures have higher priority and won't be overridden unless force=True"
+    ],
     "domain_tags": [
       "surface"
     ]
@@ -9132,11 +9481,13 @@
       {
         "name": "force",
         "type": "Any",
-        "desc": "",
+        "desc": "When True, overrides existing textures even if they already exist",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Existing textures have higher priority and won't be overridden unless force=True"
+    ],
     "domain_tags": [
       "surface"
     ]
@@ -9326,11 +9677,13 @@
       {
         "name": "force",
         "type": "Any",
-        "desc": "",
+        "desc": "When True, overrides existing textures even if they have higher priority",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Existing textures have higher priority and won't be overridden unless force=True"
+    ],
     "domain_tags": [
       "surface"
     ]
@@ -9348,7 +9701,9 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly"
+    ],
     "domain_tags": [
       "surface"
     ]
@@ -9520,11 +9875,13 @@
       {
         "name": "force",
         "type": "Any",
-        "desc": "",
+        "desc": "When True, enables overriding of existing textures (which normally have higher priority)",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Existing textures have higher priority and won't be overridden unless force=True"
+    ],
     "domain_tags": [
       "surface"
     ]
@@ -9542,7 +9899,9 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly."
+    ],
     "domain_tags": [
       "surface"
     ]
@@ -9814,11 +10173,13 @@
       {
         "name": "force",
         "type": "Any",
-        "desc": "",
+        "desc": "When True, enables overriding of existing textures even if they have higher priority",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Existing textures have higher priority and won't be overridden unless force=True"
+    ],
     "domain_tags": [
       "surface"
     ]
@@ -9836,7 +10197,9 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "AvatarEntity is similar to RigidEntity, but without internal physics"
+    ],
     "domain_tags": [
       "config"
     ]
@@ -9962,7 +10325,12 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Damping coefficients are used in the Rayleigh Damping model",
+      "TODO Move damping to material parameters in the future instead of solver options",
+      "Implicit solver is a more stable solver for FEM that can be used with a large time step",
+      "Parameters n_newton_iterations, n_pcg_iterations, n_linesearch_iterations, newton_dx_threshold, pcg_threshold, linesearch_c, linesearch_tau, damping_alpha, and damping_beta are only used when use_implicit_solver is True"
+    ],
     "domain_tags": [
       "config",
       "core"
@@ -10132,7 +10500,13 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "MPM uses a grid representation with safety padding added to specified bounds, making actual boundaries slightly tighter than specified",
+      "Domain size affects simulation performance - set bounds as tight as possible",
+      "If particle_size not given, it will be computed based on grid_density (linearly proportional to grid cell size)",
+      "use_sparse_grid option is deprecated",
+      "leaf_block_size option is deprecated"
+    ],
     "domain_tags": [
       "config",
       "core"
@@ -10175,7 +10549,10 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "If spatial hashing parameters are not given, they will be computed automatically: hash_grid_cell_size = 1.25 * particle_size; hash_grid_res uses a default value of a 150^3 cube if no small bound is given",
+      "Any grid bigger than 150^3 will result in too many cells and is not ideal"
+    ],
     "domain_tags": [
       "config",
       "core"
@@ -10261,7 +10638,11 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Hibernation hasn't been robustly tested and will be fully supported soon",
+      "noslip solver should only be enabled if necessary because it is experimental and will slow down the simulation",
+      "contact_resolve_time will be deprecated in a future version"
+    ],
     "domain_tags": [
       "config",
       "core"
@@ -10390,7 +10771,13 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "If spatial hashing parameters are not given, they will be computed automatically",
+      "hash_grid_cell_size should be at least 2 * particle_size",
+      "Any grid bigger than 150^3 cube will result in too many cells and is not ideal",
+      "For hash_grid_cell_size, if not given, it will be set to support_radius (2 * particle_size)",
+      "For hash_grid_res, if not given and no small bound is provided, default is 150^3 cube"
+    ],
     "domain_tags": [
       "config",
       "core"
@@ -10433,7 +10820,10 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "In differentiable mode, substeps_local must be divisible by substeps",
+      "If requires_grad is False, arbitrary substeps_local can be used"
+    ],
     "domain_tags": [
       "config",
       "core"
@@ -10476,7 +10866,13 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "ToolEntity is a simplified form of RigidEntity with no internal dynamics",
+      "ToolEntity can only be created from a single mesh",
+      "ToolEntity supports one way tool->other coupling only",
+      "This is a temporal workaround for differentiable rigid-soft interaction",
+      "This solver will be removed once differentiable mode is supported by the RigidSolver"
+    ],
     "domain_tags": [
       "config"
     ]
@@ -10518,7 +10914,10 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "The viewer's camera uses the `Rasterizer` backend regardless of `gs.renderers.*` when creating the scene.",
+      "run_in_thread option is not supported on MacOS"
+    ],
     "domain_tags": [
       "config",
       "core"
@@ -10561,7 +10960,12 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "env_separate_rigid is only an option for Rasterizer; enforced for BatchRender",
+      "segmentation_level must be one of ['entity', 'link', 'geom']",
+      "render_particle_as must be one of ['sphere', 'tet']",
+      "n_rendered_envs is deprecated; use rendered_envs_idx instead"
+    ],
     "domain_tags": [
       "config",
       "core"
@@ -10688,7 +11092,9 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly"
+    ],
     "domain_tags": [
       "config"
     ]
@@ -10730,7 +11136,9 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly."
+    ],
     "domain_tags": [
       "config"
     ]
@@ -10796,7 +11204,9 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly."
+    ],
     "domain_tags": [
       "config"
     ]
@@ -11000,7 +11410,11 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Values must be N-dimensional tensors, arrays or scalars (np.generic, int, float, str)",
+      "If the data or header is a dict, it cannot be further nested",
+      "Values are processed in order"
+    ],
     "domain_tags": [
       "config"
     ]
@@ -11056,7 +11470,7 @@
       {
         "name": "labels",
         "type": "tuple[str, ...] | dict[str, tuple[str, ...]] | None",
-        "desc": "",
+        "desc": "Length must match data length. If dict, data must also be dict of tuples with matching lengths.",
         "required": false
       },
       {
@@ -11074,11 +11488,13 @@
       {
         "name": "history_length",
         "type": "int",
-        "desc": "",
+        "desc": "Maximum number of previous data points to store.",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Recorded data_func must return scalar data (single scalar, tuple of scalars, or dict with string keys and scalar/tuple values)."
+    ],
     "domain_tags": [
       "config"
     ]
@@ -11092,11 +11508,13 @@
       {
         "name": "data",
         "type": "Dict",
-        "desc": "[Auto-Detect] Variable keyword arguments. Needs LLM expansion.",
+        "desc": "Array-like object with shape (H, W), (H, W, 1), (H, W, 3), or (H, W, 4)",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Image data must have shape (H, W), (H, W, 1), (H, W, 3), or (H, W, 4)"
+    ],
     "domain_tags": [
       "config"
     ]
@@ -11152,11 +11570,15 @@
       {
         "name": "data",
         "type": "Dict",
-        "desc": "[Auto-Detect] Variable keyword arguments. Needs LLM expansion.",
+        "desc": "The recorded data_func should return scalar data (single scalar, a tuple of scalars, or a dict with string keys and scalar or tuple of scalars as values).",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Recorded data_func should return scalar data (single scalar, tuple of scalars, or dict with string keys and scalar/tuple values)",
+      "Labels length should match the length of the data",
+      "If labels is a dict, data should also be a dict of tuples of strings matching data length"
+    ],
     "domain_tags": [
       "config"
     ]
@@ -11276,7 +11698,9 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly."
+    ],
     "domain_tags": [
       "config"
     ]
@@ -11318,7 +11742,11 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Recorded data_func should return scalar data (single scalar, tuple of scalars, or dict with string keys and scalar/tuple of scalars as values)",
+      "If labels is a dict, data should also be a dict of tuples of strings matching the length of the data",
+      "If show_window is not provided, it will be set to True if a display is connected, False otherwise"
+    ],
     "domain_tags": [
       "config"
     ]
@@ -11438,7 +11866,9 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Incoming data should either be grayscale [H, W] or color [H, W, RGB] where values are uint8 (0, 255)."
+    ],
     "domain_tags": [
       "config"
     ]
@@ -11541,7 +11971,9 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly."
+    ],
     "domain_tags": [
       "config"
     ]
@@ -11583,7 +12015,11 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Rasterizer has no parameters to be configured",
+      "Interactive viewer always uses rasterizer rendering backend (cannot be changed)",
+      "For configuring properties like shadow, lights, etc., use gs.options.VisOptions instead"
+    ],
     "domain_tags": [
       "config"
     ]
@@ -11625,7 +12061,9 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "We use a environmental sphere wrapped around the scene to render the environment map (i.e. skybox)."
+    ],
     "domain_tags": [
       "config"
     ]
@@ -11663,11 +12101,13 @@
       {
         "name": "data",
         "type": "Dict",
-        "desc": "[Auto-Detect] Variable keyword arguments. Needs LLM expansion.",
+        "desc": "Keyword arguments passed to the renderer configuration; specific parameters depend on the renderer type being configured.",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This is not an actual renderer but a configuration specifying which renderer to use and its parameters"
+    ],
     "domain_tags": [
       "config"
     ]
@@ -11709,7 +12149,9 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly"
+    ],
     "domain_tags": [
       "config"
     ]
@@ -11881,11 +12323,13 @@
       {
         "name": "force",
         "type": "Any",
-        "desc": "",
+        "desc": "When True, overrides existing textures even if they have higher priority",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Existing textures have higher priority and won't be overridden unless force=True"
+    ],
     "domain_tags": [
       "config"
     ]
@@ -11963,7 +12407,9 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "All batch renderer cameras must have the same resolution."
+    ],
     "domain_tags": [
       "config"
     ]
@@ -12181,47 +12627,50 @@
       {
         "name": "res",
         "type": "tuple",
-        "desc": "",
+        "desc": "in pixels, specified as (width, height)",
         "required": false
       },
       {
         "name": "fx",
         "type": "float | None",
-        "desc": "",
+        "desc": "in pixels, computed from fov_horizontal if None",
         "required": false
       },
       {
         "name": "fy",
         "type": "float | None",
-        "desc": "",
+        "desc": "in pixels, computed from fov_vertical if None",
         "required": false
       },
       {
         "name": "cx",
         "type": "float | None",
-        "desc": "",
+        "desc": "in pixels, defaults to image center if None",
         "required": false
       },
       {
         "name": "cy",
         "type": "float | None",
-        "desc": "",
+        "desc": "in pixels, defaults to image center if None",
         "required": false
       },
       {
         "name": "fov_horizontal",
         "type": "float",
-        "desc": "",
+        "desc": "in degrees, used to compute fx if fx is None",
         "required": false
       },
       {
         "name": "fov_vertical",
         "type": "float | None",
-        "desc": "",
+        "desc": "in degrees, used to compute fy if fy is None",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Camera intrinsics can be configured in multiple ways: 1) Provide fx and fy directly, 2) Provide fov_horizontal only, 3) Provide fov_vertical only, 4) Provide both fov_horizontal and fov_vertical",
+      "If cx or cy are not provided, they default to the image center"
+    ],
     "domain_tags": [
       "config"
     ]
@@ -12257,13 +12706,13 @@
       {
         "name": "resolution",
         "type": "float",
-        "desc": "",
+        "desc": "Grid spacing in meters",
         "required": false
       },
       {
         "name": "size",
         "type": "tuple",
-        "desc": "",
+        "desc": "Grid dimensions (length, width) in meters",
         "required": false
       },
       {
@@ -12295,7 +12744,9 @@
     "signature": "compute_ray_starts()",
     "summary": "Update ray_starts, the local start positions of the rays.",
     "parameters": [],
-    "constraints": [],
+    "constraints": [
+      "All rays start at the local origin by default"
+    ],
     "domain_tags": [
       "config"
     ]
@@ -12439,7 +12890,10 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Jitter cannot be greater than delay",
+      "Interpolate should be True when jitter is greater than 0"
+    ],
     "domain_tags": [
       "config"
     ]
@@ -12475,7 +12929,9 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly."
+    ],
     "domain_tags": [
       "config"
     ]
@@ -12517,7 +12973,9 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "OpenGL-based rendering"
+    ],
     "domain_tags": [
       "config"
     ]
@@ -12792,29 +13250,31 @@
       {
         "name": "fov",
         "type": "tuple",
-        "desc": "",
+        "desc": "Field of view in degrees for horizontal and vertical directions. If a single float is provided, the FOV is centered around 0 degrees. If a tuple is provided, it specifies the (min, max) angles.",
         "required": false
       },
       {
         "name": "n_points",
         "type": "tuple",
-        "desc": "",
+        "desc": "Number of horizontal/azimuth and vertical/elevation scan lines.",
         "required": false
       },
       {
         "name": "angular_resolution",
         "type": "tuple",
-        "desc": "",
+        "desc": "Horizontal and vertical angular resolution in degrees. Overrides n_points if provided.",
         "required": false
       },
       {
         "name": "angles",
         "type": "tuple",
-        "desc": "",
+        "desc": "Array of horizontal/vertical angles. Overrides the other options if provided.",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Either specify (n_points, fov) for uniform spacing by count, (angular_resolution, fov) for uniform spacing by resolution, or angles for custom angles."
+    ],
     "domain_tags": [
       "config"
     ]
@@ -12914,7 +13374,9 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "All batch renderer cameras must have the same resolution."
+    ],
     "domain_tags": [
       "config"
     ]
@@ -13318,47 +13780,50 @@
       {
         "name": "res",
         "type": "tuple",
-        "desc": "",
+        "desc": "in pixels, specified as (width, height)",
         "required": false
       },
       {
         "name": "fx",
         "type": "float | None",
-        "desc": "",
+        "desc": "in pixels, computed from fov_horizontal if None",
         "required": false
       },
       {
         "name": "fy",
         "type": "float | None",
-        "desc": "",
+        "desc": "in pixels, computed from fov_vertical if None",
         "required": false
       },
       {
         "name": "cx",
         "type": "float | None",
-        "desc": "",
+        "desc": "in pixels, defaults to image center if None",
         "required": false
       },
       {
         "name": "cy",
         "type": "float | None",
-        "desc": "",
+        "desc": "in pixels, defaults to image center if None",
         "required": false
       },
       {
         "name": "fov_horizontal",
         "type": "float",
-        "desc": "",
+        "desc": "in degrees, used to compute fx if fx is None",
         "required": false
       },
       {
         "name": "fov_vertical",
         "type": "float | None",
-        "desc": "",
+        "desc": "in degrees, used to compute fy if fy is None",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Camera intrinsics can be configured in multiple ways: 1) Provide fx and fy directly, 2) Provide fov_horizontal only, 3) Provide fov_vertical only, 4) Provide both fov_horizontal and fov_vertical",
+      "If cx or cy are not provided, they default to the image center"
+    ],
     "domain_tags": [
       "config"
     ]
@@ -13464,7 +13929,10 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Jitter cannot be greater than delay",
+      "Interpolate should be True when jitter is greater than 0"
+    ],
     "domain_tags": [
       "config"
     ]
@@ -13500,7 +13968,9 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly"
+    ],
     "domain_tags": [
       "config"
     ]
@@ -13697,47 +14167,49 @@
       {
         "name": "res",
         "type": "tuple",
-        "desc": "",
+        "desc": "in pixels, specified as (width, height)",
         "required": false
       },
       {
         "name": "fx",
         "type": "float | None",
-        "desc": "",
+        "desc": "in pixels, computed from fov_horizontal if None",
         "required": false
       },
       {
         "name": "fy",
         "type": "float | None",
-        "desc": "",
+        "desc": "in pixels, computed from fov_vertical if None",
         "required": false
       },
       {
         "name": "cx",
         "type": "float | None",
-        "desc": "",
+        "desc": "in pixels, defaults to image center if None",
         "required": false
       },
       {
         "name": "cy",
         "type": "float | None",
-        "desc": "",
+        "desc": "in pixels, defaults to image center if None",
         "required": false
       },
       {
         "name": "fov_horizontal",
         "type": "float",
-        "desc": "",
+        "desc": "in degrees, used to compute fx if fx is None",
         "required": false
       },
       {
         "name": "fov_vertical",
         "type": "float | None",
-        "desc": "",
+        "desc": "in degrees, used to compute fy if fy is None",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Camera intrinsics can be configured in multiple ways: 1) Provide fx and fy directly, 2) Provide fov_horizontal only, 3) Provide fov_vertical only, 4) Provide both fov_horizontal and fov_vertical"
+    ],
     "domain_tags": [
       "config"
     ]
@@ -13773,13 +14245,13 @@
       {
         "name": "resolution",
         "type": "float",
-        "desc": "",
+        "desc": "Grid spacing in meters.",
         "required": false
       },
       {
         "name": "size",
         "type": "tuple",
-        "desc": "",
+        "desc": "Grid dimensions (length, width) in meters.",
         "required": false
       },
       {
@@ -13858,29 +14330,31 @@
       {
         "name": "fov",
         "type": "tuple",
-        "desc": "",
+        "desc": "Field of view in degrees for horizontal and vertical directions. If a single float is provided, the FOV is centered around 0 degrees. If a tuple is provided, it specifies the (min, max) angles.",
         "required": false
       },
       {
         "name": "n_points",
         "type": "tuple",
-        "desc": "",
+        "desc": "Number of horizontal/azimuth and vertical/elevation scan lines.",
         "required": false
       },
       {
         "name": "angular_resolution",
         "type": "tuple",
-        "desc": "",
+        "desc": "Horizontal and vertical angular resolution in degrees. Overrides n_points if provided.",
         "required": false
       },
       {
         "name": "angles",
         "type": "tuple",
-        "desc": "",
+        "desc": "Array of horizontal/vertical angles. Overrides the other options if provided.",
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Must specify exactly one of: (n_points, fov) for uniform spacing by count, (angular_resolution, fov) for uniform spacing by resolution, or angles for custom angles"
+    ],
     "domain_tags": [
       "config"
     ]
@@ -14004,7 +14478,19 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Damping coefficients are used in the Rayleigh Damping model",
+      "TODO: Move damping to material parameters in the future instead of solver options",
+      "n_newton_iterations only used when use_implicit_solver is True",
+      "n_pcg_iterations only used when use_implicit_solver is True",
+      "n_linesearch_iterations only used when use_implicit_solver is True",
+      "newton_dx_threshold only used when use_implicit_solver is True",
+      "pcg_threshold only used when use_implicit_solver is True",
+      "linesearch_c only used when use_implicit_solver is True",
+      "linesearch_tau only used when use_implicit_solver is True",
+      "damping_alpha only used when use_implicit_solver is True",
+      "damping_beta only used when use_implicit_solver is True"
+    ],
     "domain_tags": [
       "config"
     ]
@@ -14046,7 +14532,12 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Higher ipc_constraint_strength values create stiffer coupling between Genesis rigid bodies and IPC ABD objects",
+      "When two_way_coupling=False, only Genesis → IPC coupling is active (one-way)",
+      "When IPC_self_contact=False, only FEM-FEM and FEM-ABD collisions are detected",
+      "disable_genesis_ground_contact can be useful to avoid double-counting ground contacts"
+    ],
     "domain_tags": [
       "config"
     ]
@@ -14130,7 +14621,13 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "A safety padding will be added to the actual grid boundary, so actual boundary could be slightly tighter than specified upper_bound/lower_bound",
+      "Size of the domain affects performance, so set it as tight as possible",
+      "If particle_size not given, it will be computed based on grid_density (linearly proportional to grid cell size)",
+      "use_sparse_grid option is deprecated",
+      "leaf_block_size option is deprecated"
+    ],
     "domain_tags": [
       "config"
     ]
@@ -14172,7 +14669,9 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly."
+    ],
     "domain_tags": [
       "config"
     ]
@@ -14214,7 +14713,11 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "If spatial hashing parameters are not given, they will be computed automatically: hash_grid_cell_size = 1.25 * particle_size",
+      "For hash_grid_res: if a small bound is given, it's used for the hash grid; otherwise, a default value of a 150^3 cube is used",
+      "Any grid bigger than 150^3 will result in too many cells and is not ideal"
+    ],
     "domain_tags": [
       "config"
     ]
@@ -14256,7 +14759,11 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "Hibernation hasn't been robustly tested and will be fully supported soon",
+      "contact_resolve_time will be deprecated in a future version",
+      "noslip solver is experimental and will slow down simulation"
+    ],
     "domain_tags": [
       "config"
     ]
@@ -14382,7 +14889,11 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "If spatial hashing parameters are not given, they will be computed automatically: hash_grid_cell_size = support_radius (2 * particle_size); hash_grid_res defaults to a 150^3 cube if no small bound is given.",
+      "Any grid bigger than 150^3 will result in too many cells and is not ideal.",
+      "hash_grid_cell_size should be at least 2 * particle_size."
+    ],
     "domain_tags": [
       "config"
     ]
@@ -14424,7 +14935,11 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "In differentiable mode, substeps_local must be divisible by substeps",
+      "If requires_grad is False, arbitrary substeps_local can be used",
+      "Parameters in SolverOptions override SimOptions for specific solvers"
+    ],
     "domain_tags": [
       "config"
     ]
@@ -14466,7 +14981,13 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "ToolEntity is a simplified form of RigidEntity with no internal dynamics",
+      "ToolEntity supports only one-way tool->other coupling",
+      "ToolEntity can only be created from a single mesh",
+      "This is a temporal workaround for differentiable rigid-soft interaction",
+      "This solver will be removed once differentiable mode is supported by the RigidSolver"
+    ],
     "domain_tags": [
       "config"
     ]
@@ -14730,7 +15251,9 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly."
+    ],
     "domain_tags": [
       "config"
     ]
@@ -14772,7 +15295,9 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly."
+    ],
     "domain_tags": [
       "config"
     ]
@@ -14872,7 +15397,9 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "This class should not be instantiated directly."
+    ],
     "domain_tags": [
       "config"
     ]
@@ -14914,7 +15441,10 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "The viewer's camera uses the `Rasterizer` backend regardless of `gs.renderers.*` when creating the scene.",
+      "run_in_thread option is not supported on MacOS"
+    ],
     "domain_tags": [
       "config"
     ]
@@ -14956,7 +15486,12 @@
         "required": false
       }
     ],
-    "constraints": [],
+    "constraints": [
+      "env_separate_rigid is only an option for Rasterizer; enforced for BatchRender",
+      "segmentation_level should be one of ['entity', 'link', 'geom']",
+      "render_particle_as should be one of ['sphere', 'tet']",
+      "n_rendered_envs is deprecated; use rendered_envs_idx instead"
+    ],
     "domain_tags": [
       "config"
     ]

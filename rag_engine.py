@@ -374,6 +374,21 @@ class GenesisRAG:
             # 错误记忆如果不带 filter 搜不到，可能意味着没有通用错误，返回空或者尝试裸搜
             return self.error_collection.query(query_texts=[query], n_results=n_results)
 
+    def search_knowledge_units(self, query, n_results=3, tag_filter=None):
+        """检索知识单元（HyDE 优化后的聚合知识体）"""
+        where_clause = None
+        if tag_filter:
+            where_clause = {"tags": {"$contains": tag_filter}}
+
+        try:
+            return self.unit_collection.query(
+                query_texts=[query],
+                n_results=n_results,
+                where=where_clause
+            )
+        except Exception:
+            return self.unit_collection.query(query_texts=[query], n_results=n_results)
+
     def search_api(self, query, n_results=10):
         return self.api_collection.query(query_texts=[query], n_results=n_results)
 

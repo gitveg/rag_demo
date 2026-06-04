@@ -1,0 +1,399 @@
+[
+  {
+    "task_id": "eval_001",
+    "complexity": "simple",
+    "query": "Simulate a red rigid sphere falling straight down onto a flat ground.",
+    "expected_apis": [
+      "genesis.Scene.add_entity",
+      "genesis.morphs.Sphere",
+      "genesis.morphs.Plane",
+      "genesis.materials.Rigid",
+      "genesis.Scene",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.ViewerOptions",
+      "genesis.surfaces.Default"
+    ],
+    "evaluation_rules": {
+      "must_run": true,
+      "max_execution_time": null
+    }
+  },
+  {
+    "task_id": "eval_002",
+    "complexity": "simple",
+    "query": "Create a static rigid box to serve as an obstacle in the scene.",
+    "expected_apis": [
+      "genesis.Scene.add_entity",
+      "genesis.morphs.Box",
+      "genesis.materials.Rigid",
+      "genesis.Scene",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.morphs.Plane",
+      "genesis.options.ViewerOptions"
+    ],
+    "evaluation_rules": {
+      "must_run": true,
+      "max_execution_time": null
+    }
+  },
+  {
+    "task_id": "eval_003",
+    "complexity": "simple",
+    "query": "Drop a rigid cylinder from a height of 3 meters onto a horizontal plane.",
+    "expected_apis": [
+      "genesis.Scene.add_entity",
+      "genesis.morphs.Cylinder",
+      "genesis.morphs.Plane",
+      "genesis.materials.Rigid",
+      "genesis.Scene",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.ViewerOptions"
+    ],
+    "evaluation_rules": {
+      "must_run": true,
+      "max_execution_time": null
+    }
+  },
+  {
+    "task_id": "eval_004",
+    "complexity": "simple",
+    "query": "Create a rigid box floating without gravity in a zero-g environment.",
+    "expected_apis": [
+      "genesis.Scene.add_entity",
+      "genesis.morphs.Plane",
+      "genesis.materials.Rigid",
+      "genesis.Scene",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.morphs.Box",
+      "genesis.options.RigidOptions"
+    ],
+    "evaluation_rules": {
+      "must_run": true,
+      "max_execution_time": null
+    }
+  },
+  {
+    "task_id": "eval_005",
+    "complexity": "simple",
+    "query": "Create a rigid sphere floating in a completely zero-gravity environment.",
+    "expected_apis": [
+      "genesis.Scene.add_entity",
+      "genesis.morphs.Sphere",
+      "genesis.materials.Rigid",
+      "genesis.options.SimOptions",
+      "genesis.Scene",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.ViewerOptions"
+    ],
+    "evaluation_rules": {
+      "must_run": true,
+      "max_execution_time": null
+    }
+  },
+  {
+    "task_id": "eval_006",
+    "complexity": "medium",
+    "query": "Create two rigid spheres positioned side by side, falling onto the ground at the same time.",
+    "expected_apis": [
+      "genesis.Scene.add_entity",
+      "genesis.morphs.Sphere",
+      "genesis.morphs.Plane",
+      "genesis.materials.Rigid",
+      "genesis.Scene",
+      "genesis.Scene.build",
+      "genesis.Scene.step"
+    ],
+    "evaluation_rules": {
+      "must_run": true,
+      "max_execution_time": null
+    }
+  },
+  {
+    "task_id": "eval_007",
+    "complexity": "medium",
+    "query": "Stack three rigid boxes vertically on top of each other on a static ground plane.",
+    "expected_apis": [
+      "genesis.Scene.add_entity",
+      "genesis.morphs.Box",
+      "genesis.morphs.Plane",
+      "genesis.materials.Rigid",
+      "genesis.Scene",
+      "genesis.Scene.build",
+      "genesis.Scene.step"
+    ],
+    "evaluation_rules": {
+      "must_run": true,
+      "max_execution_time": null
+    }
+  },
+  {
+    "task_id": "eval_008",
+    "complexity": "medium",
+    "query": "Simulate a small rigid sphere falling directly onto the center of a large static rigid box.",
+    "expected_apis": [
+      "genesis.Scene.add_entity",
+      "genesis.morphs.Sphere",
+      "genesis.morphs.Box",
+      "genesis.materials.Rigid",
+      "genesis.Scene",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.ViewerOptions"
+    ],
+    "evaluation_rules": {
+      "must_run": true,
+      "max_execution_time": null
+    }
+  },
+  {
+    "task_id": "eval_009",
+    "complexity": "medium",
+    "query": "Spawn a red rigid box and a blue rigid cylinder, dropping them simultaneously.",
+    "expected_apis": [
+      "genesis.Scene.add_entity",
+      "genesis.morphs.Box",
+      "genesis.morphs.Cylinder",
+      "genesis.materials.Rigid",
+      "genesis.Scene",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.morphs.Plane",
+      "genesis.options.ViewerOptions",
+      "genesis.surfaces.Default"
+    ],
+    "evaluation_rules": {
+      "must_run": true,
+      "max_execution_time": null
+    }
+  },
+  {
+    "task_id": "eval_010",
+    "complexity": "medium",
+    "query": "Simulate two rigid spheres moving towards each other and colliding in mid-air.",
+    "expected_apis": [
+      "genesis.Scene.add_entity",
+      "genesis.morphs.Sphere",
+      "genesis.materials.Rigid",
+      "genesis.Scene",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.morphs.Plane",
+      "genesis.options.ViewerOptions"
+    ],
+    "evaluation_rules": {
+      "must_run": true,
+      "max_execution_time": null
+    }
+  },
+  {
+    "task_id": "eval_011",
+    "complexity": "medium",
+    "query": "Set up a scene with zero gravity where two rigid boxes gently collide with each other.",
+    "expected_apis": [
+      "genesis.Scene.add_entity",
+      "genesis.morphs.Box",
+      "genesis.options.SimOptions",
+      "genesis.materials.Rigid",
+      "genesis.Scene",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.ViewerOptions"
+    ],
+    "evaluation_rules": {
+      "must_run": true,
+      "max_execution_time": null
+    }
+  },
+  {
+    "task_id": "eval_012",
+    "complexity": "medium",
+    "query": "Simulate a small rigid box landing on top of a large static rigid sphere.",
+    "expected_apis": [
+      "genesis.Scene.add_entity",
+      "genesis.morphs.Sphere",
+      "genesis.morphs.Plane",
+      "genesis.materials.Rigid",
+      "genesis.Scene",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.morphs.Box"
+    ],
+    "evaluation_rules": {
+      "must_run": true,
+      "max_execution_time": null
+    }
+  },
+  {
+    "task_id": "eval_013",
+    "complexity": "medium",
+    "query": "Create a soft elastic sphere using MPM material falling onto a rigid ground.",
+    "expected_apis": [
+      "genesis.Scene.add_entity",
+      "genesis.morphs.Sphere",
+      "genesis.morphs.Plane",
+      "genesis.materials.MPM.Elastic",
+      "genesis.Scene",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.MPMOptions",
+      "genesis.options.SimOptions",
+      "genesis.surfaces.Default"
+    ],
+    "evaluation_rules": {
+      "must_run": true,
+      "max_execution_time": null
+    }
+  },
+  {
+    "task_id": "eval_014",
+    "complexity": "medium",
+    "query": "Stack a soft elastic box on top of a larger static rigid box.",
+    "expected_apis": [
+      "genesis.Scene.add_entity",
+      "genesis.morphs.Box",
+      "genesis.materials.MPM.Elastic",
+      "genesis.materials.Rigid",
+      "genesis.Scene",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.morphs.Plane",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions"
+    ],
+    "evaluation_rules": {
+      "must_run": true,
+      "max_execution_time": null
+    }
+  },
+  {
+    "task_id": "eval_015",
+    "complexity": "medium",
+    "query": "Create a block of liquid water dropping onto a static flat ground.",
+    "expected_apis": [
+      "genesis.Scene.add_entity",
+      "genesis.morphs.Plane",
+      "genesis.materials.MPM.Liquid",
+      "genesis.Scene",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.materials.SPH.Liquid",
+      "genesis.morphs.Box",
+      "genesis.options.ViewerOptions"
+    ],
+    "evaluation_rules": {
+      "must_run": true,
+      "max_execution_time": null
+    }
+  },
+  {
+    "task_id": "eval_016",
+    "complexity": "hard",
+    "query": "Import a bunny mesh and simulate it as a soft elastic body falling onto a rigid ground.",
+    "expected_apis": [
+      "genesis.Scene.add_entity",
+      "genesis.morphs.Mesh",
+      "genesis.morphs.Plane",
+      "genesis.materials.MPM.Elastic",
+      "genesis.Scene",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.MPMOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions",
+      "genesis.surfaces.Default"
+    ],
+    "evaluation_rules": {
+      "must_run": true,
+      "max_execution_time": null
+    }
+  },
+  {
+    "task_id": "eval_017",
+    "complexity": "hard",
+    "query": "Load a Franka robot arm from an XML file and place a red rigid box on the ground in front of it.",
+    "expected_apis": [
+      "genesis.Scene.add_entity",
+      "genesis.morphs.MJCF",
+      "genesis.morphs.Box",
+      "genesis.morphs.Plane",
+      "genesis.Scene",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.ViewerOptions",
+      "genesis.surfaces.Default"
+    ],
+    "evaluation_rules": {
+      "must_run": true,
+      "max_execution_time": null
+    }
+  },
+  {
+    "task_id": "eval_018",
+    "complexity": "hard",
+    "query": "Load a bathtub mesh as a static rigid container, add a rigid ground plane, and pour an MPM liquid volume from above into the bathtub.",
+    "expected_apis": [
+      "genesis.Scene.add_entity",
+      "genesis.morphs.Mesh",
+      "genesis.morphs.Plane",
+      "genesis.materials.Rigid",
+      "genesis.materials.MPM.Liquid",
+      "genesis.Scene",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.MPMOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions"
+    ],
+    "evaluation_rules": {
+      "must_run": true,
+      "max_execution_time": null
+    }
+  },
+  {
+    "task_id": "eval_019",
+    "complexity": "hard",
+    "query": "Create a scene where a rigid sphere rolls down a tilted static box (acting as a ramp) and knocks over a stack of three rigid boxes.",
+    "expected_apis": [
+      "genesis.Scene.add_entity",
+      "genesis.morphs.Sphere",
+      "genesis.morphs.Box",
+      "genesis.materials.Rigid",
+      "genesis.Scene",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.morphs.Plane",
+      "genesis.options.ViewerOptions"
+    ],
+    "evaluation_rules": {
+      "must_run": true,
+      "max_execution_time": null
+    }
+  },
+  {
+    "task_id": "eval_020",
+    "complexity": "hard",
+    "query": "Load an articulated robotic gripper and place a soft MPM elastic sphere between its fingers for contact-rich interaction.",
+    "expected_apis": [
+      "genesis.Scene.add_entity",
+      "genesis.morphs.MJCF",
+      "genesis.morphs.Sphere",
+      "genesis.morphs.Plane",
+      "genesis.materials.MPM.Elastic",
+      "genesis.Scene",
+      "genesis.Scene.build",
+      "genesis.Scene.step",
+      "genesis.options.MPMOptions",
+      "genesis.options.SimOptions",
+      "genesis.options.ViewerOptions"
+    ],
+    "evaluation_rules": {
+      "must_run": true,
+      "max_execution_time": null
+    }
+  }
+]

@@ -1,0 +1,526 @@
+query_gen:   0%|          | 0/24 [00:00<?, ?it/s]query_gen:   4%|▍         | 1/24 [00:43<16:45, 43.72s/it]query_gen:   8%|▊         | 2/24 [01:18<14:09, 38.63s/it]query_gen:  12%|█▎        | 3/24 [02:00<13:57, 39.88s/it]query_gen:  17%|█▋        | 4/24 [02:43<13:43, 41.18s/it]query_gen:  21%|██        | 5/24 [03:25<13:10, 41.61s/it]query_gen:  25%|██▌       | 6/24 [04:01<11:53, 39.65s/it]query_gen:  29%|██▉       | 7/24 [05:28<15:37, 55.16s/it]
+[s1_terrain_simple_001] -> s1_terrain_simple_001.py
+  - 不存在脚本，开始生成
+  - 生成中 (1/2)
+  - 执行中
+    [FAIL] 执行失败 (1/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:30:43] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:30:43] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:30:43.800 47980] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:30:44.049 47980] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+  - 生成中 (2/2)
+  - 执行中
+    [FAIL] 执行失败 (2/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:31:05] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:31:05] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:31:05.742 58264] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:31:05.989 58264] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+
+[s1_terrain_simple_002] -> s1_terrain_simple_002.py
+  - 不存在脚本，开始生成
+  - 生成中 (1/2)
+  - 执行中
+    [FAIL] 执行失败 (1/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:31:23] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:31:23] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:31:23.565 42944] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:31:23.817 42944] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+  - 生成中 (2/2)
+  - 执行中
+    [FAIL] 执行失败 (2/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:31:40] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:31:40] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:31:41.026 43140] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:31:41.272 43140] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+
+[s1_terrain_medium_001] -> s1_terrain_medium_001.py
+  - 不存在脚本，开始生成
+  - 生成中 (1/2)
+  - 执行中
+    [FAIL] 执行失败 (1/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:32:02] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:32:02] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:32:02.407 41720] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:32:02.651 41720] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+  - 生成中 (2/2)
+  - 执行中
+    [FAIL] 执行失败 (2/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:32:22] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:32:22] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:32:22.780 29776] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:32:23.021 29776] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+
+[s1_terrain_medium_002] -> s1_terrain_medium_002.py
+  - 不存在脚本，开始生成
+  - 生成中 (1/2)
+  - 执行中
+    [FAIL] 执行失败 (1/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:32:41] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:32:41] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:32:41.844 42244] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:32:42.082 42244] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+  - 生成中 (2/2)
+  - 执行中
+    [FAIL] 执行失败 (2/2)
+query_gen:  33%|███▎      | 8/24 [05:58<12:34, 47.18s/it]query_gen:  38%|███▊      | 9/24 [08:29<19:53, 79.55s/it]query_gen:  42%|████▏     | 10/24 [08:58<14:55, 63.99s/it]query_gen:  46%|████▌     | 11/24 [09:32<11:50, 54.66s/it]      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:33:05] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:33:05] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:33:05.984 52876] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:33:06.227 52876] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+
+[s1_terrain_medium_003] -> s1_terrain_medium_003.py
+  - 不存在脚本，开始生成
+  - 生成中 (1/2)
+  - 执行中
+    [FAIL] 执行失败 (1/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:33:25] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:33:25] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:33:26.226 59616] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:33:26.455 59616] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+  - 生成中 (2/2)
+  - 执行中
+    [FAIL] 执行失败 (2/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:33:48] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:33:48] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:33:48.377 60012] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:33:48.613 60012] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+
+[s1_terrain_complex_001] -> s1_terrain_complex_001.py
+  - 不存在脚本，开始生成
+  - 生成中 (1/2)
+  - 执行中
+    [FAIL] 执行失败 (1/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:34:06] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:34:06] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:34:06.483 47096] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:34:06.721 47096] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+  - 生成中 (2/2)
+  - 执行中
+    [FAIL] 执行失败 (2/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:34:23] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:34:23] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:34:24.083 11180] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:34:24.316 11180] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+
+[s1_terrain_complex_002] -> s1_terrain_complex_002.py
+  - 不存在脚本，开始生成
+  - 生成中 (1/2)
+  - 执行中
+    [FAIL] 执行失败 (1/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:34:59] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:34:59] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:34:59.854 28788] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:35:00.087 28788] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+  - 生成中 (2/2)
+  - 执行中
+    [FAIL] 执行失败 (2/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:35:51] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:35:51] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:35:51.358 60068] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:35:51.576 60068] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+
+[s1_terrain_complex_003] -> s1_terrain_complex_003.py
+  - 不存在脚本，开始生成
+  - 生成中 (1/2)
+  - 执行中
+    [FAIL] 执行失败 (1/2)
+query_gen:  50%|█████     | 12/24 [10:17<10:23, 51.95s/it]query_gen:  54%|█████▍    | 13/24 [12:33<14:10, 77.33s/it]query_gen:  58%|█████▊    | 14/24 [13:29<11:49, 70.96s/it]query_gen:  62%|██████▎   | 15/24 [14:46<10:54, 72.71s/it]      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:36:05] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:36:05] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:36:05.499 58180] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:36:05.733 58180] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+  - 生成中 (2/2)
+  - 执行中
+    [FAIL] 执行失败 (2/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:36:21] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:36:21] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:36:21.396 48448] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:36:21.630 48448] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+
+[s1_drone_simple_001] -> s1_drone_simple_001.py
+  - 不存在脚本，开始生成
+  - 生成中 (1/2)
+  - 执行中
+    [FAIL] 执行失败 (1/2)
+      原因: ...(truncated head)
+peError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:36:36] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:36:36] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:36:36.699 4012] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:36:36.947 4012] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+  - 生成中 (2/2)
+  - 执行中
+    [OK] 执行成功
+  - 提取 API
+
+[s1_drone_simple_002] -> s1_drone_simple_002.py
+  - 不存在脚本，开始生成
+  - 生成中 (1/2)
+  - 执行中
+    [FAIL] 执行失败 (1/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:39:07] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:39:07] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:39:07.820 60108] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:39:08.053 60108] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+  - 生成中 (2/2)
+  - 执行中
+    [FAIL] 执行失败 (2/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:39:21] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:39:21] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:39:21.276 43492] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:39:21.495 43492] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+
+[s1_drone_medium_001] -> s1_drone_medium_001.py
+  - 不存在脚本，开始生成
+  - 生成中 (1/2)
+  - 执行中
+    [FAIL] 执行失败 (1/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:39:38] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:39:38] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:39:38.962 38208] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:39:39.213 38208] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+  - 生成中 (2/2)
+  - 执行中
+    [FAIL] 执行失败 (2/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:39:54] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:39:54] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:39:54.919 59400] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:39:55.167 59400] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+
+[s1_drone_medium_002] -> s1_drone_medium_002.py
+  - 不存在脚本，开始生成
+  - 生成中 (1/2)
+  - 执行中
+    [FAIL] 执行失败 (1/2)
+query_gen:  67%|██████▋   | 16/24 [15:42<09:02, 67.77s/it]query_gen:  71%|███████   | 17/24 [16:21<06:53, 59.08s/it]query_gen:  75%|███████▌  | 18/24 [17:05<05:26, 54.44s/it]query_gen:  79%|███████▉  | 19/24 [19:22<06:36, 79.32s/it]query_gen:  83%|████████▎ | 20/24 [20:22<04:53, 73.34s/it]      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:40:18] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:40:18] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:40:19.126 50020] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:40:19.358 50020] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+  - 生成中 (2/2)
+  - 执行中
+    [FAIL] 执行失败 (2/2)
+      原因: ...(truncated head)
+peError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:40:40] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:40:40] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:40:40.601 3096] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:40:40.853 3096] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+
+[s1_drone_medium_003] -> s1_drone_medium_003.py
+  - 不存在脚本，开始生成
+  - 生成中 (1/2)
+  - 执行中
+    [OK] 执行成功
+  - 提取 API
+
+[s1_drone_complex_001] -> s1_drone_complex_001.py
+  - 已存在脚本，重新执行验证
+    [FAIL] 验证失败，删除后重新生成
+  - 生成中 (1/2)
+  - 执行中
+    [FAIL] 执行失败 (1/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:43:29] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:43:29] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:43:29.279 47876] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:43:29.512 47876] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+  - 生成中 (2/2)
+  - 执行中
+    [FAIL] 执行失败 (2/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:43:52] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:43:52] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:43:52.448 10964] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:43:52.699 10964] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+
+[s1_drone_complex_002] -> s1_drone_complex_002.py
+  - 已存在脚本，重新执行验证
+    [FAIL] 验证失败，删除后重新生成
+  - 生成中 (1/2)
+  - 执行中
+    [FAIL] 执行失败 (1/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:44:37] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:44:37] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:44:37.469 40820] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:44:37.722 40820] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+  - 生成中 (2/2)
+  - 执行中
+    [FAIL] 执行失败 (2/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:45:09] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:45:09] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:45:09.253 13172] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:45:09.480 13172] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+
+[s1_drone_complex_003] -> s1_drone_complex_003.py
+  - 已存在脚本，重新执行验证
+    [FAIL] 验证失败，删除后重新生成
+  - 生成中 (1/2)
+  - 执行中
+    [FAIL] 执行失败 (1/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:45:38] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:45:38] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:45:38.586 45940] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:45:38.827 45940] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+  - 生成中 (2/2)
+  - 执行中
+    [FAIL] 执行失败 (2/2)
+query_gen:  88%|████████▊ | 21/24 [21:06<03:14, 64.69s/it]query_gen:  92%|█████████▏| 22/24 [21:52<01:58, 59.12s/it]query_gen:  96%|█████████▌| 23/24 [23:05<01:03, 63.15s/it]      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:46:05] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:46:05] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:46:05.957 37728] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:46:06.189 37728] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+
+[s1_sensor_simple_001] -> s1_sensor_simple_001.py
+  - 已存在脚本，重新执行验证
+    [FAIL] 验证失败，删除后重新生成
+  - 生成中 (1/2)
+  - 执行中
+    [FAIL] 执行失败 (1/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:46:27] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:46:27] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:46:28.245 56628] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:46:28.490 56628] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+  - 生成中 (2/2)
+  - 执行中
+    [FAIL] 执行失败 (2/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:46:44] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:46:44] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:46:44.373 56804] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:46:44.625 56804] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+
+[s1_sensor_simple_002] -> s1_sensor_simple_002.py
+  - 已存在脚本，重新执行验证
+    [FAIL] 验证失败，删除后重新生成
+  - 生成中 (1/2)
+  - 执行中
+    [FAIL] 执行失败 (1/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:47:11] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:47:11] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:47:11.346 20248] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:47:11.588 20248] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+  - 生成中 (2/2)
+  - 执行中
+    [FAIL] 执行失败 (2/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:47:27] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:47:27] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:47:28.074 31468] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:47:28.320 31468] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+
+[s1_sensor_medium_001] -> s1_sensor_medium_001.py
+  - 已存在脚本，重新执行验证
+    [OK] 验证通过，直接用于 API 提取
+  - 提取 API
+
+[s1_sensor_medium_002] -> s1_sensor_medium_002.py
+  - 已存在脚本，重新执行验证
+    [FAIL] 验证失败，删除后重新生成
+  - 生成中 (1/2)
+  - 执行中
+    [FAIL] 执行失败 (1/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:50:17] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:50:17] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:50:18.105 42692] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:50:18.325 42692] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+  - 生成中 (2/2)
+  - 执行中
+    [FAIL] 执行失败 (2/2)
+      原因: ...(truncated head)
+peError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:50:44] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:50:44] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:50:44.695 6092] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:50:44.943 6092] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+
+[s1_sensor_medium_003] -> s1_sensor_medium_003.py
+  - 已存在脚本，重新执行验证
+    [FAIL] 验证失败，删除后重新生成
+  - 生成中 (1/2)
+  - 执行中
+    [FAIL] 执行失败 (1/2)
+query_gen: 100%|██████████| 24/24 [24:07<00:00, 62.95s/it]query_gen: 100%|██████████| 24/24 [24:07<00:00, 60.32s/it]
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:51:12] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:51:12] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:51:12.673 48044] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:51:12.919 48044] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+  - 生成中 (2/2)
+  - 执行中
+    [FAIL] 执行失败 (2/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:51:28] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:51:28] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:51:29.227 60356] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:51:29.475 60356] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+
+[s1_sensor_complex_001] -> s1_sensor_complex_001.py
+  - 已存在脚本，重新执行验证
+    [FAIL] 验证失败，删除后重新生成
+  - 生成中 (1/2)
+  - 执行中
+    [FAIL] 执行失败 (1/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:51:56] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:51:56] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:51:56.575 57284] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:51:56.825 57284] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+  - 生成中 (2/2)
+  - 执行中
+    [FAIL] 执行失败 (2/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:52:15] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:52:15] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:52:15.404 59116] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:52:15.655 59116] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+
+[s1_sensor_complex_002] -> s1_sensor_complex_002.py
+  - 已存在脚本，重新执行验证
+    [FAIL] 验证失败，删除后重新生成
+  - 生成中 (1/2)
+  - 执行中
+    [FAIL] 执行失败 (1/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:52:56] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:52:56] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:52:56.888 31264] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:52:57.126 31264] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+  - 生成中 (2/2)
+  - 执行中
+    [FAIL] 执行失败 (2/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:53:27] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:53:27] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:53:28.016 33432] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:53:28.254 33432] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+
+[s1_sensor_complex_003] -> s1_sensor_complex_003.py
+  - 已存在脚本，重新执行验证
+    [FAIL] 验证失败，删除后重新生成
+  - 生成中 (1/2)
+  - 执行中
+    [FAIL] 执行失败 (1/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:54:02] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:54:02] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:54:02.992 26368] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:54:03.239 26368] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+  - 生成中 (2/2)
+  - 执行中
+    [FAIL] 执行失败 (2/2)
+      原因: ...(truncated head)
+Error: Rigid.__init__() got an unexpected keyword argument 'restitution'
+
+[Genesis] [00:54:30] [ERROR] TypeError: Rigid.__init__() got an unexpected keyword argument 'restitution'
+[Genesis] [00:54:30] [INFO] ? Exiting Genesis and caching compiled kernels...
+[W 05/25/26 00:54:30.361 19512] [kernel_compilation_manager.cpp:gstaichi::lang::KernelCompilationManager::KernelCompilationManager@71] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+[W 05/25/26 00:54:30.613 19512] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.
+
+[DONE] 已更新 stage1_manual/stage1_prompts.json 中 3 条 expected_apis
+[REPORT] 明细报告: D:\Desktop\Genesis\Genesis-main\rag_demo\benchmark\results\query_gen_report.txt

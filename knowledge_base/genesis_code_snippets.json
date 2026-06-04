@@ -1,7 +1,7 @@
 [
   {
     "id": "snip_50d91092",
-    "task": "Usage example of gs.init",
+    "task": "This code initializes the Google Sheets API for use in a script.",
     "code": "gs.init()",
     "key_apis": [
       "gs.init"
@@ -11,9 +11,9 @@
     ]
   },
   {
-    "id": "snip_3bcda82f",
-    "task": "Usage example of gs.init",
-    "code": "gs.init(precision=\"32\", logging_level=\"warning\")",
+    "id": "snip_2df3f1c9",
+    "task": "This code initializes a computational environment with 32-bit precision, sets the logging level to info, and specifies the CPU as the backend.",
+    "code": "gs.init(precision=\"32\", logging_level=\"info\", backend=gs.cpu)",
     "key_apis": [
       "gs.init"
     ],
@@ -22,9 +22,9 @@
     ]
   },
   {
-    "id": "snip_8319b884",
-    "task": "Usage example of gs.init",
-    "code": "gs.init(backend=gs.cpu if args.cpu else gs.gpu, seed=0, precision=\"32\", logging_level=\"info\")",
+    "id": "snip_8295cfbd",
+    "task": "This code initializes a GPU-accelerated computational environment with single precision, performance optimization, a fixed random seed, and minimal logging.",
+    "code": "gs.init(backend=gs.gpu, precision=\"32\", performance_mode=True, seed=0, logging_level=\"warning\")",
     "key_apis": [
       "gs.init"
     ],
@@ -33,9 +33,9 @@
     ]
   },
   {
-    "id": "snip_9ae283c4",
-    "task": "Usage example of gs.Scene",
-    "code": "scene = gs.Scene(\n        viewer_options=gs.options.ViewerOptions(\n            camera_pos=(3.5, 0.0, 2.5),\n            camera_lookat=(0.0, 0.0, 0.5),\n            camera_fov=40,\n        ),\n        show_viewer=False,\n        show_FPS=False,\n    )",
+    "id": "snip_1664ecf6",
+    "task": "This code creates a new scene object.",
+    "code": "gs.Scene()",
     "key_apis": [
       "gs.Scene"
     ],
@@ -44,9 +44,9 @@
     ]
   },
   {
-    "id": "snip_b69ea974",
-    "task": "Usage example of gs.Scene",
-    "code": "scene = gs.Scene(\n        sim_options=gs.options.SimOptions(\n            dt=dt,\n            substeps=substeps,\n            gravity=(0, 0, -9.81),\n        ),\n        fem_options=gs.options.FEMOptions(\n            use_implicit_solver=args.solver == \"implicit\",\n            enable_vertex_constraints=True,\n        ),\n        profiling_options=gs.options.ProfilingOptions(\n            show_FPS=False,\n        ),\n        show_viewer=args.vis,\n    )",
+    "id": "snip_ffb8f07b",
+    "task": "This code initializes a simulation scene with specified viewer and rigid body dynamics settings.",
+    "code": "scene = gs.Scene(\n        viewer_options=gs.options.ViewerOptions(\n            camera_pos=(0.0, -2, 1.5),\n            camera_lookat=(0.0, 0.0, 0.5),\n            camera_fov=40,\n            max_FPS=200,\n        ),\n        rigid_options=gs.options.RigidOptions(\n            dt=0.01,\n            constraint_solver=gs.constraint_solver.Newton,\n        ),\n        show_viewer=args.vis,\n    )",
     "key_apis": [
       "gs.Scene"
     ],
@@ -55,9 +55,9 @@
     ]
   },
   {
-    "id": "snip_6ad67ef4",
-    "task": "Usage example of gs.Scene",
-    "code": "gs.Scene(\n        sim_options=gs.options.SimOptions(\n            substeps=4,\n        ),\n        rigid_options=gs.options.RigidOptions(\n            enable_joint_limit=True,\n            enable_collision=True,\n            gravity=(0, 0, -9.8),\n            box_box_detection=True,\n            constraint_timeconst=0.01,\n        ),\n        viewer_options=gs.options.ViewerOptions(\n            camera_pos=(1.5, 0.0, 0.7),\n            camera_lookat=(0.2, 0.0, 0.1),\n            camera_fov=50,\n            max_FPS=60,\n        ),\n        show_viewer=True,\n        show_FPS=False,\n    )",
+    "id": "snip_9f96a9ec",
+    "task": "This code configures a simulation scene with specific physics parameters for rigid body dynamics and material point method (MPM) interactions, including collision settings, gravity, and viewer options.",
+    "code": "gs.Scene(\n    sim_options=gs.options.SimOptions(\n        dt=3e-3,\n        substeps=10,\n    ),\n    rigid_options=gs.options.RigidOptions(\n        gravity=(0, 0, -9.8),\n        enable_collision=True,\n        enable_self_collision=False,\n        enable_adjacent_collision=False,\n        # Prevent the rigid contact solver from being too stiff otherwise this would cause large impulse, especially\n        # because the simulation timestep must be very small to ensure numerical stability of rigid body dynamics.\n        constraint_timeconst=0.02,\n    ),\n    mpm_options=gs.options.MPMOptions(\n        lower_bound=(0.0, 0.0, -0.2),\n        upper_bound=(1.0, 1.0, 1.0),\n        gravity=(0, 0, 0),  # mimic gravity compensation\n        enable_CPIC=True,\n    ),\n    viewer_options=gs.options.ViewerOptions(\n        camera_pos=(1.5, 1.3, 0.5),\n        camera_lookat=(0.0, 0.0, 0.0),\n        camera_fov=40,\n    ),\n    vis_options=gs.options.VisOptions(\n        show_world_frame=True,\n        visualize_mpm_boundary=False,\n    ),\n    show_viewer=True,\n    show_FPS=False,\n)",
     "key_apis": [
       "gs.Scene"
     ],
@@ -67,7 +67,7 @@
   },
   {
     "id": "snip_fbb1b14f",
-    "task": "Usage example of gs.morphs.Plane",
+    "task": "This code adds a plane entity to the scene.",
     "code": "scene.add_entity(gs.morphs.Plane())",
     "key_apis": [
       "gs.morphs.Plane"
@@ -77,9 +77,9 @@
     ]
   },
   {
-    "id": "snip_6664a81c",
-    "task": "Usage example of gs.morphs.Plane",
-    "code": "scene.add_entity(\n        gs.morphs.Plane(),\n    )",
+    "id": "snip_16074fe5",
+    "task": "This code adds a plane entity with a frictionless rigid material to a scene.",
+    "code": "scene.add_entity(\n        morph=gs.morphs.Plane(),\n        material=frictionless_rigid,\n    )",
     "key_apis": [
       "gs.morphs.Plane"
     ],
@@ -88,9 +88,20 @@
     ]
   },
   {
-    "id": "snip_7fffb18a",
-    "task": "Usage example of gs.morphs.MJCF",
-    "code": "scene.add_entity(\n        gs.morphs.MJCF(file=\"xml/franka_emika_panda/panda.xml\"),\n    )",
+    "id": "snip_c3f98f7b",
+    "task": "This code adds a plane entity to a scene with a default surface that uses a batch texture created from images in a specified folder.",
+    "code": "scene.add_entity(\n        gs.morphs.Plane(),\n        surface=gs.surfaces.Default(\n            diffuse_texture=gs.textures.BatchTexture.from_images(image_folder=\"textures\"),\n        ),\n    )",
+    "key_apis": [
+      "gs.morphs.Plane"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_dfdab2c5",
+    "task": "This code adds a Morphs MJCF entity to a scene from a specified MJCF file.",
+    "code": "scene.add_entity(\n        gs.morphs.MJCF(file=mjcf_file),\n    )",
     "key_apis": [
       "gs.morphs.MJCF"
     ],
@@ -99,9 +110,20 @@
     ]
   },
   {
-    "id": "snip_2da98367",
-    "task": "Usage example of gs.morphs.MJCF",
-    "code": "scene.add_entity(\n        gs.morphs.MJCF(file=\"xml/franka_emika_panda/panda.xml\"),\n        visualize_contact=True,\n    )",
+    "id": "snip_ba571e32",
+    "task": "This code adds a Franka Emika Panda hand model from an MJCF XML file to a simulation scene.",
+    "code": "scene.add_entity(\n            gs.morphs.MJCF(\n                file=\"xml/franka_emika_panda/hand.xml\",\n            ),\n        )",
+    "key_apis": [
+      "gs.morphs.MJCF"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_d0e7b061",
+    "task": "This code adds a collision-visualized MJCF model from an XML file to a scene at a specified position.",
+    "code": "scene.add_entity(\n            gs.morphs.MJCF(\n                file=f\"{asset_path}/{asset_name}/output.xml\",\n                pos=(0.0, 0.15 * (i - 1.5), 0.7),\n            ),\n            vis_mode=\"collision\",\n            # visualize_contact=True,\n        )",
     "key_apis": [
       "gs.morphs.MJCF"
     ],
@@ -111,7 +133,7 @@
   },
   {
     "id": "snip_8d06e0b9",
-    "task": "Usage example of gs_general",
+    "task": "This code builds a simulation environment with a specified number of parallel instances.",
     "code": "scene.build(n_envs=args.n_envs)",
     "key_apis": [
       "gs_general"
@@ -121,8 +143,30 @@
     ]
   },
   {
+    "id": "snip_d18c3308",
+    "task": "This code adds a camera to a scene with specified resolution, position, look-at point, field of view, and GUI visibility.",
+    "code": "scene.add_camera(\n        res=(512, 512),\n        pos=(1.5, -0.5, 1.5),\n        lookat=(0.0, 0.0, 0.5),\n        fov=45,\n        GUI=args.vis,\n    )",
+    "key_apis": [
+      "gs_general"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_28916a87",
+    "task": "This code adds a camera to a scene with specified resolution, position, orientation, field of view, lens model, and GUI visibility.",
+    "code": "scene.add_camera(\n        res=(512, 512),\n        pos=(0.0, 0.0, 5.0),\n        lookat=(0.0, 0.0, 0.0),\n        fov=70,\n        model=\"fisheye\" if args.use_fisheye else \"pinhole\",\n        GUI=args.vis,\n    )",
+    "key_apis": [
+      "gs_general"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
     "id": "snip_5b776b99",
-    "task": "Usage example of scene.step",
+    "task": "This code advances the simulation or animation to the next frame or time step.",
     "code": "scene.step()",
     "key_apis": [
       "scene.step"
@@ -132,8 +176,19 @@
     ]
   },
   {
+    "id": "snip_45242c40",
+    "task": "This code advances the simulation by one step without updating the visualizer.",
+    "code": "scene.step(update_visualizer=False)",
+    "key_apis": [
+      "scene.step"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
     "id": "snip_9ed3a682",
-    "task": "Usage example of gs.destroy",
+    "task": "This code destroys the graphical user interface window.",
     "code": "gs.destroy()",
     "key_apis": [
       "gs.destroy"
@@ -144,7 +199,7 @@
   },
   {
     "id": "snip_363b4358",
-    "task": "Usage example of gs.morphs.URDF",
+    "task": "This code adds a fixed plane entity from a URDF file to the scene.",
     "code": "scene.add_entity(gs.morphs.URDF(file=\"urdf/plane/plane.urdf\", fixed=True))",
     "key_apis": [
       "gs.morphs.URDF"
@@ -154,8 +209,30 @@
     ]
   },
   {
+    "id": "snip_ea034d83",
+    "task": "This code adds a Panda robot model to a simulation scene using an MJCF file.",
+    "code": "scene.add_entity(\n    # gs.morphs.URDF(\n    #     file='urdf/panda_bullet/panda.urdf',\n    #     fixed=True,\n    # ),\n    gs.morphs.MJCF(file=\"xml/franka_emika_panda/panda.xml\"),\n)",
+    "key_apis": [
+      "gs.morphs.URDF"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_7232bd82",
+    "task": "This code adds a two-link arm model from a URDF file to a simulation scene with specific positioning, scaling, and a hybrid material combining rigid and soft muscle-like properties.",
+    "code": "scene.add_entity(\n    morph=gs.morphs.URDF(\n        file=\"urdf/simple/two_link_arm.urdf\",\n        pos=(0.5, 0.5, 0.3),\n        euler=(0.0, 0.0, 0.0),\n        scale=0.2,\n        fixed=True,\n    ),\n    material=gs.materials.Hybrid(\n        material_rigid=gs.materials.Rigid(\n            gravity_compensation=1.0,\n        ),\n        material_soft=gs.materials.MPM.Muscle(  # to allow setting group\n            E=1e4,\n            nu=0.45,\n            rho=1000.0,\n            model=\"neohooken\",\n        ),\n        thickness=0.05,\n        damping=1000.0,\n    ),\n)",
+    "key_apis": [
+      "gs.morphs.URDF"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
     "id": "snip_a19cd1bb",
-    "task": "Usage example of gs.materials.Tool",
+    "task": "This code adds a stirrer object to a scene with specified material properties, mesh geometry, and surface appearance.",
     "code": "scene.add_entity(\n        material=gs.materials.Tool(friction=8.0),\n        morph=gs.morphs.Mesh(\n            file=\"meshes/stirrer.obj\",\n            scale=0.6,\n            pos=(0.5, 0.5, 0.05),\n            euler=(90.0, 0.0, 0.0),\n        ),\n        surface=gs.surfaces.Default(\n            color=(1.0, 1.0, 1.0, 1.0),\n        ),\n    )",
     "key_apis": [
       "gs.materials.Tool"
@@ -165,9 +242,20 @@
     ]
   },
   {
-    "id": "snip_e8ee7dde",
-    "task": "Usage example of gs.materials.MPM.Elastic",
-    "code": "scene.add_entity(\n        material=gs.materials.MPM.Elastic(rho=500),\n        morph=gs.morphs.Box(\n            lower=(0.2, 0.1, 0.05),\n            upper=(0.4, 0.3, 0.15),\n        ),\n        surface=gs.surfaces.Default(\n            color=(0.9, 0.9, 0.9, 1.0),\n        ),\n        vis_mode=\"particle\",\n    )",
+    "id": "snip_9abf2bdb",
+    "task": "This code adds a 3D elastic box entity with a specified position, size, and surface color to a scene.",
+    "code": "scene.add_entity(\n    material=gs.materials.MPM.Elastic(),\n    morph=gs.morphs.Box(\n        pos=(0.0, -0.5, 0.25),\n        size=(0.2, 0.2, 0.2),\n    ),\n    surface=gs.surfaces.Default(\n        color=(1.0, 0.4, 0.4),\n        vis_mode=\"visual\",\n    ),\n)",
+    "key_apis": [
+      "gs.materials.MPM.Elastic"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_1cdb386e",
+    "task": "This code adds a box-shaped elastic material entity with a rough pink surface to a simulation scene.",
+    "code": "scene.add_entity(\n        material=gs.materials.MPM.Elastic(rho=400),\n        morph=gs.morphs.Box(\n            pos=(0.0, 0.25, 0.4),\n            size=(0.12, 0.12, 0.12),\n        ),\n        surface=gs.surfaces.Rough(\n            color=(1.0, 0.5, 0.5, 1.0),\n            vis_mode=\"particle\",\n        ),\n    )",
     "key_apis": [
       "gs.materials.MPM.Elastic"
     ],
@@ -177,7 +265,7 @@
   },
   {
     "id": "snip_f7aae476",
-    "task": "Usage example of gs.materials.MPM.Elastic",
+    "task": "This code adds a duck-shaped elastic material object to a scene with specified position, scale, orientation, color, and particle-based visualization.",
     "code": "scene.add_entity(\n        material=gs.materials.MPM.Elastic(rho=500),\n        morph=gs.morphs.Mesh(\n            file=\"meshes/duck.obj\",\n            pos=(0.4, 0.55, 0.056),\n            scale=0.07,\n            euler=(90.0, 0.0, 90.0),\n        ),\n        surface=gs.surfaces.Default(\n            color=(0.9, 0.8, 0.2, 1.0),\n        ),\n        vis_mode=\"particle\",\n    )",
     "key_apis": [
       "gs.materials.MPM.Elastic"
@@ -187,9 +275,9 @@
     ]
   },
   {
-    "id": "snip_b747d675",
-    "task": "Usage example of scene.add_camera",
-    "code": "scene.add_camera(\n        pos=(1.5, 0.5, 2.42),\n        lookat=(0.5, 0.5, 0.1),\n        fov=30,\n        GUI=True,\n    )",
+    "id": "snip_7b15c63c",
+    "task": "This code adds a camera to a scene.",
+    "code": "scene.add_camera()",
     "key_apis": [
       "scene.add_camera"
     ],
@@ -198,9 +286,9 @@
     ]
   },
   {
-    "id": "snip_91b2a198",
-    "task": "Usage example of scene.add_camera",
-    "code": "scene.add_camera(\n        pos=(-3.0, 1.5, 2.0),\n        lookat=(0.5, 0.5, 0.1),\n        fov=30,\n        GUI=True,\n    )",
+    "id": "snip_e1cd7243",
+    "task": "This code adds a camera to a scene with specified resolution, position, look-at point, and field of view.",
+    "code": "scene.add_camera(\n        res=(640, 480),\n        pos=(-2.0, 3.0, 2.0),\n        lookat=(0.5, 0.5, 0.5),\n        fov=30,\n    )",
     "key_apis": [
       "scene.add_camera"
     ],
@@ -209,9 +297,9 @@
     ]
   },
   {
-    "id": "snip_36b03635",
-    "task": "Usage example of scene.add_camera",
-    "code": "scene.add_camera(\n        res=(640, 480),\n        pos=(-2.0, 3.0, 2.0),\n        lookat=SCENE_POS + np.array([0.0, 0.0, -0.8]),\n        fov=30,\n    )",
+    "id": "snip_e24484d9",
+    "task": "This code adds a camera to a scene with specified resolution, position, look-at point, field of view, GUI visibility, and samples per pixel.",
+    "code": "scene.add_camera(\n        res=(1600, 900),\n        pos=(8.5, 0.0, 1.5),\n        lookat=(3.0, 0.0, 0.7),\n        fov=60,\n        GUI=True,\n        spp=512,\n    )",
     "key_apis": [
       "scene.add_camera"
     ],
@@ -221,7 +309,7 @@
   },
   {
     "id": "snip_c71a9db1",
-    "task": "Usage example of scene.build",
+    "task": "This code builds a scene.",
     "code": "scene.build()",
     "key_apis": [
       "scene.build"
@@ -231,9 +319,20 @@
     ]
   },
   {
-    "id": "snip_8e8b6621",
-    "task": "Usage example of scene.build",
-    "code": "scene.build(n_envs=2)",
+    "id": "snip_e03e1885",
+    "task": "This code builds a simulation environment with 100 parallel instances.",
+    "code": "scene.build(n_envs=100)",
+    "key_apis": [
+      "scene.build"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_cbb1ebb0",
+    "task": "This code builds a simulation scene with a specified number of environments arranged at given spacing intervals.",
+    "code": "scene.build(n_envs=n_envs, env_spacing=(1.0, 1.0))",
     "key_apis": [
       "scene.build"
     ],
@@ -243,7 +342,7 @@
   },
   {
     "id": "snip_fe806b69",
-    "task": "Usage example of gs.tensor",
+    "task": "This code creates a tensor with the floating-point values 0.5, 0.8, and 0.05.",
     "code": "gs.tensor([0.5, 0.8, 0.05])",
     "key_apis": [
       "gs.tensor"
@@ -254,7 +353,7 @@
   },
   {
     "id": "snip_8c0979be",
-    "task": "Usage example of gs.tensor",
+    "task": "This code initializes a 3D tensor with gradient tracking enabled for the values [0.0, -1.0, 0.0].",
     "code": "v_obj1_init = gs.tensor([0.0, -1.0, 0.0], requires_grad=True)",
     "key_apis": [
       "gs.tensor"
@@ -265,7 +364,7 @@
   },
   {
     "id": "snip_bde5a9df",
-    "task": "Usage example of gs.tensor",
+    "task": "This code initializes a 2x3 tensor with gradient tracking enabled for potential use in optimization or machine learning tasks.",
     "code": "init_pos = gs.tensor([[0.3, 0.1, 0.28], [0.3, 0.1, 0.5]], requires_grad=True)",
     "key_apis": [
       "gs.tensor"
@@ -276,7 +375,7 @@
   },
   {
     "id": "snip_f8e3219b",
-    "task": "Usage example of scene.reset",
+    "task": "This code resets the scene to its initial state.",
     "code": "scene.reset()",
     "key_apis": [
       "scene.reset"
@@ -287,7 +386,7 @@
   },
   {
     "id": "snip_07f308a3",
-    "task": "Usage example of scene.get_state",
+    "task": "This code retrieves the current state of a scene object.",
     "code": "scene.get_state()",
     "key_apis": [
       "scene.get_state"
@@ -298,7 +397,7 @@
   },
   {
     "id": "snip_0b33f91c",
-    "task": "Usage example of init_pos.zero_grad",
+    "task": "This code resets the gradients of the `init_pos` tensor to zero.",
     "code": "init_pos.zero_grad()",
     "key_apis": [
       "init_pos.zero_grad"
@@ -308,9 +407,9 @@
     ]
   },
   {
-    "id": "snip_8a46927d",
-    "task": "Usage example of gs.morphs.Mesh",
-    "code": "scene.add_entity(\n        gs.morphs.Mesh(\n            file=\"meshes/axis.obj\",\n            scale=0.15,\n            collision=False,\n        ),\n        surface=gs.surfaces.Default(color=(1, 0.5, 0.5, 1)),\n    )",
+    "id": "snip_7b144703",
+    "task": "This code adds a 3D duck model from an OBJ file to a scene, scaling it down and positioning it in 3D space.",
+    "code": "scene.add_entity(\n        morph=gs.morphs.Mesh(\n            file=\"meshes/duck.obj\",\n            scale=0.1,\n            pos=(0, 0, 1.0),\n        ),\n    )",
     "key_apis": [
       "gs.morphs.Mesh"
     ],
@@ -319,9 +418,9 @@
     ]
   },
   {
-    "id": "snip_c6469986",
-    "task": "Usage example of gs.morphs.Mesh",
-    "code": "scene.add_entity(\n        material=mat_elastic,\n        morph=gs.morphs.Mesh(\n            file=\"meshes/dragon/dragon.obj\",\n            scale=0.003,\n            pos=(0, 0, 0.8),\n        ),\n        surface=gs.surfaces.Default(\n            # vis_mode='recon',\n        ),\n    )",
+    "id": "snip_46efc5c6",
+    "task": "This code adds a gold-colored sphere entity to a scene at a specified position and scale.",
+    "code": "scene.add_entity(\n        morph=gs.morphs.Mesh(\n            file=\"meshes/sphere.obj\",\n            scale=0.5,\n            pos=(0.0, 1.8, 0.0),\n        ),\n        surface=gs.surfaces.Gold(\n            color=(1.0, 1.0, 1.0),\n        ),\n    )",
     "key_apis": [
       "gs.morphs.Mesh"
     ],
@@ -330,9 +429,20 @@
     ]
   },
   {
-    "id": "snip_31f4ddc4",
-    "task": "Usage example of gs.morphs.Sphere",
-    "code": "scene.add_entity(\n        morph=gs.morphs.Sphere(pos=SCENE_POS + np.array([-0.3, -0.3, 0]), radius=0.1),\n        material=gs.materials.FEM.Elastic(E=1.0e4, nu=0.45, rho=1000.0, model=\"linear_corotated\"),\n    )",
+    "id": "snip_3fc66ccb",
+    "task": "This code adds a cloth-like mesh entity to a scene with specified geometry, material properties, and visual appearance.",
+    "code": "scene.add_entity(\n            morph=gs.morphs.Mesh(\n                file=\"meshes/grid20x20.obj\",\n                scale=0.5,\n                pos=(0.5, 0.0, 0.1),\n                euler=(90, 0, 0),\n            ),\n            material=gs.materials.FEM.Cloth(\n                E=1e5,  # Young's modulus (Pa) - soft cloth (10 kPa)\n                nu=0.499,  # Poisson's ratio - nearly incompressible\n                rho=200,  # Density (kg/m³) - typical fabric\n                thickness=0.002,  # Shell thickness (m) - 2mm\n                bending_stiffness=100.0,  # Bending resistance\n            ),\n            surface=gs.surfaces.Plastic(color=(0.3, 0.5, 0.8, 1.0), double_sided=True),\n        )",
+    "key_apis": [
+      "gs.morphs.Mesh"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_3724fadd",
+    "task": "This code adds a spherical entity with a specified position and radius to a scene.",
+    "code": "scene.add_entity(\n        morph=gs.morphs.Sphere(\n            pos=(1.0, 1.0, 1.0),\n            radius=0.1,\n        ),\n    )",
     "key_apis": [
       "gs.morphs.Sphere"
     ],
@@ -341,8 +451,41 @@
     ]
   },
   {
+    "id": "snip_d85bb1d1",
+    "task": "This code adds a spherical entity with specified position, radius, and an elastic material model to a scene.",
+    "code": "scene.add_entity(\n        morph=gs.morphs.Sphere(pos=(0.3, 0.0, 0.4), radius=0.1),\n        material=gs.materials.FEM.Elastic(E=1.0e5, nu=0.45, rho=1000.0, model=\"stable_neohookean\"),\n    )",
+    "key_apis": [
+      "gs.morphs.Sphere"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_b9da9834",
+    "task": "This code adds a spherical entity with specified radius and position to a scene, applying an elastic material model with linear corotated properties, friction coefficient, Young's modulus, and Poisson's ratio.",
+    "code": "scene.add_entity(\n        morph=gs.morphs.Sphere(\n            radius=0.02,\n            pos=(0.65, 0.0, 0.02),\n        ),\n        material=gs.materials.FEM.Elastic(\n            model=\"linear_corotated\",\n            friction_mu=1.0,\n            E=1e5,\n            nu=0.4,\n        ),\n    )",
+    "key_apis": [
+      "gs.morphs.Sphere"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_60a86c4b",
+    "task": "This code adds a box-shaped entity with specified dimensions and position to a scene.",
+    "code": "scene.add_entity(\n        gs.morphs.Box(\n            size=(0.5, 0.5, 0.5),\n            pos=(0, 0, 0),\n        ),\n    )",
+    "key_apis": [
+      "gs.morphs.Box"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
     "id": "snip_302005cb",
-    "task": "Usage example of gs.morphs.Box",
+    "task": "This code adds a box-shaped elastic entity to a scene with specified position, size, and material properties.",
     "code": "scene.add_entity(\n        morph=gs.morphs.Box(pos=SCENE_POS + np.array([0.3, 0.3, 0]), size=(0.2, 0.2, 0.2)),\n        material=gs.materials.FEM.Elastic(E=1.0e6, nu=0.45, rho=1000.0, model=\"linear_corotated\"),\n    )",
     "key_apis": [
       "gs.morphs.Box"
@@ -352,20 +495,20 @@
     ]
   },
   {
-    "id": "snip_16c09fbd",
-    "task": "Usage example of scene.draw_debug_spheres",
-    "code": "scene.draw_debug_spheres(poss=new_pos, radius=0.02, color=(0, 1, 0, 0.8))",
+    "id": "snip_7e2760a9",
+    "task": "This code adds a fixed, rigid box entity to a scene with specified position, size, material density, friction, and a semi-transparent plastic surface color.",
+    "code": "scene.add_entity(\n                morph=gs.morphs.Box(\n                    pos=(x, y, cube_height),\n                    size=(cube_size, cube_size, cube_size),\n                    fixed=True,\n                ),\n                material=gs.materials.Rigid(rho=500, friction=0.3),\n                surface=gs.surfaces.Plastic(color=(0.8, 0.3, 0.2, 0.8)),\n            )",
     "key_apis": [
-      "scene.draw_debug_spheres"
+      "gs.morphs.Box"
     ],
     "tags": [
       "auto_extracted"
     ]
   },
   {
-    "id": "snip_65372b5d",
-    "task": "Usage example of scene.draw_debug_spheres",
-    "code": "scene.draw_debug_spheres(poss=target_positions, radius=0.02, color=(1, 0, 1, 0.8))",
+    "id": "snip_6e9690ac",
+    "task": "This code draws semi-transparent blue debug spheres at specified positions with a given radius in a scene.",
+    "code": "scene.draw_debug_spheres(poss=poss, radius=0.05, color=(0, 0, 1, 0.7))",
     "key_apis": [
       "scene.draw_debug_spheres"
     ],
@@ -375,7 +518,7 @@
   },
   {
     "id": "snip_c40e0278",
-    "task": "Usage example of scene.draw_debug_spheres",
+    "task": "This code draws green debug spheres at specified target positions with a radius of 0.02 and a semi-transparent color.",
     "code": "scene.draw_debug_spheres(poss=target_positions, radius=0.02, color=(0, 1, 0, 0.8))",
     "key_apis": [
       "scene.draw_debug_spheres"
@@ -385,8 +528,41 @@
     ]
   },
   {
+    "id": "snip_65121711",
+    "task": "This code draws debug spheres at specified positions with a given radius and color in a scene.",
+    "code": "scene.draw_debug_spheres(poss=cube.init_positions[pin_idx], radius=0.02, color=(1.0, 0.0, 1.0, 0.8))",
+    "key_apis": [
+      "scene.draw_debug_spheres"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_d62324cb",
+    "task": "This code removes a debug visualization object from the scene.",
+    "code": "scene.clear_debug_object(debug_box)",
+    "key_apis": [
+      "scene.clear_debug_object"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_0b823d49",
+    "task": "This code removes a debug object from a scene by clearing it from a specified path.",
+    "code": "scene.clear_debug_object(path_debug)",
+    "key_apis": [
+      "scene.clear_debug_object"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
     "id": "snip_0aca65dd",
-    "task": "Usage example of scene.clear_debug_object",
+    "task": "This code removes a debug circle object from the scene.",
     "code": "scene.clear_debug_object(debug_circle)",
     "key_apis": [
       "scene.clear_debug_object"
@@ -396,9 +572,9 @@
     ]
   },
   {
-    "id": "snip_9283570a",
-    "task": "Usage example of gs.materials.Rigid",
-    "code": "scene.add_entity(\n        material=gs.materials.Rigid(gravity_compensation=1),\n        morph=gs.morphs.MJCF(\n            file=\"xml/franka_emika_panda/panda.xml\",\n            euler=(0, 0, 0),\n        ),\n    )",
+    "id": "snip_64f5b0d5",
+    "task": "This code adds a rigid plane entity with specified material properties and a fixed URDF model to a scene.",
+    "code": "scene.add_entity(\n        material=gs.materials.Rigid(\n            needs_coup=True,\n            coup_friction=0.2,\n        ),\n        morph=gs.morphs.URDF(file=\"urdf/plane/plane.urdf\", fixed=True),\n    )",
     "key_apis": [
       "gs.materials.Rigid"
     ],
@@ -408,7 +584,7 @@
   },
   {
     "id": "snip_fb26c945",
-    "task": "Usage example of gs.materials.Rigid",
+    "task": "This code adds a rigid green box entity with specified dimensions and position to a scene.",
     "code": "scene.add_entity(\n        material=gs.materials.Rigid(rho=300),\n        morph=gs.morphs.Box(\n            pos=(0.5, 0.0, 0.07),\n            size=(0.04, 0.04, 0.04),\n        ),\n        surface=gs.surfaces.Default(color=(0.5, 1, 0.5)),\n    )",
     "key_apis": [
       "gs.materials.Rigid"
@@ -418,8 +594,19 @@
     ]
   },
   {
+    "id": "snip_fac8be76",
+    "task": "This code adds a rigid entity to the scene by loading a URDF model with specified material properties, scale, position, and orientation.",
+    "code": "scene.add_entity(\n        material=gs.materials.Rigid(rho=300),\n        morph=gs.morphs.URDF(\n            file=\"urdf/3763/mobility_vhacd.urdf\",\n            scale=0.09,\n            pos=(0.65, 0.0, 0.036),\n            euler=(0, 90, 0),\n        ),\n        # visualize_contact=True,\n    )",
+    "key_apis": [
+      "gs.materials.Rigid"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
     "id": "snip_b9643397",
-    "task": "Usage example of gs.materials.PBD.Liquid",
+    "task": "This code adds a liquid material entity with PBD simulation properties and a box-shaped morph to a scene.",
     "code": "scene.add_entity(\n        material=gs.materials.PBD.Liquid(\n            sampler=\"regular\",\n            rho=1.0,\n            density_relaxation=1.0,\n            viscosity_relaxation=0.0,\n        ),\n        morph=gs.morphs.Box(lower=(0.2, 0.1, 0.1), upper=(0.4, 0.3, 0.5)),\n    )",
     "key_apis": [
       "gs.materials.PBD.Liquid"
@@ -429,8 +616,569 @@
     ]
   },
   {
+    "id": "snip_6836b074",
+    "task": "This code adds a fixed cylinder with specified dimensions and position to a scene.",
+    "code": "scene.add_entity(\n            gs.morphs.Cylinder(\n                height=1.5,\n                radius=0.3,\n                pos=(x, y, 0.75),\n                fixed=True,\n            )\n        )",
+    "key_apis": [
+      "gs.morphs.Cylinder"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_78c01748",
+    "task": "This code adds a cylinder entity to a scene with specified dimensions and a position calculated based on the number of stacks and box height.",
+    "code": "scene.add_entity(\n            morph=gs.morphs.Cylinder(\n                radius=cylinder_radius,\n                height=cylinder_height,\n                pos=(0.0, 0.0, num_stacks * box_height + 5 * cylinder_height),\n            ),\n        )",
+    "key_apis": [
+      "gs.morphs.Cylinder"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_4ffbee1e",
+    "task": "This code adds a box-shaped entity with rigid body physics to a scene.",
+    "code": "scene.add_entity(box_morph, rigid_material)",
+    "key_apis": [
+      "add_entity"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_8e6fefa7",
+    "task": "This code adds a cloth entity with specified morph, material, and surface properties to a scene.",
+    "code": "scene.add_entity(cloth_morph, cloth_material, cloth_surface)",
+    "key_apis": [
+      "add_entity"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_fd9312d8",
+    "task": "This code adds a cloth entity to a scene with a PBD material, a mesh morph from an OBJ file, and a default surface appearance.",
+    "code": "scene.add_entity(\n    material=gs.materials.PBD.Cloth(),\n    morph=gs.morphs.Mesh(\n        file=\"meshes/cloth.obj\",\n        scale=2.0,\n        pos=(0, 0, 0.5),\n        euler=(0.0, 0, 0.0),\n    ),\n    surface=gs.surfaces.Default(\n        color=(0.2, 0.4, 0.8, 1.0),\n        vis_mode=\"visual\",\n    ),\n)",
+    "key_apis": [
+      "gs.materials.PBD.Cloth"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_2dab1a37",
+    "task": "This code adds a cloth entity to a scene with a PBD material, a mesh morph, and a default surface configuration.",
+    "code": "scene.add_entity(\n    material=gs.materials.PBD.Cloth(),\n    morph=gs.morphs.Mesh(\n        file=\"meshes/cloth.obj\",\n        scale=2.0,\n        pos=(0, 0, 1.0),\n        euler=(0.0, 0, 0.0),\n    ),\n    surface=gs.surfaces.Default(\n        color=(0.8, 0.4, 0.2, 1.0),\n        vis_mode=\"particle\",\n    ),\n)",
+    "key_apis": [
+      "gs.materials.PBD.Cloth"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_d793510b",
+    "task": "This code adds a cloth entity to a scene with a specific material, mesh, and surface properties.",
+    "code": "scene.add_entity(\n        material=gs.materials.PBD.Cloth(),\n        morph=gs.morphs.Mesh(\n            file=\"meshes/cloth.obj\",\n            scale=1.0,\n            pos=(0.0, 0.0, 0.3),\n            euler=(180.0, 0.0, 0.0),\n        ),\n        surface=gs.surfaces.Default(\n            color=(0.2, 0.4, 0.8, 1.0),\n        ),\n    )",
+    "key_apis": [
+      "gs.materials.PBD.Cloth"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_d749ec03",
+    "task": "This code adds a liquid particle emitter with a rough surface appearance to a scene.",
+    "code": "scene.add_emitter(\n        material=gs.materials.MPM.Liquid(sampler=\"random\"),\n        max_particles=800000,\n        surface=gs.surfaces.Rough(\n            color=(0.0, 0.9, 0.4, 1.0),\n        ),\n    )",
+    "key_apis": [
+      "gs.materials.MPM.Liquid"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_de22fad0",
+    "task": "This code adds a liquid particle emitter with a rough surface appearance to a scene.",
+    "code": "scene.add_emitter(\n        material=gs.materials.MPM.Liquid(sampler=\"random\"),\n        max_particles=800000,\n        surface=gs.surfaces.Rough(\n            color=(0.0, 0.4, 0.9, 1.0),\n        ),\n    )",
+    "key_apis": [
+      "gs.materials.MPM.Liquid"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_89e3c5f1",
+    "task": "This code adds a liquid material entity with a box shape and a blue particle-based surface visualization to a scene.",
+    "code": "scene.add_entity(\n    material=gs.materials.MPM.Liquid(),\n    morph=gs.morphs.Box(\n        pos=(0.0, 0.0, 0.25),\n        size=(0.3, 0.3, 0.3),\n    ),\n    surface=gs.surfaces.Default(\n        color=(0.3, 0.3, 1.0),\n        vis_mode=\"particle\",\n    ),\n)",
+    "key_apis": [
+      "gs.materials.MPM.Liquid"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_da4b4389",
+    "task": "This code adds a sand particle emitter to a scene with a rough surface texture and a maximum particle limit.",
+    "code": "scene.add_emitter(\n        material=gs.materials.MPM.Sand(),\n        max_particles=200000,\n        surface=gs.surfaces.Rough(\n            color=(1.0, 0.9, 0.6, 1.0),\n        ),\n    )",
+    "key_apis": [
+      "gs.materials.MPM.Sand"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_6d351b03",
+    "task": "This code adds a liquid-filled box entity with a specified material, position, size, and surface color to a scene.",
+    "code": "scene.add_entity(\n        material=gs.materials.SPH.Liquid(mu=0.01, sampler=\"regular\"),\n        morph=gs.morphs.Box(\n            pos=(0.5, 0.0, 0.6),\n            size=(0.9, 1.6, 1.2),\n        ),\n        surface=gs.surfaces.Default(\n            color=(0.5, 0.7, 0.9, 1.0),\n        ),\n    )",
+    "key_apis": [
+      "gs.materials.SPH.Liquid"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_d73dd52f",
+    "task": "This code adds a liquid entity with a box shape and a particle-based surface visualization to a scene.",
+    "code": "scene.add_entity(\n    # viscous liquid\n    # material=gs.materials.SPH.Liquid(mu=0.02, gamma=0.02),\n    material=gs.materials.SPH.Liquid(),\n    morph=gs.morphs.Box(\n        pos=(0.0, 0.0, 0.65),\n        size=(0.4, 0.4, 0.4),\n    ),\n    surface=gs.surfaces.Default(\n        color=(0.4, 0.8, 1.0),\n        vis_mode=\"particle\",\n    ),\n)",
+    "key_apis": [
+      "gs.materials.SPH.Liquid"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_ad39417e",
+    "task": "This code adds a liquid emitter with a glass surface to a simulation scene, configuring its material, particle limit, and visual rendering mode based on provided arguments.",
+    "code": "scene.add_emitter(\n        material=getattr(gs.materials, args.solver.upper()).Liquid(\n            sampler=\"regular\",\n        ),\n        max_particles=100000,\n        surface=gs.surfaces.Glass(\n            color=(0.7, 0.85, 1.0, 0.7),\n            vis_mode=\"recon\" if args.recon else \"particle\",\n        ),\n    )",
+    "key_apis": [
+      "gs.materials, args.solver.upper"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_ba999d0f",
+    "task": "This code adds a drone entity to a scene using a specified URDF file and initial position.",
+    "code": "scene.add_entity(morph=gs.morphs.Drone(file=\"urdf/drones/cf2x.urdf\", pos=(0, 0, 0.2)))",
+    "key_apis": [
+      "gs.morphs.Drone"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_39aa3e39",
+    "task": "This code adds a drone entity to a scene using a specified URDF file and initial position.",
+    "code": "scene.add_entity(\n        morph=gs.morphs.Drone(\n            file=\"urdf/drones/cf2x.urdf\",\n            pos=(0.0, 0, 0.02),\n        ),\n    )",
+    "key_apis": [
+      "gs.morphs.Drone"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_25fa32ce",
+    "task": "This code adds a drone entity to a scene using a specified URDF file and initial position.",
+    "code": "scene.add_entity(\n        morph=gs.morphs.Drone(\n            file=\"urdf/drones/cf2x.urdf\",\n            pos=(0.0, 0, 0.5),  # Start a bit higher\n        ),\n    )",
+    "key_apis": [
+      "gs.morphs.Drone"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_88ae40f6",
+    "task": "This code clears all debug objects from the scene.",
+    "code": "scene.clear_debug_objects()",
+    "key_apis": [
+      "scene.clear_debug_objects"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_76e2570a",
+    "task": "This code draws a debug arrow in a 3D scene from a specified position with a given direction, radius, and color.",
+    "code": "scene.draw_debug_arrow(pos=(1, 0, 0), vec=(0, 0, 1), radius=0.02, color=(1, 0, 0, 0.5))",
+    "key_apis": [
+      "scene.draw_debug_arrow"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_196a804b",
+    "task": "This code draws a debug arrow in a scene from a specified position along a given acceleration vector.",
+    "code": "scene.draw_debug_arrow(\n                pos=link_pos.tolist(),\n                vec=link_acc.tolist(),\n            )",
+    "key_apis": [
+      "scene.draw_debug_arrow"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_f1b6a755",
+    "task": "This code draws a green debug arrow in a scene from a specified position along a computed acceleration vector.",
+    "code": "scene.draw_debug_arrow(\n                    pos=link_pos.tolist(),\n                    vec=finite_diff_acc[i],\n                    color=(0, 1, 0),\n                )",
+    "key_apis": [
+      "scene.draw_debug_arrow"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_29265f12",
+    "task": "This code computes the inverse of a quaternion representing the end-effector orientation.",
+    "code": "gs.inv_quat(ee_quat)",
+    "key_apis": [
+      "gs.inv_quat"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_11e18be7",
+    "task": "This code computes the relative rotation between two quaternions by inverting the first quaternion and then applying it to the second.",
+    "code": "gs.transform_quat_by_quat(gs.inv_quat(ee_quat), target_quat)",
+    "key_apis": [
+      "gs.transform_quat_by_quat"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_d7917968",
+    "task": "This code computes the orientation error between a target quaternion and an end-effector quaternion by transforming the target quaternion into the end-effector's frame.",
+    "code": "error_quat = gs.transform_quat_by_quat(gs.inv_quat(ee_quat), target_quat)",
+    "key_apis": [
+      "gs.transform_quat_by_quat"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_81a10d82",
+    "task": "This code converts a quaternion representing orientation error into a rotation vector.",
+    "code": "gs.quat_to_rotvec(error_quat)",
+    "key_apis": [
+      "gs.quat_to_rotvec"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_c9fb79dd",
+    "task": "This code converts a quaternion representing an orientation error into its corresponding rotation vector.",
+    "code": "error_rotvec = gs.quat_to_rotvec(error_quat)",
+    "key_apis": [
+      "gs.quat_to_rotvec"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_bd359597",
+    "task": "This code builds a simulation scene with a specified number of environments arranged in a grid pattern.",
+    "code": "scene.build(n_envs=args.n_envs, env_spacing=(1, 1))",
+    "key_apis": [
+      "gs.n_envs, env_spacing="
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_9010ce86",
+    "task": "This code adds a non-directional light source with specified position, direction, shadow casting, cutoff angle, intensity, and attenuation to a scene.",
+    "code": "scene.add_light(\n        pos=(4, -4, 4),\n        dir=(0, 0, -1),\n        directional=False,\n        castshadow=True,\n        cutoff=80.0,\n        intensity=1.0,\n        attenuation=0.1,\n    )",
+    "key_apis": [
+      "scene.add_light"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_590c81a6",
+    "task": "This code adds a directional red light with a 45-degree cutoff and half intensity to a scene, positioned at (0,0,1.5) and pointing in the direction (1,1,-2), while enabling shadow casting.",
+    "code": "scene.add_light(\n        pos=(0.0, 0.0, 1.5),\n        dir=(1.0, 1.0, -2.0),\n        color=(1.0, 0.0, 0.0),\n        directional=True,\n        castshadow=True,\n        cutoff=45.0,\n        intensity=0.5,\n    )",
+    "key_apis": [
+      "scene.add_light"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_acf937e6",
+    "task": "This code renders a scene from all cameras, capturing RGB and normal data for every frame while alternating between capturing depth and segmentation data on odd-numbered frames.",
+    "code": "scene.render_all_cameras(\n                rgb=True, depth=i % 2 == 1, segmentation=i % 2 == 1, normal=True\n            )",
+    "key_apis": [
+      "scene.render_all_cameras"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_5c7ef0da",
+    "task": "This code builds a simulation scene with a specified number of environments arranged at defined spacing intervals.",
+    "code": "scene.build(n_envs=args.num_env, env_spacing=(0.5, 0.5))",
+    "key_apis": [
+      "gs.num_env, env_spacing="
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_3a316b3e",
+    "task": "This code adds a terrain entity to a scene with specified scaling, height data, and collision visualization.",
+    "code": "scene.add_entity(\n        morph=gs.morphs.Terrain(\n            horizontal_scale=horizontal_scale,\n            vertical_scale=1.0,\n            height_field=hf_terrain,\n            pos=translation,\n        ),\n        vis_mode=\"collision\",\n    )",
+    "key_apis": [
+      "gs.morphs.Terrain"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_1f4af90b",
+    "task": "This code adds a terrain entity to a scene using specified scaling parameters and a height field.",
+    "code": "scene.add_entity(\n        morph=gs.morphs.Terrain(\n            horizontal_scale=horizontal_scale,\n            vertical_scale=vertical_scale,\n            height_field=height_field,\n            name=\"example\",\n            # from_stored=True,\n        ),\n    )",
+    "key_apis": [
+      "gs.morphs.Terrain"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_853ae749",
+    "task": "This code adds a procedurally generated terrain entity to a scene with a 2x2 grid of different terrain types.",
+    "code": "scene.add_entity(\n        morph=gs.morphs.Terrain(\n            n_subterrains=(2, 2),\n            subterrain_size=(6.0, 6.0),\n            horizontal_scale=horizontal_scale,\n            vertical_scale=vertical_scale,\n            subterrain_types=[\n                [\"flat_terrain\", \"random_uniform_terrain\"],\n                [\"pyramid_sloped_terrain\", \"discrete_obstacles_terrain\"],\n            ],\n        ),\n    )",
+    "key_apis": [
+      "gs.morphs.Terrain"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_5b54aa3d",
+    "task": "This code adds a sensor to a scene with specified configuration options.",
+    "code": "scene.add_sensor(sensor_options)",
+    "key_apis": [
+      "scene.add_sensor"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_47881143",
+    "task": "This code adds a sensor to a scene using configuration options.",
+    "code": "scene.add_sensor(config[\"options\"])",
+    "key_apis": [
+      "scene.add_sensor"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_7d40870e",
+    "task": "This code stops the recording of a scene.",
+    "code": "scene.stop_recording()",
+    "key_apis": [
+      "scene.stop_recording"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_440b130c",
+    "task": "This code adds an IMU sensor to the end effector of a Franka robot with specified noise parameters and visualization settings.",
+    "code": "scene.add_sensor(\n        gs.sensors.IMU(\n            entity_idx=franka.idx,\n            link_idx_local=end_effector.idx_local,\n            pos_offset=(0.0, 0.0, 0.15),\n            # noise parameters\n            acc_cross_axis_coupling=(0.0, 0.01, 0.02),\n            gyro_cross_axis_coupling=(0.03, 0.04, 0.05),\n            acc_noise=(0.01, 0.01, 0.01),\n            gyro_noise=(0.01, 0.01, 0.01),\n            acc_random_walk=(0.001, 0.001, 0.001),\n            gyro_random_walk=(0.001, 0.001, 0.001),\n            delay=0.01,\n            jitter=0.01,\n            interpolate=True,\n            # visualize\n            draw_debug=True,\n        )\n    )",
+    "key_apis": [
+      "gs.sensors.IMU"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_3c407916",
+    "task": "This code starts recording data from a specified function and visualizes it as a line plot using a PyQt-based recorder.",
+    "code": "scene.start_recording(\n                data_func,\n                gs.recorders.PyQtLinePlot(title=\"IMU Ground Truth Data\", labels=labels),\n            )",
+    "key_apis": [
+      "gs.recorders.PyQtLinePlot"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_7a4cbf83",
+    "task": "This code starts recording data from a specified function and visualizes it as a line plot using a Matplotlib-based recorder with a given title and labels.",
+    "code": "scene.start_recording(\n                data_func,\n                gs.recorders.MPLLinePlot(title=\"IMU Ground Truth Data\", labels=labels),\n            )",
+    "key_apis": [
+      "gs.recorders.MPLLinePlot"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_3cb8fe9d",
+    "task": "This code starts recording IMU sensor data into an NPZ file using a lambda function to capture readings as dictionaries.",
+    "code": "scene.start_recording(\n        data_func=lambda: imu.read()._asdict(),\n        rec_options=gs.recorders.NPZFile(filename=\"imu_data.npz\"),\n    )",
+    "key_apis": [
+      "gs.recorders.NPZFile"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_55658cbf",
+    "task": "This code draws a semi-transparent red debug sphere at a specified position with a small radius.",
+    "code": "scene.draw_debug_sphere(pos, radius=0.01, color=(1.0, 0.0, 0.0, 0.5))",
+    "key_apis": [
+      "scene.draw_debug_sphere"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_0cba6a9c",
+    "task": "This code draws a semi-transparent blue debug sphere at a specified position and radius in a scene.",
+    "code": "scene.draw_debug_sphere(pos=(1.5, 0, 0.5), radius=0.1, color=(0, 0, 1, 0.5))",
+    "key_apis": [
+      "scene.draw_debug_sphere"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_983fd2cd",
+    "task": "This code adds a depth camera sensor to a scene with a specified pattern and additional sensor parameters.",
+    "code": "scene.add_sensor(gs.sensors.DepthCamera(pattern=gs.sensors.DepthCameraPattern(), **sensor_kwargs))",
+    "key_apis": [
+      "gs.sensors.DepthCamera"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_b968fe86",
+    "task": "This code starts recording a scene by capturing images from a sensor, using either a lambda function for multiple environments or a direct sensor read, and saves the output with an MPLImagePlot recorder.",
+    "code": "scene.start_recording(\n            data_func=(lambda: sensor.read_image()[0]) if args.n_envs > 0 else sensor.read_image,\n            rec_options=gs.recorders.MPLImagePlot(),\n        )",
+    "key_apis": [
+      "gs.n_envs > 0 else sensor.read_image,\n            rec_options=gs.recorders.MPLImagePlot"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_0717c540",
+    "task": "This code adds a LiDAR sensor with a specified pattern and additional sensor parameters to a scene.",
+    "code": "scene.add_sensor(gs.sensors.Lidar(pattern=pattern_cfg, **sensor_kwargs))",
+    "key_apis": [
+      "gs.sensors.Lidar"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_14185887",
+    "task": "This code draws a magenta-colored wireframe debug box with specified bounds and wireframe radius in a 3D scene.",
+    "code": "scene.draw_debug_box(\n        bounds=[[-0.25, -0.25, 0], [0.25, 0.25, 0.5]],\n        color=(1, 0, 1, 1),\n        wireframe=True,\n        wireframe_radius=0.005,  # Magenta\n    )",
+    "key_apis": [
+      "scene.draw_debug_box"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_6e9695f7",
+    "task": "This code draws a red debug line in a 3D scene from the start point (0.5, -0.25, 0.5) to the end point (0.5, 0.25, 0.5) with a specified radius and color.",
+    "code": "scene.draw_debug_line(\n        start=(0.5, -0.25, 0.5), end=(0.5, 0.25, 0.5), radius=0.01, color=(1, 0, 0, 1)\n    )",
+    "key_apis": [
+      "scene.draw_debug_line"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_91443e20",
+    "task": "This code draws a debug frame in a scene with specified transformation, axis length, origin size, and axis radius.",
+    "code": "scene.draw_debug_frame(T=T, axis_length=0.5, origin_size=0.03, axis_radius=0.02)",
+    "key_apis": [
+      "scene.draw_debug_frame"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_0c12381b",
+    "task": "This code draws a debug visualization of a specified path for a Franka robot in a scene.",
+    "code": "scene.draw_debug_path(path, franka)",
+    "key_apis": [
+      "scene.draw_debug_path"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
+    "id": "snip_e72c63a1",
+    "task": "This code adds a spherical entity with elastoplastic material properties and a green particle-based visualization to a simulation scene.",
+    "code": "scene.add_entity(\n    material=gs.materials.MPM.ElastoPlastic(),\n    morph=gs.morphs.Sphere(\n        pos=(0.0, 0.5, 0.35),\n        radius=0.1,\n    ),\n    surface=gs.surfaces.Default(\n        color=(0.4, 1.0, 0.4),\n        vis_mode=\"particle\",\n    ),\n)",
+    "key_apis": [
+      "gs.materials.MPM.ElastoPlastic"
+    ],
+    "tags": [
+      "auto_extracted"
+    ]
+  },
+  {
     "id": "snip_manual_camera_recording",
-    "task": "Record simulation to video with camera: start_recording, step loop with set_pose and render, then stop_recording(save_to_filename=..., fps=...).",
+    "task": "This code records a 60-second video by moving a camera in a circular path around a point while rendering frames of a scene.",
     "code": "cam.start_recording()\n\nimport numpy as np\nfor i in range(120):\n    scene.step()\n\n    cam.set_pose(\n        pos    = (3.0 * np.sin(i / 60), 3.0 * np.cos(i / 60), 2.5),\n        lookat = (0, 0, 0.5),\n    )\n\n    cam.render()\n\ncam.stop_recording(save_to_filename='video.mp4', fps=60)",
     "key_apis": [
       "start_recording",
