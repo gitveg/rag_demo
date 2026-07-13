@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\online_authorized_20260712\018_eval_019\attempt_1\code.py", line 72, in <module>
+    main()
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\online_authorized_20260712\018_eval_019\attempt_1\code.py", line 68, in main
+    while scene.viewer.is_alive():  # run until viewer window closed
+AttributeError: 'NoneType' object has no attribute 'is_alive'
+
+[38;5;9m[Genesis] [14:17:09] [ERROR] AttributeError: 'NoneType' object has no attribute 'is_alive'[0m
+[38;5;159m[Genesis] [14:17:09] [INFO] 💤 Exiting Genesis and caching compiled kernels...[0m

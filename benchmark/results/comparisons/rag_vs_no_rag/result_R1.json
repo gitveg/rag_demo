@@ -1,0 +1,533 @@
+{
+  "timestamp": "2026-06-11T18:18:37.894620",
+  "task_ids": [
+    "eval_001",
+    "eval_002",
+    "eval_003",
+    "eval_004",
+    "eval_006",
+    "eval_007",
+    "eval_008",
+    "eval_016",
+    "eval_017",
+    "eval_018"
+  ],
+  "best_rag_params": {
+    "rewrite_mode": "hyde",
+    "hyde_route": "unit",
+    "n_api": 10,
+    "n_code": 3,
+    "n_snippet": 5,
+    "n_error": 0,
+    "n_units": 10,
+    "tag_filter": null,
+    "include_core_api": true,
+    "core_api_limit": 40,
+    "rerank": true,
+    "rerank_top_n": 10,
+    "rerank_oversample": 2.0,
+    "use_hybrid": true
+  },
+  "summary": {
+    "no_rag": {
+      "pass_at_1": 1,
+      "pass_at_3": 3,
+      "n": 10
+    },
+    "best_rag": {
+      "pass_at_1": 6,
+      "pass_at_3": 8,
+      "n": 10
+    }
+  },
+  "tasks": {
+    "no_rag": [
+      {
+        "pass_at_1": false,
+        "pass_at_3": false,
+        "success_attempt": null,
+        "total_attempts": 3,
+        "attempts": [
+          {
+            "attempt": 1,
+            "success": false,
+            "code": "import genesis as gs\n\ngs.init()\n\nscene = gs.Scene()\n\n# ground plane\nscene.add_entity(gs.morphs.Plane())\n\n# red rigid sphere\nsphere = scene.add_entity(\n    morph=gs.morphs.Sphere(pos=(0, 2, 0), radius=0.5),\n    material=gs.materials.Rigid(),\n    color=(1, 0, 0),\n)\n\n# viewer\nviewer = scene.viewer\n\n# simulation loop\nfor _ in range(500):\n    scene.step()\n    viewer.update()",
+            "error": "gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 17:44:34.524 42040] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          },
+          {
+            "attempt": 2,
+            "success": false,
+            "code": "import genesis as gs\n\ngs.init(seed=0)\nscene = gs.Scene()\n\n# Ground plane\nplane = scene.add_entity(\n    gs.morphs.Plane(),\n)\n\n# Red rigid sphere\nsphere = scene.add_entity(\n    gs.morphs.Sphere(\n        radius=0.1,\n        pos=(0.0, 0.5, 0.0),\n        color=(1.0, 0.0, 0.0),\n    ),\n)\n\nscene.build()\n\nfor i in range(1000):\n    scene.step()",
+            "error": "gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 17:44:50.633 44196] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          },
+          {
+            "attempt": 3,
+            "success": false,
+            "code": "import genesis as gs\n\ngs.init()\n\nscene = gs.Scene(show_viewer=True)\n\nplane = scene.add_entity(gs.morphs.Plane())\nsphere = scene.add_entity(\n    gs.morphs.Sphere(radius=0.2, pos=(0.0, 1.0, 0.0), color=(1.0, 0.0, 0.0, 1.0))\n)\n\nscene.build()\n\nfor _ in range(500):\n    scene.step()",
+            "error": "gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 17:45:08.598 43828] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          }
+        ],
+        "duration": 50.4,
+        "task_id": "eval_001",
+        "complexity": "simple"
+      },
+      {
+        "pass_at_1": false,
+        "pass_at_3": false,
+        "success_attempt": null,
+        "total_attempts": 3,
+        "attempts": [
+          {
+            "attempt": 1,
+            "success": false,
+            "code": "import genesis as gs\n\ngs.init()\n\nscene = gs.Scene(show_viewer=True)\n\n# ground plane\n_ = scene.add_entity(gs.morphs.Plane())\n\n# static rigid box obstacle\nobstacle = scene.add_entity(\n    gs.morphs.Box(size=(1.0, 1.0, 1.0)),\n    pos=(0.0, 0.5, 2.0),\n    static=True,\n)\n\nscene.build()\n\n# run simulation for a few steps\nfor i in range(500):\n    scene.step()",
+            "error": "gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 17:47:09.780 44240] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          },
+          {
+            "attempt": 2,
+            "success": false,
+            "code": "import genesis as gs\n\ngs.init(backend=gs.gpu)\n\nscene = gs.Scene(show_viewer=True)\n\n# Ground plane\n_ = scene.add_entity(\n    gs.morphs.Plane(),\n)\n\n# Static rigid box obstacle\n_ = scene.add_entity(\n    gs.morphs.Box(\n        pos=(0.0, 0.5, 0.0),\n        half_size=(0.5, 0.5, 0.5),\n    ),\n    static=True,\n)\n\nscene.build()\n\nfor _ in range(1000):\n    scene.step()",
+            "error": "gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 17:47:29.780 41700] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          },
+          {
+            "attempt": 3,
+            "success": false,
+            "code": "import genesis as gs\n\ngs.init()\n\nscene = gs.Scene(\n    show_viewer=False,\n    vis_options=None,\n)\n\n# Static rigid box as obstacle\nbox = scene.add_entity(\n    morph=gs.morphs.Box(\n        pos=(0.0, 0.0, 0.0),\n        size=(1.0, 1.0, 1.0),\n    ),\n    material=gs.materials.Rigid(static=True),\n)\n\nscene.build()\n\nfor i in range(100):\n    scene.step()\n    if i % 10 == 0:\n        print(f\"Step {i}: box position = {box.get_pos()}\")",
+            "error": "gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 17:47:47.709 40164] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          }
+        ],
+        "duration": 58.5,
+        "task_id": "eval_002",
+        "complexity": "simple"
+      },
+      {
+        "pass_at_1": false,
+        "pass_at_3": true,
+        "success_attempt": 3,
+        "total_attempts": 3,
+        "attempts": [
+          {
+            "attempt": 1,
+            "success": false,
+            "code": "import genesis as gs\n\ngs.init()\n\nscene = gs.Scene(show_viewer=True)\n\nplane = scene.add_entity(gs.morphs.Plane())\ncylinder = scene.add_entity(\n    gs.morphs.Cylinder(),\n    pos=(0.0, 0.0, 3.0),\n)\n\nscene.build()\nscene.simulate(duration=5.0)",
+            "error": "gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 17:50:47.516 45020] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          },
+          {
+            "attempt": 2,
+            "success": false,
+            "code": "import genesis as gs\n\ngs.init()\n\nscene = gs.Scene(show_viewer=True)\n\nplane = scene.add_entity(gs.morphs.Plane())\n\ncylinder = scene.add_entity(\n    gs.morphs.Box,\n    pos=(0, 0, 3.0),\n    material=gs.materials.Rigid(),\n)\n\nscene.build()\nscene.simulate(steps=1000)",
+            "error": "gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 17:51:34.062 22904] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          },
+          {
+            "attempt": 3,
+            "success": true,
+            "code": "import genesis as gs\nimport time\n\ngs.init()\n\nscene = gs.Scene(show_viewer=True)\n\nplane = scene.add_entity(gs.morphs.Plane())\ncylinder = scene.add_entity(\n    gs.morphs.Cylinder(\n        radius=0.2,\n        height=0.5,\n        pos=(0.0, 0.0, 3.25),\n    ),\n)\n\nscene.build()\n\nfor _ in range(1000):\n    scene.step()\n    time.sleep(0.01)",
+            "error": null
+          }
+        ],
+        "duration": 173.9,
+        "task_id": "eval_003",
+        "complexity": "simple"
+      },
+      {
+        "pass_at_1": false,
+        "pass_at_3": false,
+        "success_attempt": null,
+        "total_attempts": 3,
+        "attempts": [
+          {
+            "attempt": 1,
+            "success": false,
+            "code": "import genesis as gs\n\ngs.init()\n\nscene = gs.Scene(\n    show_viewer=True,\n    options=gs.options.SceneOptions(gravity=[0, 0, 0]),\n)\n\nbox = scene.add_entity(\n    gs.morphs.Box(size=(0.1, 0.1, 0.1), pos=(0, 0, 0)),\n    material=gs.materials.Rigid(),\n)\n\nscene.build()\nscene.viewer.start()",
+            "error": "gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 17:55:09.082 14196] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          },
+          {
+            "attempt": 2,
+            "success": false,
+            "code": "import genesis as gs\n\ngs.init()\n\nscene_options = gs.options.SceneOptions(gravity=0.0)\nscene = gs.Scene(scene_options=scene_options, show_viewer=True)\n\nbox = scene.add_entity(\n    gs.morphs.Box(size=(0.1, 0.1, 0.1), pos=(0, 0, 0)),\n    material=gs.materials.Rigid(),\n)\n\nscene.build()\nfor _ in range(1000):\n    scene.step()",
+            "error": "gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 17:55:24.251 35680] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          },
+          {
+            "attempt": 3,
+            "success": false,
+            "code": "import genesis as gs\n\ngs.init()\n\nscene = gs.Scene(gravity=(0, 0, 0))\n\nbox = scene.add_entity(\n    gs.morphs.Box(size=(0.5, 0.5, 0.5), pos=(0, 0, 0)),\n)\n\nscene.build()\n\nfor i in range(200):\n    scene.step()",
+            "error": "gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 17:55:39.158 36980] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          }
+        ],
+        "duration": 46.2,
+        "task_id": "eval_004",
+        "complexity": "simple"
+      },
+      {
+        "pass_at_1": true,
+        "pass_at_3": true,
+        "success_attempt": 1,
+        "total_attempts": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "success": true,
+            "code": "import genesis as gs\n\ngs.init(backend=gs.gpu)\n\nscene = gs.Scene(\n    sim_options=gs.options.SimOptions(\n        dt=0.01,\n    ),\n    viewer_options=gs.options.ViewerOptions(\n        camera_pos=(3.0, 2.0, 5.0),\n        camera_lookat=(0.0, 0.5, 0.0),\n    ),\n)\n\nplane = scene.add_entity(\n    morph=gs.morphs.Plane(),\n)\n\nsphere1 = scene.add_entity(\n    morph=gs.morphs.Sphere(\n        pos=(0.5, 1.0, 0.0),\n        radius=0.2,\n    ),\n    material=gs.materials.Rigid(),\n)\n\nsphere2 = scene.add_entity(\n    morph=gs.morphs.Sphere(\n        pos=(-0.5, 1.0, 0.0),\n        radius=0.2,\n    ),\n    material=gs.materials.Rigid(),\n)\n\nscene.build()\n\nfor i in range(1000):\n    scene.step()",
+            "error": null
+          }
+        ],
+        "duration": 144.9,
+        "task_id": "eval_006",
+        "complexity": "medium"
+      },
+      {
+        "pass_at_1": false,
+        "pass_at_3": true,
+        "success_attempt": 2,
+        "total_attempts": 2,
+        "attempts": [
+          {
+            "attempt": 1,
+            "success": false,
+            "code": "import genesis as gs\n\ngs.init(backend=gs.gpu)\n\nscene = gs.Scene()\n\n# Static ground plane\nscene.add_entity(gs.morphs.Plane())\n\n# Stack three rigid boxes vertically\nbox1 = scene.add_entity(\n    gs.morphs.Box(pos=(0, 0.5, 0), size=(1, 1, 1), mass=1)\n)\nbox2 = scene.add_entity(\n    gs.morphs.Box(pos=(0, 1.5, 0), size=(1, 1, 1), mass=1)\n)\nbox3 = scene.add_entity(\n    gs.morphs.Box(pos=(0, 2.5, 0), size=(1, 1, 1), mass=1)\n)\n\nscene.build()\n\nfor i in range(1000):\n    scene.step()\n\nprint(\"Final box centers:\")\nprint(f\"box1: {box1.pos}\")\nprint(f\"box2: {box2.pos}\")\nprint(f\"box3: {box3.pos}\")",
+            "error": "gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 18:01:52.257 35876] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          },
+          {
+            "attempt": 2,
+            "success": true,
+            "code": "import genesis as gs\n\ngs.init()\n\nscene = gs.Scene(\n    viewer_options=gs.options.ViewerOptions(\n        camera_pos=(1, 0.5, 1),\n        camera_lookat=(0, 0.3, 0),\n    ),\n    show_viewer=True,\n)\n\nplane = scene.add_entity(\n    morph=gs.morphs.Plane(),\n)\n\nbox1 = scene.add_entity(\n    morph=gs.morphs.Box(\n        size=(0.2, 0.2, 0.2),\n        pos=(0.0, 0.1, 0.0),\n    ),\n    material=gs.materials.Rigid(),\n)\n\nbox2 = scene.add_entity(\n    morph=gs.morphs.Box(\n        size=(0.2, 0.2, 0.2),\n        pos=(0.0, 0.3, 0.0),\n    ),\n    material=gs.materials.Rigid(),\n)\n\nbox3 = scene.add_entity(\n    morph=gs.morphs.Box(\n        size=(0.2, 0.2, 0.2),\n        pos=(0.0, 0.5, 0.0),\n    ),\n    material=gs.materials.Rigid(),\n)\n\nscene.build()\n\nfor i in range(300):\n    scene.step()",
+            "error": null
+          }
+        ],
+        "duration": 158.8,
+        "task_id": "eval_007",
+        "complexity": "medium"
+      },
+      {
+        "pass_at_1": false,
+        "pass_at_3": false,
+        "success_attempt": null,
+        "total_attempts": 3,
+        "attempts": [
+          {
+            "attempt": 1,
+            "success": false,
+            "code": "import genesis as gs\n\ngs.init()\n\nscene = gs.Scene(show_viewer=True)\n\n# Large static box centered at origin\nscene.add_entity(\n    gs.morphs.Box(size=[2.0, 2.0, 0.2]),\n    static=True,\n)\n\n# Small sphere above the box\nscene.add_entity(\n    gs.morphs.Sphere(radius=0.1, pos=(0.0, 0.0, 1.0)),\n)\n\nscene.build()\n\nfor _ in range(200):\n    scene.step()",
+            "error": "/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 18:06:45.130 3976] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          },
+          {
+            "attempt": 2,
+            "success": false,
+            "code": "import genesis as gs\n\ngs.init()\n\nscene = gs.Scene(show_viewer=True)\n\n# Large static rigid box at the center\nbox = scene.add_entity(\n    morph=gs.morphs.Box(size=(2.0, 2.0, 2.0)),\n    material=gs.materials.Rigid(static=True),\n)\n\n# Small dynamic sphere above the box\nsphere = scene.add_entity(\n    morph=gs.morphs.Sphere(radius=0.2, pos=(0.0, 0.0, 2.0)),\n    material=gs.materials.Rigid(),\n)\n\nscene.build()\n\n# Simulate falling\nfor i in range(500):\n    scene.step()",
+            "error": "gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 18:07:06.282 11736] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          },
+          {
+            "attempt": 3,
+            "success": false,
+            "code": "import genesis as gs\n\ngs.init(seed=0)\n\nscene = gs.Scene(show_viewer=True)\n\nplane = scene.add_entity(gs.morphs.Plane())\nbox = scene.add_entity(\n    gs.morphs.Box(size=(1.0, 1.0, 1.0), pos=(0.0, 0.0, 0.5))\n)\nsphere = scene.add_entity(\n    gs.morphs.Sphere(radius=0.1, pos=(0.0, 0.0, 2.0))\n)\n\nbox.set_static(True)\n\nscene.build()\n\nfor i in range(1000):\n    scene.step()",
+            "error": "gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 18:07:27.348 11252] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          }
+        ],
+        "duration": 66.8,
+        "task_id": "eval_008",
+        "complexity": "medium"
+      },
+      {
+        "pass_at_1": false,
+        "pass_at_3": false,
+        "success_attempt": null,
+        "total_attempts": 3,
+        "attempts": [
+          {
+            "attempt": 1,
+            "success": false,
+            "code": "import genesis as gs\n\ngs.init(backend=gs.gpu)\n\nscene = gs.Scene(show_viewer=True)\n\n# rigid ground plane\nplane = scene.add_entity(\n    gs.morphs.Plane(),\n    material=gs.materials.Rigid(),\n)\n\n# soft elastic bunny (FEM)\nbunny = scene.add_entity(\n    gs.morphs.Mesh(\n        file='bunny.obj',\n        pos=(0, 1.0, 0),\n        scale=0.1,\n    ),\n    material=gs.materials.FEM(),\n)\n\n# build the scene\nscene.build()\n\n# simulate for 500 steps\nfor i in range(500):\n    scene.step()",
+            "error": "gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 18:10:48.488 34540] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          },
+          {
+            "attempt": 2,
+            "success": false,
+            "code": "import genesis as gs\n\n# Initialize Genesis\ngs.init()\n\n# Create scene with default options\nscene = gs.Scene()\n\n# Add a rigid ground plane\nground_entity = scene.add_entity(\n    morph=gs.morphs.Plane(),\n)\n\n# Add a soft bunny mesh (FEM material)\nbunny_entity = scene.add_entity(\n    morph=gs.morphs.Mesh(\n        file='bunny.obj',  # path to your bunny mesh file\n        scale=0.01,        # adjust scale as needed\n        pos=(0.0, 1.0, 0.0),  # above ground\n        euler=(0.0, 0.0, 0.0),\n    ),\n    material=gs.materials.FEM(),\n)\n\n# Build the scene\nscene.build()\n\n# Run simulation for 500 steps\nfor _ in range(500):\n    scene.step()",
+            "error": "gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 18:11:05.958 10464] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          },
+          {
+            "attempt": 3,
+            "success": false,
+            "code": "import genesis as gs\nimport numpy as np\n\ngs.init(backend=gs.cpu)\n\nscene = gs.Scene(\n    show_viewer=True,\n    viewer_options=gs.options.ViewerOptions(\n        camera_pos=(3, -1, 1.5),\n        camera_lookat=(0.0, 0.0, 0.0),\n    ),\n    rigid_options=gs.options.RigidOptions(\n        dt=0.01,\n    ),\n)\n\n# Add ground plane (rigid)\nplane = scene.add_entity(\n    morph=gs.morphs.Plane(),\n)\n\n# Import bunny mesh as a soft body (FEM)\nbunny = scene.add_entity(\n    morph=gs.morphs.Mesh(\n        file=\"bunny.obj\",\n        scale=0.5,\n        pos=(0.0, 0.2, 0.0),\n    ),\n    material=gs.materials.FEM.Elastic(\n        young_modulus=1e6,\n        poisson_ratio=0.45,\n        density=1000.0,\n    ),\n)\n\n# Build the scene\nscene.build()\n\n# Run simulation for 500 steps\nfor i in range(500):\n    scene.step()",
+            "error": "gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 18:11:21.254 36152] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          }
+        ],
+        "duration": 57.3,
+        "task_id": "eval_016",
+        "complexity": "hard"
+      },
+      {
+        "pass_at_1": false,
+        "pass_at_3": false,
+        "success_attempt": null,
+        "total_attempts": 3,
+        "attempts": [
+          {
+            "attempt": 1,
+            "success": false,
+            "code": "import genesis as gs\n\ngs.init()\n\nscene = gs.Scene(show_viewer=True)\n\n# Ground plane\nplane = scene.add_entity(gs.morphs.Plane())\n\n# Franka robot arm (URDF)\n# Assumes the XML file is at the given path\nfranka = scene.add_entity(\n    gs.morphs.URDF(file=\"franka_panda/panda.urdf\", pos=(0.0, 0.0, 0.0)),\n)\n\n# Red rigid box on the ground in front of the robot\nbox = scene.add_entity(\n    gs.morphs.Box(size=(0.1, 0.1, 0.1), pos=(0.5, 0.0, 0.05)),\n    material=gs.materials.Rigid(),\n    surface=gs.surfaces.Default(color=(1.0, 0.0, 0.0, 1.0)),\n)\n\nscene.build()\n\n# Run simulation for a short while to let the box settle\nfor i in range(500):\n    scene.step()",
+            "error": "gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 18:13:26.098 44840] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          },
+          {
+            "attempt": 2,
+            "success": false,
+            "code": "import genesis as gs\n\ngs.init()\n\nscene = gs.Scene(show_viewer=True)\n\n# Add a ground plane\nscene.add_entity(gs.morphs.Plane())\n\n# Add Franka robot arm (URDF)\nfranka = scene.add_entity(\n    gs.morphs.URDF(file=\"franka_panda.urdf\", pos=[0.0, 0.0, 0.0])\n)\n\n# Add a red rigid box in front of the robot\nbox = scene.add_entity(\n    gs.morphs.Box(size=[0.2, 0.2, 0.2], pos=[0.5, 0.0, 0.1]),\n    material=gs.materials.Rigid(),\n    color=[1.0, 0.0, 0.0, 1.0],\n)\n\n# Run simulation for a few steps\nfor i in range(1000):\n    scene.step()",
+            "error": "gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 18:13:47.171 37240] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          },
+          {
+            "attempt": 3,
+            "success": false,
+            "code": "import genesis as gs\n\ngs.init()\n\nscene = gs.Scene(\n    show_viewer=True,\n    viewer_options=gs.options.ViewerOptions(\n        camera_pos=(3, -1, 2),\n        camera_lookat=(0, 0, 1),\n    ),\n)\n\n# Ground plane\nscene.add_entity(gs.morphs.Plane())\n\n# Franka robot arm (MJCF XML file)\n# The file path should point to the actual location of the Franka model.\n# For example: '../assets/xml/franka_emika_panda.xml' for the bundled asset.\nfile_path = 'franka_emika_panda.xml'  # Update this to match your file location\nscene.add_entity(gs.morphs.MJCF(file=file_path))\n\n# Red rigid box on the ground in front of the robot\nbox = scene.add_entity(\n    gs.morphs.Box(\n        size=(0.2, 0.2, 0.2),\n        pos=(0.5, 0.0, 0.1),  # half height above ground, 0.5m in front of robot base\n    ),\n    surface=gs.surfaces.Default(color=(1.0, 0.0, 0.0, 1.0)),  # red\n)\n\nscene.build()\n\n# Run simulation for a few steps\nfor _ in range(1000):\n    scene.step()",
+            "error": "gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 18:14:08.862 44644] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          }
+        ],
+        "duration": 67.1,
+        "task_id": "eval_017",
+        "complexity": "hard"
+      },
+      {
+        "pass_at_1": false,
+        "pass_at_3": false,
+        "success_attempt": null,
+        "total_attempts": 3,
+        "attempts": [
+          {
+            "attempt": 1,
+            "success": false,
+            "code": "import genesis as gs\n\ngs.init(backend=gs.gpu)\n\nscene = gs.Scene(\n    sim=gs.solvers.MPM(),\n    viewer_options=gs.options.ViewerOptions(),\n    show_viewer=True,\n)\n\n# Ground plane\nplane = scene.add_entity(\n    morph=gs.morphs.Plane(),\n    surface=gs.surfaces.Rigid(),\n)\n\n# Bathtub mesh (static rigid)\nbathtub = scene.add_entity(\n    morph=gs.morphs.Mesh(file=\"bathtub.obj\", static=True),\n    surface=gs.surfaces.Rigid(),\n)\n\n# MPM liquid volume (box from above)\nliquid = scene.add_entity(\n    morph=gs.morphs.Box(\n        pos=(0.0, 5.0, 0.0),  # above bathtub\n        size=(1.0, 0.5, 0.8),\n    ),\n    material=gs.materials.MPM.Liquid(),\n)\n\nscene.build()\n\n# Run simulation\nscene.run(n_steps=1000)",
+            "error": "gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 18:15:50.867 32924] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          },
+          {
+            "attempt": 2,
+            "success": false,
+            "code": "import genesis as gs\n\ngs.init()\n\nscene = gs.Scene(\n    show_viewer=True,\n    sim_options=gs.options.SimOptions(\n        dt=0.01,\n    ),\n)\n\n# ground plane\nplane = scene.add_entity(\n    morph=gs.morphs.Box(\n        pos=(0.0, -0.5, 0.0),\n        size=(10.0, 1.0, 10.0),\n        fixed=True,\n    ),\n    material=gs.materials.Rigid(),\n)\n\n# bathtub mesh as static rigid container\nbathtub = scene.add_entity(\n    morph=gs.morphs.Mesh(\n        file=\"bathtub.obj\",\n        pos=(0.0, 0.0, 0.0),\n        euler=(0.0, 0.0, 0.0),\n        scale=1.0,\n        fixed=True,\n    ),\n    material=gs.materials.Rigid(),\n)\n\n# MPM liquid volume poured from above\nliquid = scene.add_entity(\n    morph=gs.morphs.Box(\n        pos=(0.0, 3.0, 0.0),\n        size=(0.5, 0.5, 0.5),\n    ),\n    material=gs.materials.MPM(\n        density=1000.0,\n        E=1.0e6,\n        nu=0.3,\n    ),\n    particle_system=gs.systems.MPM(),\n)\n\nscene.build()\n\nfor i in range(500):\n    scene.step()",
+            "error": "gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 18:16:09.043 33004] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          },
+          {
+            "attempt": 3,
+            "success": false,
+            "code": "import genesis as gs\n\ngs.init(backend=gs.gpu)  # or gs.cpu\n\nscene = gs.Scene(show_viewer=True, show_FPS=True)\n\n# Static ground plane (acts as bathtub floor)\nplane = scene.add_entity(gs.morphs.Plane(), static=True)\n\n# Bathtub walls (approximate shape with boxes)\nwall_thickness = 0.1\nlength = 3.0\nwidth = 2.0\nheight = 1.0   # wall height above the plane\n\n# Left wall\nscene.add_entity(\n    gs.morphs.Box(\n        size=(wall_thickness, height, width),\n        pos=(-length/2, height/2, 0),\n    ),\n    static=True\n)\n# Right wall\nscene.add_entity(\n    gs.morphs.Box(\n        size=(wall_thickness, height, width),\n        pos=(length/2, height/2, 0),\n    ),\n    static=True\n)\n# Back wall\nscene.add_entity(\n    gs.morphs.Box(\n        size=(length, height, wall_thickness),\n        pos=(0, height/2, -width/2),\n    ),\n    static=True\n)\n# Front wall\nscene.add_entity(\n    gs.morphs.Box(\n        size=(length, height, wall_thickness),\n        pos=(0, height/2, width/2),\n    ),\n    static=True\n)\n\n# MPM liquid volume above the bathtub\nliquid_morph = gs.morphs.MPM(\n    n_particles=5000,\n    pos=(0, 2.0, 0),          # center of particle cloud\n    size=(1.0, 0.5, 1.0),     # dimensions of the cloud\n)\nliquid = scene.add_entity(liquid_morph)\n\nscene.build()\n\n# Run simulation for some steps\nfor i in range(200):\n    scene.step()",
+            "error": "gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 18:16:45.836 35276] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          }
+        ],
+        "duration": 72.4,
+        "task_id": "eval_018",
+        "complexity": "hard"
+      }
+    ],
+    "best_rag": [
+      {
+        "pass_at_1": true,
+        "pass_at_3": true,
+        "success_attempt": 1,
+        "total_attempts": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "success": true,
+            "code": "import argparse\nimport genesis as gs\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=False)\n    parser.add_argument(\"-c\", \"--cpu\", action=\"store_true\", default=False)\n    args = parser.parse_args()\n\n    ########################## init ##########################\n    gs.init(backend=gs.cpu if args.cpu else gs.gpu)\n\n    ########################## create a scene ##########################\n    scene = gs.Scene(\n        viewer_options=gs.options.ViewerOptions(\n            camera_pos=(3.0, -3.0, 2.5),\n            camera_lookat=(0.0, 0.0, 1.0),\n        ),\n        show_viewer=args.vis,\n    )\n\n    ########################## entities ##########################\n    # ground plane\n    plane = scene.add_entity(\n        morph=gs.options.morphs.Plane(),\n    )\n\n    # red rigid sphere falling down\n    sphere = scene.add_entity(\n        morph=gs.options.morphs.Sphere(\n            pos=(0.0, 0.0, 2.0),\n            radius=0.3,\n        ),\n    )\n\n    ########################## build ##########################\n    scene.build()\n\n    ########################## simulate ##########################\n    for i in range(1000):\n        scene.step()\n\n\nif __name__ == \"__main__\":\n    main()",
+            "error": null
+          }
+        ],
+        "duration": 99.8,
+        "task_id": "eval_001",
+        "complexity": "simple"
+      },
+      {
+        "pass_at_1": false,
+        "pass_at_3": true,
+        "success_attempt": 3,
+        "total_attempts": 3,
+        "attempts": [
+          {
+            "attempt": 1,
+            "success": false,
+            "code": "import genesis as gs\n\ndef main():\n    gs.init()\n\n    scene = gs.Scene(\n        show_viewer=True,\n        viewer_options=gs.options.ViewerOptions(\n            camera_pos=(2.0, 2.0, 2.0),\n            camera_lookat=(0.0, 0.0, 0.5),\n        ),\n    )\n\n    # Ground plane\n    scene.add_entity(morph=gs.morphs.Plane())\n\n    # Static rigid box obstacle\n    scene.add_entity(\n        morph=gs.morphs.Box(size=(0.5, 0.5, 0.5), pos=(0.0, 0.0, 0.25)),\n        surface=gs.surfaces.Default(static=True),\n    )\n\n    scene.build()\n\n    for _ in range(200):\n        scene.step()\n\nif __name__ == \"__main__\":\n    main()",
+            "error": "gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 17:48:11.580 40684] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          },
+          {
+            "attempt": 2,
+            "success": false,
+            "code": "import genesis as gs\n\n\ndef main():\n    # Initialize genesis\n    gs.init()\n\n    # Create a scene with default viewer\n    scene = gs.Scene(\n        viewer_options=gs.options.ViewerOptions(\n            camera_pos=(3, -1, 1.5),\n            camera_lookat=(0.0, 0.0, 0.5),\n            camera_fov=30,\n        ),\n        show_viewer=True,\n    )\n\n    # Add a ground plane\n    scene.add_entity(morph=gs.morphs.Plane())\n\n    # Add a static rigid box as obstacle\n    scene.add_entity(\n        morph=gs.morphs.Box(\n            size=(0.5, 0.5, 0.5),\n            pos=(0.0, 0.0, 0.25),   # half height above ground\n            static=True,             # make the box not move\n        )\n    )\n\n    # Build the scene\n    scene.build()\n\n    # Run simulation for a few steps\n    for _ in range(1000):\n        scene.step()\n\n\nif __name__ == \"__main__\":\n    main()",
+            "error": "/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 17:48:54.717 6820] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          },
+          {
+            "attempt": 3,
+            "success": true,
+            "code": "import numpy as np\nimport genesis as gs\n\ndef main():\n    gs.init()\n\n    scene = gs.Scene(\n        viewer_options=gs.options.ViewerOptions(\n            camera_pos=(0, -3.5, 2.5),\n            camera_lookat=(0.0, 0.0, 0.5),\n        ),\n        show_viewer=True,\n    )\n\n    # Ground plane\n    scene.add_entity(morph=gs.morphs.Plane())\n\n    # Static rigid box obstacle\n    box = scene.add_entity(\n        morph=gs.morphs.Box(\n            size=(0.2, 0.2, 0.2),\n            pos=(0.0, 0.0, 0.1),\n        ),\n    )\n\n    scene.build()\n\n    for i in range(200):\n        scene.step()\n\nif __name__ == \"__main__\":\n    main()",
+            "error": null
+          }
+        ],
+        "duration": 157.1,
+        "task_id": "eval_002",
+        "complexity": "simple"
+      },
+      {
+        "pass_at_1": true,
+        "pass_at_3": true,
+        "success_attempt": 1,
+        "total_attempts": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "success": true,
+            "code": "import genesis as gs\n\n\ndef main():\n    gs.init(backend=gs.cpu)\n\n    scene = gs.Scene(\n        viewer_options=gs.options.ViewerOptions(\n            camera_pos=(0, -3.5, 2.5),\n            camera_lookat=(0.0, 0.0, 1.0),\n            camera_fov=40,\n        ),\n        show_viewer=True,\n    )\n\n    # Ground plane\n    scene.add_entity(morph=gs.morphs.Plane())\n\n    # Rigid cylinder dropped from height 3 m\n    cylinder_radius = 0.2\n    cylinder_height = 0.5\n    cylinder = scene.add_entity(\n        morph=gs.morphs.Cylinder(\n            radius=cylinder_radius,\n            height=cylinder_height,\n            pos=(0, 0, 3.0 + cylinder_height / 2),\n        ),\n        material=gs.materials.Rigid(),\n    )\n\n    scene.build()\n\n    for _ in range(200):\n        scene.step()\n\n\nif __name__ == \"__main__\":\n    main()",
+            "error": null
+          }
+        ],
+        "duration": 93.0,
+        "task_id": "eval_003",
+        "complexity": "simple"
+      },
+      {
+        "pass_at_1": true,
+        "pass_at_3": true,
+        "success_attempt": 1,
+        "total_attempts": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "success": true,
+            "code": "import genesis as gs\n\ndef main():\n    gs.init(backend=gs.cpu)  # or gs.gpu, but CPU is fine\n\n    # Create a scene with zero gravity and a viewer\n    scene = gs.Scene(\n        sim_options=gs.options.SimOptions(\n            gravity=(0.0, 0.0, 0.0),  # zero-g environment\n        ),\n        viewer_options=gs.options.ViewerOptions(\n            camera_pos=(3.0, -3.0, 2.0),\n            camera_lookat=(0.0, 0.0, 0.5),\n        ),\n        show_viewer=True,\n    )\n\n    # Add a floating rigid box\n    scene.add_entity(\n        morph=gs.morphs.Box(\n            size=(0.5, 0.5, 0.5),\n            pos=(0.0, 0.0, 1.0),  # placed above origin\n        ),\n    )\n\n    # Build the scene\n    scene.build()\n\n    # Simulate for a while (e.g., 500 steps)\n    for i in range(500):\n        scene.step()\n\nif __name__ == \"__main__\":\n    main()",
+            "error": null
+          }
+        ],
+        "duration": 60.8,
+        "task_id": "eval_004",
+        "complexity": "simple"
+      },
+      {
+        "pass_at_1": true,
+        "pass_at_3": true,
+        "success_attempt": 1,
+        "total_attempts": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "success": true,
+            "code": "import argparse\n\nimport genesis as gs\n\n\ndef main():\n\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=False)\n    parser.add_argument(\"-c\", \"--cpu\", action=\"store_true\", default=False)\n    args = parser.parse_args()\n\n    ########################## init ##########################\n    gs.init(backend=gs.cpu if args.cpu else gs.gpu)\n\n    ########################## create a scene ##########################\n    scene = gs.Scene(\n        viewer_options=gs.options.ViewerOptions(\n            camera_pos=(3.5, 0.0, 2.5),\n            camera_lookat=(0.0, 0.0, 0.5),\n        ),\n        show_viewer=args.vis,\n    )\n\n    ########################## entities ##########################\n    # ground plane\n    scene.add_entity(gs.morphs.Plane())\n\n    # two spheres side by side\n    sphere1 = scene.add_entity(\n        gs.morphs.Sphere(\n            pos=(-0.5, 0.0, 0.5),\n            radius=0.5,\n        ),\n        material=gs.materials.Rigid(),\n    )\n    sphere2 = scene.add_entity(\n        gs.morphs.Sphere(\n            pos=(0.5, 0.0, 0.5),\n            radius=0.5,\n        ),\n        material=gs.materials.Rigid(),\n    )\n\n    ########################## build ##########################\n    scene.build()\n\n    ########################## run ##########################\n    for i in range(500):\n        scene.step()\n\n\nif __name__ == \"__main__\":\n    main()",
+            "error": null
+          }
+        ],
+        "duration": 139.0,
+        "task_id": "eval_006",
+        "complexity": "medium"
+      },
+      {
+        "pass_at_1": true,
+        "pass_at_3": true,
+        "success_attempt": 1,
+        "total_attempts": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "success": true,
+            "code": "import genesis as gs\n\ngs.init(backend=gs.cpu)\n\nscene = gs.Scene()\n\nplane = scene.add_entity(\n    gs.morphs.Plane(),\n)\n\n# three boxes stacked vertically\nbox1 = scene.add_entity(\n    gs.morphs.Box(\n        size=(0.2, 0.2, 0.2),\n        pos=(0.0, 0.0, 0.1),\n    ),\n)\nbox2 = scene.add_entity(\n    gs.morphs.Box(\n        size=(0.2, 0.2, 0.2),\n        pos=(0.0, 0.0, 0.3),\n    ),\n)\nbox3 = scene.add_entity(\n    gs.morphs.Box(\n        size=(0.2, 0.2, 0.2),\n        pos=(0.0, 0.0, 0.5),\n    ),\n)\n\nscene.build()\nfor i in range(1000):\n    scene.step()",
+            "error": null
+          }
+        ],
+        "duration": 134.5,
+        "task_id": "eval_007",
+        "complexity": "medium"
+      },
+      {
+        "pass_at_1": false,
+        "pass_at_3": true,
+        "success_attempt": 2,
+        "total_attempts": 2,
+        "attempts": [
+          {
+            "attempt": 1,
+            "success": false,
+            "code": "import genesis as gs\n\ndef main():\n    gs.init()\n\n    scene = gs.Scene(\n        viewer_options=gs.options.ViewerOptions(\n            camera_pos=(3.0, 3.0, 2.0),\n            camera_lookat=(0.0, 0.0, 0.5),\n        ),\n    )\n\n    # Large static box\n    scene.add_entity(\n        gs.morphs.Box(\n            size=(2.0, 2.0, 0.5),\n            pos=(0.0, 0.0, 0.25),\n            static=True,\n        ),\n    )\n\n    # Small dynamic sphere\n    scene.add_entity(\n        gs.morphs.Sphere(\n            radius=0.1,\n            pos=(0.0, 0.0, 2.0),\n        ),\n        material=gs.materials.Rigid(\n            rho=1000.0,\n        ),\n    )\n\n    scene.build()\n\n    for _ in range(500):\n        scene.step()\n\nif __name__ == \"__main__\":\n    main()",
+            "error": "gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 18:08:09.831 44728] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          },
+          {
+            "attempt": 2,
+            "success": true,
+            "code": "import argparse\n\nimport genesis as gs\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=False)\n    parser.add_argument(\"-c\", \"--cpu\", action=\"store_true\", default=False)\n    args = parser.parse_args()\n\n    ########################## init ##########################\n    gs.init(backend=gs.cpu if args.cpu else gs.gpu)\n\n    ########################## create a scene ##########################\n    scene = gs.Scene(\n        viewer_options=gs.options.ViewerOptions(\n            camera_pos=(3.5, 0.0, 2.5),\n            camera_lookat=(0.0, 0.0, 0.5),\n        ),\n        show_viewer=args.vis,\n    )\n\n    ########################## entities ##########################\n    # Large static rigid box (very high density)\n    box = scene.add_entity(\n        morph=gs.morphs.Box(size=(2.0, 2.0, 1.0), pos=(0.0, 0.0, 0.5)),\n        material=gs.materials.Rigid(rho=1e10),\n    )\n\n    # Small dynamic sphere falling onto the box center\n    sphere = scene.add_entity(\n        morph=gs.morphs.Sphere(radius=0.2, pos=(0.0, 0.0, 2.0)),\n        material=gs.materials.Rigid(),\n    )\n\n    ########################## build ##########################\n    scene.build()\n\n    for i in range(1000):\n        scene.step()\n\n\nif __name__ == \"__main__\":\n    main()",
+            "error": null
+          }
+        ],
+        "duration": 175.2,
+        "task_id": "eval_008",
+        "complexity": "medium"
+      },
+      {
+        "pass_at_1": false,
+        "pass_at_3": false,
+        "success_attempt": null,
+        "total_attempts": 3,
+        "attempts": [
+          {
+            "attempt": 1,
+            "success": false,
+            "code": "import genesis as gs\n\ngs.init()\n\nscene = gs.Scene(\n    sim_options=gs.options.SimOptions(\n        dt=2e-3,\n        substeps=10,\n    ),\n    viewer_options=gs.options.ViewerOptions(\n        camera_pos=(2.0, 2.0, 2.5),\n        camera_lookat=(0.0, 0.0, 0.5),\n        camera_fov=40,\n    ),\n    show_viewer=True,\n)\n\n# Rigid ground\nplane = scene.add_entity(\n    morph=gs.options.morphs.Plane(),\n    material=gs.materials.Rigid(),\n)\n\n# Soft elastic bunny\nbunny = scene.add_entity(\n    morph=gs.options.morphs.Mesh(\n        file=\"bunny.obj\",\n        pos=(0.0, 0.0, 1.0),\n    ),\n    material=gs.materials.FEM.Elastic(),\n)\n\n# Build the scene\nscene.build()\n\n# Simulate for 500 steps\nfor i in range(500):\n    scene.step()",
+            "error": "gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 18:11:59.910 36336] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          },
+          {
+            "attempt": 2,
+            "success": false,
+            "code": "import genesis as gs\n\n########################## init ##########################\ngs.init()\n\n########################## create a scene ##########################\nscene = gs.Scene(\n    sim_options=gs.options.SimOptions(\n        dt=4e-3,\n        substeps=10,\n    ),\n    viewer_options=gs.options.ViewerOptions(\n        camera_fov=40,\n        res=(960, 640),\n    ),\n    show_viewer=True,\n)\n\n########################## entities ##########################\n# Rigid ground\nplane = scene.add_entity(\n    morph=gs.morphs.Plane(),\n)\n\n# Soft elastic bunny mesh\nbunny = scene.add_entity(\n    morph=gs.morphs.Mesh(\n        file=\"bunny/bunny.obj\",\n        scale=1.0,\n        pos=(0.0, 0.0, 0.5),\n    ),\n    material=gs.materials.PBD.Elastic(),\n)\n\n########################## build the scene ##########################\nscene.build()\n\n########################## run simulation ##########################\nfor i in range(500):\n    scene.step()",
+            "error": "gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 18:12:31.025 33444] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          },
+          {
+            "attempt": 3,
+            "success": false,
+            "code": "import argparse\nimport genesis as gs\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=False)\n    parser.add_argument(\"-c\", \"--cpu\", action=\"store_true\", default=False)\n    args = parser.parse_args()\n\n    ########################## init ##########################\n    gs.init(backend=gs.cpu if args.cpu else gs.gpu, precision=\"32\", seed=0)\n\n    ########################## create a scene ##########################\n    scene = gs.Scene(\n        sim_options=gs.options.SimOptions(\n            substeps=10,\n        ),\n        viewer_options=gs.options.ViewerOptions(\n            camera_pos=(3.0, 0.0, 2.5),\n            camera_lookat=(0.0, 0.0, 0.5),\n            camera_fov=40,\n        ),\n        show_viewer=args.vis,\n    )\n\n    ########################## add entities ##########################\n    # rigid ground plane\n    scene.add_entity(\n        morph=gs.options.morphs.Plane(),\n    )\n\n    # soft elastic bunny mesh\n    scene.add_entity(\n        morph=gs.options.morphs.Mesh(\n            file=\"bunny.obj\",\n        ),\n        material=gs.materials.PBD.Elastic(),\n        surface=gs.surfaces.Default(),\n    )\n\n    ########################## build ##########################\n    scene.build()\n\n    ########################## simulate ##########################\n    for i in range(1000):\n        scene.step()\n\nif __name__ == \"__main__\":\n    main()",
+            "error": "gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 18:13:01.417 42628] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          }
+        ],
+        "duration": 99.8,
+        "task_id": "eval_016",
+        "complexity": "hard"
+      },
+      {
+        "pass_at_1": true,
+        "pass_at_3": true,
+        "success_attempt": 1,
+        "total_attempts": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "success": true,
+            "code": "import genesis as gs\n\ngs.init(backend=gs.cpu)\n\nscene = gs.Scene()\n\nplane = scene.add_entity(gs.morphs.Plane())\n\nfranka = scene.add_entity(\n    gs.morphs.MJCF(file=\"xml/franka_emika_panda/panda.xml\"),\n)\n\nbox = scene.add_entity(\n    gs.morphs.Box(size=(0.05, 0.05, 0.05), pos=(0.6, 0.0, 0.025)),\n    surface=gs.options.surfaces.Plastic(color=(1.0, 0.0, 0.0, 1.0)),\n)\n\nscene.build()\nfor i in range(1000):\n    scene.step()",
+            "error": null
+          }
+        ],
+        "duration": 83.8,
+        "task_id": "eval_017",
+        "complexity": "hard"
+      },
+      {
+        "pass_at_1": false,
+        "pass_at_3": false,
+        "success_attempt": null,
+        "total_attempts": 3,
+        "attempts": [
+          {
+            "attempt": 1,
+            "success": false,
+            "code": "import os\nimport genesis as gs\n\n########################## init ##########################\ngs.init()\n\n########################## create a scene ##########################\n\nscene = gs.Scene(\n    sim_options=gs.options.SimOptions(\n        dt=4e-3,\n        substeps=10,\n    ),\n    mpm_options=gs.options.MPMOptions(\n        lower_bound=(-0.8, -0.8, 0.0),\n        upper_bound=(0.8, 0.8, 1.5),\n    ),\n    vis_options=gs.options.VisOptions(\n        visualize_mpm_boundary=True,\n    ),\n    viewer_options=gs.options.ViewerOptions(\n        camera_fov=30,\n        res=(960, 640),\n    ),\n    show_viewer=True,\n)\n\n########################## add entities ##########################\n\n# Bathtub mesh (static container)\nscene.add_entity(\n    morph=gs.options.morphs.Mesh(\n        file=\"bathtub.obj\",\n        pos=(0.0, 0.0, 0.0),\n        scale=1.0,\n    ),\n)\n\n# Ground plane (static)\nscene.add_entity(\n    morph=gs.options.morphs.Plane(),\n)\n\n# MPM liquid volume (pour from above)\nscene.add_entity(\n    morph=gs.options.morphs.Box(\n        pos=(0.0, 0.0, 1.0),\n        size=(0.4, 0.4, 0.2),\n    ),\n    material=gs.materials.MPM.Liquid(),\n)\n\n########################## build the scene ##########################\nscene.build()\n\n########################## simulation loop ##########################\nfor i in range(500):\n    scene.step()",
+            "error": "gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 18:17:29.281 33072] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          },
+          {
+            "attempt": 2,
+            "success": false,
+            "code": "import os\nimport numpy as np\nimport genesis as gs\n\ndef main():\n    ########################## init ##########################\n    gs.init(precision=\"32\", logging_level=\"info\")\n\n    ########################## create a scene ##########################\n    scene = gs.Scene(\n        sim_options=gs.options.SimOptions(\n            dt=4e-3,\n            substeps=20,\n        ),\n        mpm_options=gs.options.MPMOptions(\n            lower_bound=(-1.0, -1.0, -0.5),\n            upper_bound=(1.0, 1.0, 2.0),\n        ),\n        viewer_options=gs.options.ViewerOptions(\n            camera_fov=40,\n            res=(960, 640),\n        ),\n        show_viewer=True,\n    )\n\n    ########################## entities ##########################\n    # Ground plane\n    scene.add_entity(morph=gs.morphs.Plane())\n\n    # Bathtub mesh as a static rigid container\n    # Replace 'path/to/bathtub.obj' with the actual mesh file path\n    scene.add_entity(\n        morph=gs.morphs.Mesh(\n            file='path/to/bathtub.obj',\n            static=True,\n            pos=(0.0, 0.0, 0.0),\n        ),\n        material=gs.materials.Rigid(),\n    )\n\n    # MPM liquid volume above the bathtub\n    scene.add_entity(\n        morph=gs.morphs.Box(\n            size=(0.4, 0.4, 0.4),\n            pos=(0.0, 0.0, 1.5),\n        ),\n        material=gs.materials.MPM.Liquid(),\n    )\n\n    ########################## build ##########################\n    scene.build()\n\n    ########################## run ##########################\n    for i in range(500):\n        scene.step()\n\nif __name__ == \"__main__\":\n    main()",
+            "error": "gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 18:18:00.089 16752] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          },
+          {
+            "attempt": 3,
+            "success": false,
+            "code": "import genesis as gs\n\ndef main():\n    ########################## init ##########################\n    gs.init(seed=0, precision=\"32\", logging_level=\"info\")\n\n    ########################## create a scene ##########################\n    scene = gs.Scene(\n        sim_options=gs.options.SimOptions(\n            dt=4e-3,\n            substeps=20,\n        ),\n        mpm_options=gs.options.MPMOptions(\n            lower_bound=(-1.0, -0.5, 0.0),\n            upper_bound=(1.0, 1.5, 1.5),\n        ),\n        viewer_options=gs.options.ViewerOptions(\n            camera_fov=30,\n            res=(960, 640),\n        ),\n        show_viewer=True,\n    )\n\n    ########################## entities ##########################\n    # Static rigid bathtub mesh\n    bathtub = scene.add_entity(\n        morph=gs.options.morphs.Mesh(\n            file=\"bathtub.obj\",   # replace with actual mesh path\n            pos=(0.0, 0.5, 0.0),\n            scale=(0.5, 0.5, 0.5),\n        ),\n    )\n\n    # Ground plane\n    plane = scene.add_entity(\n        morph=gs.options.morphs.Plane(),\n    )\n\n    # MPM liquid volume (poured from above)\n    liquid = scene.add_entity(\n        morph=gs.options.morphs.Box(\n            pos=(0.0, 0.8, 1.2),\n            size=(0.4, 0.4, 0.2),\n        ),\n        material=gs.materials.MPM.Liquid(),\n    )\n\n    ########################## build ##########################\n    scene.build()\n\n    ########################## run simulation ##########################\n    for i in range(500):\n        scene.step()\n\nif __name__ == \"__main__\":\n    main()",
+            "error": "gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. Please run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n[W 06/11/26 18:18:36.965 41584] [gstaichi/util/offline_cache.h:gstaichi::lang::offline_cache::CacheCleaner<struct gstaichi::lang::CacheData>::run@188] Lock C:/gstaichi_cache/ticache/kernel_compilation_manager/ticache.lock failed. You can run 'ti cache clean -p C:/gstaichi_cache/ticache/kernel_compilation_manager' and try again.\n"
+          }
+        ],
+        "duration": 111.0,
+        "task_id": "eval_018",
+        "complexity": "hard"
+      }
+    ]
+  }
+}

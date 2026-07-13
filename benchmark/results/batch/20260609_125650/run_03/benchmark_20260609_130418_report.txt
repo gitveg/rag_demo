@@ -1,0 +1,1382 @@
+============================================================
+  rag_demo Benchmark Report
+  Run ID  : 20260609_130418
+  RAG Rewrite: hyde
+  Detailed Report: False
+  Tasks   : 100
+  Retries : 3
+  Skip Exec: True
+  Time    : 2026-06-09T13:10:45.316260
+============================================================
+
+--- 汇总指标 ---
+组别              N     RAG总召回      语义召回   TokF(avg)   Pass@1   Pass@3
+--------------------------------------------------------------------
+overall       100      92.1%     88.1%       3,575      N/A      N/A
+complex        24      88.8%     84.6%       3,581      N/A      N/A
+hard            5      97.8%     97.8%       3,663      N/A      N/A
+medium         40      92.7%     89.1%       3,568      N/A      N/A
+simple         31      93.1%     87.9%       3,565      N/A      N/A
+
+--- 逐任务结果 ---
+task_id          cx     RAG       TokI/F   P@1   P@3   att      sec
+------------------------------------------------------------
+eval_001     simple    100%  3,665/3,665     -     -     -    6.75s
+eval_002     simple    100%  3,430/3,430     -     -     -    2.34s
+eval_003     simple    100%  3,978/3,978     -     -     -    2.67s
+eval_004     simple    100%  3,422/3,422     -     -     -     2.9s
+eval_005     simple    100%  3,420/3,420     -     -     -    2.57s
+eval_006     medium    100%  3,582/3,582     -     -     -    2.75s
+eval_007     medium    100%  3,449/3,449     -     -     -    2.97s
+eval_008     medium    100%  3,641/3,641     -     -     -    3.03s
+eval_009     medium    100%  3,579/3,579     -     -     -     3.1s
+eval_010     medium    100%  3,702/3,702     -     -     -    3.02s
+eval_011     medium    100%  3,569/3,569     -     -     -     2.7s
+eval_012     medium    100%  3,715/3,715     -     -     -    3.22s
+eval_013     medium    100%  3,677/3,677     -     -     -    3.72s
+eval_014     medium    100%  3,823/3,823     -     -     -    3.31s
+eval_015     medium    100%  3,401/3,401     -     -     -    2.98s
+eval_016       hard    100%  3,571/3,571     -     -     -    2.74s
+eval_017       hard     89%  3,419/3,419     -     -     -    3.24s
+eval_018       hard    100%  3,849/3,849     -     -     -     3.3s
+eval_019       hard    100%  3,593/3,593     -     -     -    3.77s
+eval_020       hard    100%  3,883/3,883     -     -     -    8.12s
+s1_fem_elastic_simple_001 simple     91%  3,638/3,638     -     -     -    2.89s
+s1_fem_elastic_simple_002 simple    100%  3,445/3,445     -     -     -    3.18s
+s1_fem_elastic_medium_001 medium    100%  3,599/3,599     -     -     -    3.04s
+s1_fem_elastic_medium_002 medium     83%  3,666/3,666     -     -     -    3.29s
+s1_fem_elastic_medium_003 medium    100%  3,651/3,651     -     -     -    3.36s
+s1_fem_elastic_complex_001 complex    100%  3,657/3,657     -     -     -    3.72s
+s1_fem_elastic_complex_002 complex    100%  3,426/3,426     -     -     -     3.1s
+s1_fem_cloth_simple_002 simple    100%  3,367/3,367     -     -     -    2.77s
+s1_fem_cloth_medium_003 medium    100%  3,635/3,635     -     -     -    3.33s
+s1_fem_cloth_complex_002 complex    100%  3,289/3,289     -     -     -     3.0s
+s1_sph_fluid_simple_001 simple    100%  3,370/3,370     -     -     -    3.23s
+s1_sph_fluid_simple_002 simple     93%  3,729/3,729     -     -     -    3.76s
+s1_sph_fluid_simple_003 simple    100%  3,457/3,457     -     -     -    4.52s
+s1_sph_fluid_medium_001 medium    100%  3,475/3,475     -     -     -    4.45s
+s1_sph_fluid_medium_002 medium    100%  3,385/3,385     -     -     -    4.58s
+s1_sph_fluid_medium_003 medium     77%  3,440/3,440     -     -     -    4.72s
+s1_sph_fluid_complex_001 complex    100%  3,418/3,418     -     -     -    4.83s
+s1_sph_fluid_complex_002 complex     93%  3,405/3,405     -     -     -    5.02s
+s1_sph_fluid_complex_003 complex    100%  3,527/3,527     -     -     -    4.21s
+s1_mpm_sand_simple_001 simple    100%  3,606/3,606     -     -     -    3.23s
+s1_mpm_sand_simple_002 simple     92%  3,936/3,936     -     -     -    3.65s
+s1_mpm_sand_medium_003 medium    100%  3,567/3,567     -     -     -     3.2s
+s1_mpm_sand_complex_001 complex    100%  3,416/3,416     -     -     -    4.36s
+s1_surface_simple_001 simple    100%  3,418/3,418     -     -     -    2.65s
+s1_surface_simple_002 simple    100%  3,693/3,693     -     -     -    3.98s
+s1_surface_simple_003 simple     89%  3,606/3,606     -     -     -    3.25s
+s1_surface_medium_001 medium    100%  3,653/3,653     -     -     -    3.54s
+s1_surface_medium_002 medium     90%  3,528/3,528     -     -     -    3.61s
+s1_surface_medium_003 medium     80%  3,459/3,459     -     -     -    4.44s
+s1_surface_complex_001 complex    100%  3,391/3,391     -     -     -    2.88s
+s1_surface_complex_002 complex     78%  4,636/4,636     -     -     -    4.39s
+s1_camera_simple_001 simple     91%  3,914/3,914     -     -     -    3.73s
+s1_camera_simple_002 simple     86%  3,477/3,477     -     -     -     3.8s
+s1_camera_medium_001 medium    100%  3,774/3,774     -     -     -    3.94s
+s1_camera_medium_002 medium    100%  3,469/3,469     -     -     -    3.63s
+s1_camera_complex_001 complex    100%  3,432/3,432     -     -     -    4.51s
+s1_force_field_simple_001 simple    100%  3,584/3,584     -     -     -    3.44s
+s1_force_field_simple_002 simple    100%  3,599/3,599     -     -     -    3.97s
+s1_force_field_simple_003 simple    100%  3,668/3,668     -     -     -    2.84s
+s1_force_field_medium_001 medium    100%  3,600/3,600     -     -     -    2.95s
+s1_force_field_medium_002 medium    100%  3,585/3,585     -     -     -    3.22s
+s1_force_field_medium_003 medium    100%  3,382/3,382     -     -     -    6.99s
+s1_force_field_complex_001 complex     71%  3,717/3,717     -     -     -    3.21s
+s1_force_field_complex_003 complex     89%  3,733/3,733     -     -     -     4.5s
+s1_terrain_simple_001 simple     70%  3,203/3,203     -     -     -    3.84s
+s1_terrain_simple_002 simple     83%  3,308/3,308     -     -     -    2.65s
+s1_terrain_medium_001 medium     75%  3,232/3,232     -     -     -    4.03s
+s1_terrain_medium_002 medium     82%  3,394/3,394     -     -     -     5.1s
+s1_terrain_medium_003 medium     82%  3,439/3,439     -     -     -    4.03s
+s1_terrain_complex_001 complex     77%  3,681/3,681     -     -     -    6.04s
+s1_terrain_complex_003 complex     67%  3,479/3,479     -     -     -    2.69s
+s1_drone_simple_001 simple     83%  3,538/3,538     -     -     -    2.98s
+s1_drone_simple_002 simple     80%  3,538/3,538     -     -     -    2.88s
+s1_drone_medium_001 medium     80%  3,553/3,553     -     -     -    4.27s
+s1_drone_medium_002 medium     67%  3,470/3,470     -     -     -    4.38s
+s1_drone_medium_003 medium     83%  3,538/3,538     -     -     -     3.7s
+s1_drone_complex_001 complex     78%  3,469/3,469     -     -     -    2.47s
+s1_drone_complex_002 complex     79%  3,571/3,571     -     -     -    4.06s
+s1_drone_complex_003 complex     73%  3,553/3,553     -     -     -    3.75s
+s1_sensor_simple_001 simple     56%  3,751/3,751     -     -     -    6.06s
+s1_sensor_simple_002 simple     93%  4,203/4,203     -     -     -    6.36s
+s1_sensor_medium_001 medium     85%  3,623/3,623     -     -     -    3.36s
+s1_sensor_medium_002 medium     68%  3,952/3,952     -     -     -    3.92s
+s1_sensor_medium_003 medium     71%  3,989/3,989     -     -     -    2.79s
+s1_sensor_complex_001 complex     88%  4,245/4,245     -     -     -     8.6s
+s1_robot_simple_001 simple    100%  3,408/3,408     -     -     -    4.47s
+s1_robot_simple_002 simple    100%  3,408/3,408     -     -     -    3.41s
+s1_robot_simple_003 simple     78%  3,324/3,324     -     -     -    2.28s
+s1_robot_medium_001 medium    100%  3,401/3,401     -     -     -    2.62s
+s1_robot_medium_002 medium    100%  3,619/3,619     -     -     -    4.26s
+s1_robot_medium_003 medium    100%  3,281/3,281     -     -     -     3.6s
+s1_robot_complex_001 complex    100%  3,390/3,390     -     -     -    5.04s
+s1_robot_complex_003 complex     82%  3,353/3,353     -     -     -    3.72s
+s1_cross_domain_simple_001 simple    100%  3,423/3,423     -     -     -    3.98s
+s1_cross_domain_medium_001 medium     86%  3,724/3,724     -     -     -     3.5s
+s1_cross_domain_medium_002 medium    100%  3,499/3,499     -     -     -    5.23s
+s1_cross_domain_complex_003 complex     90%  3,503/3,503     -     -     -    3.87s
+s1_cross_domain_complex_004 complex    100%  3,471/3,471     -     -     -    5.01s
+s1_cross_domain_complex_005 complex     90%  3,768/3,768     -     -     -     7.5s
+s1_cross_domain_complex_006 complex     78%  3,416/3,416     -     -     -    6.57s
+
+--- RAG 命中详情（per API）---
+
+  eval_001:
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    Y genesis.surfaces.Default  [semantic]
+
+  eval_002:
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+
+  eval_003:
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.morphs.Cylinder  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+
+  eval_004:
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.materials.Rigid  [semantic]
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.options.RigidOptions  [semantic]
+
+  eval_005:
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+
+  eval_006:
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.materials.Rigid  [semantic]
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+
+  eval_007:
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.materials.Rigid  [semantic]
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+
+  eval_008:
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.materials.Rigid  [semantic]
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+
+  eval_009:
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Cylinder  [semantic]
+    Y genesis.materials.Rigid  [semantic]
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    Y genesis.surfaces.Default  [semantic]
+
+  eval_010:
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+
+  eval_011:
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+
+  eval_012:
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.materials.Rigid  [semantic]
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.morphs.Box  [semantic]
+
+  eval_013:
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.materials.MPM.Elastic  [semantic]
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.options.MPMOptions  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.surfaces.Default  [semantic]
+
+  eval_014:
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.materials.MPM.Elastic  [semantic]
+    Y genesis.materials.Rigid  [semantic]
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+
+  eval_015:
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.materials.MPM.Liquid  [semantic]
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.SPH.Liquid  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+
+  eval_016:
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.morphs.Mesh  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.materials.MPM.Elastic  [semantic]
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.options.MPMOptions  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    Y genesis.surfaces.Default  [semantic]
+
+  eval_017:
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.morphs.MJCF  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    N genesis.surfaces.Default  [miss]
+
+  eval_018:
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.morphs.Mesh  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.materials.Rigid  [semantic]
+    Y genesis.materials.MPM.Liquid  [semantic]
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.options.MPMOptions  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+
+  eval_019:
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.materials.Rigid  [semantic]
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+
+  eval_020:
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.morphs.MJCF  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.materials.MPM.Elastic  [semantic]
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.options.MPMOptions  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+
+  s1_fem_elastic_simple_001:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.FEM.Elastic  [semantic]
+    Y genesis.materials.Rigid  [semantic]
+    Y genesis.options.FEMOptions  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    Y genesis.options.morphs.Sphere  [semantic]
+    N genesis.options.morphs.Terrain  [miss]
+    Y genesis.options.SimOptions  [semantic]
+
+  s1_fem_elastic_simple_002:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.FEM.Elastic  [core]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.options.ViewerOptions  [semantic]
+
+  s1_fem_elastic_medium_001:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.FEM.Elastic  [semantic]
+    Y genesis.materials.Rigid  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+
+  s1_fem_elastic_medium_002:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.FEM.Elastic  [semantic]
+    Y genesis.materials.Rigid  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    N genesis.options.renderers.Rasterizer  [miss]
+    Y genesis.surfaces.Default  [semantic]
+    N genesis.surfaces.Rough  [miss]
+
+  s1_fem_elastic_medium_003:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.FEM.Elastic  [semantic]
+    Y genesis.materials.Rigid  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+    Y genesis.options.FEMOptions  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    Y genesis.surfaces.Default  [semantic]
+    Y genesis.options.morphs.Plane  [semantic]
+    Y genesis.options.morphs.Sphere  [semantic]
+
+  s1_fem_elastic_complex_001:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.FEM.Elastic  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+    Y genesis.options.FEMOptions  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+
+  s1_fem_elastic_complex_002:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.FEM.Elastic  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.options.ViewerOptions  [semantic]
+    Y genesis.options.morphs.Sphere  [semantic]
+
+  s1_fem_cloth_simple_002:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.PBD.Cloth  [semantic]
+    Y genesis.morphs.Mesh  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+
+  s1_fem_cloth_medium_003:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.PBD.Cloth  [semantic]
+    Y genesis.materials.Rigid  [semantic]
+    Y genesis.morphs.Mesh  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+
+  s1_fem_cloth_complex_002:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.PBD.Cloth  [semantic]
+    Y genesis.materials.Rigid  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Mesh  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+
+  s1_sph_fluid_simple_001:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.SPH.Liquid  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+    Y genesis.surfaces.Default  [semantic]
+    Y genesis.options.SPHOptions  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.VisOptions  [semantic]
+    Y genesis.options.morphs.Box  [semantic]
+    Y genesis.options.morphs.Plane  [semantic]
+
+  s1_sph_fluid_simple_002:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.SPH.Liquid  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    N genesis.morphs.URDF  [miss]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.surfaces.Default  [semantic]
+    Y genesis.options.SPHOptions  [semantic]
+    Y genesis.options.VisOptions  [semantic]
+    Y genesis.options.morphs.Box  [semantic]
+    Y genesis.options.morphs.Plane  [semantic]
+
+  s1_sph_fluid_simple_003:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.SPH.Liquid  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    Y genesis.surfaces.Default  [semantic]
+    Y genesis.options.SPHOptions  [semantic]
+    Y genesis.options.VisOptions  [semantic]
+    Y genesis.options.morphs.Plane  [semantic]
+
+  s1_sph_fluid_medium_001:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.Rigid  [semantic]
+    Y genesis.materials.SPH.Liquid  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.SPHOptions  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    Y genesis.options.VisOptions  [semantic]
+    Y genesis.options.morphs.Box  [semantic]
+    Y genesis.options.morphs.Plane  [semantic]
+
+  s1_sph_fluid_medium_002:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.SPH.Liquid  [semantic]
+    Y genesis.options.SPHOptions  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.VisOptions  [semantic]
+    Y genesis.options.morphs.Box  [semantic]
+    Y genesis.options.morphs.Plane  [semantic]
+    Y genesis.materials.Rigid  [semantic]
+
+  s1_sph_fluid_medium_003:
+    Y genesis.Scene  [semantic]
+    N genesis.Scene.add_camera  [miss]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.Rigid  [semantic]
+    Y genesis.materials.SPH.Liquid  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    N genesis.options.renderers.Rasterizer  [miss]
+    Y genesis.surfaces.Default  [semantic]
+    N genesis.surfaces.Glass  [miss]
+
+  s1_sph_fluid_complex_001:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.materials.SPH.Liquid  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+    Y genesis.options.SPHOptions  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    Y genesis.options.VisOptions  [semantic]
+    Y genesis.options.morphs.Box  [semantic]
+
+  s1_sph_fluid_complex_002:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.SPHOptions  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.VisOptions  [semantic]
+    Y genesis.options.surfaces.Glass  [semantic]
+    Y genesis.Scene.add_emitter  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.materials.SPH.Liquid  [semantic]
+    Y genesis.surfaces.Glass  [semantic]
+    N genesis.surfaces.Water  [miss]
+
+  s1_sph_fluid_complex_003:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.Rigid  [semantic]
+    Y genesis.options.SPHOptions  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.VisOptions  [semantic]
+    Y genesis.options.morphs.Box  [semantic]
+    Y genesis.options.morphs.Plane  [semantic]
+
+  s1_mpm_sand_simple_001:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.MPM.Sand  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.MPMOptions  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.surfaces.Default  [semantic]
+    Y genesis.materials.Rigid  [semantic]
+
+  s1_mpm_sand_simple_002:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.MPM.Sand  [semantic]
+    N genesis.morphs.Cylinder  [miss]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.MPMOptions  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    Y genesis.surfaces.Default  [semantic]
+    Y genesis.materials.Rigid  [semantic]
+    Y genesis.morphs.Box  [semantic]
+
+  s1_mpm_sand_medium_003:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.MPM.Sand  [core]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.MPMOptions  [core]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.surfaces.Default  [semantic]
+    Y genesis.materials.Rigid  [semantic]
+
+  s1_mpm_sand_complex_001:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.MPM.Sand  [core]
+    Y genesis.materials.Rigid  [semantic]
+    Y genesis.morphs.Mesh  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    Y genesis.options.surfaces.Glass  [semantic]
+
+  s1_surface_simple_001:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    Y genesis.surfaces.Default  [semantic]
+    Y genesis.materials.FEM.Elastic  [semantic]
+    Y genesis.options.morphs.Sphere  [semantic]
+
+  s1_surface_simple_002:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    Y genesis.surfaces.Default  [semantic]
+
+  s1_surface_simple_003:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    N genesis.surfaces.Rough  [miss]
+    Y genesis.Scene.draw_debug_sphere  [semantic]
+
+  s1_surface_medium_001:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    Y genesis.surfaces.Default  [semantic]
+
+  s1_surface_medium_002:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    Y genesis.surfaces.Default  [semantic]
+    N genesis.surfaces.Gold  [miss]
+    Y genesis.surfaces.Rough  [semantic]
+
+  s1_surface_medium_003:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Cylinder  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    N genesis.surfaces.Default  [miss]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.options.morphs.Box  [semantic]
+    Y genesis.options.morphs.Cylinder  [semantic]
+    Y genesis.options.morphs.Plane  [semantic]
+    N genesis.surfaces.Metal  [miss]
+    N genesis.surfaces.Rough  [miss]
+
+  s1_surface_complex_001:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.MJCF  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    Y genesis.surfaces.Default  [semantic]
+
+  s1_surface_complex_002:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    N genesis.morphs.Box  [miss]
+    N genesis.morphs.Cylinder  [miss]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    Y genesis.surfaces.Default  [semantic]
+
+  s1_camera_simple_001:
+    Y genesis.Scene  [semantic]
+    N genesis.Scene.add_camera  [miss]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.options.ViewerOptions  [semantic]
+    Y genesis.options.morphs.Plane  [semantic]
+    Y genesis.options.morphs.Sphere  [semantic]
+
+  s1_camera_simple_002:
+    Y genesis.Scene  [semantic]
+    N genesis.Scene.add_camera  [miss]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+
+  s1_camera_medium_001:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_camera  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+    Y genesis.surfaces.Default  [semantic]
+
+  s1_camera_medium_002:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_camera  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.VisOptions  [semantic]
+
+  s1_camera_complex_001:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_camera  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+
+  s1_force_field_simple_001:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.add_force_field  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.force_fields.Wind  [semantic]
+    Y genesis.materials.Rigid  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    Y genesis.options.morphs.Sphere  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+
+  s1_force_field_simple_002:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.add_force_field  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.force_fields.Wind  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.options.ViewerOptions  [semantic]
+    Y genesis.options.morphs.Sphere  [semantic]
+
+  s1_force_field_simple_003:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.surfaces.Default  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    Y genesis.options.morphs.Sphere  [semantic]
+
+  s1_force_field_medium_001:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.options.ViewerOptions  [semantic]
+    Y genesis.options.morphs.Sphere  [semantic]
+
+  s1_force_field_medium_002:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+
+  s1_force_field_medium_003:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.add_force_field  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.force_fields.Wind  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+
+  s1_force_field_complex_001:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.add_force_field  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    N genesis.force_fields.Vortex  [miss]
+    Y genesis.materials.Rigid  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    N genesis.options.renderers.Rasterizer  [miss]
+    Y genesis.surfaces.Default  [semantic]
+    N genesis.surfaces.Gold  [miss]
+    N genesis.surfaces.Iron  [miss]
+    N genesis.surfaces.Rough  [miss]
+
+  s1_force_field_complex_003:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.add_force_field  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    N genesis.force_fields.Constant  [miss]
+    Y genesis.materials.Rigid  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    Y genesis.options.morphs.Sphere  [semantic]
+
+  s1_terrain_simple_001:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.morphs.Sphere  [semantic]
+    Y genesis.morphs.Terrain  [semantic]
+    N genesis.options.renderers.Rasterizer  [miss]
+    N genesis.surfaces.Default  [miss]
+    N genesis.surfaces.Rough  [miss]
+
+  s1_terrain_simple_002:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.Rigid  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    Y genesis.morphs.Terrain  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    N genesis.options.renderers.Rasterizer  [miss]
+    N genesis.surfaces.Iron  [miss]
+
+  s1_terrain_medium_001:
+    Y genesis.Scene  [semantic]
+    N genesis.Scene.add_camera  [miss]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.morphs.Sphere  [semantic]
+    Y genesis.morphs.Terrain  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    N genesis.options.renderers.Rasterizer  [miss]
+    N genesis.surfaces.Default  [miss]
+
+  s1_terrain_medium_002:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Terrain  [semantic]
+    Y genesis.options.RigidOptions  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    N genesis.options.renderers.Rasterizer  [miss]
+    N genesis.surfaces.Rough  [miss]
+
+  s1_terrain_medium_003:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_camera  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Terrain  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    N genesis.options.renderers.Rasterizer  [miss]
+    N genesis.surfaces.Rough  [miss]
+
+  s1_terrain_complex_001:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_camera  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+    Y genesis.morphs.Terrain  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    N genesis.options.renderers.Rasterizer  [miss]
+    N genesis.surfaces.Gold  [miss]
+    N genesis.surfaces.Iron  [miss]
+
+  s1_terrain_complex_003:
+    Y genesis.Scene  [semantic]
+    N genesis.Scene.add_camera  [miss]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.morphs.Mesh  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    N genesis.options.renderers.Rasterizer  [miss]
+    N genesis.surfaces.Iron  [miss]
+    N genesis.surfaces.Rough  [miss]
+
+  s1_drone_simple_001:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.morphs.Drone  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    N genesis.options.renderers.Rasterizer  [miss]
+    Y genesis.surfaces.Rough  [semantic]
+    N genesis.surfaces.Default  [miss]
+    Y genesis.materials.Rigid  [core]
+
+  s1_drone_simple_002:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.morphs.Drone  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    N genesis.options.renderers.Rasterizer  [miss]
+    N genesis.surfaces.Default  [miss]
+
+  s1_drone_medium_001:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.morphs.Drone  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    N genesis.options.renderers.Rasterizer  [miss]
+    N genesis.surfaces.Default  [miss]
+
+  s1_drone_medium_002:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_camera  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.Rigid  [core]
+    N genesis.morphs.Cylinder  [miss]
+    Y genesis.morphs.Drone  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    N genesis.options.renderers.Rasterizer  [miss]
+    N genesis.surfaces.Default  [miss]
+    N genesis.surfaces.Emission  [miss]
+    N genesis.surfaces.Gold  [miss]
+
+  s1_drone_medium_003:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.morphs.Drone  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    N genesis.options.renderers.Rasterizer  [miss]
+    N genesis.surfaces.Default  [miss]
+    Y genesis.surfaces.Rough  [semantic]
+    Y genesis.materials.Rigid  [core]
+
+  s1_drone_complex_001:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.morphs.Drone  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    N genesis.options.renderers.Rasterizer  [miss]
+    N genesis.surfaces.Default  [miss]
+
+  s1_drone_complex_002:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Drone  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    N genesis.options.renderers.Rasterizer  [miss]
+    N genesis.surfaces.Emission  [miss]
+    N genesis.surfaces.Iron  [miss]
+    Y genesis.surfaces.Rough  [semantic]
+
+  s1_drone_complex_003:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_camera  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.Rigid  [core]
+    N genesis.morphs.Box  [miss]
+    N genesis.morphs.Cylinder  [miss]
+    Y genesis.morphs.Drone  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    N genesis.options.renderers.Rasterizer  [miss]
+    N genesis.surfaces.Default  [miss]
+    Y genesis.surfaces.Rough  [semantic]
+
+  s1_sensor_simple_001:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_camera  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+    N genesis.Scene.add_sensor  [miss]
+    Y genesis.materials.Rigid  [core]
+    N genesis.options.renderers.Rasterizer  [miss]
+    N genesis.sensors.DepthCamera  [miss]
+    N genesis.sensors.DepthCameraPattern  [miss]
+    N genesis.surfaces.Default  [miss]
+    N genesis.surfaces.Glass  [miss]
+    N genesis.surfaces.Rough  [miss]
+
+  s1_sensor_simple_002:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.add_sensor  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.renderers.Rasterizer  [semantic]
+    Y genesis.sensors.DepthCamera  [semantic]
+    Y genesis.sensors.DepthCameraPattern  [semantic]
+    N genesis.surfaces.Default  [miss]
+    Y genesis.surfaces.Rough  [semantic]
+
+  s1_sensor_medium_001:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.add_sensor  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.morphs.MJCF  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    N genesis.options.renderers.Rasterizer  [miss]
+    Y genesis.sensors.IMU  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.morphs.Plane  [semantic]
+    N genesis.surfaces.Default  [miss]
+
+  s1_sensor_medium_002:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Cylinder  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    N genesis.morphs.Sphere  [miss]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    N genesis.surfaces.Default  [miss]
+    Y genesis.Scene.add_sensor  [semantic]
+    Y genesis.materials.Rigid  [core]
+    N genesis.options.renderers.Rasterizer  [miss]
+    Y genesis.sensors.Lidar  [semantic]
+    Y genesis.sensors.SphericalPattern  [semantic]
+    N genesis.surfaces.Aluminium  [miss]
+    N genesis.surfaces.Iron  [miss]
+    N genesis.surfaces.Rough  [miss]
+
+  s1_sensor_medium_003:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.add_sensor  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    N genesis.options.renderers.Rasterizer  [miss]
+    Y genesis.sensors.IMU  [semantic]
+    N genesis.surfaces.Aluminium  [miss]
+    N genesis.surfaces.Default  [miss]
+    N genesis.surfaces.Iron  [miss]
+
+  s1_sensor_complex_001:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.add_sensor  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Cylinder  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.renderers.Rasterizer  [semantic]
+    Y genesis.sensors.Lidar  [semantic]
+    Y genesis.sensors.SphericalPattern  [semantic]
+    N genesis.surfaces.Default  [miss]
+    N genesis.surfaces.Iron  [miss]
+    Y genesis.surfaces.Rough  [semantic]
+
+  s1_robot_simple_001:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.morphs.MJCF  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+
+  s1_robot_simple_002:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.morphs.MJCF  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+
+  s1_robot_simple_003:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.morphs.MJCF  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    N genesis.options.renderers.Rasterizer  [miss]
+    N genesis.surfaces.Default  [miss]
+
+  s1_robot_medium_001:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.morphs.MJCF  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+
+  s1_robot_medium_002:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.MJCF  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    Y genesis.surfaces.Default  [semantic]
+    Y genesis.materials.Rigid  [semantic]
+
+  s1_robot_medium_003:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.morphs.MJCF  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.options.RigidOptions  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+
+  s1_robot_complex_001:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.morphs.MJCF  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+
+  s1_robot_complex_003:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.morphs.URDF  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    N genesis.options.renderers.Rasterizer  [miss]
+    N genesis.surfaces.Default  [miss]
+
+  s1_cross_domain_simple_001:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_emitter  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.materials.SPH.Liquid  [semantic]
+    Y genesis.options.SPHOptions  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.morphs.Box  [semantic]
+
+  s1_cross_domain_medium_001:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.FEM.Elastic  [semantic]
+    Y genesis.materials.Rigid  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    N genesis.options.renderers.Rasterizer  [miss]
+    Y genesis.surfaces.Default  [semantic]
+    N genesis.surfaces.Iron  [miss]
+
+  s1_cross_domain_medium_002:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.MPM.Elastic  [semantic]
+    Y genesis.materials.Rigid  [semantic]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.MJCF  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+    Y genesis.options.MPMOptions  [semantic]
+    Y genesis.options.RigidOptions  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    Y genesis.options.VisOptions  [semantic]
+    Y genesis.surfaces.Default  [semantic]
+
+  s1_cross_domain_complex_003:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.add_force_field  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.force_fields.Turbulence  [semantic]
+    Y genesis.morphs.Drone  [semantic]
+    Y genesis.morphs.Terrain  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    N genesis.options.renderers.Rasterizer  [miss]
+
+  s1_cross_domain_complex_004:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_emitter  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.materials.SPH.Liquid  [semantic]
+    Y genesis.options.SPHOptions  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    Y genesis.options.morphs.Box  [semantic]
+    Y genesis.options.morphs.Plane  [semantic]
+
+  s1_cross_domain_complex_005:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.add_entity  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.materials.FEM.Elastic  [semantic]
+    Y genesis.materials.Rigid  [semantic]
+    Y genesis.morphs.Sphere  [semantic]
+    N genesis.morphs.Terrain  [miss]
+    Y genesis.morphs.URDF  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+
+  s1_cross_domain_complex_006:
+    Y genesis.Scene  [semantic]
+    Y genesis.Scene.build  [semantic]
+    Y genesis.Scene.step  [semantic]
+    Y genesis.options.RigidOptions  [semantic]
+    Y genesis.options.SimOptions  [semantic]
+    Y genesis.options.ViewerOptions  [semantic]
+    Y genesis.surfaces.Default  [semantic]
+    N genesis.surfaces.Metal  [miss]
+    N genesis.surfaces.Plastic  [miss]

@@ -1,0 +1,21 @@
+Traceback (most recent call last):
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\online_authorized_20260712\023_s1_fem_elastic_medium_002\attempt_1\code.py", line 72, in <module>
+    main()
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\online_authorized_20260712\023_s1_fem_elastic_medium_002\attempt_1\code.py", line 65, in main
+    scene.build()
+  File "D:\Desktop\Genesis\Genesis-main\genesis\utils\misc.py", line 141, in wrapper
+    return method(self, *args, **kwargs)
+  File "D:\Desktop\Genesis\Genesis-main\genesis\engine\scene.py", line 775, in build
+    self._sim.build()
+  File "D:\Desktop\Genesis\Genesis-main\genesis\engine\simulator.py", line 207, in build
+    self._coupler.build()
+  File "D:\Desktop\Genesis\Genesis-main\genesis\engine\couplers\sap_coupler.py", line 264, in build
+    self._init_hydroelastic_rigid_fields_and_info()
+  File "D:\Desktop\Genesis\Genesis-main\genesis\engine\couplers\sap_coupler.py", line 320, in _init_hydroelastic_rigid_fields_and_info
+    gs.raise_exception("Primitive plane not supported as user-specified collision geometries.")
+  File "D:\Desktop\Genesis\Genesis-main\genesis\utils\misc.py", line 44, in raise_exception
+    raise gs.GenesisException(msg)
+genesis.GenesisException: Primitive plane not supported as user-specified collision geometries.
+
+[38;5;9m[Genesis] [14:20:58] [ERROR] GenesisException: Primitive plane not supported as user-specified collision geometries.[0m
+[38;5;159m[Genesis] [14:20:58] [INFO] 💤 Exiting Genesis and caching compiled kernels...[0m

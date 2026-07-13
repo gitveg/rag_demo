@@ -1,0 +1,34 @@
+[38;5;159m[Genesis] [16:15:09] [INFO] [38;5;121m╭───────────────────────────────────────────────╮[0m[38;5;159m[0m
+[38;5;159m[Genesis] [16:15:09] [INFO] [38;5;121m│┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈[0m[38;5;159m [38;5;121m[1m[3mGenesis[0m[38;5;159m [38;5;121m┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈│[0m[38;5;159m[0m
+[38;5;159m[Genesis] [16:15:09] [INFO] [38;5;121m╰───────────────────────────────────────────────╯[0m[38;5;159m[0m
+[38;5;159m[Genesis] [16:15:10] [INFO] Running on [38;5;121m[4m[NVIDIA GeForce RTX 4060 Laptop GPU][0m[38;5;159m with backend [38;5;121m[4mgs.cuda[0m[38;5;159m. Device memory: [38;5;121m[4m8.00[0m[38;5;159m GB.[0m
+[38;5;159m[Genesis] [16:15:10] [INFO] 🚀 Genesis initialized. 🔖 version: [38;5;121m[4m0.3.8[0m[38;5;159m, 🎨 theme: [38;5;121m[4mdark[0m[38;5;159m, 🌱 seed: [38;5;121m[4mNone[0m[38;5;159m, 🐛 debug: [38;5;121m[4mFalse[0m[38;5;159m, 📏 precision: [38;5;121m[4m32[0m[38;5;159m, 🔥 performance: [38;5;121m[4mFalse[0m[38;5;159m, 💬 verbose: [38;5;121m[4mINFO[0m[38;5;159m[0m
+[38;5;159m[Genesis] [16:15:14] [INFO] Scene [38;5;121m[3m<d0a1353>[0m[38;5;159m created.[0m
+[38;5;159m[Genesis] [16:15:14] [INFO] Adding [38;5;121m<gs.RigidEntity>[0m[38;5;159m. idx: [38;5;121m0[0m[38;5;159m, uid: [38;5;121m[3m<951f878>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Terrain>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+Traceback (most recent call last):
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\run_20260712_161214_f8cf6ba7\066_s1_terrain_medium_001\attempt_1\code.py", line 47, in <module>
+    main()
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\run_20260712_161214_f8cf6ba7\066_s1_terrain_medium_001\attempt_1\code.py", line 15, in main
+    terrain = scene.add_entity(
+  File "D:\Desktop\Genesis\Genesis-main\genesis\utils\misc.py", line 141, in wrapper
+    return method(self, *args, **kwargs)
+  File "D:\Desktop\Genesis\Genesis-main\genesis\engine\scene.py", line 457, in add_entity
+    entity = self._sim._add_entity(morph, material, surface, visualize_contact)
+  File "D:\Desktop\Genesis\Genesis-main\genesis\engine\simulator.py", line 171, in _add_entity
+    entity = self.rigid_solver.add_entity(self.n_entities, material, morph, surface, visualize_contact)
+  File "D:\Desktop\Genesis\Genesis-main\genesis\engine\solvers\rigid\rigid_solver_decomp.py", line 154, in add_entity
+    entity = EntityClass(
+  File "D:\Desktop\Genesis\Genesis-main\genesis\engine\entities\rigid_entity\rigid_entity.py", line 117, in __init__
+    self._load_model()
+  File "D:\Desktop\Genesis\Genesis-main\genesis\engine\entities\rigid_entity\rigid_entity.py", line 148, in _load_model
+    self._load_terrain(self._morph, self._surface)
+  File "D:\Desktop\Genesis\Genesis-main\genesis\engine\entities\rigid_entity\rigid_entity.py", line 317, in _load_terrain
+    vmesh, mesh, self.terrain_hf = tu.parse_terrain(morph, surface)
+  File "D:\Desktop\Genesis\Genesis-main\genesis\utils\terrain.py", line 96, in parse_terrain
+    subterrain = isaacgym_terrain_utils.random_uniform_terrain(
+  File "D:\Desktop\Genesis\Genesis-main\genesis\ext\isaacgym\terrain_utils.py", line 70, in random_uniform_terrain
+    heights_range = np.arange(min_height, max_height + step, step)
+ZeroDivisionError: division by zero
+
+[38;5;9m[Genesis] [16:15:14] [ERROR] ZeroDivisionError: division by zero[0m
+[38;5;159m[Genesis] [16:15:14] [INFO] 💤 Exiting Genesis and caching compiled kernels...[0m

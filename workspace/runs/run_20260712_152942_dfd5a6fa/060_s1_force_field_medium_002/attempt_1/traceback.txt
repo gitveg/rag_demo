@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\run_20260712_152942_dfd5a6fa\060_s1_force_field_medium_002\attempt_1\code.py", line 58, in <module>
+    main()
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\run_20260712_152942_dfd5a6fa\060_s1_force_field_medium_002\attempt_1\code.py", line 46, in main
+    t = scene.sim.cur_time
+AttributeError: 'Simulator' object has no attribute 'cur_time'
+
+[38;5;9m[Genesis] [15:54:27] [ERROR] AttributeError: 'Simulator' object has no attribute 'cur_time'[0m
+[38;5;159m[Genesis] [15:54:27] [INFO] 💤 Exiting Genesis and caching compiled kernels...[0m

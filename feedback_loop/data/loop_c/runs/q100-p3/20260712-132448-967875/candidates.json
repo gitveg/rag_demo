@@ -1,0 +1,94 @@
+{
+  "generated_at": "20260712_132448_967875",
+  "source_log": "workspace\\logs\\execution_log_query100_part3.jsonl",
+  "counts": {
+    "A": 0,
+    "B": 0,
+    "C": 3
+  },
+  "candidates": [
+    {
+      "candidate_id": "cand_c_ff701340e41b885a6d15d05d",
+      "type": "C",
+      "api_id": "genesis.options.morphs.Terrain",
+      "constraints": [
+        "Do not pass unrecognized attribute 'terrain_config'; it is not a valid parameter for this API.",
+        "Do not pass unrecognized attribute 'mesh'; it is not a valid parameter for this API."
+      ],
+      "error_examples": [
+        "`subterrain_types` should be either a string or a 2D list of strings with the same shape as `n_subterrains`.",
+        "Unrecognized attribute: terrain_config",
+        "Unrecognized attribute: mesh"
+      ],
+      "event_count": 3,
+      "entry": {
+        "api_id": "genesis.options.morphs.Terrain",
+        "constraints": [
+          "Do not pass unrecognized attribute 'terrain_config'; it is not a valid parameter for this API.",
+          "Do not pass unrecognized attribute 'mesh'; it is not a valid parameter for this API."
+        ],
+        "error_examples": [
+          "`subterrain_types` should be either a string or a 2D list of strings with the same shape as `n_subterrains`.",
+          "Unrecognized attribute: terrain_config",
+          "Unrecognized attribute: mesh"
+        ],
+        "event_count": 3,
+        "sources": [
+          "legacy_evt_6846f60fb661cc9eb320d367150c839c6153273571731b2c973091220e0273c3",
+          "legacy_evt_cebda17d75049db161e8eb199d55526d394efa5cca9425118e21161050d33f9f",
+          "legacy_evt_ffc130e17cff5187b37bf03defcc7145ee1985afad0ac82e203e8853c8642ef7"
+        ]
+      }
+    },
+    {
+      "candidate_id": "cand_c_ea795cd89a3c0d3f07e25eac",
+      "type": "C",
+      "api_id": "genesis.options.sensors.IMU",
+      "constraints": [
+        "Do not pass unrecognized attribute 'attach_to'; it is not a valid parameter for this API."
+      ],
+      "error_examples": [
+        "Unrecognized attribute: attach_to"
+      ],
+      "event_count": 1,
+      "entry": {
+        "api_id": "genesis.options.sensors.IMU",
+        "constraints": [
+          "Do not pass unrecognized attribute 'attach_to'; it is not a valid parameter for this API."
+        ],
+        "error_examples": [
+          "Unrecognized attribute: attach_to"
+        ],
+        "event_count": 1,
+        "sources": [
+          "legacy_evt_370c9272de953915eb728df1d431052dc64db4928255184b3e8f760e08678b9e"
+        ]
+      }
+    },
+    {
+      "candidate_id": "cand_c_d0f98e79c349d7328cce92ae",
+      "type": "C",
+      "api_id": "genesis.options.sensors.Lidar",
+      "constraints": [
+        "Do not pass unrecognized attribute 'pose'; it is not a valid parameter for this API."
+      ],
+      "error_examples": [
+        "Unrecognized attribute: pose"
+      ],
+      "event_count": 1,
+      "entry": {
+        "api_id": "genesis.options.sensors.Lidar",
+        "constraints": [
+          "Do not pass unrecognized attribute 'pose'; it is not a valid parameter for this API."
+        ],
+        "error_examples": [
+          "Unrecognized attribute: pose"
+        ],
+        "event_count": 1,
+        "sources": [
+          "legacy_evt_f3809286cc942d0dd96da71ebcbffa6a725c2cc9cf71f1db2ecc11ce4cae1351"
+        ]
+      }
+    }
+  ]
+}

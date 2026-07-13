@@ -1,0 +1,29 @@
+[38;5;159m[Genesis] [14:05:52] [INFO] [38;5;121m╭───────────────────────────────────────────────╮[0m[38;5;159m[0m
+[38;5;159m[Genesis] [14:05:52] [INFO] [38;5;121m│┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈[0m[38;5;159m [38;5;121m[1m[3mGenesis[0m[38;5;159m [38;5;121m┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈│[0m[38;5;159m[0m
+[38;5;159m[Genesis] [14:05:52] [INFO] [38;5;121m╰───────────────────────────────────────────────╯[0m[38;5;159m[0m
+[38;5;159m[Genesis] [14:05:53] [INFO] Running on [38;5;121m[4m[NVIDIA GeForce RTX 4060 Laptop GPU][0m[38;5;159m with backend [38;5;121m[4mgs.cuda[0m[38;5;159m. Device memory: [38;5;121m[4m8.00[0m[38;5;159m GB.[0m
+[38;5;159m[Genesis] [14:05:53] [INFO] 🚀 Genesis initialized. 🔖 version: [38;5;121m[4m0.3.8[0m[38;5;159m, 🎨 theme: [38;5;121m[4mdark[0m[38;5;159m, 🌱 seed: [38;5;121m[4mNone[0m[38;5;159m, 🐛 debug: [38;5;121m[4mFalse[0m[38;5;159m, 📏 precision: [38;5;121m[4m32[0m[38;5;159m, 🔥 performance: [38;5;121m[4mFalse[0m[38;5;159m, 💬 verbose: [38;5;121m[4mINFO[0m[38;5;159m[0m
+[38;5;159m[Genesis] [14:06:00] [INFO] Scene [38;5;121m[3m<4360791>[0m[38;5;159m created.[0m
+[38;5;159m[Genesis] [14:06:00] [INFO] Adding [38;5;121m<gs.RigidEntity>[0m[38;5;159m. idx: [38;5;121m0[0m[38;5;159m, uid: [38;5;121m[3m<a7a8d51>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [14:06:00] [INFO] Adding [38;5;121m<gs.RigidEntity>[0m[38;5;159m. idx: [38;5;121m1[0m[38;5;159m, uid: [38;5;121m[3m<9e54b7b>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Sphere>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [14:06:00] [INFO] Building scene [38;5;121m[3m<4360791>[0m[38;5;159m...[0m
+[38;5;159m[Genesis] [14:06:04] [INFO] Compiling simulation kernels...[0m
+[38;5;159m[Genesis] [14:06:07] [INFO] Building visualizer...[0m
+[38;5;159m[Genesis] [14:06:08] [INFO] Running at [38;5;121m287.64[0m[38;5;159m FPS.[0m
+[38;5;159m[Genesis] [14:06:08] [INFO] Running at [38;5;121m268.34[0m[38;5;159m FPS.[0m
+[38;5;159m[Genesis] [14:06:08] [INFO] Running at [38;5;121m249.00[0m[38;5;159m FPS.[0m
+[38;5;159m[Genesis] [14:06:08] [INFO] Running at [38;5;121m230.26[0m[38;5;159m FPS.[0m
+[38;5;159m[Genesis] [14:06:08] [INFO] Running at [38;5;121m153.30[0m[38;5;159m FPS.[0m
+[38;5;159m[Genesis] [14:06:08] [INFO] Running at [38;5;121m56.89[0m[38;5;159m FPS.[0m
+[38;5;159m[Genesis] [14:06:09] [INFO] Running at [38;5;121m11.01[0m[38;5;159m FPS.[0m
+[38;5;159m[Genesis] [14:06:09] [INFO] Running at [38;5;121m22.29[0m[38;5;159m FPS.[0m
+[38;5;159m[Genesis] [14:06:09] [INFO] Running at [38;5;121m77.19[0m[38;5;159m FPS.[0m
+[38;5;159m[Genesis] [14:06:09] [INFO] Running at [38;5;121m154.27[0m[38;5;159m FPS.[0m
+[38;5;159m[Genesis] [14:06:09] [INFO] Running at [38;5;121m212.22[0m[38;5;159m FPS.[0m
+[38;5;159m[Genesis] [14:06:09] [INFO] Running at [38;5;121m269.92[0m[38;5;159m FPS.[0m
+[38;5;159m[Genesis] [14:06:09] [INFO] Running at [38;5;121m289.08[0m[38;5;159m FPS.[0m
+[38;5;159m[Genesis] [14:06:09] [INFO] Running at [38;5;121m347.35[0m[38;5;159m FPS.[0m
+[38;5;159m[Genesis] [14:06:09] [INFO] Running at [38;5;121m386.59[0m[38;5;159m FPS.[0m
+[38;5;159m[Genesis] [14:06:09] [INFO] Running at [38;5;121m367.60[0m[38;5;159m FPS.[0m
+[38;5;159m[Genesis] [14:06:09] [INFO] Running at [38;5;121m425.71[0m[38;5;159m FPS.[0m
+[38;5;159m[Genesis] [14:06:09] [INFO] 💤 Exiting Genesis and caching compiled kernels...[0m

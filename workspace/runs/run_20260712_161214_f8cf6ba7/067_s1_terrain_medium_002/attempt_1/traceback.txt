@@ -1,0 +1,27 @@
+Traceback (most recent call last):
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\run_20260712_161214_f8cf6ba7\067_s1_terrain_medium_002\attempt_1\code.py", line 53, in <module>
+    main()
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\run_20260712_161214_f8cf6ba7\067_s1_terrain_medium_002\attempt_1\code.py", line 15, in main
+    terrain = scene.add_entity(
+  File "D:\Desktop\Genesis\Genesis-main\genesis\utils\misc.py", line 141, in wrapper
+    return method(self, *args, **kwargs)
+  File "D:\Desktop\Genesis\Genesis-main\genesis\engine\scene.py", line 457, in add_entity
+    entity = self._sim._add_entity(morph, material, surface, visualize_contact)
+  File "D:\Desktop\Genesis\Genesis-main\genesis\engine\simulator.py", line 171, in _add_entity
+    entity = self.rigid_solver.add_entity(self.n_entities, material, morph, surface, visualize_contact)
+  File "D:\Desktop\Genesis\Genesis-main\genesis\engine\solvers\rigid\rigid_solver_decomp.py", line 154, in add_entity
+    entity = EntityClass(
+  File "D:\Desktop\Genesis\Genesis-main\genesis\engine\entities\rigid_entity\rigid_entity.py", line 117, in __init__
+    self._load_model()
+  File "D:\Desktop\Genesis\Genesis-main\genesis\engine\entities\rigid_entity\rigid_entity.py", line 148, in _load_model
+    self._load_terrain(self._morph, self._surface)
+  File "D:\Desktop\Genesis\Genesis-main\genesis\engine\entities\rigid_entity\rigid_entity.py", line 317, in _load_terrain
+    vmesh, mesh, self.terrain_hf = tu.parse_terrain(morph, surface)
+  File "D:\Desktop\Genesis\Genesis-main\genesis\utils\terrain.py", line 96, in parse_terrain
+    subterrain = isaacgym_terrain_utils.random_uniform_terrain(
+  File "D:\Desktop\Genesis\Genesis-main\genesis\ext\isaacgym\terrain_utils.py", line 70, in random_uniform_terrain
+    heights_range = np.arange(min_height, max_height + step, step)
+ZeroDivisionError: division by zero
+
+[38;5;9m[Genesis] [16:16:06] [ERROR] ZeroDivisionError: division by zero[0m
+[38;5;159m[Genesis] [16:16:06] [INFO] 💤 Exiting Genesis and caching compiled kernels...[0m

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "pid": 25016,
+  "run_id": "online_authorized_20260712",
+  "prompts": "D:\\Desktop\\Genesis\\Genesis-main\\rag_demo\\benchmark\\query.json",
+  "expected_records": 100,
+  "log": "D:\\Desktop\\Genesis\\Genesis-main\\rag_demo\\workspace\\logs\\execution_log_online_online_authorized_20260712.jsonl",
+  "state_file": "D:\\Desktop\\Genesis\\Genesis-main\\rag_demo\\workspace\\logs\\online_run_online_authorized_20260712_state.json",
+  "started_at": "2026-07-12T13:57:00",
+  "status": "full_run_running",
+  "stats": {
+    "records": 1,
+    "generation_failed": 0,
+    "process_passed": 0,
+    "execution_failed": 1
+  },
+  "updated_at": "2026-07-12T13:58:13"
+}

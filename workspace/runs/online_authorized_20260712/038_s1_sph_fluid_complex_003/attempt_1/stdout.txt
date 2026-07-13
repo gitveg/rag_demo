@@ -1,0 +1,20 @@
+[38;5;159m[Genesis] [14:45:35] [INFO] [38;5;121m╭───────────────────────────────────────────────╮[0m[38;5;159m[0m
+[38;5;159m[Genesis] [14:45:35] [INFO] [38;5;121m│┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈[0m[38;5;159m [38;5;121m[1m[3mGenesis[0m[38;5;159m [38;5;121m┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈│[0m[38;5;159m[0m
+[38;5;159m[Genesis] [14:45:35] [INFO] [38;5;121m╰───────────────────────────────────────────────╯[0m[38;5;159m[0m
+[38;5;159m[Genesis] [14:45:35] [INFO] Running on [38;5;121m[4m[NVIDIA GeForce RTX 4060 Laptop GPU][0m[38;5;159m with backend [38;5;121m[4mgs.cuda[0m[38;5;159m. Device memory: [38;5;121m[4m8.00[0m[38;5;159m GB.[0m
+[38;5;159m[Genesis] [14:45:35] [INFO] 🚀 Genesis initialized. 🔖 version: [38;5;121m[4m0.3.8[0m[38;5;159m, 🎨 theme: [38;5;121m[4mdark[0m[38;5;159m, 🌱 seed: [38;5;121m[4mNone[0m[38;5;159m, 🐛 debug: [38;5;121m[4mFalse[0m[38;5;159m, 📏 precision: [38;5;121m[4m32[0m[38;5;159m, 🔥 performance: [38;5;121m[4mFalse[0m[38;5;159m, 💬 verbose: [38;5;121m[4mINFO[0m[38;5;159m[0m
+Traceback (most recent call last):
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\online_authorized_20260712\038_s1_sph_fluid_complex_003\attempt_1\code.py", line 78, in <module>
+    main()
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\online_authorized_20260712\038_s1_sph_fluid_complex_003\attempt_1\code.py", line 32, in main
+    vis_options=gs.options.VisOptions(
+  File "D:\Desktop\Genesis\Genesis-main\genesis\options\vis.py", line 136, in __init__
+    super().__init__(**data)
+  File "D:\Desktop\Genesis\Genesis-main\genesis\options\options.py", line 27, in __init__
+    gs.raise_exception(f"Unrecognized attribute: {key}")
+  File "D:\Desktop\Genesis\Genesis-main\genesis\utils\misc.py", line 44, in raise_exception
+    raise gs.GenesisException(msg)
+genesis.GenesisException: Unrecognized attribute: visualize_mpm_grid
+
+[38;5;9m[Genesis] [14:45:35] [ERROR] GenesisException: Unrecognized attribute: visualize_mpm_grid[0m
+[38;5;159m[Genesis] [14:45:35] [INFO] 💤 Exiting Genesis and caching compiled kernels...[0m

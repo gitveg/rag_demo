@@ -1,0 +1,8 @@
+# This example compares the position control accuracy between 'control_dofs_position' and
+# 'control_dofs_position_velocity' when tracking a dynamic trajectory.
+# While both are equivalent in static, the former lacks the target velocity term of  true PD controller in robotics,
+# making it underperform compared to 'control_dofs_position_velocity'.
+import argparse
+import math
+
+,\n5),\nÿvÿÿÿÿÿÿÿÿÿÿÿÿ

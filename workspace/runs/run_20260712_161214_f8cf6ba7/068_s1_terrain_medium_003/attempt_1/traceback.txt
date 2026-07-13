@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\run_20260712_161214_f8cf6ba7\068_s1_terrain_medium_003\attempt_1\code.py", line 62, in <module>
+    main()
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\run_20260712_161214_f8cf6ba7\068_s1_terrain_medium_003\attempt_1\code.py", line 38, in main
+    morph=gs.morphs.Terrain(
+  File "D:\Desktop\Genesis\Genesis-main\genesis\options\morphs.py", line 1227, in __init__
+    gs.raise_exception("`subterrain_size` should be divisible by `horizontal_scale`.")
+  File "D:\Desktop\Genesis\Genesis-main\genesis\utils\misc.py", line 44, in raise_exception
+    raise gs.GenesisException(msg)
+genesis.GenesisException: `subterrain_size` should be divisible by `horizontal_scale`.
+
+[38;5;9m[Genesis] [16:17:10] [ERROR] GenesisException: `subterrain_size` should be divisible by `horizontal_scale`.[0m
+[38;5;159m[Genesis] [16:17:10] [INFO] 💤 Exiting Genesis and caching compiled kernels...[0m

@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "loop": "C",
+  "run_id": "execution_log_online_authorized_20260712_full_20260712_183541_908429",
+  "generated_at": "20260712_183541_908429",
+  "source_log": "D:/Desktop/Genesis/Genesis-main/rag_demo/workspace/logs/execution_log_online_authorized_20260712_full.jsonl",
+  "counts": {
+    "A": 0,
+    "B": 0,
+    "C": 4
+  },
+  "candidates": [
+    {
+      "candidate_id": "cand_c_ef071148d986ede9638a8630",
+      "type": "C",
+      "api_id": "genesis.options.VisOptions",
+      "constraints": [
+        "Do not pass unrecognized attribute 'visualize_mpm_grid'; it is not a valid parameter for this API."
+      ],
+      "error_examples": [
+        "Unrecognized attribute: visualize_mpm_grid"
+      ],
+      "event_count": 1,
+      "entry": {
+        "api_id": "genesis.options.VisOptions",
+        "constraints": [
+          "Do not pass unrecognized attribute 'visualize_mpm_grid'; it is not a valid parameter for this API."
+        ],
+        "error_examples": [
+          "Unrecognized attribute: visualize_mpm_grid"
+        ],
+        "event_count": 1,
+        "sources": [
+          "evt_841f585d25e100644bc228cca97a7bea3b0c9fb0f405e77858de787d00447ec8"
+        ]
+      }
+    },
+    {
+      "candidate_id": "cand_c_34ad276d7f65f6ccb2e1822e",
+      "type": "C",
+      "api_id": "genesis.options.morphs.Terrain",
+      "constraints": [
+        "Do not pass unrecognized attribute 'type'; it is not a valid parameter for this API."
+      ],
+      "error_examples": [
+        "`subterrain_size` should be divisible by `horizontal_scale`.",
+        "Unrecognized attribute: type"
+      ],
+      "event_count": 2,
+      "entry": {
+        "api_id": "genesis.options.morphs.Terrain",
+        "constraints": [
+          "Do not pass unrecognized attribute 'type'; it is not a valid parameter for this API."
+        ],
+        "error_examples": [
+          "`subterrain_size` should be divisible by `horizontal_scale`.",
+          "Unrecognized attribute: type"
+        ],
+        "event_count": 2,
+        "sources": [
+          "evt_2cdeb195f3d2ec3ac9d69552022c757eb51974269526557f29d6df0d404712d9",
+          "evt_dd05bdcb7a5539d42a0c0892e7bfcd8f99f777e37bb20948f27d9f187416f001"
+        ]
+      }
+    },
+    {
+      "candidate_id": "cand_c_1ecc8b6ad024df0b33e92431",
+      "type": "C",
+      "api_id": "genesis.options.sensors.DepthCamera",
+      "constraints": [
+        "Do not pass unrecognized attribute 'pos'; it is not a valid parameter for this API."
+      ],
+      "error_examples": [
+        "Unrecognized attribute: pos"
+      ],
+      "event_count": 1,
+      "entry": {
+        "api_id": "genesis.options.sensors.DepthCamera",
+        "constraints": [
+          "Do not pass unrecognized attribute 'pos'; it is not a valid parameter for this API."
+        ],
+        "error_examples": [
+          "Unrecognized attribute: pos"
+        ],
+        "event_count": 1,
+        "sources": [
+          "evt_b2d3a5a659770eb619d7a1ef87ba3e09ecc6edad884c26b4a2f162e61ad868d2"
+        ]
+      }
+    },
+    {
+      "candidate_id": "cand_c_c22b793ba66a3b11a0a86c0d",
+      "type": "C",
+      "api_id": "genesis.options.sensors.Lidar",
+      "constraints": [
+        "Do not pass unrecognized attribute 'pos'; it is not a valid parameter for this API."
+      ],
+      "error_examples": [
+        "Unrecognized attribute: pos"
+      ],
+      "event_count": 1,
+      "entry": {
+        "api_id": "genesis.options.sensors.Lidar",
+        "constraints": [
+          "Do not pass unrecognized attribute 'pos'; it is not a valid parameter for this API."
+        ],
+        "error_examples": [
+          "Unrecognized attribute: pos"
+        ],
+        "event_count": 1,
+        "sources": [
+          "evt_b710db3c176224b5c73d0b2abcb164c07dcb245a5d66177a81977f3aae6d0db3"
+        ]
+      }
+    }
+  ]
+}

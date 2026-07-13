@@ -1,0 +1,79 @@
+[38;5;159m[Genesis] [18:24:55] [INFO] [38;5;121m╭───────────────────────────────────────────────╮[0m[38;5;159m[0m
+[38;5;159m[Genesis] [18:24:55] [INFO] [38;5;121m│┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈[0m[38;5;159m [38;5;121m[1m[3mGenesis[0m[38;5;159m [38;5;121m┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈│[0m[38;5;159m[0m
+[38;5;159m[Genesis] [18:24:55] [INFO] [38;5;121m╰───────────────────────────────────────────────╯[0m[38;5;159m[0m
+[38;5;159m[Genesis] [18:24:55] [INFO] Running on [38;5;121m[4m[NVIDIA GeForce RTX 4060 Laptop GPU][0m[38;5;159m with backend [38;5;121m[4mgs.cuda[0m[38;5;159m. Device memory: [38;5;121m[4m8.00[0m[38;5;159m GB.[0m
+[38;5;159m[Genesis] [18:24:55] [INFO] 🚀 Genesis initialized. 🔖 version: [38;5;121m[4m0.3.8[0m[38;5;159m, 🎨 theme: [38;5;121m[4mdark[0m[38;5;159m, 🌱 seed: [38;5;121m[4mNone[0m[38;5;159m, 🐛 debug: [38;5;121m[4mFalse[0m[38;5;159m, 📏 precision: [38;5;121m[4m64[0m[38;5;159m, 🔥 performance: [38;5;121m[4mFalse[0m[38;5;159m, 💬 verbose: [38;5;121m[4mINFO[0m[38;5;159m[0m
+[38;5;159m[Genesis] [18:25:01] [INFO] Scene [38;5;121m[3m<9cee1ef>[0m[38;5;159m created.[0m
+[38;5;159m[Genesis] [18:25:01] [INFO] Adding [38;5;121m<gs.RigidEntity>[0m[38;5;159m. idx: [38;5;121m0[0m[38;5;159m, uid: [38;5;121m[3m<ad87f96>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Plane>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [18:25:01] [INFO] Adding [38;5;121m<gs.FEMEntity>[0m[38;5;159m. idx: [38;5;121m1[0m[38;5;159m, uid: [38;5;121m[3m<9700c16>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.FEM.Elastic>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [18:25:05] [INFO] Adding [38;5;121m<gs.RigidEntity>[0m[38;5;159m. idx: [38;5;121m2[0m[38;5;159m, uid: [38;5;121m[3m<454e427>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Sphere>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [18:25:05] [INFO] Building scene [38;5;121m[3m<9cee1ef>[0m[38;5;159m...[0m
+Delaunizing vertices...
+Delaunay seconds:  0
+Creating surface mesh ...
+Surface mesh seconds:  0
+Recovering boundaries...
+Boundary recovery seconds:  0
+Removing exterior tetrahedra ...
+Exterior tets removal seconds:  0
+Suppressing Steiner points ...
+Steiner suppression seconds:  0
+Recovering Delaunayness...
+Delaunay recovery seconds:  0
+Refining mesh...
+  11 insertions, added 0 points, 1 tetrahedra in queue.
+  3 insertions, added 0 points, 0 tetrahedra in queue.
+  4 insertions, added 0 points, 0 tetrahedra in queue.
+  5 insertions, added 0 points, 0 tetrahedra in queue.
+Refinement seconds:  0
+Smoothing vertices...
+Mesh smoothing seconds:  0
+Improving mesh...
+Mesh improvement seconds:  0
+
+Writing nodes.
+Writing elements.
+Writing faces.
+Writing edges.
+
+Output seconds:  0
+Total running seconds:  0
+
+Statistics:
+
+  Input points: 8
+  Input facets: 12
+  Input segments: 18
+  Input holes: 0
+  Input regions: 0
+
+  Mesh points: 9
+  Mesh tetrahedra: 12
+  Mesh faces: 30
+  Mesh faces on exterior boundary: 12
+  Mesh faces on input facets: 12
+  Mesh edges on input segments: 18
+  Steiner points inside domain: 1
+
+[38;5;159m[Genesis] [18:25:09] [INFO] Entity <9700c16> added. class: FEMEntity, morph: Box, size: (12, 9), material: <gs.FEM.Elastic>.[0m
+Traceback (most recent call last):
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\run_20260712_182331_55ce57ec\094_s1_cross_domain_medium_001\attempt_1\code.py", line 61, in <module>
+    main()
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\run_20260712_182331_55ce57ec\094_s1_cross_domain_medium_001\attempt_1\code.py", line 54, in main
+    scene.build()
+  File "D:\Desktop\Genesis\Genesis-main\genesis\utils\misc.py", line 141, in wrapper
+    return method(self, *args, **kwargs)
+  File "D:\Desktop\Genesis\Genesis-main\genesis\engine\scene.py", line 775, in build
+    self._sim.build()
+  File "D:\Desktop\Genesis\Genesis-main\genesis\engine\simulator.py", line 207, in build
+    self._coupler.build()
+  File "D:\Desktop\Genesis\Genesis-main\genesis\engine\couplers\sap_coupler.py", line 264, in build
+    self._init_hydroelastic_rigid_fields_and_info()
+  File "D:\Desktop\Genesis\Genesis-main\genesis\engine\couplers\sap_coupler.py", line 320, in _init_hydroelastic_rigid_fields_and_info
+    gs.raise_exception("Primitive plane not supported as user-specified collision geometries.")
+  File "D:\Desktop\Genesis\Genesis-main\genesis\utils\misc.py", line 44, in raise_exception
+    raise gs.GenesisException(msg)
+genesis.GenesisException: Primitive plane not supported as user-specified collision geometries.
+
+[38;5;9m[Genesis] [18:25:10] [ERROR] GenesisException: Primitive plane not supported as user-specified collision geometries.[0m
+[38;5;159m[Genesis] [18:25:10] [INFO] 💤 Exiting Genesis and caching compiled kernels...[0m

@@ -1,0 +1,70 @@
+============================================================
+  rag_demo Benchmark Report
+  Run ID  : 20260607_222530
+  RAG Rewrite: hyde
+  Detailed Report: True
+  Tasks   : 3
+  Retries : 3
+  Skip Exec: True
+  Time    : 2026-06-07T22:25:33.659484
+============================================================
+
+--- 汇总指标 ---
+组别              N     RAG总召回      语义召回   TokF(avg)   Pass@1   Pass@3
+--------------------------------------------------------------------
+overall         3       0.0%      0.0%         N/A     0.0%     0.0%
+simple          3       0.0%      0.0%         N/A     0.0%     0.0%
+
+--- 逐任务结果 ---
+task_id          cx     RAG       TokI/F   P@1   P@3   att      sec
+------------------------------------------------------------
+eval_001     simple      0%          -/-  FAIL  FAIL     -    3.03s
+eval_002     simple      0%          -/-  FAIL  FAIL     -     0.0s
+eval_003     simple      0%          -/-  FAIL  FAIL     -     0.0s
+
+--- RAG 命中详情（per API）---
+
+  eval_001:
+    N genesis.Scene.add_entity  [unknown]
+    N genesis.morphs.Sphere  [unknown]
+    N genesis.morphs.Plane  [unknown]
+    N genesis.materials.Rigid  [unknown]
+    N genesis.Scene  [unknown]
+    N genesis.Scene.build  [unknown]
+    N genesis.Scene.step  [unknown]
+    N genesis.options.ViewerOptions  [unknown]
+    N genesis.surfaces.Default  [unknown]
+
+  eval_002:
+    N genesis.Scene.add_entity  [unknown]
+    N genesis.morphs.Box  [unknown]
+    N genesis.materials.Rigid  [unknown]
+    N genesis.Scene  [unknown]
+    N genesis.Scene.build  [unknown]
+    N genesis.Scene.step  [unknown]
+    N genesis.morphs.Plane  [unknown]
+    N genesis.options.ViewerOptions  [unknown]
+
+  eval_003:
+    N genesis.Scene.add_entity  [unknown]
+    N genesis.morphs.Cylinder  [unknown]
+    N genesis.morphs.Plane  [unknown]
+    N genesis.materials.Rigid  [unknown]
+    N genesis.Scene  [unknown]
+    N genesis.Scene.build  [unknown]
+    N genesis.Scene.step  [unknown]
+    N genesis.options.ViewerOptions  [unknown]
+
+--- 详细检索内容（完整上下文）---
+
+  [eval_001] query: Simulate a red rigid sphere falling straight down onto a flat ground.
+  - RAG Context:
+    (empty)
+
+  [eval_002] query: Create a static rigid box to serve as an obstacle in the scene.
+  - RAG Context:
+    (empty)
+
+  [eval_003] query: Drop a rigid cylinder from a height of 3 meters onto a horizontal plane.
+  - RAG Context:
+    (empty)

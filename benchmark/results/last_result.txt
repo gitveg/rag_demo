@@ -1,0 +1,1260 @@
+============================================================
+  rag_demo Benchmark Report
+  Run ID  : 20260610_145048
+  RAG Rewrite: none
+  RAG Search Params: {"rewrite_mode": "none", "hyde_route": "unit", "n_api": 6, "n_code": 1, "n_snippet": 3, "n_error": 0, "n_units": 5, "tag_filter": null, "include_core_api": true, "core_api_limit": 40, "rerank": false, "rerank_top_n": null, "rerank_oversample": 2.0}
+  Detailed Report: True
+  Tasks   : 3
+  Retries : 3
+  Skip Exec: True
+  Time    : 2026-06-10T14:50:52.414024
+============================================================
+
+--- 汇总指标 ---
+组别              N     RAG总召回      语义召回   TokF(avg)   Pass@1   Pass@3
+--------------------------------------------------------------------
+overall         3      84.7%     13.7%       6,119      N/A      N/A
+medium          1     100.0%     28.6%       6,052      N/A      N/A
+simple          2      77.1%      6.2%       6,152      N/A      N/A
+
+--- 逐任务结果 ---
+task_id          cx     RAG       TokI/F   P@1   P@3   att      sec
+------------------------------------------------------------
+eval_001     simple     67%  6,604/6,604     -     -     -    2.91s
+eval_002     simple     88%  5,701/5,701     -     -     -    0.46s
+eval_007     medium    100%  6,052/6,052     -     -     -     0.5s
+
+--- RAG 命中详情（per API）---
+
+  eval_001:
+    Y genesis.Scene.add_entity  [core]
+    N genesis.morphs.Sphere  [miss]
+    N genesis.morphs.Plane  [miss]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.Scene  [core]
+    Y genesis.Scene.build  [core]
+    Y genesis.Scene.step  [core]
+    Y genesis.options.ViewerOptions  [core]
+    N genesis.surfaces.Default  [miss]
+
+  eval_002:
+    Y genesis.Scene.add_entity  [core]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.Scene  [core]
+    Y genesis.Scene.build  [core]
+    Y genesis.Scene.step  [core]
+    N genesis.morphs.Plane  [miss]
+    Y genesis.options.ViewerOptions  [core]
+
+  eval_007:
+    Y genesis.Scene.add_entity  [core]
+    Y genesis.morphs.Box  [semantic]
+    Y genesis.morphs.Plane  [semantic]
+    Y genesis.materials.Rigid  [core]
+    Y genesis.Scene  [core]
+    Y genesis.Scene.build  [core]
+    Y genesis.Scene.step  [core]
+
+--- 详细检索内容（完整上下文）---
+
+  [eval_001] query: Simulate a red rigid sphere falling straight down onto a flat ground.
+  - RAG Context:
+    [1] type=api  meta={"api_id": "genesis.Scene", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.Scene ---
+API: genesis.Scene
+Summary: A ``genesis.Scene`` object wraps all components in a simulation environment, including a simulator (containing multiple physics solvers), entities, an...
+Signature: Scene(sim_options=None, coupler_options=None, tool_options=None, rigid_options=None, avatar_options=None, mpm_options=None, sph_options=None, fem_options=None, sf_options=None, pbd_options=None, vis_options=None, viewer_options=None, profiling_options=None, renderer=None, show_viewer=None, show_FPS=None)
+Parameters: sim_options: The options configuring the overarching simulator, which in turn manages all the solvers., coupler_options: The options configuring the coupler between different solvers., tool_options: The options configuring the tool_solver (scene.sim.ToolSolver)., rigid_options: The options configuring the rigid_solver (scene.sim.RigidSolver)., avatar_options: The options configuring the avatar_solver (scene.sim.AvatarSolver)., mpm_options: The options configuring the mpm_solver (scene.sim.MPMSolver)., sph_options: The options configuring the sph_solver (scene.sim.SPHSolver)., fem_options: The options configuring the fem_solver (scene.sim.FEMSolver)., sf_options: The options configuring the sf_solver (scene.sim.SFSolver)., pbd_options: The options configuring the pbd_solver (scene.sim.PBDSolver)., vis_options: The options configuring the visualization system (scene.visualizer). Visualizer controls both the interactive viewer and the cameras., viewer_options: The options configuring the viewer (scene.visualizer.viewer)., renderer: The renderer options used by camera for rendering images. This doesn't affect the behavior of the interactive viewer., show_viewer: Whether to show the interactive viewer. Set it to False if you only need headless rendering., show_FPS: Whether to show the FPS in the terminal.
+Constraints: 
+    ----- content end -----
+    [2] type=api  meta={"api_id": "genesis.Scene.add_entity", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.Scene.add_entity ---
+API: genesis.Scene.add_entity
+Summary: Add an entity to the scene.
+Signature: add_entity(morph, material=None, surface=None, visualize_contact=False, vis_mode=None)
+Parameters: material: If None, use gs.materials.Rigid(), surface: If None, use gs.surfaces.Default(), visualize_contact: Will not be displayed in images rendered by camera using the RayTracer renderer, vis_mode: Shortcut for setting surface.vis_mode without explicitly creating a surface object
+Constraints: visualize_contact will not be displayed in images rendered by camera using the RayTracer renderer
+    ----- content end -----
+    [3] type=api  meta={"api_id": "genesis.Scene.build", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.Scene.build ---
+API: genesis.Scene.build
+Summary: Builds the scene once all entities have been added. This operation is required before running the simulation.
+Signature: build(n_envs=0, env_spacing=(0.0, 0.0), n_envs_per_row=None, center_envs_at_origin=True, compile_kernels=None)
+Parameters: n_envs: If 0, scene has no batching dimension; if >0, first dimension of all states becomes batch dimension., env_spacing: Spacing between adjacent environments (visualization only, does not affect simulation poses)., n_envs_per_row: If None, set to sqrt(n_envs)., center_envs_at_origin: For visualization only., compile_kernels: Deprecated and will be removed in future release.
+Constraints: env_spacing is for visualization only and does not change simulation-related poses, center_envs_at_origin is for visualization only, compile_kernels is deprecated and will be removed in future release
+    ----- content end -----
+    [4] type=api  meta={"api_id": "genesis.Scene.step", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.Scene.step ---
+API: genesis.Scene.step
+Summary: Runs a simulation step forward in time.
+Signature: step(update_visualizer=True, refresh_visualizer=True)
+Constraints: 
+    ----- content end -----
+    [5] type=api  meta={"api_id": "genesis.constraint_solver", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.constraint_solver ---
+API: genesis.constraint_solver
+Summary: An enumeration.
+Signature: constraint_solver(*args, **kwargs)
+Constraints: 
+    ----- content end -----
+    [6] type=api  meta={"api_id": "genesis.materials.FEM.Cloth", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.FEM.Cloth ---
+API: genesis.materials.FEM.Cloth
+Summary: Cloth material for thin shell/membrane simulation using IPC.
+Signature: Cloth(E=10000.0, nu=0.49, rho=200.0, thickness=0.001, bending_stiffness=None, model=stable_neohookean)
+Parameters: E: Young's modulus in Pa, controlling stiffness, nu: Poisson's ratio, describing volume change under stress, rho: Material density in kg/m³, thickness: Shell thickness in meters, bending_stiffness: Bending resistance coefficient; if None, no bending resistance, model: FEM material model (not used for cloth, kept for compatibility)
+Constraints: Only works with IPCCoupler enabled, Requires GPU backend, Only accepts surface mesh morphs (Mesh, etc.), Uses FEMEntity infrastructure but simulated as 2D shell in IPC
+    ----- content end -----
+    [7] type=api  meta={"api_id": "genesis.materials.FEM.Elastic", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.FEM.Elastic ---
+API: genesis.materials.FEM.Elastic
+Summary: The elastic material class for FEM.
+Signature: Elastic(E=1000000.0, nu=0.2, rho=1000.0, hydroelastic_modulus=10000000.0, friction_mu=0.1, model=linear)
+Parameters: E: Young's modulus, which controls stiffness, nu: Poisson ratio, describing the material's volume change under stress, rho: Material density in kg/m^3, hydroelastic_modulus: Hydroelastic modulus for hydroelastic contact, friction_mu: Friction coefficient, model: Constitutive model for stress computation: 'linear', 'stable_neohookean', or 'linear_corotated'
+Constraints: 
+    ----- content end -----
+    [8] type=api  meta={"api_id": "genesis.materials.FEM.Muscle", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.FEM.Muscle ---
+API: genesis.materials.FEM.Muscle
+Summary: The muscle material class for FEM.
+Signature: Muscle(E=1000000.0, nu=0.2, rho=1000.0, model=linear, n_groups=1)
+Parameters: E: Young's modulus, which controls stiffness, nu: Poisson ratio, describing the material's volume change under stress, rho: Material density in kg/m³, model: Constitutive model for stress computation. Options: 'linear' (linear elasticity) or 'stable_neohookean' (numerically stable Neo-Hookean), n_groups: Number of muscle groups
+Constraints: 
+    ----- content end -----
+    [9] type=api  meta={"api_id": "genesis.materials.Hybrid", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.Hybrid ---
+API: genesis.materials.Hybrid
+Summary: The class for hybrid body material (soft skin actuated by inner rigid skeleton).
+Signature: Hybrid(material_rigid, material_soft, use_default_coupling=False, damping=0.0, thickness=0.05, soft_dv_coef=0.01, func_instantiate_rigid_from_soft=None, func_instantiate_soft_from_rigid=None, func_instantiate_rigid_soft_association=None)
+Parameters: damping: Damping coefficient between soft and rigid., thickness: The thickness to instantiate soft skin., soft_dv_coef: The coefficient to apply delta velocity from rigid to soft., func_instantiate_rigid_from_soft: The function to instantiate rigid body from the geometry of soft body., func_instantiate_soft_from_rigid: The function to instantiate soft body from the geometry of rigid body., func_instantiate_rigid_soft_association: The function that determines the association of the rigid and the soft body.
+Constraints: 
+    ----- content end -----
+    [10] type=api  meta={"api_id": "genesis.materials.MPM.Elastic", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.MPM.Elastic ---
+API: genesis.materials.MPM.Elastic
+Summary: The elastic material class for MPM.
+Signature: Elastic(E=300000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, model=corotation)
+Parameters: E: Young's modulus. Elastic objects are softened by multiplying the default E by 0.3., nu: Poisson ratio., rho: Density in kg/m^3., lam: The first Lame's parameter. If None, computed by E and nu., mu: The second Lame's parameter. If None, computed by E and nu., sampler: Particle sampler ('pbs', 'regular', 'random'). Note that 'pbs' is only supported on Linux for now., model: Stress model ('corotation', 'neohooken').
+Constraints: Elastic objects are softened by multiplying the default E by 0.3, Sampler 'pbs' is only supported on Linux for now
+    ----- content end -----
+    [11] type=api  meta={"api_id": "genesis.materials.MPM.ElastoPlastic", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.MPM.ElastoPlastic ---
+API: genesis.materials.MPM.ElastoPlastic
+Summary: The elasto-plastic material class for MPM.
+Signature: ElastoPlastic(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, yield_lower=0.025, yield_higher=0.0045, use_von_mises=True, von_mises_yield_stress=10000.0)
+Parameters: E: Young's modulus, nu: Poisson ratio, rho: Density in kg/m^3, lam: First Lame's parameter; computed from E and nu if None, mu: Second Lame's parameter; computed from E and nu if None, sampler: Particle sampler ('pbs', 'regular', 'random'); 'pbs' only supported on Linux, yield_lower: Lower bound for yield clamp; ignored if using von Mises, yield_higher: Upper bound for yield clamp; ignored if using von Mises, use_von_mises: Whether to use von Mises yield criterion, von_mises_yield_stress: Yield stress for von Mises criterion
+Constraints: Default yield ratio comes from SNOW material in taichi's MPM implementation, Sampler 'pbs' is only supported on Linux for now, yield_lower and yield_higher are ignored if using von Mises criterion
+    ----- content end -----
+    [12] type=api  meta={"api_id": "genesis.materials.MPM.Liquid", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.MPM.Liquid ---
+API: genesis.materials.MPM.Liquid
+Summary: The liquid material class for MPM.
+Signature: Liquid(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, viscous=False, sampler=None)
+Parameters: E: Young's modulus, nu: Poisson ratio, rho: Density in kg/m^3, lam: First Lame's parameter; if None, computed by E and nu, mu: Second Lame's parameter; if None, computed by E and nu, viscous: Whether the liquid is viscous; sets mu to zero when non-viscous, sampler: Particle sampler ('pbs', 'regular', 'random'); 'pbs' only supported on Linux
+Constraints: Sampler 'pbs' is only supported on Linux, If sampler is 'pbs' on unsupported platforms, defaults to 'random'
+    ----- content end -----
+    [13] type=api  meta={"api_id": "genesis.materials.MPM.Muscle", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.MPM.Muscle ---
+API: genesis.materials.MPM.Muscle
+Summary: The muscle material class for MPM.
+Signature: Muscle(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, model=neohooken, n_groups=1)
+Parameters: E: Young's modulus, nu: Poisson ratio, rho: Density in kg/m^3, lam: First Lame's parameter; computed from E and nu if None, mu: Second Lame's parameter; computed from E and nu if None, sampler: Particle sampler ('pbs', 'regular', 'random'); 'pbs' only supported on Linux, model: Stress model ('corotation', 'neohooken'), n_groups: Number of muscle groups
+Constraints: 'pbs' sampler is only supported on Linux for now
+    ----- content end -----
+    [14] type=api  meta={"api_id": "genesis.materials.MPM.Sand", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.MPM.Sand ---
+API: genesis.materials.MPM.Sand
+Summary: The sand material class for MPM.
+Signature: Sand(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=random, friction_angle=45)
+Parameters: E: Young's modulus, nu: Poisson ratio, rho: Density in kg/m^3, lam: First Lame's parameter; if None, computed by E and nu, mu: Second Lame's parameter; if None, computed by E and nu, sampler: Particle sampler ('pbs', 'regular', 'random'); 'pbs' only supported on Linux for now, friction_angle: Friction angle in degrees, used to compute internal pressure-dependent plasticity
+Constraints: 'pbs' sampler is only supported on Linux for now
+    ----- content end -----
+    [15] type=api  meta={"api_id": "genesis.materials.PBD.Cloth", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.PBD.Cloth ---
+API: genesis.materials.PBD.Cloth
+Summary: The cloth material class for PBD.
+Signature: Cloth(rho=4.0, static_friction=0.15, kinetic_friction=0.15, stretch_compliance=1e-07, bending_compliance=1e-05, stretch_relaxation=0.3, bending_relaxation=0.1, air_resistance=0.001)
+Parameters: rho: density in kg/m² (2D material, mass = rho * surface_area), static_friction: resistance to start of sliding motion between contacting particles, kinetic_friction: resistance during sliding motion between contacting particles, stretch_compliance: controls softness of stretch constraint between particles in m/N, bending_compliance: controls how easily material bends in rad/N, stretch_relaxation: smaller value weakens stretch constraint, bending_relaxation: smaller value weakens bending constraint, air_resistance: damping force due to air drag
+Constraints: 
+    ----- content end -----
+    [16] type=api  meta={"api_id": "genesis.materials.PBD.Elastic", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.PBD.Elastic ---
+API: genesis.materials.PBD.Elastic
+Summary: The 3D elastic volumentric material class for PBD.
+Signature: Elastic(rho=1000.0, static_friction=0.15, kinetic_friction=0.15, stretch_compliance=0.0, bending_compliance=0.0, volume_compliance=0.0, stretch_relaxation=0.1, bending_relaxation=0.1, volume_relaxation=0.1)
+Parameters: rho: density of the elastic material in kg/m^3, static_friction: resistance to the start of sliding motion between two contacting particles; determines how much tangential force can be applied before sliding begins, kinetic_friction: resistance during sliding motion between two contacting particles; limits tangential force to simulate energy loss due to friction, stretch_compliance: controls softness of stretch constraint between particles in m/N; low values = stiff, high values = softer, bending_compliance: controls how easily material bends in rad/N; appears in inner edge constraints, volume_compliance: determines compressibility of tetrahedral element in m^3/N; used in volume preservation constraints, stretch_relaxation: smaller value weakens the stretch constraint, bending_relaxation: smaller value weakens the bending constraint, volume_relaxation: smaller value weakens the volume constraint
+Constraints: 
+    ----- content end -----
+    [17] type=api  meta={"api_id": "genesis.materials.PBD.Liquid", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.PBD.Liquid ---
+API: genesis.materials.PBD.Liquid
+Summary: The liquid material class for PBD.
+Signature: Liquid(rho=1000.0, sampler=None, density_relaxation=0.2, viscosity_relaxation=0.01)
+Parameters: rho: in kg/m^3, sampler: 'pbs' only supported on Linux for now, density_relaxation: higher values lead to faster convergence but can cause instability, viscosity_relaxation: higher values lead to more viscous (syrupy) fluid behavior
+Constraints: sampler 'pbs' is only supported on Linux for now
+    ----- content end -----
+    [18] type=api  meta={"api_id": "genesis.materials.Rigid", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.Rigid ---
+API: genesis.materials.Rigid
+Summary: The Rigid class represents a material used in rigid body simulation.
+Signature: Rigid(rho=200.0, friction=None, needs_coup=True, coup_friction=0.1, coup_softness=0.002, coup_restitution=0.0, sdf_cell_size=0.005, sdf_min_res=32, sdf_max_res=128, gravity_compensation=0)
+Parameters: friction: If None, a default of 1.0 may be used or parsed from file., coup_friction: Must be non-negative., coup_softness: Must be non-negative., coup_restitution: Should be between 0 and 1., sdf_cell_size: Cell size in SDF grid in meters., sdf_min_res: Must be at least 16., sdf_max_res: Must be >= sdf_min_res., gravity_compensation: 1.0 cancels gravity.
+Constraints: coup_friction must be non-negative, coup_softness must be non-negative, coup_restitution should be between 0 and 1, sdf_min_res must be at least 16, sdf_max_res must be >= sdf_min_res
+    ----- content end -----
+    [19] type=api  meta={"api_id": "genesis.materials.SPH.Liquid", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.SPH.Liquid ---
+API: genesis.materials.SPH.Liquid
+Summary: The liquid material class for SPH.
+Signature: Liquid(rho=1000.0, stiffness=50000.0, exponent=7.0, mu=0.005, gamma=0.01, sampler=None)
+Parameters: rho: density in kg/m³ that material tends to maintain in equilibrium, stiffness: state stiffness in N/m² controlling how pressure increases with compression, exponent: controls how nonlinearly pressure scales with density; larger values mean stiffer response to compression, mu: viscosity of the liquid; measure of internal friction, gamma: surface tension controlling how strongly material clumps together at boundaries, sampler: particle sampler; 'pbs' only supported on Linux for now
+Constraints: 'pbs' sampler only supported on Linux for now
+    ----- content end -----
+    [20] type=api  meta={"api_id": "genesis.materials.Tool", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.Tool ---
+API: genesis.materials.Tool
+Summary: The base class of materials.
+Signature: Tool(friction=0.0, coup_softness=0.01, collision=True, sdf_res=128)
+Constraints: This class should not be instantiated directly.
+    ----- content end -----
+    [21] type=api  meta={"api_id": "genesis.options.FEMOptions", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.FEMOptions ---
+API: genesis.options.FEMOptions
+Summary: Options configuring the FEMSolver.
+Signature: FEMOptions(**data)
+Constraints: Damping coefficients are used in the Rayleigh Damping model, TODO Move damping to material parameters in the future instead of solver options, Implicit solver is a more stable solver for FEM that can be used with a large time step, Parameters n_newton_iterations, n_pcg_iterations, n_linesearch_iterations, newton_dx_threshold, pcg_threshold, linesearch_c, linesearch_tau, damping_alpha, and damping_beta are only used when use_implicit_solver is True
+    ----- content end -----
+    [22] type=api  meta={"api_id": "genesis.options.IPCCouplerOptions", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.IPCCouplerOptions ---
+API: genesis.options.IPCCouplerOptions
+Summary: Options configuring the Incremental Potential Contact (IPC) coupler.
+Signature: IPCCouplerOptions(**data)
+Constraints: 
+    ----- content end -----
+    [23] type=api  meta={"api_id": "genesis.options.MPMOptions", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.MPMOptions ---
+API: genesis.options.MPMOptions
+Summary: Options configuring the MPMSolver.
+Signature: MPMOptions(**data)
+Constraints: MPM uses a grid representation with safety padding added to specified bounds, making actual boundaries slightly tighter than specified, Domain size affects simulation performance - set bounds as tight as possible, If particle_size not given, it will be computed based on grid_density (linearly proportional to grid cell size), use_sparse_grid option is deprecated, leaf_block_size option is deprecated
+    ----- content end -----
+    [24] type=api  meta={"api_id": "genesis.options.PBDOptions", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.PBDOptions ---
+API: genesis.options.PBDOptions
+Summary: Options configuring the PBDSolver.
+Signature: PBDOptions(**data)
+Constraints: If spatial hashing parameters are not given, they will be computed automatically: hash_grid_cell_size = 1.25 * particle_size; hash_grid_res uses a default value of a 150^3 cube if no small bound is given, Any grid bigger than 150^3 will result in too many cells and is not ideal
+    ----- content end -----
+    [25] type=api  meta={"api_id": "genesis.options.RigidOptions", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.RigidOptions ---
+API: genesis.options.RigidOptions
+Summary: Options configuring the RigidSolver.
+Signature: RigidOptions(**data)
+Constraints: Hibernation hasn't been robustly tested and will be fully supported soon, noslip solver should only be enabled if necessary because it is experimental and will slow down the simulation, contact_resolve_time will be deprecated in a future version
+    ----- content end -----
+    [26] type=api  meta={"api_id": "genesis.options.SAPCouplerOptions", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.SAPCouplerOptions ---
+API: genesis.options.SAPCouplerOptions
+Summary: Options configuring the inter-solver coupling for the Semi-Analytic Primal (SAP) contact solver used in Drake.
+Signature: SAPCouplerOptions(**data)
+Constraints: 
+    ----- content end -----
+    [27] type=api  meta={"api_id": "genesis.options.SPHOptions", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.SPHOptions ---
+API: genesis.options.SPHOptions
+Summary: Options configuring the SPHSolver.
+Signature: SPHOptions(**data)
+Constraints: If spatial hashing parameters are not given, they will be computed automatically, hash_grid_cell_size should be at least 2 * particle_size, Any grid bigger than 150^3 cube will result in too many cells and is not ideal, For hash_grid_cell_size, if not given, it will be set to support_radius (2 * particle_size), For hash_grid_res, if not given and no small bound is provided, default is 150^3 cube
+    ----- content end -----
+    [28] type=api  meta={"api_id": "genesis.options.SimOptions", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.SimOptions ---
+API: genesis.options.SimOptions
+Summary: Options configuring the top-level simulator.
+Signature: SimOptions(**data)
+Constraints: In differentiable mode, substeps_local must be divisible by substeps, If requires_grad is False, arbitrary substeps_local can be used
+    ----- content end -----
+    [29] type=api  meta={"api_id": "genesis.options.ViewerOptions", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.ViewerOptions ---
+API: genesis.options.ViewerOptions
+Summary: Options configuring preperties of the interactive viewer.
+Signature: ViewerOptions(**data)
+Constraints: The viewer's camera uses the `Rasterizer` backend regardless of `gs.renderers.*` when creating the scene., run_in_thread option is not supported on MacOS
+    ----- content end -----
+    [30] type=api  meta={"api_id": "genesis.options.VisOptions", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.VisOptions ---
+API: genesis.options.VisOptions
+Summary: This configures visualization-related properties that are independent of the viewer or camera.
+Signature: VisOptions(**data)
+Constraints: env_separate_rigid is only an option for Rasterizer; enforced for BatchRender, segmentation_level must be one of ['entity', 'link', 'geom'], render_particle_as must be one of ['sphere', 'tet'], n_rendered_envs is deprecated; use rendered_envs_idx instead
+    ----- content end -----
+    [31] type=api  meta={"api_id": "genesis.options.renderers.BatchRenderer", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.renderers.BatchRenderer ---
+API: genesis.options.renderers.BatchRenderer
+Summary: BatchRenderer renderer.
+Signature: BatchRenderer(**data)
+Constraints: 
+    ----- content end -----
+    [32] type=api  meta={"api_id": "genesis.Scene.viewer.save_video", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.Scene.viewer.save_video ---
+API: genesis.Scene.viewer.save_video
+Summary: Save the stored frames from the viewer to a video file (e.g. MP4). Use after scene.viewer is running with record enabled: call scene.start_recording() before stepping, then scene.viewer.save_video(filename='out.mp4') after simulation (or use Viewer.close_external() then save_video).
+Signature: save_video(filename=None)
+Parameters: filename: Path to save the video file. If None, a file dialog is opened.
+Constraints: 
+    ----- content end -----
+    [33] type=api  meta={"api_id": "genesis.materials.rigid.Rigid"}
+    ----- content begin -----
+--- API: genesis.materials.rigid.Rigid ---
+API: genesis.materials.rigid.Rigid
+Summary: The Rigid class represents a material used in rigid body simulation.
+Signature: Rigid(rho=200.0, friction=None, needs_coup=True, coup_friction=0.1, coup_softness=0.002, coup_restitution=0.0, sdf_cell_size=0.005, sdf_min_res=32, sdf_max_res=128, gravity_compensation=0)
+Parameters: rho: density used to compute mass, friction: friction coefficient within rigid solver; if None, default 1.0 may be used or parsed from file, coup_friction: must be non-negative, coup_softness: must be non-negative, coup_restitution: should be between 0 and 1, sdf_cell_size: cell size in SDF grid in meters, sdf_min_res: must be at least 16, sdf_max_res: must be >= sdf_min_res, gravity_compensation: 1.0 cancels gravity
+Constraints: coup_friction must be non-negative, coup_softness must be non-negative, coup_restitution should be between 0 and 1, sdf_min_res must be at least 16, sdf_max_res must be >= sdf_min_res
+    ----- content end -----
+    [34] type=api  meta={"api_id": "genesis.materials.avatar.Rigid"}
+    ----- content begin -----
+--- API: genesis.materials.avatar.Rigid ---
+API: genesis.materials.avatar.Rigid
+Summary: The Rigid class represents a material used in rigid body simulation.
+Signature: Rigid(rho=200.0, friction=None, needs_coup=True, coup_friction=0.1, coup_softness=0.002, coup_restitution=0.0, sdf_cell_size=0.005, sdf_min_res=32, sdf_max_res=128, gravity_compensation=0)
+Parameters: friction: If None, a default of 1.0 may be used or parsed from file., coup_friction: Must be non-negative., coup_softness: Must be non-negative., coup_restitution: Should be between 0 and 1., sdf_cell_size: Cell size in SDF grid in meters., sdf_min_res: Must be at least 16., sdf_max_res: Must be >= sdf_min_res., gravity_compensation: 1.0 cancels gravity.
+Constraints: coup_friction must be non-negative, coup_softness must be non-negative, coup_restitution should be between 0 and 1, sdf_min_res must be at least 16, sdf_max_res must be >= sdf_min_res
+    ----- content end -----
+    [35] type=api  meta={"api_id": "genesis.materials.Avatar"}
+    ----- content begin -----
+--- API: genesis.materials.Avatar ---
+API: genesis.materials.Avatar
+Summary: The Rigid class represents a material used in rigid body simulation.
+Signature: Avatar(rho=200.0, friction=None, needs_coup=True, coup_friction=0.1, coup_softness=0.002, coup_restitution=0.0, sdf_cell_size=0.005, sdf_min_res=32, sdf_max_res=128, gravity_compensation=0)
+Parameters: rho: density used to compute mass, friction: friction coefficient within rigid solver; if None, default of 1.0 may be used or parsed from file, coup_friction: must be non-negative, coup_softness: must be non-negative, coup_restitution: should be between 0 and 1, sdf_cell_size: cell size in SDF grid in meters, sdf_min_res: must be at least 16, sdf_max_res: must be >= sdf_min_res, gravity_compensation: 1.0 cancels gravity
+Constraints: coup_friction must be non-negative, coup_softness must be non-negative, coup_restitution should be between 0 and 1, sdf_min_res must be at least 16, sdf_max_res must be >= sdf_min_res
+    ----- content end -----
+    [36] type=api  meta={"api_id": "genesis.materials.avatar.Avatar"}
+    ----- content begin -----
+--- API: genesis.materials.avatar.Avatar ---
+API: genesis.materials.avatar.Avatar
+Summary: The Rigid class represents a material used in rigid body simulation.
+Signature: Avatar(rho=200.0, friction=None, needs_coup=True, coup_friction=0.1, coup_softness=0.002, coup_restitution=0.0, sdf_cell_size=0.005, sdf_min_res=32, sdf_max_res=128, gravity_compensation=0)
+Parameters: rho: density used to compute mass, friction: friction coefficient within rigid solver; if None, default of 1.0 may be used or parsed from file, coup_friction: must be non-negative, coup_softness: must be non-negative, coup_restitution: should be between 0 and 1, sdf_cell_size: cell size in SDF grid in meters, sdf_min_res: must be at least 16, sdf_max_res: must be >= sdf_min_res, gravity_compensation: 1.0 cancels gravity
+Constraints: coup_friction must be non-negative, coup_softness must be non-negative, coup_restitution should be between 0 and 1, sdf_min_res must be at least 16, sdf_max_res must be >= sdf_min_res
+    ----- content end -----
+    [37] type=code  meta={"id": "nonconvex_mesh.py", "title": "Simple Sphere in Tank Scene"}
+    ----- content begin -----
+Title: Simple Sphere in Tank Scene
+import argparse
+
+import genesis as gs
+
+
+def main():
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-v", "--vis", action="store_true", default=False)
+    parser.add_argument("-c", "--cpu", action="store_true", default=False)
+    args = parser.parse_args()
+
+    ########################## init ##########################
+    gs.init(backend=gs.cpu if args.cpu else gs.gpu)
+
+    ########################## create a scene ##########################
+    scene = gs.Scene(
+        viewer_options=gs.options.ViewerOptions(
+            camera_pos=(3.5, 0.0, 2.5),
+            camera_lookat=(0.0, 0.0, 0.5),
+            camera_fov=40,
+        ),
+        show_viewer=args.vis,
+    )
+
+    ########################## entities ##########################
+    tank = scene.add_entity(
+        gs.morphs.Mesh(
+            file="meshes/tank.obj",
+            scale=5.0,
+            fixed=True,
+            euler=(90, 0, 0),
+        ),
+        # vis_mode="collision",
+    )
+    ball = scene.add_entit
+    ----- content end -----
+    [38] type=snippet  meta={"id": "snip_7e2760a9", "task": "This code adds a fixed, rigid box entity to a scene with specified position, size, material density, friction, and a semi-transparent plastic surface color."}
+    ----- content begin -----
+Task: This code adds a fixed, rigid box entity to a scene with specified position, size, material density, friction, and a semi-transparent plastic surface color.
+scene.add_entity(
+                morph=gs.morphs.Box(
+                    pos=(x, y, cube_height),
+                    size=(cube_size, cube_size, cube_size),
+                    fixed=True,
+                ),
+                material=gs.materials.Rigid(rho=500, friction=0.3),
+                surface=gs.surfaces.Plastic(color=(0.8, 0.3, 0.2, 0.8)),
+            )
+    ----- content end -----
+    [39] type=snippet  meta={"id": "snip_ffb8f07b", "task": "This code initializes a simulation scene with specified viewer and rigid body dynamics settings."}
+    ----- content begin -----
+Task: This code initializes a simulation scene with specified viewer and rigid body dynamics settings.
+scene = gs.Scene(
+        viewer_options=gs.options.ViewerOptions(
+            camera_pos=(0.0, -2, 1.5),
+            camera_lookat=(0.0, 0.0, 0.5),
+            camera_fov=40,
+            max_FPS=200,
+        ),
+        rigid_options=gs.options.RigidOptions(
+            dt=0.01,
+            constraint_solver=gs.constraint_solver.Newton,
+        ),
+        show_viewer=args.vis,
+    )
+    ----- content end -----
+    [40] type=snippet  meta={"id": "snip_9f96a9ec", "task": "This code configures a simulation scene with specific physics parameters for rigid body dynamics and material point method (MPM) interactions, including collision settings, gravity, and viewer options."}
+    ----- content begin -----
+Task: This code configures a simulation scene with specific physics parameters for rigid body dynamics and material point method (MPM) interactions, including collision settings, gravity, and viewer options.
+gs.Scene(
+    sim_options=gs.options.SimOptions(
+        dt=3e-3,
+        substeps=10,
+    ),
+    rigid_options=gs.options.RigidOptions(
+        gravity=(0, 0, -9.8),
+        enable_collision=True,
+        enable_self_collision=False,
+        enable_adjacent_collision=False,
+        # Prevent the rigid contact solver from being too stiff otherwise this would cause large impulse, especially
+        # because the simulation timestep must be very small to ensure numerical stability of rigid body dynamics.
+        constraint_timeconst=0.02,
+    ),
+    mpm_options=gs.options.MPMOptions(
+        lower_bound=(0.0, 0.0, -0.2),
+        upper_bound=(1.0, 1.0, 1.0),
+        gravity=(0, 0, 0),  # mimic gravity compensation
+        enable_CPIC=True,
+    ),
+    viewer_options=gs.options.ViewerOptions(
+        camera_pos=(1.5, 1.3, 0.5),
+        camera_lookat=(0.0, 0.0, 0.0),
+        camera_fov=40,
+    ),
+    vis_options=gs.options.VisOptions(
+        show_world_frame=True,
+        visualize_mpm_boundary=False,
+    ),
+    show_viewer=True,
+    show_FPS=False,
+)
+    ----- content end -----
+
+  [eval_002] query: Create a static rigid box to serve as an obstacle in the scene.
+  - RAG Context:
+    [1] type=api  meta={"api_id": "genesis.Scene", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.Scene ---
+API: genesis.Scene
+Summary: A ``genesis.Scene`` object wraps all components in a simulation environment, including a simulator (containing multiple physics solvers), entities, an...
+Signature: Scene(sim_options=None, coupler_options=None, tool_options=None, rigid_options=None, avatar_options=None, mpm_options=None, sph_options=None, fem_options=None, sf_options=None, pbd_options=None, vis_options=None, viewer_options=None, profiling_options=None, renderer=None, show_viewer=None, show_FPS=None)
+Parameters: sim_options: The options configuring the overarching simulator, which in turn manages all the solvers., coupler_options: The options configuring the coupler between different solvers., tool_options: The options configuring the tool_solver (scene.sim.ToolSolver)., rigid_options: The options configuring the rigid_solver (scene.sim.RigidSolver)., avatar_options: The options configuring the avatar_solver (scene.sim.AvatarSolver)., mpm_options: The options configuring the mpm_solver (scene.sim.MPMSolver)., sph_options: The options configuring the sph_solver (scene.sim.SPHSolver)., fem_options: The options configuring the fem_solver (scene.sim.FEMSolver)., sf_options: The options configuring the sf_solver (scene.sim.SFSolver)., pbd_options: The options configuring the pbd_solver (scene.sim.PBDSolver)., vis_options: The options configuring the visualization system (scene.visualizer). Visualizer controls both the interactive viewer and the cameras., viewer_options: The options configuring the viewer (scene.visualizer.viewer)., renderer: The renderer options used by camera for rendering images. This doesn't affect the behavior of the interactive viewer., show_viewer: Whether to show the interactive viewer. Set it to False if you only need headless rendering., show_FPS: Whether to show the FPS in the terminal.
+Constraints: 
+    ----- content end -----
+    [2] type=api  meta={"api_id": "genesis.Scene.add_entity", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.Scene.add_entity ---
+API: genesis.Scene.add_entity
+Summary: Add an entity to the scene.
+Signature: add_entity(morph, material=None, surface=None, visualize_contact=False, vis_mode=None)
+Parameters: material: If None, use gs.materials.Rigid(), surface: If None, use gs.surfaces.Default(), visualize_contact: Will not be displayed in images rendered by camera using the RayTracer renderer, vis_mode: Shortcut for setting surface.vis_mode without explicitly creating a surface object
+Constraints: visualize_contact will not be displayed in images rendered by camera using the RayTracer renderer
+    ----- content end -----
+    [3] type=api  meta={"api_id": "genesis.Scene.build", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.Scene.build ---
+API: genesis.Scene.build
+Summary: Builds the scene once all entities have been added. This operation is required before running the simulation.
+Signature: build(n_envs=0, env_spacing=(0.0, 0.0), n_envs_per_row=None, center_envs_at_origin=True, compile_kernels=None)
+Parameters: n_envs: If 0, scene has no batching dimension; if >0, first dimension of all states becomes batch dimension., env_spacing: Spacing between adjacent environments (visualization only, does not affect simulation poses)., n_envs_per_row: If None, set to sqrt(n_envs)., center_envs_at_origin: For visualization only., compile_kernels: Deprecated and will be removed in future release.
+Constraints: env_spacing is for visualization only and does not change simulation-related poses, center_envs_at_origin is for visualization only, compile_kernels is deprecated and will be removed in future release
+    ----- content end -----
+    [4] type=api  meta={"api_id": "genesis.Scene.step", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.Scene.step ---
+API: genesis.Scene.step
+Summary: Runs a simulation step forward in time.
+Signature: step(update_visualizer=True, refresh_visualizer=True)
+Constraints: 
+    ----- content end -----
+    [5] type=api  meta={"api_id": "genesis.constraint_solver", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.constraint_solver ---
+API: genesis.constraint_solver
+Summary: An enumeration.
+Signature: constraint_solver(*args, **kwargs)
+Constraints: 
+    ----- content end -----
+    [6] type=api  meta={"api_id": "genesis.materials.FEM.Cloth", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.FEM.Cloth ---
+API: genesis.materials.FEM.Cloth
+Summary: Cloth material for thin shell/membrane simulation using IPC.
+Signature: Cloth(E=10000.0, nu=0.49, rho=200.0, thickness=0.001, bending_stiffness=None, model=stable_neohookean)
+Parameters: E: Young's modulus in Pa, controlling stiffness, nu: Poisson's ratio, describing volume change under stress, rho: Material density in kg/m³, thickness: Shell thickness in meters, bending_stiffness: Bending resistance coefficient; if None, no bending resistance, model: FEM material model (not used for cloth, kept for compatibility)
+Constraints: Only works with IPCCoupler enabled, Requires GPU backend, Only accepts surface mesh morphs (Mesh, etc.), Uses FEMEntity infrastructure but simulated as 2D shell in IPC
+    ----- content end -----
+    [7] type=api  meta={"api_id": "genesis.materials.FEM.Elastic", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.FEM.Elastic ---
+API: genesis.materials.FEM.Elastic
+Summary: The elastic material class for FEM.
+Signature: Elastic(E=1000000.0, nu=0.2, rho=1000.0, hydroelastic_modulus=10000000.0, friction_mu=0.1, model=linear)
+Parameters: E: Young's modulus, which controls stiffness, nu: Poisson ratio, describing the material's volume change under stress, rho: Material density in kg/m^3, hydroelastic_modulus: Hydroelastic modulus for hydroelastic contact, friction_mu: Friction coefficient, model: Constitutive model for stress computation: 'linear', 'stable_neohookean', or 'linear_corotated'
+Constraints: 
+    ----- content end -----
+    [8] type=api  meta={"api_id": "genesis.materials.FEM.Muscle", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.FEM.Muscle ---
+API: genesis.materials.FEM.Muscle
+Summary: The muscle material class for FEM.
+Signature: Muscle(E=1000000.0, nu=0.2, rho=1000.0, model=linear, n_groups=1)
+Parameters: E: Young's modulus, which controls stiffness, nu: Poisson ratio, describing the material's volume change under stress, rho: Material density in kg/m³, model: Constitutive model for stress computation. Options: 'linear' (linear elasticity) or 'stable_neohookean' (numerically stable Neo-Hookean), n_groups: Number of muscle groups
+Constraints: 
+    ----- content end -----
+    [9] type=api  meta={"api_id": "genesis.materials.Hybrid", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.Hybrid ---
+API: genesis.materials.Hybrid
+Summary: The class for hybrid body material (soft skin actuated by inner rigid skeleton).
+Signature: Hybrid(material_rigid, material_soft, use_default_coupling=False, damping=0.0, thickness=0.05, soft_dv_coef=0.01, func_instantiate_rigid_from_soft=None, func_instantiate_soft_from_rigid=None, func_instantiate_rigid_soft_association=None)
+Parameters: damping: Damping coefficient between soft and rigid., thickness: The thickness to instantiate soft skin., soft_dv_coef: The coefficient to apply delta velocity from rigid to soft., func_instantiate_rigid_from_soft: The function to instantiate rigid body from the geometry of soft body., func_instantiate_soft_from_rigid: The function to instantiate soft body from the geometry of rigid body., func_instantiate_rigid_soft_association: The function that determines the association of the rigid and the soft body.
+Constraints: 
+    ----- content end -----
+    [10] type=api  meta={"api_id": "genesis.materials.MPM.Elastic", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.MPM.Elastic ---
+API: genesis.materials.MPM.Elastic
+Summary: The elastic material class for MPM.
+Signature: Elastic(E=300000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, model=corotation)
+Parameters: E: Young's modulus. Elastic objects are softened by multiplying the default E by 0.3., nu: Poisson ratio., rho: Density in kg/m^3., lam: The first Lame's parameter. If None, computed by E and nu., mu: The second Lame's parameter. If None, computed by E and nu., sampler: Particle sampler ('pbs', 'regular', 'random'). Note that 'pbs' is only supported on Linux for now., model: Stress model ('corotation', 'neohooken').
+Constraints: Elastic objects are softened by multiplying the default E by 0.3, Sampler 'pbs' is only supported on Linux for now
+    ----- content end -----
+    [11] type=api  meta={"api_id": "genesis.materials.MPM.ElastoPlastic", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.MPM.ElastoPlastic ---
+API: genesis.materials.MPM.ElastoPlastic
+Summary: The elasto-plastic material class for MPM.
+Signature: ElastoPlastic(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, yield_lower=0.025, yield_higher=0.0045, use_von_mises=True, von_mises_yield_stress=10000.0)
+Parameters: E: Young's modulus, nu: Poisson ratio, rho: Density in kg/m^3, lam: First Lame's parameter; computed from E and nu if None, mu: Second Lame's parameter; computed from E and nu if None, sampler: Particle sampler ('pbs', 'regular', 'random'); 'pbs' only supported on Linux, yield_lower: Lower bound for yield clamp; ignored if using von Mises, yield_higher: Upper bound for yield clamp; ignored if using von Mises, use_von_mises: Whether to use von Mises yield criterion, von_mises_yield_stress: Yield stress for von Mises criterion
+Constraints: Default yield ratio comes from SNOW material in taichi's MPM implementation, Sampler 'pbs' is only supported on Linux for now, yield_lower and yield_higher are ignored if using von Mises criterion
+    ----- content end -----
+    [12] type=api  meta={"api_id": "genesis.materials.MPM.Liquid", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.MPM.Liquid ---
+API: genesis.materials.MPM.Liquid
+Summary: The liquid material class for MPM.
+Signature: Liquid(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, viscous=False, sampler=None)
+Parameters: E: Young's modulus, nu: Poisson ratio, rho: Density in kg/m^3, lam: First Lame's parameter; if None, computed by E and nu, mu: Second Lame's parameter; if None, computed by E and nu, viscous: Whether the liquid is viscous; sets mu to zero when non-viscous, sampler: Particle sampler ('pbs', 'regular', 'random'); 'pbs' only supported on Linux
+Constraints: Sampler 'pbs' is only supported on Linux, If sampler is 'pbs' on unsupported platforms, defaults to 'random'
+    ----- content end -----
+    [13] type=api  meta={"api_id": "genesis.materials.MPM.Muscle", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.MPM.Muscle ---
+API: genesis.materials.MPM.Muscle
+Summary: The muscle material class for MPM.
+Signature: Muscle(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, model=neohooken, n_groups=1)
+Parameters: E: Young's modulus, nu: Poisson ratio, rho: Density in kg/m^3, lam: First Lame's parameter; computed from E and nu if None, mu: Second Lame's parameter; computed from E and nu if None, sampler: Particle sampler ('pbs', 'regular', 'random'); 'pbs' only supported on Linux, model: Stress model ('corotation', 'neohooken'), n_groups: Number of muscle groups
+Constraints: 'pbs' sampler is only supported on Linux for now
+    ----- content end -----
+    [14] type=api  meta={"api_id": "genesis.materials.MPM.Sand", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.MPM.Sand ---
+API: genesis.materials.MPM.Sand
+Summary: The sand material class for MPM.
+Signature: Sand(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=random, friction_angle=45)
+Parameters: E: Young's modulus, nu: Poisson ratio, rho: Density in kg/m^3, lam: First Lame's parameter; if None, computed by E and nu, mu: Second Lame's parameter; if None, computed by E and nu, sampler: Particle sampler ('pbs', 'regular', 'random'); 'pbs' only supported on Linux for now, friction_angle: Friction angle in degrees, used to compute internal pressure-dependent plasticity
+Constraints: 'pbs' sampler is only supported on Linux for now
+    ----- content end -----
+    [15] type=api  meta={"api_id": "genesis.materials.PBD.Cloth", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.PBD.Cloth ---
+API: genesis.materials.PBD.Cloth
+Summary: The cloth material class for PBD.
+Signature: Cloth(rho=4.0, static_friction=0.15, kinetic_friction=0.15, stretch_compliance=1e-07, bending_compliance=1e-05, stretch_relaxation=0.3, bending_relaxation=0.1, air_resistance=0.001)
+Parameters: rho: density in kg/m² (2D material, mass = rho * surface_area), static_friction: resistance to start of sliding motion between contacting particles, kinetic_friction: resistance during sliding motion between contacting particles, stretch_compliance: controls softness of stretch constraint between particles in m/N, bending_compliance: controls how easily material bends in rad/N, stretch_relaxation: smaller value weakens stretch constraint, bending_relaxation: smaller value weakens bending constraint, air_resistance: damping force due to air drag
+Constraints: 
+    ----- content end -----
+    [16] type=api  meta={"api_id": "genesis.materials.PBD.Elastic", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.PBD.Elastic ---
+API: genesis.materials.PBD.Elastic
+Summary: The 3D elastic volumentric material class for PBD.
+Signature: Elastic(rho=1000.0, static_friction=0.15, kinetic_friction=0.15, stretch_compliance=0.0, bending_compliance=0.0, volume_compliance=0.0, stretch_relaxation=0.1, bending_relaxation=0.1, volume_relaxation=0.1)
+Parameters: rho: density of the elastic material in kg/m^3, static_friction: resistance to the start of sliding motion between two contacting particles; determines how much tangential force can be applied before sliding begins, kinetic_friction: resistance during sliding motion between two contacting particles; limits tangential force to simulate energy loss due to friction, stretch_compliance: controls softness of stretch constraint between particles in m/N; low values = stiff, high values = softer, bending_compliance: controls how easily material bends in rad/N; appears in inner edge constraints, volume_compliance: determines compressibility of tetrahedral element in m^3/N; used in volume preservation constraints, stretch_relaxation: smaller value weakens the stretch constraint, bending_relaxation: smaller value weakens the bending constraint, volume_relaxation: smaller value weakens the volume constraint
+Constraints: 
+    ----- content end -----
+    [17] type=api  meta={"api_id": "genesis.materials.PBD.Liquid", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.PBD.Liquid ---
+API: genesis.materials.PBD.Liquid
+Summary: The liquid material class for PBD.
+Signature: Liquid(rho=1000.0, sampler=None, density_relaxation=0.2, viscosity_relaxation=0.01)
+Parameters: rho: in kg/m^3, sampler: 'pbs' only supported on Linux for now, density_relaxation: higher values lead to faster convergence but can cause instability, viscosity_relaxation: higher values lead to more viscous (syrupy) fluid behavior
+Constraints: sampler 'pbs' is only supported on Linux for now
+    ----- content end -----
+    [18] type=api  meta={"api_id": "genesis.materials.Rigid", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.Rigid ---
+API: genesis.materials.Rigid
+Summary: The Rigid class represents a material used in rigid body simulation.
+Signature: Rigid(rho=200.0, friction=None, needs_coup=True, coup_friction=0.1, coup_softness=0.002, coup_restitution=0.0, sdf_cell_size=0.005, sdf_min_res=32, sdf_max_res=128, gravity_compensation=0)
+Parameters: friction: If None, a default of 1.0 may be used or parsed from file., coup_friction: Must be non-negative., coup_softness: Must be non-negative., coup_restitution: Should be between 0 and 1., sdf_cell_size: Cell size in SDF grid in meters., sdf_min_res: Must be at least 16., sdf_max_res: Must be >= sdf_min_res., gravity_compensation: 1.0 cancels gravity.
+Constraints: coup_friction must be non-negative, coup_softness must be non-negative, coup_restitution should be between 0 and 1, sdf_min_res must be at least 16, sdf_max_res must be >= sdf_min_res
+    ----- content end -----
+    [19] type=api  meta={"api_id": "genesis.materials.SPH.Liquid", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.SPH.Liquid ---
+API: genesis.materials.SPH.Liquid
+Summary: The liquid material class for SPH.
+Signature: Liquid(rho=1000.0, stiffness=50000.0, exponent=7.0, mu=0.005, gamma=0.01, sampler=None)
+Parameters: rho: density in kg/m³ that material tends to maintain in equilibrium, stiffness: state stiffness in N/m² controlling how pressure increases with compression, exponent: controls how nonlinearly pressure scales with density; larger values mean stiffer response to compression, mu: viscosity of the liquid; measure of internal friction, gamma: surface tension controlling how strongly material clumps together at boundaries, sampler: particle sampler; 'pbs' only supported on Linux for now
+Constraints: 'pbs' sampler only supported on Linux for now
+    ----- content end -----
+    [20] type=api  meta={"api_id": "genesis.materials.Tool", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.Tool ---
+API: genesis.materials.Tool
+Summary: The base class of materials.
+Signature: Tool(friction=0.0, coup_softness=0.01, collision=True, sdf_res=128)
+Constraints: This class should not be instantiated directly.
+    ----- content end -----
+    [21] type=api  meta={"api_id": "genesis.options.FEMOptions", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.FEMOptions ---
+API: genesis.options.FEMOptions
+Summary: Options configuring the FEMSolver.
+Signature: FEMOptions(**data)
+Constraints: Damping coefficients are used in the Rayleigh Damping model, TODO Move damping to material parameters in the future instead of solver options, Implicit solver is a more stable solver for FEM that can be used with a large time step, Parameters n_newton_iterations, n_pcg_iterations, n_linesearch_iterations, newton_dx_threshold, pcg_threshold, linesearch_c, linesearch_tau, damping_alpha, and damping_beta are only used when use_implicit_solver is True
+    ----- content end -----
+    [22] type=api  meta={"api_id": "genesis.options.IPCCouplerOptions", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.IPCCouplerOptions ---
+API: genesis.options.IPCCouplerOptions
+Summary: Options configuring the Incremental Potential Contact (IPC) coupler.
+Signature: IPCCouplerOptions(**data)
+Constraints: 
+    ----- content end -----
+    [23] type=api  meta={"api_id": "genesis.options.MPMOptions", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.MPMOptions ---
+API: genesis.options.MPMOptions
+Summary: Options configuring the MPMSolver.
+Signature: MPMOptions(**data)
+Constraints: MPM uses a grid representation with safety padding added to specified bounds, making actual boundaries slightly tighter than specified, Domain size affects simulation performance - set bounds as tight as possible, If particle_size not given, it will be computed based on grid_density (linearly proportional to grid cell size), use_sparse_grid option is deprecated, leaf_block_size option is deprecated
+    ----- content end -----
+    [24] type=api  meta={"api_id": "genesis.options.PBDOptions", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.PBDOptions ---
+API: genesis.options.PBDOptions
+Summary: Options configuring the PBDSolver.
+Signature: PBDOptions(**data)
+Constraints: If spatial hashing parameters are not given, they will be computed automatically: hash_grid_cell_size = 1.25 * particle_size; hash_grid_res uses a default value of a 150^3 cube if no small bound is given, Any grid bigger than 150^3 will result in too many cells and is not ideal
+    ----- content end -----
+    [25] type=api  meta={"api_id": "genesis.options.RigidOptions", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.RigidOptions ---
+API: genesis.options.RigidOptions
+Summary: Options configuring the RigidSolver.
+Signature: RigidOptions(**data)
+Constraints: Hibernation hasn't been robustly tested and will be fully supported soon, noslip solver should only be enabled if necessary because it is experimental and will slow down the simulation, contact_resolve_time will be deprecated in a future version
+    ----- content end -----
+    [26] type=api  meta={"api_id": "genesis.options.SAPCouplerOptions", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.SAPCouplerOptions ---
+API: genesis.options.SAPCouplerOptions
+Summary: Options configuring the inter-solver coupling for the Semi-Analytic Primal (SAP) contact solver used in Drake.
+Signature: SAPCouplerOptions(**data)
+Constraints: 
+    ----- content end -----
+    [27] type=api  meta={"api_id": "genesis.options.SPHOptions", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.SPHOptions ---
+API: genesis.options.SPHOptions
+Summary: Options configuring the SPHSolver.
+Signature: SPHOptions(**data)
+Constraints: If spatial hashing parameters are not given, they will be computed automatically, hash_grid_cell_size should be at least 2 * particle_size, Any grid bigger than 150^3 cube will result in too many cells and is not ideal, For hash_grid_cell_size, if not given, it will be set to support_radius (2 * particle_size), For hash_grid_res, if not given and no small bound is provided, default is 150^3 cube
+    ----- content end -----
+    [28] type=api  meta={"api_id": "genesis.options.SimOptions", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.SimOptions ---
+API: genesis.options.SimOptions
+Summary: Options configuring the top-level simulator.
+Signature: SimOptions(**data)
+Constraints: In differentiable mode, substeps_local must be divisible by substeps, If requires_grad is False, arbitrary substeps_local can be used
+    ----- content end -----
+    [29] type=api  meta={"api_id": "genesis.options.ViewerOptions", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.ViewerOptions ---
+API: genesis.options.ViewerOptions
+Summary: Options configuring preperties of the interactive viewer.
+Signature: ViewerOptions(**data)
+Constraints: The viewer's camera uses the `Rasterizer` backend regardless of `gs.renderers.*` when creating the scene., run_in_thread option is not supported on MacOS
+    ----- content end -----
+    [30] type=api  meta={"api_id": "genesis.options.VisOptions", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.VisOptions ---
+API: genesis.options.VisOptions
+Summary: This configures visualization-related properties that are independent of the viewer or camera.
+Signature: VisOptions(**data)
+Constraints: env_separate_rigid is only an option for Rasterizer; enforced for BatchRender, segmentation_level must be one of ['entity', 'link', 'geom'], render_particle_as must be one of ['sphere', 'tet'], n_rendered_envs is deprecated; use rendered_envs_idx instead
+    ----- content end -----
+    [31] type=api  meta={"api_id": "genesis.options.renderers.BatchRenderer", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.renderers.BatchRenderer ---
+API: genesis.options.renderers.BatchRenderer
+Summary: BatchRenderer renderer.
+Signature: BatchRenderer(**data)
+Constraints: 
+    ----- content end -----
+    [32] type=api  meta={"api_id": "genesis.Scene.viewer.save_video", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.Scene.viewer.save_video ---
+API: genesis.Scene.viewer.save_video
+Summary: Save the stored frames from the viewer to a video file (e.g. MP4). Use after scene.viewer is running with record enabled: call scene.start_recording() before stepping, then scene.viewer.save_video(filename='out.mp4') after simulation (or use Viewer.close_external() then save_video).
+Signature: save_video(filename=None)
+Parameters: filename: Path to save the video file. If None, a file dialog is opened.
+Constraints: 
+    ----- content end -----
+    [33] type=api  meta={"api_id": "genesis.options.morphs.Box"}
+    ----- content begin -----
+--- API: genesis.options.morphs.Box ---
+API: genesis.options.morphs.Box
+Summary: Morph defined by a box shape.
+Signature: Box(**data)
+Constraints: Either [pos and size] or [lower and upper] should be specified. The latter has a higher priority., visualization and collision cannot both be False, quat will be ignored if euler is specified
+    ----- content end -----
+    [34] type=api  meta={"api_id": "genesis.Scene.draw_debug_box"}
+    ----- content begin -----
+--- API: genesis.Scene.draw_debug_box ---
+API: genesis.Scene.draw_debug_box
+Summary: Draws a box in the scene for visualization.
+Signature: draw_debug_box(bounds, color=(1.0, 0.0, 0.0, 1.0), wireframe=True, wireframe_radius=0.0015)
+Parameters: bounds: specified as [[min_x, min_y, min_z], [max_x, max_y, max_z]]
+Constraints: 
+    ----- content end -----
+    [35] type=api  meta={"api_id": "genesis.states.RigidSolverState"}
+    ----- content begin -----
+--- API: genesis.states.RigidSolverState ---
+API: genesis.states.RigidSolverState
+Summary: Dynamic state queried from a RigidSolver.
+Signature: RigidSolverState(scene, s_global)
+Constraints: 
+    ----- content end -----
+    [36] type=api  meta={"api_id": "genesis.states.ToolSolverState"}
+    ----- content begin -----
+--- API: genesis.states.ToolSolverState ---
+API: genesis.states.ToolSolverState
+Summary: Dynamic state queried from a RigidSolver.
+Signature: ToolSolverState(scene)
+Constraints: 
+    ----- content end -----
+    [37] type=api  meta={"api_id": "genesis.states.solvers.RigidSolverState"}
+    ----- content begin -----
+--- API: genesis.states.solvers.RigidSolverState ---
+API: genesis.states.solvers.RigidSolverState
+Summary: Dynamic state queried from a RigidSolver.
+Signature: RigidSolverState(scene, s_global)
+Constraints: 
+    ----- content end -----
+    [38] type=api  meta={"api_id": "genesis.Scene.draw_debug_frame"}
+    ----- content begin -----
+--- API: genesis.Scene.draw_debug_frame ---
+API: genesis.Scene.draw_debug_frame
+Summary: Draws a 3-axis coordinate frame in the scene for visualization.
+Signature: draw_debug_frame(T, axis_length=1.0, origin_size=0.015, axis_radius=0.01)
+Parameters: T: The transformation matrix of the frame., axis_length: The length of the axes., origin_size: The size of the origin point (represented as a sphere)., axis_radius: The radius of the axes (represented as cylinders).
+Constraints: 
+    ----- content end -----
+    [39] type=code  meta={"id": "pyramid.py", "title": "Box Pile Simulation"}
+    ----- content begin -----
+Title: Box Pile Simulation
+import numpy as np
+import genesis as gs
+import argparse
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--pile_type", type=str, default="falling", choices=("static", "falling"))
+    parser.add_argument("--num_cubes", type=int, default=5, choices=(5, 6, 7, 8, 9, 10))
+    parser.add_argument("--cpu", action="store_true", help="Use CPU backend instead of GPU", default=True)
+    parser.add_argument("--steps", type=int, default=150)
+    parser.add_argument("-v", "--vis", action="store_true", default=False)
+    args = parser.parse_args()
+
+    gs.init(backend=gs.cpu if args.cpu else gs.gpu, precision="32")
+
+    scene = gs.Scene(
+        sim_options=gs.options.SimOptions(
+            dt=0.01,
+        ),
+        viewer_options=gs.options.ViewerOptions(
+            camera_pos=(0, -5.5, 2.5),
+            camera_lookat=(0, 0.0, 1.5),
+            max_FPS=60,
+        ),
+        show_viewer=args.vis,
+    )
+
+    plane = scene.add_entity(gs.morphs.Plane())
+
+    # create py
+    ----- content end -----
+    [40] type=snippet  meta={"id": "snip_7e2760a9", "task": "This code adds a fixed, rigid box entity to a scene with specified position, size, material density, friction, and a semi-transparent plastic surface color."}
+    ----- content begin -----
+Task: This code adds a fixed, rigid box entity to a scene with specified position, size, material density, friction, and a semi-transparent plastic surface color.
+scene.add_entity(
+                morph=gs.morphs.Box(
+                    pos=(x, y, cube_height),
+                    size=(cube_size, cube_size, cube_size),
+                    fixed=True,
+                ),
+                material=gs.materials.Rigid(rho=500, friction=0.3),
+                surface=gs.surfaces.Plastic(color=(0.8, 0.3, 0.2, 0.8)),
+            )
+    ----- content end -----
+    [41] type=snippet  meta={"id": "snip_4ffbee1e", "task": "This code adds a box-shaped entity with rigid body physics to a scene."}
+    ----- content begin -----
+Task: This code adds a box-shaped entity with rigid body physics to a scene.
+scene.add_entity(box_morph, rigid_material)
+    ----- content end -----
+    [42] type=snippet  meta={"id": "snip_fb26c945", "task": "This code adds a rigid green box entity with specified dimensions and position to a scene."}
+    ----- content begin -----
+Task: This code adds a rigid green box entity with specified dimensions and position to a scene.
+scene.add_entity(
+        material=gs.materials.Rigid(rho=300),
+        morph=gs.morphs.Box(
+            pos=(0.5, 0.0, 0.07),
+            size=(0.04, 0.04, 0.04),
+        ),
+        surface=gs.surfaces.Default(color=(0.5, 1, 0.5)),
+    )
+    ----- content end -----
+
+  [eval_007] query: Stack three rigid boxes vertically on top of each other on a static ground plane.
+  - RAG Context:
+    [1] type=api  meta={"api_id": "genesis.Scene", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.Scene ---
+API: genesis.Scene
+Summary: A ``genesis.Scene`` object wraps all components in a simulation environment, including a simulator (containing multiple physics solvers), entities, an...
+Signature: Scene(sim_options=None, coupler_options=None, tool_options=None, rigid_options=None, avatar_options=None, mpm_options=None, sph_options=None, fem_options=None, sf_options=None, pbd_options=None, vis_options=None, viewer_options=None, profiling_options=None, renderer=None, show_viewer=None, show_FPS=None)
+Parameters: sim_options: The options configuring the overarching simulator, which in turn manages all the solvers., coupler_options: The options configuring the coupler between different solvers., tool_options: The options configuring the tool_solver (scene.sim.ToolSolver)., rigid_options: The options configuring the rigid_solver (scene.sim.RigidSolver)., avatar_options: The options configuring the avatar_solver (scene.sim.AvatarSolver)., mpm_options: The options configuring the mpm_solver (scene.sim.MPMSolver)., sph_options: The options configuring the sph_solver (scene.sim.SPHSolver)., fem_options: The options configuring the fem_solver (scene.sim.FEMSolver)., sf_options: The options configuring the sf_solver (scene.sim.SFSolver)., pbd_options: The options configuring the pbd_solver (scene.sim.PBDSolver)., vis_options: The options configuring the visualization system (scene.visualizer). Visualizer controls both the interactive viewer and the cameras., viewer_options: The options configuring the viewer (scene.visualizer.viewer)., renderer: The renderer options used by camera for rendering images. This doesn't affect the behavior of the interactive viewer., show_viewer: Whether to show the interactive viewer. Set it to False if you only need headless rendering., show_FPS: Whether to show the FPS in the terminal.
+Constraints: 
+    ----- content end -----
+    [2] type=api  meta={"api_id": "genesis.Scene.add_entity", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.Scene.add_entity ---
+API: genesis.Scene.add_entity
+Summary: Add an entity to the scene.
+Signature: add_entity(morph, material=None, surface=None, visualize_contact=False, vis_mode=None)
+Parameters: material: If None, use gs.materials.Rigid(), surface: If None, use gs.surfaces.Default(), visualize_contact: Will not be displayed in images rendered by camera using the RayTracer renderer, vis_mode: Shortcut for setting surface.vis_mode without explicitly creating a surface object
+Constraints: visualize_contact will not be displayed in images rendered by camera using the RayTracer renderer
+    ----- content end -----
+    [3] type=api  meta={"api_id": "genesis.Scene.build", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.Scene.build ---
+API: genesis.Scene.build
+Summary: Builds the scene once all entities have been added. This operation is required before running the simulation.
+Signature: build(n_envs=0, env_spacing=(0.0, 0.0), n_envs_per_row=None, center_envs_at_origin=True, compile_kernels=None)
+Parameters: n_envs: If 0, scene has no batching dimension; if >0, first dimension of all states becomes batch dimension., env_spacing: Spacing between adjacent environments (visualization only, does not affect simulation poses)., n_envs_per_row: If None, set to sqrt(n_envs)., center_envs_at_origin: For visualization only., compile_kernels: Deprecated and will be removed in future release.
+Constraints: env_spacing is for visualization only and does not change simulation-related poses, center_envs_at_origin is for visualization only, compile_kernels is deprecated and will be removed in future release
+    ----- content end -----
+    [4] type=api  meta={"api_id": "genesis.Scene.step", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.Scene.step ---
+API: genesis.Scene.step
+Summary: Runs a simulation step forward in time.
+Signature: step(update_visualizer=True, refresh_visualizer=True)
+Constraints: 
+    ----- content end -----
+    [5] type=api  meta={"api_id": "genesis.constraint_solver", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.constraint_solver ---
+API: genesis.constraint_solver
+Summary: An enumeration.
+Signature: constraint_solver(*args, **kwargs)
+Constraints: 
+    ----- content end -----
+    [6] type=api  meta={"api_id": "genesis.materials.FEM.Cloth", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.FEM.Cloth ---
+API: genesis.materials.FEM.Cloth
+Summary: Cloth material for thin shell/membrane simulation using IPC.
+Signature: Cloth(E=10000.0, nu=0.49, rho=200.0, thickness=0.001, bending_stiffness=None, model=stable_neohookean)
+Parameters: E: Young's modulus in Pa, controlling stiffness, nu: Poisson's ratio, describing volume change under stress, rho: Material density in kg/m³, thickness: Shell thickness in meters, bending_stiffness: Bending resistance coefficient; if None, no bending resistance, model: FEM material model (not used for cloth, kept for compatibility)
+Constraints: Only works with IPCCoupler enabled, Requires GPU backend, Only accepts surface mesh morphs (Mesh, etc.), Uses FEMEntity infrastructure but simulated as 2D shell in IPC
+    ----- content end -----
+    [7] type=api  meta={"api_id": "genesis.materials.FEM.Elastic", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.FEM.Elastic ---
+API: genesis.materials.FEM.Elastic
+Summary: The elastic material class for FEM.
+Signature: Elastic(E=1000000.0, nu=0.2, rho=1000.0, hydroelastic_modulus=10000000.0, friction_mu=0.1, model=linear)
+Parameters: E: Young's modulus, which controls stiffness, nu: Poisson ratio, describing the material's volume change under stress, rho: Material density in kg/m^3, hydroelastic_modulus: Hydroelastic modulus for hydroelastic contact, friction_mu: Friction coefficient, model: Constitutive model for stress computation: 'linear', 'stable_neohookean', or 'linear_corotated'
+Constraints: 
+    ----- content end -----
+    [8] type=api  meta={"api_id": "genesis.materials.FEM.Muscle", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.FEM.Muscle ---
+API: genesis.materials.FEM.Muscle
+Summary: The muscle material class for FEM.
+Signature: Muscle(E=1000000.0, nu=0.2, rho=1000.0, model=linear, n_groups=1)
+Parameters: E: Young's modulus, which controls stiffness, nu: Poisson ratio, describing the material's volume change under stress, rho: Material density in kg/m³, model: Constitutive model for stress computation. Options: 'linear' (linear elasticity) or 'stable_neohookean' (numerically stable Neo-Hookean), n_groups: Number of muscle groups
+Constraints: 
+    ----- content end -----
+    [9] type=api  meta={"api_id": "genesis.materials.Hybrid", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.Hybrid ---
+API: genesis.materials.Hybrid
+Summary: The class for hybrid body material (soft skin actuated by inner rigid skeleton).
+Signature: Hybrid(material_rigid, material_soft, use_default_coupling=False, damping=0.0, thickness=0.05, soft_dv_coef=0.01, func_instantiate_rigid_from_soft=None, func_instantiate_soft_from_rigid=None, func_instantiate_rigid_soft_association=None)
+Parameters: damping: Damping coefficient between soft and rigid., thickness: The thickness to instantiate soft skin., soft_dv_coef: The coefficient to apply delta velocity from rigid to soft., func_instantiate_rigid_from_soft: The function to instantiate rigid body from the geometry of soft body., func_instantiate_soft_from_rigid: The function to instantiate soft body from the geometry of rigid body., func_instantiate_rigid_soft_association: The function that determines the association of the rigid and the soft body.
+Constraints: 
+    ----- content end -----
+    [10] type=api  meta={"api_id": "genesis.materials.MPM.Elastic", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.MPM.Elastic ---
+API: genesis.materials.MPM.Elastic
+Summary: The elastic material class for MPM.
+Signature: Elastic(E=300000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, model=corotation)
+Parameters: E: Young's modulus. Elastic objects are softened by multiplying the default E by 0.3., nu: Poisson ratio., rho: Density in kg/m^3., lam: The first Lame's parameter. If None, computed by E and nu., mu: The second Lame's parameter. If None, computed by E and nu., sampler: Particle sampler ('pbs', 'regular', 'random'). Note that 'pbs' is only supported on Linux for now., model: Stress model ('corotation', 'neohooken').
+Constraints: Elastic objects are softened by multiplying the default E by 0.3, Sampler 'pbs' is only supported on Linux for now
+    ----- content end -----
+    [11] type=api  meta={"api_id": "genesis.materials.MPM.ElastoPlastic", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.MPM.ElastoPlastic ---
+API: genesis.materials.MPM.ElastoPlastic
+Summary: The elasto-plastic material class for MPM.
+Signature: ElastoPlastic(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, yield_lower=0.025, yield_higher=0.0045, use_von_mises=True, von_mises_yield_stress=10000.0)
+Parameters: E: Young's modulus, nu: Poisson ratio, rho: Density in kg/m^3, lam: First Lame's parameter; computed from E and nu if None, mu: Second Lame's parameter; computed from E and nu if None, sampler: Particle sampler ('pbs', 'regular', 'random'); 'pbs' only supported on Linux, yield_lower: Lower bound for yield clamp; ignored if using von Mises, yield_higher: Upper bound for yield clamp; ignored if using von Mises, use_von_mises: Whether to use von Mises yield criterion, von_mises_yield_stress: Yield stress for von Mises criterion
+Constraints: Default yield ratio comes from SNOW material in taichi's MPM implementation, Sampler 'pbs' is only supported on Linux for now, yield_lower and yield_higher are ignored if using von Mises criterion
+    ----- content end -----
+    [12] type=api  meta={"api_id": "genesis.materials.MPM.Liquid", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.MPM.Liquid ---
+API: genesis.materials.MPM.Liquid
+Summary: The liquid material class for MPM.
+Signature: Liquid(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, viscous=False, sampler=None)
+Parameters: E: Young's modulus, nu: Poisson ratio, rho: Density in kg/m^3, lam: First Lame's parameter; if None, computed by E and nu, mu: Second Lame's parameter; if None, computed by E and nu, viscous: Whether the liquid is viscous; sets mu to zero when non-viscous, sampler: Particle sampler ('pbs', 'regular', 'random'); 'pbs' only supported on Linux
+Constraints: Sampler 'pbs' is only supported on Linux, If sampler is 'pbs' on unsupported platforms, defaults to 'random'
+    ----- content end -----
+    [13] type=api  meta={"api_id": "genesis.materials.MPM.Muscle", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.MPM.Muscle ---
+API: genesis.materials.MPM.Muscle
+Summary: The muscle material class for MPM.
+Signature: Muscle(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, model=neohooken, n_groups=1)
+Parameters: E: Young's modulus, nu: Poisson ratio, rho: Density in kg/m^3, lam: First Lame's parameter; computed from E and nu if None, mu: Second Lame's parameter; computed from E and nu if None, sampler: Particle sampler ('pbs', 'regular', 'random'); 'pbs' only supported on Linux, model: Stress model ('corotation', 'neohooken'), n_groups: Number of muscle groups
+Constraints: 'pbs' sampler is only supported on Linux for now
+    ----- content end -----
+    [14] type=api  meta={"api_id": "genesis.materials.MPM.Sand", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.MPM.Sand ---
+API: genesis.materials.MPM.Sand
+Summary: The sand material class for MPM.
+Signature: Sand(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=random, friction_angle=45)
+Parameters: E: Young's modulus, nu: Poisson ratio, rho: Density in kg/m^3, lam: First Lame's parameter; if None, computed by E and nu, mu: Second Lame's parameter; if None, computed by E and nu, sampler: Particle sampler ('pbs', 'regular', 'random'); 'pbs' only supported on Linux for now, friction_angle: Friction angle in degrees, used to compute internal pressure-dependent plasticity
+Constraints: 'pbs' sampler is only supported on Linux for now
+    ----- content end -----
+    [15] type=api  meta={"api_id": "genesis.materials.PBD.Cloth", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.PBD.Cloth ---
+API: genesis.materials.PBD.Cloth
+Summary: The cloth material class for PBD.
+Signature: Cloth(rho=4.0, static_friction=0.15, kinetic_friction=0.15, stretch_compliance=1e-07, bending_compliance=1e-05, stretch_relaxation=0.3, bending_relaxation=0.1, air_resistance=0.001)
+Parameters: rho: density in kg/m² (2D material, mass = rho * surface_area), static_friction: resistance to start of sliding motion between contacting particles, kinetic_friction: resistance during sliding motion between contacting particles, stretch_compliance: controls softness of stretch constraint between particles in m/N, bending_compliance: controls how easily material bends in rad/N, stretch_relaxation: smaller value weakens stretch constraint, bending_relaxation: smaller value weakens bending constraint, air_resistance: damping force due to air drag
+Constraints: 
+    ----- content end -----
+    [16] type=api  meta={"api_id": "genesis.materials.PBD.Elastic", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.PBD.Elastic ---
+API: genesis.materials.PBD.Elastic
+Summary: The 3D elastic volumentric material class for PBD.
+Signature: Elastic(rho=1000.0, static_friction=0.15, kinetic_friction=0.15, stretch_compliance=0.0, bending_compliance=0.0, volume_compliance=0.0, stretch_relaxation=0.1, bending_relaxation=0.1, volume_relaxation=0.1)
+Parameters: rho: density of the elastic material in kg/m^3, static_friction: resistance to the start of sliding motion between two contacting particles; determines how much tangential force can be applied before sliding begins, kinetic_friction: resistance during sliding motion between two contacting particles; limits tangential force to simulate energy loss due to friction, stretch_compliance: controls softness of stretch constraint between particles in m/N; low values = stiff, high values = softer, bending_compliance: controls how easily material bends in rad/N; appears in inner edge constraints, volume_compliance: determines compressibility of tetrahedral element in m^3/N; used in volume preservation constraints, stretch_relaxation: smaller value weakens the stretch constraint, bending_relaxation: smaller value weakens the bending constraint, volume_relaxation: smaller value weakens the volume constraint
+Constraints: 
+    ----- content end -----
+    [17] type=api  meta={"api_id": "genesis.materials.PBD.Liquid", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.PBD.Liquid ---
+API: genesis.materials.PBD.Liquid
+Summary: The liquid material class for PBD.
+Signature: Liquid(rho=1000.0, sampler=None, density_relaxation=0.2, viscosity_relaxation=0.01)
+Parameters: rho: in kg/m^3, sampler: 'pbs' only supported on Linux for now, density_relaxation: higher values lead to faster convergence but can cause instability, viscosity_relaxation: higher values lead to more viscous (syrupy) fluid behavior
+Constraints: sampler 'pbs' is only supported on Linux for now
+    ----- content end -----
+    [18] type=api  meta={"api_id": "genesis.materials.Rigid", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.Rigid ---
+API: genesis.materials.Rigid
+Summary: The Rigid class represents a material used in rigid body simulation.
+Signature: Rigid(rho=200.0, friction=None, needs_coup=True, coup_friction=0.1, coup_softness=0.002, coup_restitution=0.0, sdf_cell_size=0.005, sdf_min_res=32, sdf_max_res=128, gravity_compensation=0)
+Parameters: friction: If None, a default of 1.0 may be used or parsed from file., coup_friction: Must be non-negative., coup_softness: Must be non-negative., coup_restitution: Should be between 0 and 1., sdf_cell_size: Cell size in SDF grid in meters., sdf_min_res: Must be at least 16., sdf_max_res: Must be >= sdf_min_res., gravity_compensation: 1.0 cancels gravity.
+Constraints: coup_friction must be non-negative, coup_softness must be non-negative, coup_restitution should be between 0 and 1, sdf_min_res must be at least 16, sdf_max_res must be >= sdf_min_res
+    ----- content end -----
+    [19] type=api  meta={"api_id": "genesis.materials.SPH.Liquid", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.SPH.Liquid ---
+API: genesis.materials.SPH.Liquid
+Summary: The liquid material class for SPH.
+Signature: Liquid(rho=1000.0, stiffness=50000.0, exponent=7.0, mu=0.005, gamma=0.01, sampler=None)
+Parameters: rho: density in kg/m³ that material tends to maintain in equilibrium, stiffness: state stiffness in N/m² controlling how pressure increases with compression, exponent: controls how nonlinearly pressure scales with density; larger values mean stiffer response to compression, mu: viscosity of the liquid; measure of internal friction, gamma: surface tension controlling how strongly material clumps together at boundaries, sampler: particle sampler; 'pbs' only supported on Linux for now
+Constraints: 'pbs' sampler only supported on Linux for now
+    ----- content end -----
+    [20] type=api  meta={"api_id": "genesis.materials.Tool", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.materials.Tool ---
+API: genesis.materials.Tool
+Summary: The base class of materials.
+Signature: Tool(friction=0.0, coup_softness=0.01, collision=True, sdf_res=128)
+Constraints: This class should not be instantiated directly.
+    ----- content end -----
+    [21] type=api  meta={"api_id": "genesis.options.FEMOptions", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.FEMOptions ---
+API: genesis.options.FEMOptions
+Summary: Options configuring the FEMSolver.
+Signature: FEMOptions(**data)
+Constraints: Damping coefficients are used in the Rayleigh Damping model, TODO Move damping to material parameters in the future instead of solver options, Implicit solver is a more stable solver for FEM that can be used with a large time step, Parameters n_newton_iterations, n_pcg_iterations, n_linesearch_iterations, newton_dx_threshold, pcg_threshold, linesearch_c, linesearch_tau, damping_alpha, and damping_beta are only used when use_implicit_solver is True
+    ----- content end -----
+    [22] type=api  meta={"api_id": "genesis.options.IPCCouplerOptions", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.IPCCouplerOptions ---
+API: genesis.options.IPCCouplerOptions
+Summary: Options configuring the Incremental Potential Contact (IPC) coupler.
+Signature: IPCCouplerOptions(**data)
+Constraints: 
+    ----- content end -----
+    [23] type=api  meta={"api_id": "genesis.options.MPMOptions", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.MPMOptions ---
+API: genesis.options.MPMOptions
+Summary: Options configuring the MPMSolver.
+Signature: MPMOptions(**data)
+Constraints: MPM uses a grid representation with safety padding added to specified bounds, making actual boundaries slightly tighter than specified, Domain size affects simulation performance - set bounds as tight as possible, If particle_size not given, it will be computed based on grid_density (linearly proportional to grid cell size), use_sparse_grid option is deprecated, leaf_block_size option is deprecated
+    ----- content end -----
+    [24] type=api  meta={"api_id": "genesis.options.PBDOptions", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.PBDOptions ---
+API: genesis.options.PBDOptions
+Summary: Options configuring the PBDSolver.
+Signature: PBDOptions(**data)
+Constraints: If spatial hashing parameters are not given, they will be computed automatically: hash_grid_cell_size = 1.25 * particle_size; hash_grid_res uses a default value of a 150^3 cube if no small bound is given, Any grid bigger than 150^3 will result in too many cells and is not ideal
+    ----- content end -----
+    [25] type=api  meta={"api_id": "genesis.options.RigidOptions", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.RigidOptions ---
+API: genesis.options.RigidOptions
+Summary: Options configuring the RigidSolver.
+Signature: RigidOptions(**data)
+Constraints: Hibernation hasn't been robustly tested and will be fully supported soon, noslip solver should only be enabled if necessary because it is experimental and will slow down the simulation, contact_resolve_time will be deprecated in a future version
+    ----- content end -----
+    [26] type=api  meta={"api_id": "genesis.options.SAPCouplerOptions", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.SAPCouplerOptions ---
+API: genesis.options.SAPCouplerOptions
+Summary: Options configuring the inter-solver coupling for the Semi-Analytic Primal (SAP) contact solver used in Drake.
+Signature: SAPCouplerOptions(**data)
+Constraints: 
+    ----- content end -----
+    [27] type=api  meta={"api_id": "genesis.options.SPHOptions", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.SPHOptions ---
+API: genesis.options.SPHOptions
+Summary: Options configuring the SPHSolver.
+Signature: SPHOptions(**data)
+Constraints: If spatial hashing parameters are not given, they will be computed automatically, hash_grid_cell_size should be at least 2 * particle_size, Any grid bigger than 150^3 cube will result in too many cells and is not ideal, For hash_grid_cell_size, if not given, it will be set to support_radius (2 * particle_size), For hash_grid_res, if not given and no small bound is provided, default is 150^3 cube
+    ----- content end -----
+    [28] type=api  meta={"api_id": "genesis.options.SimOptions", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.SimOptions ---
+API: genesis.options.SimOptions
+Summary: Options configuring the top-level simulator.
+Signature: SimOptions(**data)
+Constraints: In differentiable mode, substeps_local must be divisible by substeps, If requires_grad is False, arbitrary substeps_local can be used
+    ----- content end -----
+    [29] type=api  meta={"api_id": "genesis.options.ViewerOptions", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.ViewerOptions ---
+API: genesis.options.ViewerOptions
+Summary: Options configuring preperties of the interactive viewer.
+Signature: ViewerOptions(**data)
+Constraints: The viewer's camera uses the `Rasterizer` backend regardless of `gs.renderers.*` when creating the scene., run_in_thread option is not supported on MacOS
+    ----- content end -----
+    [30] type=api  meta={"api_id": "genesis.options.VisOptions", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.VisOptions ---
+API: genesis.options.VisOptions
+Summary: This configures visualization-related properties that are independent of the viewer or camera.
+Signature: VisOptions(**data)
+Constraints: env_separate_rigid is only an option for Rasterizer; enforced for BatchRender, segmentation_level must be one of ['entity', 'link', 'geom'], render_particle_as must be one of ['sphere', 'tet'], n_rendered_envs is deprecated; use rendered_envs_idx instead
+    ----- content end -----
+    [31] type=api  meta={"api_id": "genesis.options.renderers.BatchRenderer", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.options.renderers.BatchRenderer ---
+API: genesis.options.renderers.BatchRenderer
+Summary: BatchRenderer renderer.
+Signature: BatchRenderer(**data)
+Constraints: 
+    ----- content end -----
+    [32] type=api  meta={"api_id": "genesis.Scene.viewer.save_video", "is_core": true}
+    ----- content begin -----
+--- CORE API: genesis.Scene.viewer.save_video ---
+API: genesis.Scene.viewer.save_video
+Summary: Save the stored frames from the viewer to a video file (e.g. MP4). Use after scene.viewer is running with record enabled: call scene.start_recording() before stepping, then scene.viewer.save_video(filename='out.mp4') after simulation (or use Viewer.close_external() then save_video).
+Signature: save_video(filename=None)
+Parameters: filename: Path to save the video file. If None, a file dialog is opened.
+Constraints: 
+    ----- content end -----
+    [33] type=api  meta={"api_id": "genesis.options.morphs.Box"}
+    ----- content begin -----
+--- API: genesis.options.morphs.Box ---
+API: genesis.options.morphs.Box
+Summary: Morph defined by a box shape.
+Signature: Box(**data)
+Constraints: Either [pos and size] or [lower and upper] should be specified. The latter has a higher priority., visualization and collision cannot both be False, quat will be ignored if euler is specified
+    ----- content end -----
+    [34] type=api  meta={"api_id": "genesis.Scene.draw_debug_box"}
+    ----- content begin -----
+--- API: genesis.Scene.draw_debug_box ---
+API: genesis.Scene.draw_debug_box
+Summary: Draws a box in the scene for visualization.
+Signature: draw_debug_box(bounds, color=(1.0, 0.0, 0.0, 1.0), wireframe=True, wireframe_radius=0.0015)
+Parameters: bounds: specified as [[min_x, min_y, min_z], [max_x, max_y, max_z]]
+Constraints: 
+    ----- content end -----
+    [35] type=api  meta={"api_id": "genesis.options.morphs.Plane"}
+    ----- content begin -----
+--- API: genesis.options.morphs.Plane ---
+API: genesis.options.morphs.Plane
+Summary: Morph defined by a plane shape.
+Signature: Plane(**data)
+Constraints: Plane is a primitive with infinite size, visualization and collision cannot both be False, visualization parameter is only used for RigidEntity, collision parameter is only used for RigidEntity, fixed parameter is only used for RigidEntity, batch_fixed_verts parameter is only used for RigidEntity
+    ----- content end -----
+    [36] type=api  meta={"api_id": "genesis.options.morphs.Terrain"}
+    ----- content begin -----
+--- API: genesis.options.morphs.Terrain ---
+API: genesis.options.morphs.Terrain
+Summary: Morph for creating a rigid terrain. This can be instantiated from two choices: 1) a grid of subterrains generated using the given configurations 2) a ...
+Signature: Terrain(**data)
+Constraints: Rigid terrain SDF resolution is auto-computed and ignores the value specified in `gs.materials.Rigid()`, `visualization` and `collision` cannot both be False, 3-tuple scaling is only supported for `gs.morphs.Mesh`, If `height_field` is specified, all other configurations will be ignored, If `subterrain_types` is a 2D list, it should have the same shape as `n_subterrains`, `from_stored` parameter is deprecated, `batch_fixed_verts` is only used for RigidEntity
+    ----- content end -----
+    [37] type=api  meta={"api_id": "genesis.materials.rigid.Rigid"}
+    ----- content begin -----
+--- API: genesis.materials.rigid.Rigid ---
+API: genesis.materials.rigid.Rigid
+Summary: The Rigid class represents a material used in rigid body simulation.
+Signature: Rigid(rho=200.0, friction=None, needs_coup=True, coup_friction=0.1, coup_softness=0.002, coup_restitution=0.0, sdf_cell_size=0.005, sdf_min_res=32, sdf_max_res=128, gravity_compensation=0)
+Parameters: rho: density used to compute mass, friction: friction coefficient within rigid solver; if None, default 1.0 may be used or parsed from file, coup_friction: must be non-negative, coup_softness: must be non-negative, coup_restitution: should be between 0 and 1, sdf_cell_size: cell size in SDF grid in meters, sdf_min_res: must be at least 16, sdf_max_res: must be >= sdf_min_res, gravity_compensation: 1.0 cancels gravity
+Constraints: coup_friction must be non-negative, coup_softness must be non-negative, coup_restitution should be between 0 and 1, sdf_min_res must be at least 16, sdf_max_res must be >= sdf_min_res
+    ----- content end -----
+    [38] type=code  meta={"id": "pyramid.py", "title": "Box Pile Simulation"}
+    ----- content begin -----
+Title: Box Pile Simulation
+import numpy as np
+import genesis as gs
+import argparse
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--pile_type", type=str, default="falling", choices=("static", "falling"))
+    parser.add_argument("--num_cubes", type=int, default=5, choices=(5, 6, 7, 8, 9, 10))
+    parser.add_argument("--cpu", action="store_true", help="Use CPU backend instead of GPU", default=True)
+    parser.add_argument("--steps", type=int, default=150)
+    parser.add_argument("-v", "--vis", action="store_true", default=False)
+    args = parser.parse_args()
+
+    gs.init(backend=gs.cpu if args.cpu else gs.gpu, precision="32")
+
+    scene = gs.Scene(
+        sim_options=gs.options.SimOptions(
+            dt=0.01,
+        ),
+        viewer_options=gs.options.ViewerOptions(
+            camera_pos=(0, -5.5, 2.5),
+            camera_lookat=(0, 0.0, 1.5),
+            max_FPS=60,
+        ),
+        show_viewer=args.vis,
+    )
+
+    plane = scene.add_entity(gs.morphs.Plane())
+
+    # create py
+    ----- content end -----
+    [39] type=snippet  meta={"id": "snip_7e2760a9", "task": "This code adds a fixed, rigid box entity to a scene with specified position, size, material density, friction, and a semi-transparent plastic surface color."}
+    ----- content begin -----
+Task: This code adds a fixed, rigid box entity to a scene with specified position, size, material density, friction, and a semi-transparent plastic surface color.
+scene.add_entity(
+                morph=gs.morphs.Box(
+                    pos=(x, y, cube_height),
+                    size=(cube_size, cube_size, cube_size),
+                    fixed=True,
+                ),
+                material=gs.materials.Rigid(rho=500, friction=0.3),
+                surface=gs.surfaces.Plastic(color=(0.8, 0.3, 0.2, 0.8)),
+            )
+    ----- content end -----
+    [40] type=snippet  meta={"id": "snip_64f5b0d5", "task": "This code adds a rigid plane entity with specified material properties and a fixed URDF model to a scene."}
+    ----- content begin -----
+Task: This code adds a rigid plane entity with specified material properties and a fixed URDF model to a scene.
+scene.add_entity(
+        material=gs.materials.Rigid(
+            needs_coup=True,
+            coup_friction=0.2,
+        ),
+        morph=gs.morphs.URDF(file="urdf/plane/plane.urdf", fixed=True),
+    )
+    ----- content end -----
+    [41] type=snippet  meta={"id": "snip_fb26c945", "task": "This code adds a rigid green box entity with specified dimensions and position to a scene."}
+    ----- content begin -----
+Task: This code adds a rigid green box entity with specified dimensions and position to a scene.
+scene.add_entity(
+        material=gs.materials.Rigid(rho=300),
+        morph=gs.morphs.Box(
+            pos=(0.5, 0.0, 0.07),
+            size=(0.04, 0.04, 0.04),
+        ),
+        surface=gs.surfaces.Default(color=(0.5, 1, 0.5)),
+    )
+    ----- content end -----

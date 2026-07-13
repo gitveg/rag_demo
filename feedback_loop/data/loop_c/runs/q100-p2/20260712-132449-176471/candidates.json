@@ -1,0 +1,36 @@
+{
+  "generated_at": "20260712_132449_176471",
+  "source_log": "workspace\\logs\\execution_log_query100_part2.jsonl",
+  "counts": {
+    "A": 0,
+    "B": 0,
+    "C": 1
+  },
+  "candidates": [
+    {
+      "candidate_id": "cand_c_d10308a4827995b856238b2a",
+      "type": "C",
+      "api_id": "genesis.options.morphs.Box",
+      "constraints": [
+        "Do not pass unrecognized attribute 'vel'; it is not a valid parameter for this API."
+      ],
+      "error_examples": [
+        "Unrecognized attribute: vel"
+      ],
+      "event_count": 1,
+      "entry": {
+        "api_id": "genesis.options.morphs.Box",
+        "constraints": [
+          "Do not pass unrecognized attribute 'vel'; it is not a valid parameter for this API."
+        ],
+        "error_examples": [
+          "Unrecognized attribute: vel"
+        ],
+        "event_count": 1,
+        "sources": [
+          "legacy_evt_b2a03b659fa7e027af3fe7fd9538470c5fea3357f0822603b62ec0ae6a90675f"
+        ]
+      }
+    }
+  ]
+}

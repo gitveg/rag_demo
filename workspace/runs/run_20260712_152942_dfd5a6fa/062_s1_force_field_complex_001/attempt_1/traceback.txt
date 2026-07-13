@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\run_20260712_152942_dfd5a6fa\062_s1_force_field_complex_001\attempt_1\code.py", line 87, in <module>
+    main()
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\run_20260712_152942_dfd5a6fa\062_s1_force_field_complex_001\attempt_1\code.py", line 73, in main
+    force_field = gs.force_fields.VortexForceField(
+AttributeError: module 'genesis.engine.force_fields' has no attribute 'VortexForceField'
+
+[38;5;9m[Genesis] [15:56:14] [ERROR] AttributeError: module 'genesis.engine.force_fields' has no attribute 'VortexForceField'[0m
+[38;5;159m[Genesis] [15:56:14] [INFO] 💤 Exiting Genesis and caching compiled kernels...[0m

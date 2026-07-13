@@ -1,0 +1,2349 @@
+{
+  "run_id": "20260608_101231",
+  "rag_rewrite_mode": "hyde",
+  "detailed_report": true,
+  "max_retries": 3,
+  "skip_execution": true,
+  "timestamp": "2026-06-08T10:13:00.392045",
+  "task_count": 3,
+  "summary": {
+    "overall": {
+      "n": 3,
+      "rag_hit_rate": 0.963,
+      "unit_hit_rate": 0.7222,
+      "avg_new_hit_rate": null,
+      "avg_dynamic_slice_hit_rate": null,
+      "avg_dynamic_slice_unit_hit_rate": null,
+      "avg_context_tokens_initial": 3536.0,
+      "avg_context_tokens_final": 3536.0,
+      "pass_at_1": null,
+      "pass_at_3": null
+    },
+    "simple": {
+      "n": 3,
+      "rag_hit_rate": 0.963,
+      "unit_hit_rate": 0.7222,
+      "avg_new_hit_rate": null,
+      "avg_dynamic_slice_hit_rate": null,
+      "avg_dynamic_slice_unit_hit_rate": null,
+      "avg_context_tokens_initial": 3536.0,
+      "avg_context_tokens_final": 3536.0,
+      "pass_at_1": null,
+      "pass_at_3": null
+    }
+  },
+  "tasks": [
+    {
+      "task_id": "eval_001",
+      "complexity": "simple",
+      "query": "Simulate a red rigid sphere falling straight down onto a flat ground.",
+      "expected_apis": [
+        "genesis.Scene.add_entity",
+        "genesis.morphs.Sphere",
+        "genesis.morphs.Plane",
+        "genesis.materials.Rigid",
+        "genesis.Scene",
+        "genesis.Scene.build",
+        "genesis.Scene.step",
+        "genesis.options.ViewerOptions",
+        "genesis.surfaces.Default"
+      ],
+      "rag_hit": {
+        "per_api": {
+          "genesis.Scene.add_entity": {
+            "hit": true,
+            "source": "semantic"
+          },
+          "genesis.morphs.Sphere": {
+            "hit": true,
+            "source": "semantic"
+          },
+          "genesis.morphs.Plane": {
+            "hit": true,
+            "source": "semantic"
+          },
+          "genesis.materials.Rigid": {
+            "hit": true,
+            "source": "core"
+          },
+          "genesis.Scene": {
+            "hit": true,
+            "source": "semantic"
+          },
+          "genesis.Scene.build": {
+            "hit": true,
+            "source": "semantic"
+          },
+          "genesis.Scene.step": {
+            "hit": true,
+            "source": "semantic"
+          },
+          "genesis.options.ViewerOptions": {
+            "hit": true,
+            "source": "core"
+          },
+          "genesis.surfaces.Default": {
+            "hit": false,
+            "source": "miss"
+          }
+        },
+        "hit_count": 8,
+        "unit_hit_count": 6,
+        "core_hit_count": 2,
+        "total": 9,
+        "hit_rate": 0.8889,
+        "unit_hit_rate": 0.6667
+      },
+      "rag_hit_after_dynamic": null,
+      "rag_incremental": null,
+      "execution": null,
+      "context_length_initial": {
+        "total_chars": 12983,
+        "total_tokens": 3541,
+        "by_type": {
+          "unit": {
+            "count": 1,
+            "chars": 600,
+            "tokens": 233
+          },
+          "api": {
+            "count": 42,
+            "chars": 12383,
+            "tokens": 3308
+          }
+        }
+      },
+      "context_length_final": {
+        "total_chars": 12983,
+        "total_tokens": 3541,
+        "by_type": {
+          "unit": {
+            "count": 1,
+            "chars": 600,
+            "tokens": 233
+          },
+          "api": {
+            "count": 42,
+            "chars": 12383,
+            "tokens": 3308
+          }
+        }
+      },
+      "rag_context_initial": [
+        {
+          "type": "unit",
+          "content": "import argparse\n\nimport genesis as gs\n\n\ndef main():\n\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=False)\n    parser.add_argument(\"-c\", \"--cpu\", action=\"store_true\", default=False)\n    args = parser.parse_args()\n\n    ########################## init ##########################\n    gs.init(backend=gs.cpu if args.cpu else gs.gpu)\n\n    ########################## create a scene ##########################\n    scene = gs.Scene(\n        viewer_options=gs.options.ViewerOptions(\n            camera_pos=(3.5, 0.0, 2.5),\n            camera_lookat=",
+          "meta": {
+            "title": "Simple Sphere in Tank Scene",
+            "desc": "Creates a static tank mesh and a falling sphere within a physics simulation scene.",
+            "all_apis": "genesis.options.morphs.Mesh,genesis.options.morphs.Sphere",
+            "key_apis": "genesis.options.morphs.Mesh,genesis.options.morphs.Sphere"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.Scene ---\n--- CORE API: genesis.Scene ---\nAPI: genesis.Scene\nSummary: A ``genesis.Scene`` object wraps all components in a simulation environment, including a simulator (containing multiple physics solvers), entities, an...\nSignature: Scene(sim_options=None, coupler_options=None, tool_options=None, rigid_options=None, avatar_options=None, mpm_options=None, sph_options=None, fem_options=None, sf_options=None, pbd_options=None, vis_options=None, viewer_options=None, profiling_options=None, renderer=None, show_viewer=None, show_FPS=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.Scene.add_entity ---\n--- CORE API: genesis.Scene.add_entity ---\nAPI: genesis.Scene.add_entity\nSummary: Add an entity to the scene.\nSignature: add_entity(morph, material=None, surface=None, visualize_contact=False, vis_mode=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.add_entity",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.Scene.build ---\n--- CORE API: genesis.Scene.build ---\nAPI: genesis.Scene.build\nSummary: Builds the scene once all entities have been added. This operation is required before running the simulation.\nSignature: build(n_envs=0, env_spacing=(0.0, 0.0), n_envs_per_row=None, center_envs_at_origin=True, compile_kernels=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.build",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.Scene.step ---\n--- CORE API: genesis.Scene.step ---\nAPI: genesis.Scene.step\nSummary: Runs a simulation step forward in time.\nSignature: step(update_visualizer=True, refresh_visualizer=True)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.step",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.constraint_solver ---\n--- CORE API: genesis.constraint_solver ---\nAPI: genesis.constraint_solver\nSummary: An enumeration.\nSignature: constraint_solver(*args, **kwargs)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.constraint_solver",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.FEM.Cloth ---\n--- CORE API: genesis.materials.FEM.Cloth ---\nAPI: genesis.materials.FEM.Cloth\nSummary: Cloth material for thin shell/membrane simulation using IPC.\nSignature: Cloth(E=10000.0, nu=0.49, rho=200.0, thickness=0.001, bending_stiffness=None, model=stable_neohookean)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.FEM.Cloth",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.FEM.Elastic ---\n--- CORE API: genesis.materials.FEM.Elastic ---\nAPI: genesis.materials.FEM.Elastic\nSummary: The elastic material class for FEM.\nSignature: Elastic(E=1000000.0, nu=0.2, rho=1000.0, hydroelastic_modulus=10000000.0, friction_mu=0.1, model=linear)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.FEM.Elastic",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.FEM.Muscle ---\n--- CORE API: genesis.materials.FEM.Muscle ---\nAPI: genesis.materials.FEM.Muscle\nSummary: The muscle material class for FEM.\nSignature: Muscle(E=1000000.0, nu=0.2, rho=1000.0, model=linear, n_groups=1)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.FEM.Muscle",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.Hybrid ---\n--- CORE API: genesis.materials.Hybrid ---\nAPI: genesis.materials.Hybrid\nSummary: The class for hybrid body material (soft skin actuated by inner rigid skeleton).\nSignature: Hybrid(material_rigid, material_soft, use_default_coupling=False, damping=0.0, thickness=0.05, soft_dv_coef=0.01, func_instantiate_rigid_from_soft=None, func_instantiate_soft_from_rigid=None, func_instantiate_rigid_soft_association=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.Hybrid",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.MPM.Elastic ---\n--- CORE API: genesis.materials.MPM.Elastic ---\nAPI: genesis.materials.MPM.Elastic\nSummary: The elastic material class for MPM.\nSignature: Elastic(E=300000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, model=corotation)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.MPM.Elastic",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.MPM.ElastoPlastic ---\n--- CORE API: genesis.materials.MPM.ElastoPlastic ---\nAPI: genesis.materials.MPM.ElastoPlastic\nSummary: The elasto-plastic material class for MPM.\nSignature: ElastoPlastic(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, yield_lower=0.025, yield_higher=0.0045, use_von_mises=True, von_mises_yield_stress=10000.0)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.MPM.ElastoPlastic",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.MPM.Liquid ---\n--- CORE API: genesis.materials.MPM.Liquid ---\nAPI: genesis.materials.MPM.Liquid\nSummary: The liquid material class for MPM.\nSignature: Liquid(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, viscous=False, sampler=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.MPM.Liquid",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.MPM.Muscle ---\n--- CORE API: genesis.materials.MPM.Muscle ---\nAPI: genesis.materials.MPM.Muscle\nSummary: The muscle material class for MPM.\nSignature: Muscle(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, model=neohooken, n_groups=1)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.MPM.Muscle",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.MPM.Sand ---\n--- CORE API: genesis.materials.MPM.Sand ---\nAPI: genesis.materials.MPM.Sand\nSummary: The sand material class for MPM.\nSignature: Sand(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=random, friction_angle=45)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.MPM.Sand",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.PBD.Cloth ---\n--- CORE API: genesis.materials.PBD.Cloth ---\nAPI: genesis.materials.PBD.Cloth\nSummary: The cloth material class for PBD.\nSignature: Cloth(rho=4.0, static_friction=0.15, kinetic_friction=0.15, stretch_compliance=1e-07, bending_compliance=1e-05, stretch_relaxation=0.3, bending_relaxation=0.1, air_resistance=0.001)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.PBD.Cloth",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.PBD.Elastic ---\n--- CORE API: genesis.materials.PBD.Elastic ---\nAPI: genesis.materials.PBD.Elastic\nSummary: The 3D elastic volumentric material class for PBD.\nSignature: Elastic(rho=1000.0, static_friction=0.15, kinetic_friction=0.15, stretch_compliance=0.0, bending_compliance=0.0, volume_compliance=0.0, stretch_relaxation=0.1, bending_relaxation=0.1, volume_relaxation=0.1)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.PBD.Elastic",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.PBD.Liquid ---\n--- CORE API: genesis.materials.PBD.Liquid ---\nAPI: genesis.materials.PBD.Liquid\nSummary: The liquid material class for PBD.\nSignature: Liquid(rho=1000.0, sampler=None, density_relaxation=0.2, viscosity_relaxation=0.01)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.PBD.Liquid",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.Rigid ---\n--- CORE API: genesis.materials.Rigid ---\nAPI: genesis.materials.Rigid\nSummary: The Rigid class represents a material used in rigid body simulation.\nSignature: Rigid(rho=200.0, friction=None, needs_coup=True, coup_friction=0.1, coup_softness=0.002, coup_restitution=0.0, sdf_cell_size=0.005, sdf_min_res=32, sdf_max_res=128, gravity_compensation=0)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.Rigid",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.SPH.Liquid ---\n--- CORE API: genesis.materials.SPH.Liquid ---\nAPI: genesis.materials.SPH.Liquid\nSummary: The liquid material class for SPH.\nSignature: Liquid(rho=1000.0, stiffness=50000.0, exponent=7.0, mu=0.005, gamma=0.01, sampler=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.SPH.Liquid",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.Tool ---\n--- CORE API: genesis.materials.Tool ---\nAPI: genesis.materials.Tool\nSummary: The base class of materials.\nSignature: Tool(friction=0.0, coup_softness=0.01, collision=True, sdf_res=128)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.Tool",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.FEMOptions ---\n--- CORE API: genesis.options.FEMOptions ---\nAPI: genesis.options.FEMOptions\nSummary: Options configuring the FEMSolver.\nSignature: FEMOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.FEMOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.IPCCouplerOptions ---\n--- CORE API: genesis.options.IPCCouplerOptions ---\nAPI: genesis.options.IPCCouplerOptions\nSummary: Options configuring the Incremental Potential Contact (IPC) coupler.\nSignature: IPCCouplerOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.IPCCouplerOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.MPMOptions ---\n--- CORE API: genesis.options.MPMOptions ---\nAPI: genesis.options.MPMOptions\nSummary: Options configuring the MPMSolver.\nSignature: MPMOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.MPMOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.PBDOptions ---\n--- CORE API: genesis.options.PBDOptions ---\nAPI: genesis.options.PBDOptions\nSummary: Options configuring the PBDSolver.\nSignature: PBDOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.PBDOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.RigidOptions ---\n--- CORE API: genesis.options.RigidOptions ---\nAPI: genesis.options.RigidOptions\nSummary: Options configuring the RigidSolver.\nSignature: RigidOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.RigidOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.SAPCouplerOptions ---\n--- CORE API: genesis.options.SAPCouplerOptions ---\nAPI: genesis.options.SAPCouplerOptions\nSummary: Options configuring the inter-solver coupling for the Semi-Analytic Primal (SAP) contact solver used in Drake.\nSignature: SAPCouplerOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.SAPCouplerOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.SPHOptions ---\n--- CORE API: genesis.options.SPHOptions ---\nAPI: genesis.options.SPHOptions\nSummary: Options configuring the SPHSolver.\nSignature: SPHOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.SPHOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.SimOptions ---\n--- CORE API: genesis.options.SimOptions ---\nAPI: genesis.options.SimOptions\nSummary: Options configuring the top-level simulator.\nSignature: SimOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.SimOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.ViewerOptions ---\n--- CORE API: genesis.options.ViewerOptions ---\nAPI: genesis.options.ViewerOptions\nSummary: Options configuring preperties of the interactive viewer.\nSignature: ViewerOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.ViewerOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.VisOptions ---\n--- CORE API: genesis.options.VisOptions ---\nAPI: genesis.options.VisOptions\nSummary: This configures visualization-related properties that are independent of the viewer or camera.\nSignature: VisOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.VisOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API Reference: genesis.options.morphs.Mesh ---\n--- API Reference: genesis.options.morphs.Mesh ---\nAPI: genesis.options.morphs.Mesh\nSummary: Morph loaded from a mesh file.\nSignature: Mesh(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Mesh",
+            "is_core": false
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API Reference: genesis.options.morphs.Sphere ---\n--- API Reference: genesis.options.morphs.Sphere ---\nAPI: genesis.options.morphs.Sphere\nSummary: Morph defined by a sphere shape.\nSignature: Sphere(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Sphere",
+            "is_core": false
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.Scene.add_e...\n--- API Search Result ---\nAPI: genesis.Scene.add_entity\nSummary: Add an entity to the scene.\nSignature: add_entity(morph, material=None, surface=None, visualize_contact=False, vis_mode=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.add_entity"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.options.mor...\n--- API Search Result ---\nAPI: genesis.options.morphs.Sphere\nSummary: Morph defined by a sphere shape.\nSignature: Sphere(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Sphere"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.Scene.step\n...\n--- API Search Result ---\nAPI: genesis.Scene.step\nSummary: Runs a simulation step forward in time.\nSignature: step(update_visualizer=True, refresh_visualizer=True)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.step"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.options.mor...\n--- API Search Result ---\nAPI: genesis.options.morphs.Morph\nSummary: This is the base class for all genesis morphs. A morph in genesis is a hybrid concept, encapsulating both the geometry and pose information of an enti...\nSignature: Morph(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Morph"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.options.mor...\n--- API Search Result ---\nAPI: genesis.options.morphs.Plane\nSummary: Morph defined by a plane shape.\nSignature: Plane(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Plane"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.Scene.draw_...\n--- API Search Result ---\nAPI: genesis.Scene.draw_debug_sphere\nSummary: Draws a sphere in the scene for visualization.\nSignature: draw_debug_sphere(pos, radius=0.01, color=(1.0, 0.0, 0.0, 0.5))\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.draw_debug_sphere"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.Scene\nSumma...\n--- API Search Result ---\nAPI: genesis.Scene\nSummary: A ``genesis.Scene`` object wraps all components in a simulation environment, including a simulator (containing multiple physics solvers), entities, an...\nSignature: Scene(sim_options=None, coupler_options=None, tool_options=None, rigid_options=None, avatar_options=None, mpm_options=None, sph_options=None, fem_options=None, sf_options=None, pbd_options=None, vis_options=None, viewer_options=None, profiling_options=None, renderer=None, show_viewer=None, show_FPS=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.Scene.build...\n--- API Search Result ---\nAPI: genesis.Scene.build\nSummary: Builds the scene once all entities have been added. This operation is required before running the simulation.\nSignature: build(n_envs=0, env_spacing=(0.0, 0.0), n_envs_per_row=None, center_envs_at_origin=True, compile_kernels=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.build"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.Scene.draw_...\n--- API Search Result ---\nAPI: genesis.Scene.draw_debug_spheres\nSummary: Draws multiple spheres in the scene for visualization.\nSignature: draw_debug_spheres(poss, radius=0.01, color=(1.0, 0.0, 0.0, 0.5))\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.draw_debug_spheres"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.options.mor...\n--- API Search Result ---\nAPI: genesis.options.morphs.Terrain\nSummary: Morph for creating a rigid terrain. This can be instantiated from two choices: 1) a grid of subterrains generated using the given configurations 2) a ...\nSignature: Terrain(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Terrain"
+          }
+        }
+      ],
+      "rag_context_final": [
+        {
+          "type": "unit",
+          "content": "import argparse\n\nimport genesis as gs\n\n\ndef main():\n\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=False)\n    parser.add_argument(\"-c\", \"--cpu\", action=\"store_true\", default=False)\n    args = parser.parse_args()\n\n    ########################## init ##########################\n    gs.init(backend=gs.cpu if args.cpu else gs.gpu)\n\n    ########################## create a scene ##########################\n    scene = gs.Scene(\n        viewer_options=gs.options.ViewerOptions(\n            camera_pos=(3.5, 0.0, 2.5),\n            camera_lookat=",
+          "meta": {
+            "title": "Simple Sphere in Tank Scene",
+            "desc": "Creates a static tank mesh and a falling sphere within a physics simulation scene.",
+            "all_apis": "genesis.options.morphs.Mesh,genesis.options.morphs.Sphere",
+            "key_apis": "genesis.options.morphs.Mesh,genesis.options.morphs.Sphere"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.Scene ---\n--- CORE API: genesis.Scene ---\nAPI: genesis.Scene\nSummary: A ``genesis.Scene`` object wraps all components in a simulation environment, including a simulator (containing multiple physics solvers), entities, an...\nSignature: Scene(sim_options=None, coupler_options=None, tool_options=None, rigid_options=None, avatar_options=None, mpm_options=None, sph_options=None, fem_options=None, sf_options=None, pbd_options=None, vis_options=None, viewer_options=None, profiling_options=None, renderer=None, show_viewer=None, show_FPS=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.Scene.add_entity ---\n--- CORE API: genesis.Scene.add_entity ---\nAPI: genesis.Scene.add_entity\nSummary: Add an entity to the scene.\nSignature: add_entity(morph, material=None, surface=None, visualize_contact=False, vis_mode=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.add_entity",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.Scene.build ---\n--- CORE API: genesis.Scene.build ---\nAPI: genesis.Scene.build\nSummary: Builds the scene once all entities have been added. This operation is required before running the simulation.\nSignature: build(n_envs=0, env_spacing=(0.0, 0.0), n_envs_per_row=None, center_envs_at_origin=True, compile_kernels=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.build",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.Scene.step ---\n--- CORE API: genesis.Scene.step ---\nAPI: genesis.Scene.step\nSummary: Runs a simulation step forward in time.\nSignature: step(update_visualizer=True, refresh_visualizer=True)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.step",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.constraint_solver ---\n--- CORE API: genesis.constraint_solver ---\nAPI: genesis.constraint_solver\nSummary: An enumeration.\nSignature: constraint_solver(*args, **kwargs)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.constraint_solver",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.FEM.Cloth ---\n--- CORE API: genesis.materials.FEM.Cloth ---\nAPI: genesis.materials.FEM.Cloth\nSummary: Cloth material for thin shell/membrane simulation using IPC.\nSignature: Cloth(E=10000.0, nu=0.49, rho=200.0, thickness=0.001, bending_stiffness=None, model=stable_neohookean)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.FEM.Cloth",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.FEM.Elastic ---\n--- CORE API: genesis.materials.FEM.Elastic ---\nAPI: genesis.materials.FEM.Elastic\nSummary: The elastic material class for FEM.\nSignature: Elastic(E=1000000.0, nu=0.2, rho=1000.0, hydroelastic_modulus=10000000.0, friction_mu=0.1, model=linear)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.FEM.Elastic",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.FEM.Muscle ---\n--- CORE API: genesis.materials.FEM.Muscle ---\nAPI: genesis.materials.FEM.Muscle\nSummary: The muscle material class for FEM.\nSignature: Muscle(E=1000000.0, nu=0.2, rho=1000.0, model=linear, n_groups=1)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.FEM.Muscle",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.Hybrid ---\n--- CORE API: genesis.materials.Hybrid ---\nAPI: genesis.materials.Hybrid\nSummary: The class for hybrid body material (soft skin actuated by inner rigid skeleton).\nSignature: Hybrid(material_rigid, material_soft, use_default_coupling=False, damping=0.0, thickness=0.05, soft_dv_coef=0.01, func_instantiate_rigid_from_soft=None, func_instantiate_soft_from_rigid=None, func_instantiate_rigid_soft_association=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.Hybrid",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.MPM.Elastic ---\n--- CORE API: genesis.materials.MPM.Elastic ---\nAPI: genesis.materials.MPM.Elastic\nSummary: The elastic material class for MPM.\nSignature: Elastic(E=300000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, model=corotation)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.MPM.Elastic",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.MPM.ElastoPlastic ---\n--- CORE API: genesis.materials.MPM.ElastoPlastic ---\nAPI: genesis.materials.MPM.ElastoPlastic\nSummary: The elasto-plastic material class for MPM.\nSignature: ElastoPlastic(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, yield_lower=0.025, yield_higher=0.0045, use_von_mises=True, von_mises_yield_stress=10000.0)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.MPM.ElastoPlastic",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.MPM.Liquid ---\n--- CORE API: genesis.materials.MPM.Liquid ---\nAPI: genesis.materials.MPM.Liquid\nSummary: The liquid material class for MPM.\nSignature: Liquid(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, viscous=False, sampler=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.MPM.Liquid",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.MPM.Muscle ---\n--- CORE API: genesis.materials.MPM.Muscle ---\nAPI: genesis.materials.MPM.Muscle\nSummary: The muscle material class for MPM.\nSignature: Muscle(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, model=neohooken, n_groups=1)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.MPM.Muscle",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.MPM.Sand ---\n--- CORE API: genesis.materials.MPM.Sand ---\nAPI: genesis.materials.MPM.Sand\nSummary: The sand material class for MPM.\nSignature: Sand(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=random, friction_angle=45)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.MPM.Sand",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.PBD.Cloth ---\n--- CORE API: genesis.materials.PBD.Cloth ---\nAPI: genesis.materials.PBD.Cloth\nSummary: The cloth material class for PBD.\nSignature: Cloth(rho=4.0, static_friction=0.15, kinetic_friction=0.15, stretch_compliance=1e-07, bending_compliance=1e-05, stretch_relaxation=0.3, bending_relaxation=0.1, air_resistance=0.001)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.PBD.Cloth",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.PBD.Elastic ---\n--- CORE API: genesis.materials.PBD.Elastic ---\nAPI: genesis.materials.PBD.Elastic\nSummary: The 3D elastic volumentric material class for PBD.\nSignature: Elastic(rho=1000.0, static_friction=0.15, kinetic_friction=0.15, stretch_compliance=0.0, bending_compliance=0.0, volume_compliance=0.0, stretch_relaxation=0.1, bending_relaxation=0.1, volume_relaxation=0.1)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.PBD.Elastic",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.PBD.Liquid ---\n--- CORE API: genesis.materials.PBD.Liquid ---\nAPI: genesis.materials.PBD.Liquid\nSummary: The liquid material class for PBD.\nSignature: Liquid(rho=1000.0, sampler=None, density_relaxation=0.2, viscosity_relaxation=0.01)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.PBD.Liquid",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.Rigid ---\n--- CORE API: genesis.materials.Rigid ---\nAPI: genesis.materials.Rigid\nSummary: The Rigid class represents a material used in rigid body simulation.\nSignature: Rigid(rho=200.0, friction=None, needs_coup=True, coup_friction=0.1, coup_softness=0.002, coup_restitution=0.0, sdf_cell_size=0.005, sdf_min_res=32, sdf_max_res=128, gravity_compensation=0)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.Rigid",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.SPH.Liquid ---\n--- CORE API: genesis.materials.SPH.Liquid ---\nAPI: genesis.materials.SPH.Liquid\nSummary: The liquid material class for SPH.\nSignature: Liquid(rho=1000.0, stiffness=50000.0, exponent=7.0, mu=0.005, gamma=0.01, sampler=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.SPH.Liquid",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.Tool ---\n--- CORE API: genesis.materials.Tool ---\nAPI: genesis.materials.Tool\nSummary: The base class of materials.\nSignature: Tool(friction=0.0, coup_softness=0.01, collision=True, sdf_res=128)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.Tool",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.FEMOptions ---\n--- CORE API: genesis.options.FEMOptions ---\nAPI: genesis.options.FEMOptions\nSummary: Options configuring the FEMSolver.\nSignature: FEMOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.FEMOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.IPCCouplerOptions ---\n--- CORE API: genesis.options.IPCCouplerOptions ---\nAPI: genesis.options.IPCCouplerOptions\nSummary: Options configuring the Incremental Potential Contact (IPC) coupler.\nSignature: IPCCouplerOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.IPCCouplerOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.MPMOptions ---\n--- CORE API: genesis.options.MPMOptions ---\nAPI: genesis.options.MPMOptions\nSummary: Options configuring the MPMSolver.\nSignature: MPMOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.MPMOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.PBDOptions ---\n--- CORE API: genesis.options.PBDOptions ---\nAPI: genesis.options.PBDOptions\nSummary: Options configuring the PBDSolver.\nSignature: PBDOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.PBDOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.RigidOptions ---\n--- CORE API: genesis.options.RigidOptions ---\nAPI: genesis.options.RigidOptions\nSummary: Options configuring the RigidSolver.\nSignature: RigidOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.RigidOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.SAPCouplerOptions ---\n--- CORE API: genesis.options.SAPCouplerOptions ---\nAPI: genesis.options.SAPCouplerOptions\nSummary: Options configuring the inter-solver coupling for the Semi-Analytic Primal (SAP) contact solver used in Drake.\nSignature: SAPCouplerOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.SAPCouplerOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.SPHOptions ---\n--- CORE API: genesis.options.SPHOptions ---\nAPI: genesis.options.SPHOptions\nSummary: Options configuring the SPHSolver.\nSignature: SPHOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.SPHOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.SimOptions ---\n--- CORE API: genesis.options.SimOptions ---\nAPI: genesis.options.SimOptions\nSummary: Options configuring the top-level simulator.\nSignature: SimOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.SimOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.ViewerOptions ---\n--- CORE API: genesis.options.ViewerOptions ---\nAPI: genesis.options.ViewerOptions\nSummary: Options configuring preperties of the interactive viewer.\nSignature: ViewerOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.ViewerOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.VisOptions ---\n--- CORE API: genesis.options.VisOptions ---\nAPI: genesis.options.VisOptions\nSummary: This configures visualization-related properties that are independent of the viewer or camera.\nSignature: VisOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.VisOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API Reference: genesis.options.morphs.Mesh ---\n--- API Reference: genesis.options.morphs.Mesh ---\nAPI: genesis.options.morphs.Mesh\nSummary: Morph loaded from a mesh file.\nSignature: Mesh(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Mesh",
+            "is_core": false
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API Reference: genesis.options.morphs.Sphere ---\n--- API Reference: genesis.options.morphs.Sphere ---\nAPI: genesis.options.morphs.Sphere\nSummary: Morph defined by a sphere shape.\nSignature: Sphere(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Sphere",
+            "is_core": false
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.Scene.add_e...\n--- API Search Result ---\nAPI: genesis.Scene.add_entity\nSummary: Add an entity to the scene.\nSignature: add_entity(morph, material=None, surface=None, visualize_contact=False, vis_mode=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.add_entity"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.options.mor...\n--- API Search Result ---\nAPI: genesis.options.morphs.Sphere\nSummary: Morph defined by a sphere shape.\nSignature: Sphere(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Sphere"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.Scene.step\n...\n--- API Search Result ---\nAPI: genesis.Scene.step\nSummary: Runs a simulation step forward in time.\nSignature: step(update_visualizer=True, refresh_visualizer=True)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.step"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.options.mor...\n--- API Search Result ---\nAPI: genesis.options.morphs.Morph\nSummary: This is the base class for all genesis morphs. A morph in genesis is a hybrid concept, encapsulating both the geometry and pose information of an enti...\nSignature: Morph(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Morph"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.options.mor...\n--- API Search Result ---\nAPI: genesis.options.morphs.Plane\nSummary: Morph defined by a plane shape.\nSignature: Plane(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Plane"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.Scene.draw_...\n--- API Search Result ---\nAPI: genesis.Scene.draw_debug_sphere\nSummary: Draws a sphere in the scene for visualization.\nSignature: draw_debug_sphere(pos, radius=0.01, color=(1.0, 0.0, 0.0, 0.5))\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.draw_debug_sphere"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.Scene\nSumma...\n--- API Search Result ---\nAPI: genesis.Scene\nSummary: A ``genesis.Scene`` object wraps all components in a simulation environment, including a simulator (containing multiple physics solvers), entities, an...\nSignature: Scene(sim_options=None, coupler_options=None, tool_options=None, rigid_options=None, avatar_options=None, mpm_options=None, sph_options=None, fem_options=None, sf_options=None, pbd_options=None, vis_options=None, viewer_options=None, profiling_options=None, renderer=None, show_viewer=None, show_FPS=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.Scene.build...\n--- API Search Result ---\nAPI: genesis.Scene.build\nSummary: Builds the scene once all entities have been added. This operation is required before running the simulation.\nSignature: build(n_envs=0, env_spacing=(0.0, 0.0), n_envs_per_row=None, center_envs_at_origin=True, compile_kernels=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.build"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.Scene.draw_...\n--- API Search Result ---\nAPI: genesis.Scene.draw_debug_spheres\nSummary: Draws multiple spheres in the scene for visualization.\nSignature: draw_debug_spheres(poss, radius=0.01, color=(1.0, 0.0, 0.0, 0.5))\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.draw_debug_spheres"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.options.mor...\n--- API Search Result ---\nAPI: genesis.options.morphs.Terrain\nSummary: Morph for creating a rigid terrain. This can be instantiated from two choices: 1) a grid of subterrains generated using the given configurations 2) a ...\nSignature: Terrain(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Terrain"
+          }
+        }
+      ],
+      "duration_seconds": 20.98
+    },
+    {
+      "task_id": "eval_002",
+      "complexity": "simple",
+      "query": "Create a static rigid box to serve as an obstacle in the scene.",
+      "expected_apis": [
+        "genesis.Scene.add_entity",
+        "genesis.morphs.Box",
+        "genesis.materials.Rigid",
+        "genesis.Scene",
+        "genesis.Scene.build",
+        "genesis.Scene.step",
+        "genesis.morphs.Plane",
+        "genesis.options.ViewerOptions"
+      ],
+      "rag_hit": {
+        "per_api": {
+          "genesis.Scene.add_entity": {
+            "hit": true,
+            "source": "semantic"
+          },
+          "genesis.morphs.Box": {
+            "hit": true,
+            "source": "semantic"
+          },
+          "genesis.materials.Rigid": {
+            "hit": true,
+            "source": "core"
+          },
+          "genesis.Scene": {
+            "hit": true,
+            "source": "semantic"
+          },
+          "genesis.Scene.build": {
+            "hit": true,
+            "source": "semantic"
+          },
+          "genesis.Scene.step": {
+            "hit": true,
+            "source": "semantic"
+          },
+          "genesis.morphs.Plane": {
+            "hit": true,
+            "source": "semantic"
+          },
+          "genesis.options.ViewerOptions": {
+            "hit": true,
+            "source": "core"
+          }
+        },
+        "hit_count": 8,
+        "unit_hit_count": 6,
+        "core_hit_count": 2,
+        "total": 8,
+        "hit_rate": 1.0,
+        "unit_hit_rate": 0.75
+      },
+      "rag_hit_after_dynamic": null,
+      "rag_incremental": null,
+      "execution": null,
+      "context_length_initial": {
+        "total_chars": 13049,
+        "total_tokens": 3550,
+        "by_type": {
+          "unit": {
+            "count": 1,
+            "chars": 600,
+            "tokens": 227
+          },
+          "api": {
+            "count": 42,
+            "chars": 12449,
+            "tokens": 3323
+          }
+        }
+      },
+      "context_length_final": {
+        "total_chars": 13049,
+        "total_tokens": 3550,
+        "by_type": {
+          "unit": {
+            "count": 1,
+            "chars": 600,
+            "tokens": 227
+          },
+          "api": {
+            "count": 42,
+            "chars": 12449,
+            "tokens": 3323
+          }
+        }
+      },
+      "rag_context_initial": [
+        {
+          "type": "unit",
+          "content": "import argparse\nimport numpy as np\nimport genesis as gs\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=False)\n    args = parser.parse_args()\n\n    ########################## init ##########################\n    gs.init(backend=gs.gpu)\n\n    ########################## create a scene ##########################\n    scene = gs.Scene(\n        viewer_options=gs.options.ViewerOptions(\n            camera_pos=(0, -3.5, 2.5),\n            camera_lookat=(0.0, 0.0, 1.0),\n            camera_fov=40,\n            max_FPS=60,\n        ),\n    ",
+          "meta": {
+            "title": "Cube Levitation and Rotation",
+            "desc": "Applies external forces and torques to levitate and periodically reverse rotation of a cube above a plane.",
+            "all_apis": "genesis.options.morphs.Box,genesis.options.morphs.Plane",
+            "key_apis": "genesis.options.morphs.Box,genesis.options.morphs.Plane"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.Scene ---\n--- CORE API: genesis.Scene ---\nAPI: genesis.Scene\nSummary: A ``genesis.Scene`` object wraps all components in a simulation environment, including a simulator (containing multiple physics solvers), entities, an...\nSignature: Scene(sim_options=None, coupler_options=None, tool_options=None, rigid_options=None, avatar_options=None, mpm_options=None, sph_options=None, fem_options=None, sf_options=None, pbd_options=None, vis_options=None, viewer_options=None, profiling_options=None, renderer=None, show_viewer=None, show_FPS=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.Scene.add_entity ---\n--- CORE API: genesis.Scene.add_entity ---\nAPI: genesis.Scene.add_entity\nSummary: Add an entity to the scene.\nSignature: add_entity(morph, material=None, surface=None, visualize_contact=False, vis_mode=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.add_entity",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.Scene.build ---\n--- CORE API: genesis.Scene.build ---\nAPI: genesis.Scene.build\nSummary: Builds the scene once all entities have been added. This operation is required before running the simulation.\nSignature: build(n_envs=0, env_spacing=(0.0, 0.0), n_envs_per_row=None, center_envs_at_origin=True, compile_kernels=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.build",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.Scene.step ---\n--- CORE API: genesis.Scene.step ---\nAPI: genesis.Scene.step\nSummary: Runs a simulation step forward in time.\nSignature: step(update_visualizer=True, refresh_visualizer=True)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.step",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.constraint_solver ---\n--- CORE API: genesis.constraint_solver ---\nAPI: genesis.constraint_solver\nSummary: An enumeration.\nSignature: constraint_solver(*args, **kwargs)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.constraint_solver",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.FEM.Cloth ---\n--- CORE API: genesis.materials.FEM.Cloth ---\nAPI: genesis.materials.FEM.Cloth\nSummary: Cloth material for thin shell/membrane simulation using IPC.\nSignature: Cloth(E=10000.0, nu=0.49, rho=200.0, thickness=0.001, bending_stiffness=None, model=stable_neohookean)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.FEM.Cloth",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.FEM.Elastic ---\n--- CORE API: genesis.materials.FEM.Elastic ---\nAPI: genesis.materials.FEM.Elastic\nSummary: The elastic material class for FEM.\nSignature: Elastic(E=1000000.0, nu=0.2, rho=1000.0, hydroelastic_modulus=10000000.0, friction_mu=0.1, model=linear)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.FEM.Elastic",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.FEM.Muscle ---\n--- CORE API: genesis.materials.FEM.Muscle ---\nAPI: genesis.materials.FEM.Muscle\nSummary: The muscle material class for FEM.\nSignature: Muscle(E=1000000.0, nu=0.2, rho=1000.0, model=linear, n_groups=1)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.FEM.Muscle",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.Hybrid ---\n--- CORE API: genesis.materials.Hybrid ---\nAPI: genesis.materials.Hybrid\nSummary: The class for hybrid body material (soft skin actuated by inner rigid skeleton).\nSignature: Hybrid(material_rigid, material_soft, use_default_coupling=False, damping=0.0, thickness=0.05, soft_dv_coef=0.01, func_instantiate_rigid_from_soft=None, func_instantiate_soft_from_rigid=None, func_instantiate_rigid_soft_association=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.Hybrid",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.MPM.Elastic ---\n--- CORE API: genesis.materials.MPM.Elastic ---\nAPI: genesis.materials.MPM.Elastic\nSummary: The elastic material class for MPM.\nSignature: Elastic(E=300000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, model=corotation)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.MPM.Elastic",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.MPM.ElastoPlastic ---\n--- CORE API: genesis.materials.MPM.ElastoPlastic ---\nAPI: genesis.materials.MPM.ElastoPlastic\nSummary: The elasto-plastic material class for MPM.\nSignature: ElastoPlastic(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, yield_lower=0.025, yield_higher=0.0045, use_von_mises=True, von_mises_yield_stress=10000.0)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.MPM.ElastoPlastic",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.MPM.Liquid ---\n--- CORE API: genesis.materials.MPM.Liquid ---\nAPI: genesis.materials.MPM.Liquid\nSummary: The liquid material class for MPM.\nSignature: Liquid(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, viscous=False, sampler=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.MPM.Liquid",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.MPM.Muscle ---\n--- CORE API: genesis.materials.MPM.Muscle ---\nAPI: genesis.materials.MPM.Muscle\nSummary: The muscle material class for MPM.\nSignature: Muscle(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, model=neohooken, n_groups=1)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.MPM.Muscle",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.MPM.Sand ---\n--- CORE API: genesis.materials.MPM.Sand ---\nAPI: genesis.materials.MPM.Sand\nSummary: The sand material class for MPM.\nSignature: Sand(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=random, friction_angle=45)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.MPM.Sand",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.PBD.Cloth ---\n--- CORE API: genesis.materials.PBD.Cloth ---\nAPI: genesis.materials.PBD.Cloth\nSummary: The cloth material class for PBD.\nSignature: Cloth(rho=4.0, static_friction=0.15, kinetic_friction=0.15, stretch_compliance=1e-07, bending_compliance=1e-05, stretch_relaxation=0.3, bending_relaxation=0.1, air_resistance=0.001)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.PBD.Cloth",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.PBD.Elastic ---\n--- CORE API: genesis.materials.PBD.Elastic ---\nAPI: genesis.materials.PBD.Elastic\nSummary: The 3D elastic volumentric material class for PBD.\nSignature: Elastic(rho=1000.0, static_friction=0.15, kinetic_friction=0.15, stretch_compliance=0.0, bending_compliance=0.0, volume_compliance=0.0, stretch_relaxation=0.1, bending_relaxation=0.1, volume_relaxation=0.1)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.PBD.Elastic",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.PBD.Liquid ---\n--- CORE API: genesis.materials.PBD.Liquid ---\nAPI: genesis.materials.PBD.Liquid\nSummary: The liquid material class for PBD.\nSignature: Liquid(rho=1000.0, sampler=None, density_relaxation=0.2, viscosity_relaxation=0.01)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.PBD.Liquid",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.Rigid ---\n--- CORE API: genesis.materials.Rigid ---\nAPI: genesis.materials.Rigid\nSummary: The Rigid class represents a material used in rigid body simulation.\nSignature: Rigid(rho=200.0, friction=None, needs_coup=True, coup_friction=0.1, coup_softness=0.002, coup_restitution=0.0, sdf_cell_size=0.005, sdf_min_res=32, sdf_max_res=128, gravity_compensation=0)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.Rigid",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.SPH.Liquid ---\n--- CORE API: genesis.materials.SPH.Liquid ---\nAPI: genesis.materials.SPH.Liquid\nSummary: The liquid material class for SPH.\nSignature: Liquid(rho=1000.0, stiffness=50000.0, exponent=7.0, mu=0.005, gamma=0.01, sampler=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.SPH.Liquid",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.Tool ---\n--- CORE API: genesis.materials.Tool ---\nAPI: genesis.materials.Tool\nSummary: The base class of materials.\nSignature: Tool(friction=0.0, coup_softness=0.01, collision=True, sdf_res=128)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.Tool",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.FEMOptions ---\n--- CORE API: genesis.options.FEMOptions ---\nAPI: genesis.options.FEMOptions\nSummary: Options configuring the FEMSolver.\nSignature: FEMOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.FEMOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.IPCCouplerOptions ---\n--- CORE API: genesis.options.IPCCouplerOptions ---\nAPI: genesis.options.IPCCouplerOptions\nSummary: Options configuring the Incremental Potential Contact (IPC) coupler.\nSignature: IPCCouplerOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.IPCCouplerOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.MPMOptions ---\n--- CORE API: genesis.options.MPMOptions ---\nAPI: genesis.options.MPMOptions\nSummary: Options configuring the MPMSolver.\nSignature: MPMOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.MPMOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.PBDOptions ---\n--- CORE API: genesis.options.PBDOptions ---\nAPI: genesis.options.PBDOptions\nSummary: Options configuring the PBDSolver.\nSignature: PBDOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.PBDOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.RigidOptions ---\n--- CORE API: genesis.options.RigidOptions ---\nAPI: genesis.options.RigidOptions\nSummary: Options configuring the RigidSolver.\nSignature: RigidOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.RigidOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.SAPCouplerOptions ---\n--- CORE API: genesis.options.SAPCouplerOptions ---\nAPI: genesis.options.SAPCouplerOptions\nSummary: Options configuring the inter-solver coupling for the Semi-Analytic Primal (SAP) contact solver used in Drake.\nSignature: SAPCouplerOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.SAPCouplerOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.SPHOptions ---\n--- CORE API: genesis.options.SPHOptions ---\nAPI: genesis.options.SPHOptions\nSummary: Options configuring the SPHSolver.\nSignature: SPHOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.SPHOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.SimOptions ---\n--- CORE API: genesis.options.SimOptions ---\nAPI: genesis.options.SimOptions\nSummary: Options configuring the top-level simulator.\nSignature: SimOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.SimOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.ViewerOptions ---\n--- CORE API: genesis.options.ViewerOptions ---\nAPI: genesis.options.ViewerOptions\nSummary: Options configuring preperties of the interactive viewer.\nSignature: ViewerOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.ViewerOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.VisOptions ---\n--- CORE API: genesis.options.VisOptions ---\nAPI: genesis.options.VisOptions\nSummary: This configures visualization-related properties that are independent of the viewer or camera.\nSignature: VisOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.VisOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API Reference: genesis.options.morphs.Box ---\n--- API Reference: genesis.options.morphs.Box ---\nAPI: genesis.options.morphs.Box\nSummary: Morph defined by a box shape.\nSignature: Box(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Box",
+            "is_core": false
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API Reference: genesis.options.morphs.Plane ---\n--- API Reference: genesis.options.morphs.Plane ---\nAPI: genesis.options.morphs.Plane\nSummary: Morph defined by a plane shape.\nSignature: Plane(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Plane",
+            "is_core": false
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.Scene.add_e...\n--- API Search Result ---\nAPI: genesis.Scene.add_entity\nSummary: Add an entity to the scene.\nSignature: add_entity(morph, material=None, surface=None, visualize_contact=False, vis_mode=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.add_entity"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.Scene.step\n...\n--- API Search Result ---\nAPI: genesis.Scene.step\nSummary: Runs a simulation step forward in time.\nSignature: step(update_visualizer=True, refresh_visualizer=True)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.step"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.options.mor...\n--- API Search Result ---\nAPI: genesis.options.morphs.Morph\nSummary: This is the base class for all genesis morphs. A morph in genesis is a hybrid concept, encapsulating both the geometry and pose information of an enti...\nSignature: Morph(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Morph"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.options.mor...\n--- API Search Result ---\nAPI: genesis.options.morphs.Plane\nSummary: Morph defined by a plane shape.\nSignature: Plane(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Plane"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.Scene.build...\n--- API Search Result ---\nAPI: genesis.Scene.build\nSummary: Builds the scene once all entities have been added. This operation is required before running the simulation.\nSignature: build(n_envs=0, env_spacing=(0.0, 0.0), n_envs_per_row=None, center_envs_at_origin=True, compile_kernels=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.build"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.Scene\nSumma...\n--- API Search Result ---\nAPI: genesis.Scene\nSummary: A ``genesis.Scene`` object wraps all components in a simulation environment, including a simulator (containing multiple physics solvers), entities, an...\nSignature: Scene(sim_options=None, coupler_options=None, tool_options=None, rigid_options=None, avatar_options=None, mpm_options=None, sph_options=None, fem_options=None, sf_options=None, pbd_options=None, vis_options=None, viewer_options=None, profiling_options=None, renderer=None, show_viewer=None, show_FPS=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.options.mor...\n--- API Search Result ---\nAPI: genesis.options.morphs.URDF\nSummary: Morph loaded from a URDF file. This morph only supports `RigidEntity`. If you need to create a `Drone` entity, use `gs.morphs.Drone` instead.\nSignature: URDF(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.URDF"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.options.mor...\n--- API Search Result ---\nAPI: genesis.options.morphs.Terrain\nSummary: Morph for creating a rigid terrain. This can be instantiated from two choices: 1) a grid of subterrains generated using the given configurations 2) a ...\nSignature: Terrain(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Terrain"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.Scene.draw_...\n--- API Search Result ---\nAPI: genesis.Scene.draw_debug_box\nSummary: Draws a box in the scene for visualization.\nSignature: draw_debug_box(bounds, color=(1.0, 0.0, 0.0, 1.0), wireframe=True, wireframe_radius=0.0015)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.draw_debug_box"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.options.mor...\n--- API Search Result ---\nAPI: genesis.options.morphs.Drone\nSummary: Morph loaded from a URDF file for creating a `DroneEntity`.\nSignature: Drone(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Drone"
+          }
+        }
+      ],
+      "rag_context_final": [
+        {
+          "type": "unit",
+          "content": "import argparse\nimport numpy as np\nimport genesis as gs\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=False)\n    args = parser.parse_args()\n\n    ########################## init ##########################\n    gs.init(backend=gs.gpu)\n\n    ########################## create a scene ##########################\n    scene = gs.Scene(\n        viewer_options=gs.options.ViewerOptions(\n            camera_pos=(0, -3.5, 2.5),\n            camera_lookat=(0.0, 0.0, 1.0),\n            camera_fov=40,\n            max_FPS=60,\n        ),\n    ",
+          "meta": {
+            "title": "Cube Levitation and Rotation",
+            "desc": "Applies external forces and torques to levitate and periodically reverse rotation of a cube above a plane.",
+            "all_apis": "genesis.options.morphs.Box,genesis.options.morphs.Plane",
+            "key_apis": "genesis.options.morphs.Box,genesis.options.morphs.Plane"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.Scene ---\n--- CORE API: genesis.Scene ---\nAPI: genesis.Scene\nSummary: A ``genesis.Scene`` object wraps all components in a simulation environment, including a simulator (containing multiple physics solvers), entities, an...\nSignature: Scene(sim_options=None, coupler_options=None, tool_options=None, rigid_options=None, avatar_options=None, mpm_options=None, sph_options=None, fem_options=None, sf_options=None, pbd_options=None, vis_options=None, viewer_options=None, profiling_options=None, renderer=None, show_viewer=None, show_FPS=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.Scene.add_entity ---\n--- CORE API: genesis.Scene.add_entity ---\nAPI: genesis.Scene.add_entity\nSummary: Add an entity to the scene.\nSignature: add_entity(morph, material=None, surface=None, visualize_contact=False, vis_mode=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.add_entity",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.Scene.build ---\n--- CORE API: genesis.Scene.build ---\nAPI: genesis.Scene.build\nSummary: Builds the scene once all entities have been added. This operation is required before running the simulation.\nSignature: build(n_envs=0, env_spacing=(0.0, 0.0), n_envs_per_row=None, center_envs_at_origin=True, compile_kernels=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.build",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.Scene.step ---\n--- CORE API: genesis.Scene.step ---\nAPI: genesis.Scene.step\nSummary: Runs a simulation step forward in time.\nSignature: step(update_visualizer=True, refresh_visualizer=True)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.step",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.constraint_solver ---\n--- CORE API: genesis.constraint_solver ---\nAPI: genesis.constraint_solver\nSummary: An enumeration.\nSignature: constraint_solver(*args, **kwargs)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.constraint_solver",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.FEM.Cloth ---\n--- CORE API: genesis.materials.FEM.Cloth ---\nAPI: genesis.materials.FEM.Cloth\nSummary: Cloth material for thin shell/membrane simulation using IPC.\nSignature: Cloth(E=10000.0, nu=0.49, rho=200.0, thickness=0.001, bending_stiffness=None, model=stable_neohookean)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.FEM.Cloth",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.FEM.Elastic ---\n--- CORE API: genesis.materials.FEM.Elastic ---\nAPI: genesis.materials.FEM.Elastic\nSummary: The elastic material class for FEM.\nSignature: Elastic(E=1000000.0, nu=0.2, rho=1000.0, hydroelastic_modulus=10000000.0, friction_mu=0.1, model=linear)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.FEM.Elastic",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.FEM.Muscle ---\n--- CORE API: genesis.materials.FEM.Muscle ---\nAPI: genesis.materials.FEM.Muscle\nSummary: The muscle material class for FEM.\nSignature: Muscle(E=1000000.0, nu=0.2, rho=1000.0, model=linear, n_groups=1)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.FEM.Muscle",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.Hybrid ---\n--- CORE API: genesis.materials.Hybrid ---\nAPI: genesis.materials.Hybrid\nSummary: The class for hybrid body material (soft skin actuated by inner rigid skeleton).\nSignature: Hybrid(material_rigid, material_soft, use_default_coupling=False, damping=0.0, thickness=0.05, soft_dv_coef=0.01, func_instantiate_rigid_from_soft=None, func_instantiate_soft_from_rigid=None, func_instantiate_rigid_soft_association=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.Hybrid",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.MPM.Elastic ---\n--- CORE API: genesis.materials.MPM.Elastic ---\nAPI: genesis.materials.MPM.Elastic\nSummary: The elastic material class for MPM.\nSignature: Elastic(E=300000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, model=corotation)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.MPM.Elastic",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.MPM.ElastoPlastic ---\n--- CORE API: genesis.materials.MPM.ElastoPlastic ---\nAPI: genesis.materials.MPM.ElastoPlastic\nSummary: The elasto-plastic material class for MPM.\nSignature: ElastoPlastic(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, yield_lower=0.025, yield_higher=0.0045, use_von_mises=True, von_mises_yield_stress=10000.0)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.MPM.ElastoPlastic",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.MPM.Liquid ---\n--- CORE API: genesis.materials.MPM.Liquid ---\nAPI: genesis.materials.MPM.Liquid\nSummary: The liquid material class for MPM.\nSignature: Liquid(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, viscous=False, sampler=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.MPM.Liquid",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.MPM.Muscle ---\n--- CORE API: genesis.materials.MPM.Muscle ---\nAPI: genesis.materials.MPM.Muscle\nSummary: The muscle material class for MPM.\nSignature: Muscle(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, model=neohooken, n_groups=1)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.MPM.Muscle",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.MPM.Sand ---\n--- CORE API: genesis.materials.MPM.Sand ---\nAPI: genesis.materials.MPM.Sand\nSummary: The sand material class for MPM.\nSignature: Sand(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=random, friction_angle=45)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.MPM.Sand",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.PBD.Cloth ---\n--- CORE API: genesis.materials.PBD.Cloth ---\nAPI: genesis.materials.PBD.Cloth\nSummary: The cloth material class for PBD.\nSignature: Cloth(rho=4.0, static_friction=0.15, kinetic_friction=0.15, stretch_compliance=1e-07, bending_compliance=1e-05, stretch_relaxation=0.3, bending_relaxation=0.1, air_resistance=0.001)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.PBD.Cloth",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.PBD.Elastic ---\n--- CORE API: genesis.materials.PBD.Elastic ---\nAPI: genesis.materials.PBD.Elastic\nSummary: The 3D elastic volumentric material class for PBD.\nSignature: Elastic(rho=1000.0, static_friction=0.15, kinetic_friction=0.15, stretch_compliance=0.0, bending_compliance=0.0, volume_compliance=0.0, stretch_relaxation=0.1, bending_relaxation=0.1, volume_relaxation=0.1)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.PBD.Elastic",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.PBD.Liquid ---\n--- CORE API: genesis.materials.PBD.Liquid ---\nAPI: genesis.materials.PBD.Liquid\nSummary: The liquid material class for PBD.\nSignature: Liquid(rho=1000.0, sampler=None, density_relaxation=0.2, viscosity_relaxation=0.01)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.PBD.Liquid",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.Rigid ---\n--- CORE API: genesis.materials.Rigid ---\nAPI: genesis.materials.Rigid\nSummary: The Rigid class represents a material used in rigid body simulation.\nSignature: Rigid(rho=200.0, friction=None, needs_coup=True, coup_friction=0.1, coup_softness=0.002, coup_restitution=0.0, sdf_cell_size=0.005, sdf_min_res=32, sdf_max_res=128, gravity_compensation=0)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.Rigid",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.SPH.Liquid ---\n--- CORE API: genesis.materials.SPH.Liquid ---\nAPI: genesis.materials.SPH.Liquid\nSummary: The liquid material class for SPH.\nSignature: Liquid(rho=1000.0, stiffness=50000.0, exponent=7.0, mu=0.005, gamma=0.01, sampler=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.SPH.Liquid",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.Tool ---\n--- CORE API: genesis.materials.Tool ---\nAPI: genesis.materials.Tool\nSummary: The base class of materials.\nSignature: Tool(friction=0.0, coup_softness=0.01, collision=True, sdf_res=128)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.Tool",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.FEMOptions ---\n--- CORE API: genesis.options.FEMOptions ---\nAPI: genesis.options.FEMOptions\nSummary: Options configuring the FEMSolver.\nSignature: FEMOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.FEMOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.IPCCouplerOptions ---\n--- CORE API: genesis.options.IPCCouplerOptions ---\nAPI: genesis.options.IPCCouplerOptions\nSummary: Options configuring the Incremental Potential Contact (IPC) coupler.\nSignature: IPCCouplerOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.IPCCouplerOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.MPMOptions ---\n--- CORE API: genesis.options.MPMOptions ---\nAPI: genesis.options.MPMOptions\nSummary: Options configuring the MPMSolver.\nSignature: MPMOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.MPMOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.PBDOptions ---\n--- CORE API: genesis.options.PBDOptions ---\nAPI: genesis.options.PBDOptions\nSummary: Options configuring the PBDSolver.\nSignature: PBDOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.PBDOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.RigidOptions ---\n--- CORE API: genesis.options.RigidOptions ---\nAPI: genesis.options.RigidOptions\nSummary: Options configuring the RigidSolver.\nSignature: RigidOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.RigidOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.SAPCouplerOptions ---\n--- CORE API: genesis.options.SAPCouplerOptions ---\nAPI: genesis.options.SAPCouplerOptions\nSummary: Options configuring the inter-solver coupling for the Semi-Analytic Primal (SAP) contact solver used in Drake.\nSignature: SAPCouplerOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.SAPCouplerOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.SPHOptions ---\n--- CORE API: genesis.options.SPHOptions ---\nAPI: genesis.options.SPHOptions\nSummary: Options configuring the SPHSolver.\nSignature: SPHOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.SPHOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.SimOptions ---\n--- CORE API: genesis.options.SimOptions ---\nAPI: genesis.options.SimOptions\nSummary: Options configuring the top-level simulator.\nSignature: SimOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.SimOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.ViewerOptions ---\n--- CORE API: genesis.options.ViewerOptions ---\nAPI: genesis.options.ViewerOptions\nSummary: Options configuring preperties of the interactive viewer.\nSignature: ViewerOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.ViewerOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.VisOptions ---\n--- CORE API: genesis.options.VisOptions ---\nAPI: genesis.options.VisOptions\nSummary: This configures visualization-related properties that are independent of the viewer or camera.\nSignature: VisOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.VisOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API Reference: genesis.options.morphs.Box ---\n--- API Reference: genesis.options.morphs.Box ---\nAPI: genesis.options.morphs.Box\nSummary: Morph defined by a box shape.\nSignature: Box(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Box",
+            "is_core": false
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API Reference: genesis.options.morphs.Plane ---\n--- API Reference: genesis.options.morphs.Plane ---\nAPI: genesis.options.morphs.Plane\nSummary: Morph defined by a plane shape.\nSignature: Plane(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Plane",
+            "is_core": false
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.Scene.add_e...\n--- API Search Result ---\nAPI: genesis.Scene.add_entity\nSummary: Add an entity to the scene.\nSignature: add_entity(morph, material=None, surface=None, visualize_contact=False, vis_mode=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.add_entity"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.Scene.step\n...\n--- API Search Result ---\nAPI: genesis.Scene.step\nSummary: Runs a simulation step forward in time.\nSignature: step(update_visualizer=True, refresh_visualizer=True)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.step"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.options.mor...\n--- API Search Result ---\nAPI: genesis.options.morphs.Morph\nSummary: This is the base class for all genesis morphs. A morph in genesis is a hybrid concept, encapsulating both the geometry and pose information of an enti...\nSignature: Morph(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Morph"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.options.mor...\n--- API Search Result ---\nAPI: genesis.options.morphs.Plane\nSummary: Morph defined by a plane shape.\nSignature: Plane(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Plane"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.Scene.build...\n--- API Search Result ---\nAPI: genesis.Scene.build\nSummary: Builds the scene once all entities have been added. This operation is required before running the simulation.\nSignature: build(n_envs=0, env_spacing=(0.0, 0.0), n_envs_per_row=None, center_envs_at_origin=True, compile_kernels=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.build"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.Scene\nSumma...\n--- API Search Result ---\nAPI: genesis.Scene\nSummary: A ``genesis.Scene`` object wraps all components in a simulation environment, including a simulator (containing multiple physics solvers), entities, an...\nSignature: Scene(sim_options=None, coupler_options=None, tool_options=None, rigid_options=None, avatar_options=None, mpm_options=None, sph_options=None, fem_options=None, sf_options=None, pbd_options=None, vis_options=None, viewer_options=None, profiling_options=None, renderer=None, show_viewer=None, show_FPS=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.options.mor...\n--- API Search Result ---\nAPI: genesis.options.morphs.URDF\nSummary: Morph loaded from a URDF file. This morph only supports `RigidEntity`. If you need to create a `Drone` entity, use `gs.morphs.Drone` instead.\nSignature: URDF(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.URDF"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.options.mor...\n--- API Search Result ---\nAPI: genesis.options.morphs.Terrain\nSummary: Morph for creating a rigid terrain. This can be instantiated from two choices: 1) a grid of subterrains generated using the given configurations 2) a ...\nSignature: Terrain(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Terrain"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.Scene.draw_...\n--- API Search Result ---\nAPI: genesis.Scene.draw_debug_box\nSummary: Draws a box in the scene for visualization.\nSignature: draw_debug_box(bounds, color=(1.0, 0.0, 0.0, 1.0), wireframe=True, wireframe_radius=0.0015)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.draw_debug_box"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.options.mor...\n--- API Search Result ---\nAPI: genesis.options.morphs.Drone\nSummary: Morph loaded from a URDF file for creating a `DroneEntity`.\nSignature: Drone(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Drone"
+          }
+        }
+      ],
+      "duration_seconds": 5.38
+    },
+    {
+      "task_id": "eval_003",
+      "complexity": "simple",
+      "query": "Drop a rigid cylinder from a height of 3 meters onto a horizontal plane.",
+      "expected_apis": [
+        "genesis.Scene.add_entity",
+        "genesis.morphs.Cylinder",
+        "genesis.morphs.Plane",
+        "genesis.materials.Rigid",
+        "genesis.Scene",
+        "genesis.Scene.build",
+        "genesis.Scene.step",
+        "genesis.options.ViewerOptions"
+      ],
+      "rag_hit": {
+        "per_api": {
+          "genesis.Scene.add_entity": {
+            "hit": true,
+            "source": "semantic"
+          },
+          "genesis.morphs.Cylinder": {
+            "hit": true,
+            "source": "semantic"
+          },
+          "genesis.morphs.Plane": {
+            "hit": true,
+            "source": "semantic"
+          },
+          "genesis.materials.Rigid": {
+            "hit": true,
+            "source": "core"
+          },
+          "genesis.Scene": {
+            "hit": true,
+            "source": "semantic"
+          },
+          "genesis.Scene.build": {
+            "hit": true,
+            "source": "semantic"
+          },
+          "genesis.Scene.step": {
+            "hit": true,
+            "source": "semantic"
+          },
+          "genesis.options.ViewerOptions": {
+            "hit": true,
+            "source": "core"
+          }
+        },
+        "hit_count": 8,
+        "unit_hit_count": 6,
+        "core_hit_count": 2,
+        "total": 8,
+        "hit_rate": 1.0,
+        "unit_hit_rate": 0.75
+      },
+      "rag_hit_after_dynamic": null,
+      "rag_incremental": null,
+      "execution": null,
+      "context_length_initial": {
+        "total_chars": 12986,
+        "total_tokens": 3517,
+        "by_type": {
+          "unit": {
+            "count": 1,
+            "chars": 600,
+            "tokens": 227
+          },
+          "api": {
+            "count": 42,
+            "chars": 12386,
+            "tokens": 3290
+          }
+        }
+      },
+      "context_length_final": {
+        "total_chars": 12986,
+        "total_tokens": 3517,
+        "by_type": {
+          "unit": {
+            "count": 1,
+            "chars": 600,
+            "tokens": 227
+          },
+          "api": {
+            "count": 42,
+            "chars": 12386,
+            "tokens": 3290
+          }
+        }
+      },
+      "rag_context_initial": [
+        {
+          "type": "unit",
+          "content": "import argparse\nimport numpy as np\nimport genesis as gs\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=False)\n    args = parser.parse_args()\n\n    ########################## init ##########################\n    gs.init(backend=gs.gpu)\n\n    ########################## create a scene ##########################\n    scene = gs.Scene(\n        viewer_options=gs.options.ViewerOptions(\n            camera_pos=(0, -3.5, 2.5),\n            camera_lookat=(0.0, 0.0, 1.0),\n            camera_fov=40,\n            max_FPS=60,\n        ),\n    ",
+          "meta": {
+            "title": "Cube Levitation and Rotation",
+            "desc": "Applies external forces and torques to levitate and periodically reverse rotation of a cube above a plane.",
+            "all_apis": "genesis.options.morphs.Box,genesis.options.morphs.Plane",
+            "key_apis": "genesis.options.morphs.Box,genesis.options.morphs.Plane"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.Scene ---\n--- CORE API: genesis.Scene ---\nAPI: genesis.Scene\nSummary: A ``genesis.Scene`` object wraps all components in a simulation environment, including a simulator (containing multiple physics solvers), entities, an...\nSignature: Scene(sim_options=None, coupler_options=None, tool_options=None, rigid_options=None, avatar_options=None, mpm_options=None, sph_options=None, fem_options=None, sf_options=None, pbd_options=None, vis_options=None, viewer_options=None, profiling_options=None, renderer=None, show_viewer=None, show_FPS=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.Scene.add_entity ---\n--- CORE API: genesis.Scene.add_entity ---\nAPI: genesis.Scene.add_entity\nSummary: Add an entity to the scene.\nSignature: add_entity(morph, material=None, surface=None, visualize_contact=False, vis_mode=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.add_entity",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.Scene.build ---\n--- CORE API: genesis.Scene.build ---\nAPI: genesis.Scene.build\nSummary: Builds the scene once all entities have been added. This operation is required before running the simulation.\nSignature: build(n_envs=0, env_spacing=(0.0, 0.0), n_envs_per_row=None, center_envs_at_origin=True, compile_kernels=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.build",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.Scene.step ---\n--- CORE API: genesis.Scene.step ---\nAPI: genesis.Scene.step\nSummary: Runs a simulation step forward in time.\nSignature: step(update_visualizer=True, refresh_visualizer=True)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.step",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.constraint_solver ---\n--- CORE API: genesis.constraint_solver ---\nAPI: genesis.constraint_solver\nSummary: An enumeration.\nSignature: constraint_solver(*args, **kwargs)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.constraint_solver",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.FEM.Cloth ---\n--- CORE API: genesis.materials.FEM.Cloth ---\nAPI: genesis.materials.FEM.Cloth\nSummary: Cloth material for thin shell/membrane simulation using IPC.\nSignature: Cloth(E=10000.0, nu=0.49, rho=200.0, thickness=0.001, bending_stiffness=None, model=stable_neohookean)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.FEM.Cloth",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.FEM.Elastic ---\n--- CORE API: genesis.materials.FEM.Elastic ---\nAPI: genesis.materials.FEM.Elastic\nSummary: The elastic material class for FEM.\nSignature: Elastic(E=1000000.0, nu=0.2, rho=1000.0, hydroelastic_modulus=10000000.0, friction_mu=0.1, model=linear)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.FEM.Elastic",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.FEM.Muscle ---\n--- CORE API: genesis.materials.FEM.Muscle ---\nAPI: genesis.materials.FEM.Muscle\nSummary: The muscle material class for FEM.\nSignature: Muscle(E=1000000.0, nu=0.2, rho=1000.0, model=linear, n_groups=1)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.FEM.Muscle",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.Hybrid ---\n--- CORE API: genesis.materials.Hybrid ---\nAPI: genesis.materials.Hybrid\nSummary: The class for hybrid body material (soft skin actuated by inner rigid skeleton).\nSignature: Hybrid(material_rigid, material_soft, use_default_coupling=False, damping=0.0, thickness=0.05, soft_dv_coef=0.01, func_instantiate_rigid_from_soft=None, func_instantiate_soft_from_rigid=None, func_instantiate_rigid_soft_association=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.Hybrid",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.MPM.Elastic ---\n--- CORE API: genesis.materials.MPM.Elastic ---\nAPI: genesis.materials.MPM.Elastic\nSummary: The elastic material class for MPM.\nSignature: Elastic(E=300000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, model=corotation)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.MPM.Elastic",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.MPM.ElastoPlastic ---\n--- CORE API: genesis.materials.MPM.ElastoPlastic ---\nAPI: genesis.materials.MPM.ElastoPlastic\nSummary: The elasto-plastic material class for MPM.\nSignature: ElastoPlastic(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, yield_lower=0.025, yield_higher=0.0045, use_von_mises=True, von_mises_yield_stress=10000.0)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.MPM.ElastoPlastic",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.MPM.Liquid ---\n--- CORE API: genesis.materials.MPM.Liquid ---\nAPI: genesis.materials.MPM.Liquid\nSummary: The liquid material class for MPM.\nSignature: Liquid(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, viscous=False, sampler=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.MPM.Liquid",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.MPM.Muscle ---\n--- CORE API: genesis.materials.MPM.Muscle ---\nAPI: genesis.materials.MPM.Muscle\nSummary: The muscle material class for MPM.\nSignature: Muscle(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, model=neohooken, n_groups=1)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.MPM.Muscle",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.MPM.Sand ---\n--- CORE API: genesis.materials.MPM.Sand ---\nAPI: genesis.materials.MPM.Sand\nSummary: The sand material class for MPM.\nSignature: Sand(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=random, friction_angle=45)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.MPM.Sand",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.PBD.Cloth ---\n--- CORE API: genesis.materials.PBD.Cloth ---\nAPI: genesis.materials.PBD.Cloth\nSummary: The cloth material class for PBD.\nSignature: Cloth(rho=4.0, static_friction=0.15, kinetic_friction=0.15, stretch_compliance=1e-07, bending_compliance=1e-05, stretch_relaxation=0.3, bending_relaxation=0.1, air_resistance=0.001)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.PBD.Cloth",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.PBD.Elastic ---\n--- CORE API: genesis.materials.PBD.Elastic ---\nAPI: genesis.materials.PBD.Elastic\nSummary: The 3D elastic volumentric material class for PBD.\nSignature: Elastic(rho=1000.0, static_friction=0.15, kinetic_friction=0.15, stretch_compliance=0.0, bending_compliance=0.0, volume_compliance=0.0, stretch_relaxation=0.1, bending_relaxation=0.1, volume_relaxation=0.1)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.PBD.Elastic",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.PBD.Liquid ---\n--- CORE API: genesis.materials.PBD.Liquid ---\nAPI: genesis.materials.PBD.Liquid\nSummary: The liquid material class for PBD.\nSignature: Liquid(rho=1000.0, sampler=None, density_relaxation=0.2, viscosity_relaxation=0.01)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.PBD.Liquid",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.Rigid ---\n--- CORE API: genesis.materials.Rigid ---\nAPI: genesis.materials.Rigid\nSummary: The Rigid class represents a material used in rigid body simulation.\nSignature: Rigid(rho=200.0, friction=None, needs_coup=True, coup_friction=0.1, coup_softness=0.002, coup_restitution=0.0, sdf_cell_size=0.005, sdf_min_res=32, sdf_max_res=128, gravity_compensation=0)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.Rigid",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.SPH.Liquid ---\n--- CORE API: genesis.materials.SPH.Liquid ---\nAPI: genesis.materials.SPH.Liquid\nSummary: The liquid material class for SPH.\nSignature: Liquid(rho=1000.0, stiffness=50000.0, exponent=7.0, mu=0.005, gamma=0.01, sampler=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.SPH.Liquid",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.Tool ---\n--- CORE API: genesis.materials.Tool ---\nAPI: genesis.materials.Tool\nSummary: The base class of materials.\nSignature: Tool(friction=0.0, coup_softness=0.01, collision=True, sdf_res=128)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.Tool",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.FEMOptions ---\n--- CORE API: genesis.options.FEMOptions ---\nAPI: genesis.options.FEMOptions\nSummary: Options configuring the FEMSolver.\nSignature: FEMOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.FEMOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.IPCCouplerOptions ---\n--- CORE API: genesis.options.IPCCouplerOptions ---\nAPI: genesis.options.IPCCouplerOptions\nSummary: Options configuring the Incremental Potential Contact (IPC) coupler.\nSignature: IPCCouplerOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.IPCCouplerOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.MPMOptions ---\n--- CORE API: genesis.options.MPMOptions ---\nAPI: genesis.options.MPMOptions\nSummary: Options configuring the MPMSolver.\nSignature: MPMOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.MPMOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.PBDOptions ---\n--- CORE API: genesis.options.PBDOptions ---\nAPI: genesis.options.PBDOptions\nSummary: Options configuring the PBDSolver.\nSignature: PBDOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.PBDOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.RigidOptions ---\n--- CORE API: genesis.options.RigidOptions ---\nAPI: genesis.options.RigidOptions\nSummary: Options configuring the RigidSolver.\nSignature: RigidOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.RigidOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.SAPCouplerOptions ---\n--- CORE API: genesis.options.SAPCouplerOptions ---\nAPI: genesis.options.SAPCouplerOptions\nSummary: Options configuring the inter-solver coupling for the Semi-Analytic Primal (SAP) contact solver used in Drake.\nSignature: SAPCouplerOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.SAPCouplerOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.SPHOptions ---\n--- CORE API: genesis.options.SPHOptions ---\nAPI: genesis.options.SPHOptions\nSummary: Options configuring the SPHSolver.\nSignature: SPHOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.SPHOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.SimOptions ---\n--- CORE API: genesis.options.SimOptions ---\nAPI: genesis.options.SimOptions\nSummary: Options configuring the top-level simulator.\nSignature: SimOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.SimOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.ViewerOptions ---\n--- CORE API: genesis.options.ViewerOptions ---\nAPI: genesis.options.ViewerOptions\nSummary: Options configuring preperties of the interactive viewer.\nSignature: ViewerOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.ViewerOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.VisOptions ---\n--- CORE API: genesis.options.VisOptions ---\nAPI: genesis.options.VisOptions\nSummary: This configures visualization-related properties that are independent of the viewer or camera.\nSignature: VisOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.VisOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API Reference: genesis.options.morphs.Box ---\n--- API Reference: genesis.options.morphs.Box ---\nAPI: genesis.options.morphs.Box\nSummary: Morph defined by a box shape.\nSignature: Box(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Box",
+            "is_core": false
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API Reference: genesis.options.morphs.Plane ---\n--- API Reference: genesis.options.morphs.Plane ---\nAPI: genesis.options.morphs.Plane\nSummary: Morph defined by a plane shape.\nSignature: Plane(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Plane",
+            "is_core": false
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.Scene.add_e...\n--- API Search Result ---\nAPI: genesis.Scene.add_entity\nSummary: Add an entity to the scene.\nSignature: add_entity(morph, material=None, surface=None, visualize_contact=False, vis_mode=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.add_entity"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.options.mor...\n--- API Search Result ---\nAPI: genesis.options.morphs.Cylinder\nSummary: Morph defined by a cylinder shape.\nSignature: Cylinder(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Cylinder"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.options.mor...\n--- API Search Result ---\nAPI: genesis.options.morphs.Morph\nSummary: This is the base class for all genesis morphs. A morph in genesis is a hybrid concept, encapsulating both the geometry and pose information of an enti...\nSignature: Morph(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Morph"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.Scene.step\n...\n--- API Search Result ---\nAPI: genesis.Scene.step\nSummary: Runs a simulation step forward in time.\nSignature: step(update_visualizer=True, refresh_visualizer=True)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.step"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.options.mor...\n--- API Search Result ---\nAPI: genesis.options.morphs.Plane\nSummary: Morph defined by a plane shape.\nSignature: Plane(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Plane"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.Scene.build...\n--- API Search Result ---\nAPI: genesis.Scene.build\nSummary: Builds the scene once all entities have been added. This operation is required before running the simulation.\nSignature: build(n_envs=0, env_spacing=(0.0, 0.0), n_envs_per_row=None, center_envs_at_origin=True, compile_kernels=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.build"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.options.mor...\n--- API Search Result ---\nAPI: genesis.options.morphs.Cylinder.copy_attributes_from\nSummary: No summary available.\nSignature: copy_attributes_from(options, override=False)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Cylinder.copy_attributes_from"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.Scene\nSumma...\n--- API Search Result ---\nAPI: genesis.Scene\nSummary: A ``genesis.Scene`` object wraps all components in a simulation environment, including a simulator (containing multiple physics solvers), entities, an...\nSignature: Scene(sim_options=None, coupler_options=None, tool_options=None, rigid_options=None, avatar_options=None, mpm_options=None, sph_options=None, fem_options=None, sf_options=None, pbd_options=None, vis_options=None, viewer_options=None, profiling_options=None, renderer=None, show_viewer=None, show_FPS=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.options.mor...\n--- API Search Result ---\nAPI: genesis.options.morphs.URDF\nSummary: Morph loaded from a URDF file. This morph only supports `RigidEntity`. If you need to create a `Drone` entity, use `gs.morphs.Drone` instead.\nSignature: URDF(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.URDF"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.options.mor...\n--- API Search Result ---\nAPI: genesis.options.morphs.Terrain\nSummary: Morph for creating a rigid terrain. This can be instantiated from two choices: 1) a grid of subterrains generated using the given configurations 2) a ...\nSignature: Terrain(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Terrain"
+          }
+        }
+      ],
+      "rag_context_final": [
+        {
+          "type": "unit",
+          "content": "import argparse\nimport numpy as np\nimport genesis as gs\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"-v\", \"--vis\", action=\"store_true\", default=False)\n    args = parser.parse_args()\n\n    ########################## init ##########################\n    gs.init(backend=gs.gpu)\n\n    ########################## create a scene ##########################\n    scene = gs.Scene(\n        viewer_options=gs.options.ViewerOptions(\n            camera_pos=(0, -3.5, 2.5),\n            camera_lookat=(0.0, 0.0, 1.0),\n            camera_fov=40,\n            max_FPS=60,\n        ),\n    ",
+          "meta": {
+            "title": "Cube Levitation and Rotation",
+            "desc": "Applies external forces and torques to levitate and periodically reverse rotation of a cube above a plane.",
+            "all_apis": "genesis.options.morphs.Box,genesis.options.morphs.Plane",
+            "key_apis": "genesis.options.morphs.Box,genesis.options.morphs.Plane"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.Scene ---\n--- CORE API: genesis.Scene ---\nAPI: genesis.Scene\nSummary: A ``genesis.Scene`` object wraps all components in a simulation environment, including a simulator (containing multiple physics solvers), entities, an...\nSignature: Scene(sim_options=None, coupler_options=None, tool_options=None, rigid_options=None, avatar_options=None, mpm_options=None, sph_options=None, fem_options=None, sf_options=None, pbd_options=None, vis_options=None, viewer_options=None, profiling_options=None, renderer=None, show_viewer=None, show_FPS=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.Scene.add_entity ---\n--- CORE API: genesis.Scene.add_entity ---\nAPI: genesis.Scene.add_entity\nSummary: Add an entity to the scene.\nSignature: add_entity(morph, material=None, surface=None, visualize_contact=False, vis_mode=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.add_entity",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.Scene.build ---\n--- CORE API: genesis.Scene.build ---\nAPI: genesis.Scene.build\nSummary: Builds the scene once all entities have been added. This operation is required before running the simulation.\nSignature: build(n_envs=0, env_spacing=(0.0, 0.0), n_envs_per_row=None, center_envs_at_origin=True, compile_kernels=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.build",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.Scene.step ---\n--- CORE API: genesis.Scene.step ---\nAPI: genesis.Scene.step\nSummary: Runs a simulation step forward in time.\nSignature: step(update_visualizer=True, refresh_visualizer=True)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.step",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.constraint_solver ---\n--- CORE API: genesis.constraint_solver ---\nAPI: genesis.constraint_solver\nSummary: An enumeration.\nSignature: constraint_solver(*args, **kwargs)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.constraint_solver",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.FEM.Cloth ---\n--- CORE API: genesis.materials.FEM.Cloth ---\nAPI: genesis.materials.FEM.Cloth\nSummary: Cloth material for thin shell/membrane simulation using IPC.\nSignature: Cloth(E=10000.0, nu=0.49, rho=200.0, thickness=0.001, bending_stiffness=None, model=stable_neohookean)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.FEM.Cloth",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.FEM.Elastic ---\n--- CORE API: genesis.materials.FEM.Elastic ---\nAPI: genesis.materials.FEM.Elastic\nSummary: The elastic material class for FEM.\nSignature: Elastic(E=1000000.0, nu=0.2, rho=1000.0, hydroelastic_modulus=10000000.0, friction_mu=0.1, model=linear)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.FEM.Elastic",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.FEM.Muscle ---\n--- CORE API: genesis.materials.FEM.Muscle ---\nAPI: genesis.materials.FEM.Muscle\nSummary: The muscle material class for FEM.\nSignature: Muscle(E=1000000.0, nu=0.2, rho=1000.0, model=linear, n_groups=1)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.FEM.Muscle",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.Hybrid ---\n--- CORE API: genesis.materials.Hybrid ---\nAPI: genesis.materials.Hybrid\nSummary: The class for hybrid body material (soft skin actuated by inner rigid skeleton).\nSignature: Hybrid(material_rigid, material_soft, use_default_coupling=False, damping=0.0, thickness=0.05, soft_dv_coef=0.01, func_instantiate_rigid_from_soft=None, func_instantiate_soft_from_rigid=None, func_instantiate_rigid_soft_association=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.Hybrid",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.MPM.Elastic ---\n--- CORE API: genesis.materials.MPM.Elastic ---\nAPI: genesis.materials.MPM.Elastic\nSummary: The elastic material class for MPM.\nSignature: Elastic(E=300000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, model=corotation)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.MPM.Elastic",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.MPM.ElastoPlastic ---\n--- CORE API: genesis.materials.MPM.ElastoPlastic ---\nAPI: genesis.materials.MPM.ElastoPlastic\nSummary: The elasto-plastic material class for MPM.\nSignature: ElastoPlastic(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, yield_lower=0.025, yield_higher=0.0045, use_von_mises=True, von_mises_yield_stress=10000.0)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.MPM.ElastoPlastic",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.MPM.Liquid ---\n--- CORE API: genesis.materials.MPM.Liquid ---\nAPI: genesis.materials.MPM.Liquid\nSummary: The liquid material class for MPM.\nSignature: Liquid(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, viscous=False, sampler=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.MPM.Liquid",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.MPM.Muscle ---\n--- CORE API: genesis.materials.MPM.Muscle ---\nAPI: genesis.materials.MPM.Muscle\nSummary: The muscle material class for MPM.\nSignature: Muscle(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=None, model=neohooken, n_groups=1)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.MPM.Muscle",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.MPM.Sand ---\n--- CORE API: genesis.materials.MPM.Sand ---\nAPI: genesis.materials.MPM.Sand\nSummary: The sand material class for MPM.\nSignature: Sand(E=1000000.0, nu=0.2, rho=1000.0, lam=None, mu=None, sampler=random, friction_angle=45)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.MPM.Sand",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.PBD.Cloth ---\n--- CORE API: genesis.materials.PBD.Cloth ---\nAPI: genesis.materials.PBD.Cloth\nSummary: The cloth material class for PBD.\nSignature: Cloth(rho=4.0, static_friction=0.15, kinetic_friction=0.15, stretch_compliance=1e-07, bending_compliance=1e-05, stretch_relaxation=0.3, bending_relaxation=0.1, air_resistance=0.001)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.PBD.Cloth",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.PBD.Elastic ---\n--- CORE API: genesis.materials.PBD.Elastic ---\nAPI: genesis.materials.PBD.Elastic\nSummary: The 3D elastic volumentric material class for PBD.\nSignature: Elastic(rho=1000.0, static_friction=0.15, kinetic_friction=0.15, stretch_compliance=0.0, bending_compliance=0.0, volume_compliance=0.0, stretch_relaxation=0.1, bending_relaxation=0.1, volume_relaxation=0.1)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.PBD.Elastic",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.PBD.Liquid ---\n--- CORE API: genesis.materials.PBD.Liquid ---\nAPI: genesis.materials.PBD.Liquid\nSummary: The liquid material class for PBD.\nSignature: Liquid(rho=1000.0, sampler=None, density_relaxation=0.2, viscosity_relaxation=0.01)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.PBD.Liquid",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.Rigid ---\n--- CORE API: genesis.materials.Rigid ---\nAPI: genesis.materials.Rigid\nSummary: The Rigid class represents a material used in rigid body simulation.\nSignature: Rigid(rho=200.0, friction=None, needs_coup=True, coup_friction=0.1, coup_softness=0.002, coup_restitution=0.0, sdf_cell_size=0.005, sdf_min_res=32, sdf_max_res=128, gravity_compensation=0)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.Rigid",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.SPH.Liquid ---\n--- CORE API: genesis.materials.SPH.Liquid ---\nAPI: genesis.materials.SPH.Liquid\nSummary: The liquid material class for SPH.\nSignature: Liquid(rho=1000.0, stiffness=50000.0, exponent=7.0, mu=0.005, gamma=0.01, sampler=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.SPH.Liquid",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.materials.Tool ---\n--- CORE API: genesis.materials.Tool ---\nAPI: genesis.materials.Tool\nSummary: The base class of materials.\nSignature: Tool(friction=0.0, coup_softness=0.01, collision=True, sdf_res=128)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.materials.Tool",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.FEMOptions ---\n--- CORE API: genesis.options.FEMOptions ---\nAPI: genesis.options.FEMOptions\nSummary: Options configuring the FEMSolver.\nSignature: FEMOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.FEMOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.IPCCouplerOptions ---\n--- CORE API: genesis.options.IPCCouplerOptions ---\nAPI: genesis.options.IPCCouplerOptions\nSummary: Options configuring the Incremental Potential Contact (IPC) coupler.\nSignature: IPCCouplerOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.IPCCouplerOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.MPMOptions ---\n--- CORE API: genesis.options.MPMOptions ---\nAPI: genesis.options.MPMOptions\nSummary: Options configuring the MPMSolver.\nSignature: MPMOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.MPMOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.PBDOptions ---\n--- CORE API: genesis.options.PBDOptions ---\nAPI: genesis.options.PBDOptions\nSummary: Options configuring the PBDSolver.\nSignature: PBDOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.PBDOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.RigidOptions ---\n--- CORE API: genesis.options.RigidOptions ---\nAPI: genesis.options.RigidOptions\nSummary: Options configuring the RigidSolver.\nSignature: RigidOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.RigidOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.SAPCouplerOptions ---\n--- CORE API: genesis.options.SAPCouplerOptions ---\nAPI: genesis.options.SAPCouplerOptions\nSummary: Options configuring the inter-solver coupling for the Semi-Analytic Primal (SAP) contact solver used in Drake.\nSignature: SAPCouplerOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.SAPCouplerOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.SPHOptions ---\n--- CORE API: genesis.options.SPHOptions ---\nAPI: genesis.options.SPHOptions\nSummary: Options configuring the SPHSolver.\nSignature: SPHOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.SPHOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.SimOptions ---\n--- CORE API: genesis.options.SimOptions ---\nAPI: genesis.options.SimOptions\nSummary: Options configuring the top-level simulator.\nSignature: SimOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.SimOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.ViewerOptions ---\n--- CORE API: genesis.options.ViewerOptions ---\nAPI: genesis.options.ViewerOptions\nSummary: Options configuring preperties of the interactive viewer.\nSignature: ViewerOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.ViewerOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- CORE API: genesis.options.VisOptions ---\n--- CORE API: genesis.options.VisOptions ---\nAPI: genesis.options.VisOptions\nSummary: This configures visualization-related properties that are independent of the viewer or camera.\nSignature: VisOptions(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.VisOptions",
+            "is_core": true
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API Reference: genesis.options.morphs.Box ---\n--- API Reference: genesis.options.morphs.Box ---\nAPI: genesis.options.morphs.Box\nSummary: Morph defined by a box shape.\nSignature: Box(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Box",
+            "is_core": false
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API Reference: genesis.options.morphs.Plane ---\n--- API Reference: genesis.options.morphs.Plane ---\nAPI: genesis.options.morphs.Plane\nSummary: Morph defined by a plane shape.\nSignature: Plane(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Plane",
+            "is_core": false
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.Scene.add_e...\n--- API Search Result ---\nAPI: genesis.Scene.add_entity\nSummary: Add an entity to the scene.\nSignature: add_entity(morph, material=None, surface=None, visualize_contact=False, vis_mode=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.add_entity"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.options.mor...\n--- API Search Result ---\nAPI: genesis.options.morphs.Cylinder\nSummary: Morph defined by a cylinder shape.\nSignature: Cylinder(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Cylinder"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.options.mor...\n--- API Search Result ---\nAPI: genesis.options.morphs.Morph\nSummary: This is the base class for all genesis morphs. A morph in genesis is a hybrid concept, encapsulating both the geometry and pose information of an enti...\nSignature: Morph(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Morph"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.Scene.step\n...\n--- API Search Result ---\nAPI: genesis.Scene.step\nSummary: Runs a simulation step forward in time.\nSignature: step(update_visualizer=True, refresh_visualizer=True)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.step"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.options.mor...\n--- API Search Result ---\nAPI: genesis.options.morphs.Plane\nSummary: Morph defined by a plane shape.\nSignature: Plane(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Plane"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.Scene.build...\n--- API Search Result ---\nAPI: genesis.Scene.build\nSummary: Builds the scene once all entities have been added. This operation is required before running the simulation.\nSignature: build(n_envs=0, env_spacing=(0.0, 0.0), n_envs_per_row=None, center_envs_at_origin=True, compile_kernels=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene.build"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.options.mor...\n--- API Search Result ---\nAPI: genesis.options.morphs.Cylinder.copy_attributes_from\nSummary: No summary available.\nSignature: copy_attributes_from(options, override=False)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Cylinder.copy_attributes_from"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.Scene\nSumma...\n--- API Search Result ---\nAPI: genesis.Scene\nSummary: A ``genesis.Scene`` object wraps all components in a simulation environment, including a simulator (containing multiple physics solvers), entities, an...\nSignature: Scene(sim_options=None, coupler_options=None, tool_options=None, rigid_options=None, avatar_options=None, mpm_options=None, sph_options=None, fem_options=None, sf_options=None, pbd_options=None, vis_options=None, viewer_options=None, profiling_options=None, renderer=None, show_viewer=None, show_FPS=None)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.Scene"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.options.mor...\n--- API Search Result ---\nAPI: genesis.options.morphs.URDF\nSummary: Morph loaded from a URDF file. This morph only supports `RigidEntity`. If you need to create a `Drone` entity, use `gs.morphs.Drone` instead.\nSignature: URDF(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.URDF"
+          }
+        },
+        {
+          "type": "api",
+          "content": "--- API: --- API Search Result ---\nAPI: genesis.options.mor...\n--- API Search Result ---\nAPI: genesis.options.morphs.Terrain\nSummary: Morph for creating a rigid terrain. This can be instantiated from two choices: 1) a grid of subterrains generated using the given configurations 2) a ...\nSignature: Terrain(**data)\nConstraints:",
+          "meta": {
+            "api_id": "genesis.options.morphs.Terrain"
+          }
+        }
+      ],
+      "duration_seconds": 2.61
+    }
+  ]
+}

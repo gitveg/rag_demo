@@ -1,0 +1,165 @@
+{
+  "run_id": "20260607_222530",
+  "rag_rewrite_mode": "hyde",
+  "detailed_report": true,
+  "max_retries": 3,
+  "skip_execution": true,
+  "timestamp": "2026-06-07T22:25:33.659484",
+  "task_count": 3,
+  "summary": {
+    "overall": {
+      "n": 3,
+      "rag_hit_rate": 0.0,
+      "unit_hit_rate": 0.0,
+      "avg_new_hit_rate": null,
+      "avg_dynamic_slice_hit_rate": null,
+      "avg_dynamic_slice_unit_hit_rate": null,
+      "avg_context_tokens_initial": null,
+      "avg_context_tokens_final": null,
+      "pass_at_1": 0.0,
+      "pass_at_3": 0.0
+    },
+    "simple": {
+      "n": 3,
+      "rag_hit_rate": 0.0,
+      "unit_hit_rate": 0.0,
+      "avg_new_hit_rate": null,
+      "avg_dynamic_slice_hit_rate": null,
+      "avg_dynamic_slice_unit_hit_rate": null,
+      "avg_context_tokens_initial": null,
+      "avg_context_tokens_final": null,
+      "pass_at_1": 0.0,
+      "pass_at_3": 0.0
+    }
+  },
+  "tasks": [
+    {
+      "task_id": "eval_001",
+      "complexity": "simple",
+      "query": "Simulate a red rigid sphere falling straight down onto a flat ground.",
+      "expected_apis": [
+        "genesis.Scene.add_entity",
+        "genesis.morphs.Sphere",
+        "genesis.morphs.Plane",
+        "genesis.materials.Rigid",
+        "genesis.Scene",
+        "genesis.Scene.build",
+        "genesis.Scene.step",
+        "genesis.options.ViewerOptions",
+        "genesis.surfaces.Default"
+      ],
+      "rag_hit": {
+        "per_api": {
+          "genesis.Scene.add_entity": false,
+          "genesis.morphs.Sphere": false,
+          "genesis.morphs.Plane": false,
+          "genesis.materials.Rigid": false,
+          "genesis.Scene": false,
+          "genesis.Scene.build": false,
+          "genesis.Scene.step": false,
+          "genesis.options.ViewerOptions": false,
+          "genesis.surfaces.Default": false
+        },
+        "hit_count": 0,
+        "total": 9,
+        "hit_rate": 0.0
+      },
+      "execution": {
+        "pass_at_1": false,
+        "pass_at_3": false,
+        "success_attempt": null,
+        "total_attempts": 0,
+        "attempt_results": [],
+        "final_status": "error",
+        "error": "No module named 'openai'"
+      },
+      "rag_hit_after_dynamic": null,
+      "rag_incremental": null,
+      "duration_seconds": 3.03
+    },
+    {
+      "task_id": "eval_002",
+      "complexity": "simple",
+      "query": "Create a static rigid box to serve as an obstacle in the scene.",
+      "expected_apis": [
+        "genesis.Scene.add_entity",
+        "genesis.morphs.Box",
+        "genesis.materials.Rigid",
+        "genesis.Scene",
+        "genesis.Scene.build",
+        "genesis.Scene.step",
+        "genesis.morphs.Plane",
+        "genesis.options.ViewerOptions"
+      ],
+      "rag_hit": {
+        "per_api": {
+          "genesis.Scene.add_entity": false,
+          "genesis.morphs.Box": false,
+          "genesis.materials.Rigid": false,
+          "genesis.Scene": false,
+          "genesis.Scene.build": false,
+          "genesis.Scene.step": false,
+          "genesis.morphs.Plane": false,
+          "genesis.options.ViewerOptions": false
+        },
+        "hit_count": 0,
+        "total": 8,
+        "hit_rate": 0.0
+      },
+      "execution": {
+        "pass_at_1": false,
+        "pass_at_3": false,
+        "success_attempt": null,
+        "total_attempts": 0,
+        "attempt_results": [],
+        "final_status": "error",
+        "error": "No module named 'openai'"
+      },
+      "rag_hit_after_dynamic": null,
+      "rag_incremental": null,
+      "duration_seconds": 0.0
+    },
+    {
+      "task_id": "eval_003",
+      "complexity": "simple",
+      "query": "Drop a rigid cylinder from a height of 3 meters onto a horizontal plane.",
+      "expected_apis": [
+        "genesis.Scene.add_entity",
+        "genesis.morphs.Cylinder",
+        "genesis.morphs.Plane",
+        "genesis.materials.Rigid",
+        "genesis.Scene",
+        "genesis.Scene.build",
+        "genesis.Scene.step",
+        "genesis.options.ViewerOptions"
+      ],
+      "rag_hit": {
+        "per_api": {
+          "genesis.Scene.add_entity": false,
+          "genesis.morphs.Cylinder": false,
+          "genesis.morphs.Plane": false,
+          "genesis.materials.Rigid": false,
+          "genesis.Scene": false,
+          "genesis.Scene.build": false,
+          "genesis.Scene.step": false,
+          "genesis.options.ViewerOptions": false
+        },
+        "hit_count": 0,
+        "total": 8,
+        "hit_rate": 0.0
+      },
+      "execution": {
+        "pass_at_1": false,
+        "pass_at_3": false,
+        "success_attempt": null,
+        "total_attempts": 0,
+        "attempt_results": [],
+        "final_status": "error",
+        "error": "No module named 'openai'"
+      },
+      "rag_hit_after_dynamic": null,
+      "rag_incremental": null,
+      "duration_seconds": 0.0
+    }
+  ]
+}

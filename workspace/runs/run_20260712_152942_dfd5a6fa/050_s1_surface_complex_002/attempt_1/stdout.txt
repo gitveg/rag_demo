@@ -1,0 +1,35 @@
+Traceback (most recent call last):
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\run_20260712_152942_dfd5a6fa\050_s1_surface_complex_002\attempt_1\code.py", line 1, in <module>
+    import torch
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\torch\__init__.py", line 2150, in <module>
+    from torch import _VF as _VF, functional as functional  # usort: skip
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\torch\functional.py", line 8, in <module>
+    import torch.nn.functional as F
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\torch\nn\__init__.py", line 8, in <module>
+    from torch.nn.modules import *  # usort: skip # noqa: F403
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\torch\nn\modules\__init__.py", line 1, in <module>
+    from .module import Module  # usort: skip
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\torch\nn\modules\module.py", line 17, in <module>
+    from torch.utils._python_dispatch import is_traceable_wrapper_subclass
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\torch\utils\__init__.py", line 8, in <module>
+    from torch.utils import (
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\torch\utils\data\__init__.py", line 1, in <module>
+    from torch.utils.data.dataloader import (
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\torch\utils\data\dataloader.py", line 22, in <module>
+    import torch.distributed as dist
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\torch\distributed\__init__.py", line 3, in <module>
+    import pdb
+  File "D:\anaconda\envs\env_genesis\lib\pdb.py", line 77, in <module>
+    import code
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\run_20260712_152942_dfd5a6fa\050_s1_surface_complex_002\attempt_1\code.py", line 3, in <module>
+    import genesis as gs
+  File "D:\Desktop\Genesis\Genesis-main\genesis\__init__.py", line 434, in <module>
+    from .utils.geom import *
+  File "D:\Desktop\Genesis\Genesis-main\genesis\utils\geom.py", line 6, in <module>
+    import torch.nn.functional as F
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\torch\nn\functional.py", line 11, in <module>
+    from torch._jit_internal import (
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\torch\_jit_internal.py", line 1212, in <module>
+    if torch.distributed.rpc.is_available():
+AttributeError: partially initialized module 'torch' has no attribute 'distributed' (most likely due to a circular import)
+

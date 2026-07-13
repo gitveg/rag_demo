@@ -1,0 +1,141 @@
+[38;5;159m[Genesis] [14:11:14] [INFO] [38;5;121m╭───────────────────────────────────────────────╮[0m[38;5;159m[0m
+[38;5;159m[Genesis] [14:11:14] [INFO] [38;5;121m│┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈[0m[38;5;159m [38;5;121m[1m[3mGenesis[0m[38;5;159m [38;5;121m┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈│[0m[38;5;159m[0m
+[38;5;159m[Genesis] [14:11:14] [INFO] [38;5;121m╰───────────────────────────────────────────────╯[0m[38;5;159m[0m
+[38;5;159m[Genesis] [14:11:14] [INFO] Running on [38;5;121m[4m[NVIDIA GeForce RTX 4060 Laptop GPU][0m[38;5;159m with backend [38;5;121m[4mgs.cuda[0m[38;5;159m. Device memory: [38;5;121m[4m8.00[0m[38;5;159m GB.[0m
+[38;5;159m[Genesis] [14:11:14] [INFO] 🚀 Genesis initialized. 🔖 version: [38;5;121m[4m0.3.8[0m[38;5;159m, 🎨 theme: [38;5;121m[4mdark[0m[38;5;159m, 🌱 seed: [38;5;121m[4mNone[0m[38;5;159m, 🐛 debug: [38;5;121m[4mFalse[0m[38;5;159m, 📏 precision: [38;5;121m[4m64[0m[38;5;159m, 🔥 performance: [38;5;121m[4mFalse[0m[38;5;159m, 💬 verbose: [38;5;121m[4mINFO[0m[38;5;159m[0m
+[38;5;159m[Genesis] [14:11:18] [INFO] Scene [38;5;121m[3m<3c1c91b>[0m[38;5;159m created.[0m
+[38;5;159m[Genesis] [14:11:18] [INFO] Adding [38;5;121m<gs.RigidEntity>[0m[38;5;159m. idx: [38;5;121m0[0m[38;5;159m, uid: [38;5;121m[3m<dd90d00>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [14:11:19] [INFO] Preprocessing geom idx [38;5;121m[4m0[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [14:11:19] [INFO] Adding [38;5;121m<gs.FEMEntity>[0m[38;5;159m. idx: [38;5;121m1[0m[38;5;159m, uid: [38;5;121m[3m<3cf700d>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.FEM.Elastic>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [14:11:23] [INFO] Building scene [38;5;121m[3m<3c1c91b>[0m[38;5;159m...[0m
+Delaunizing vertices...
+Delaunay seconds:  0.001
+Creating surface mesh ...
+Surface mesh seconds:  0
+Recovering boundaries...
+Boundary recovery seconds:  0
+Removing exterior tetrahedra ...
+Exterior tets removal seconds:  0
+Suppressing Steiner points ...
+Steiner suppression seconds:  0
+Recovering Delaunayness...
+Delaunay recovery seconds:  0
+Refining mesh...
+Refinement seconds:  0
+Smoothing vertices...
+Mesh smoothing seconds:  0.001
+Improving mesh...
+Mesh improvement seconds:  0
+
+Writing nodes.
+Writing elements.
+Writing faces.
+Writing edges.
+
+Output seconds:  0
+Total running seconds:  0.002
+
+Statistics:
+
+  Input points: 8
+  Input facets: 12
+  Input segments: 18
+  Input holes: 0
+  Input regions: 0
+
+  Mesh points: 9
+  Mesh tetrahedra: 12
+  Mesh faces: 30
+  Mesh faces on exterior boundary: 12
+  Mesh faces on input facets: 12
+  Mesh edges on input segments: 18
+  Steiner points inside domain: 1
+
+[38;5;159m[Genesis] [14:11:29] [INFO] Entity <3cf700d> added. class: FEMEntity, morph: Box, size: (12, 9), material: <gs.FEM.Elastic>.[0m
+[38;5;159m[Genesis] [14:11:31] [INFO] Tetrahedralization with configuration {'nobisect': False, 'maxvolume': np.float64(4.4999999999999996e-05)} and generating `.tet` file:[0m
+Delaunizing vertices...
+Delaunay seconds:  0
+Creating surface mesh ...
+Surface mesh seconds:  0
+Recovering boundaries...
+Boundary recovery seconds:  0
+Removing exterior tetrahedra ...
+Exterior tets removal seconds:  0
+Recovering Delaunayness...
+Delaunay recovery seconds:  0
+Refining mesh...
+  10 insertions, added 6 points, 24 subfaces in queue.
+  3 insertions, added 2 points, 22 subfaces in queue.
+  4 insertions, added 2 points, 24 subfaces in queue.
+  5 insertions, added 4 points, 27 subfaces in queue.
+  7 insertions, added 4 points, 30 subfaces in queue.
+  9 insertions, added 7 points, 44 subfaces in queue.
+  12 insertions, added 10 points, 101 tetrahedra in queue.
+  16 insertions, added 12 points, 255 tetrahedra in queue.
+  21 insertions, added 13 points, 272 tetrahedra in queue.
+  28 insertions, added 14 points, 254 tetrahedra in queue.
+  38 insertions, added 22 points, 526 tetrahedra in queue.
+  50 insertions, added 26 points, 641 tetrahedra in queue.
+  67 insertions, added 38 points, 704 tetrahedra in queue.
+  89 insertions, added 50 points, 181 tetrahedra in queue.
+Refinement seconds:  0.011
+Smoothing vertices...
+Mesh smoothing seconds:  0.003
+Improving mesh...
+Mesh improvement seconds:  0
+
+Writing nodes.
+Writing elements.
+Writing faces.
+Writing edges.
+
+Output seconds:  0.001
+Total running seconds:  0.015
+
+Statistics:
+
+  Input points: 8
+  Input facets: 12
+  Input segments: 12
+  Input holes: 0
+  Input regions: 0
+
+  Mesh points: 222
+  Mesh tetrahedra: 675
+  Mesh faces: 1546
+  Mesh faces on exterior boundary: 392
+  Mesh faces on input facets: 392
+  Mesh edges on input segments: 64
+  Steiner points on input facets:  138
+  Steiner points on input segments:  52
+  Steiner points inside domain: 24
+
+Traceback (most recent call last):
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\online_authorized_20260712\013_eval_014\attempt_1\code.py", line 60, in <module>
+    main()
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\online_authorized_20260712\013_eval_014\attempt_1\code.py", line 53, in main
+    scene.build()
+  File "D:\Desktop\Genesis\Genesis-main\genesis\utils\misc.py", line 141, in wrapper
+    return method(self, *args, **kwargs)
+  File "D:\Desktop\Genesis\Genesis-main\genesis\engine\scene.py", line 775, in build
+    self._sim.build()
+  File "D:\Desktop\Genesis\Genesis-main\genesis\engine\simulator.py", line 207, in build
+    self._coupler.build()
+  File "D:\Desktop\Genesis\Genesis-main\genesis\engine\couplers\sap_coupler.py", line 266, in build
+    self._init_rigid_fields()
+  File "D:\Desktop\Genesis\Genesis-main\genesis\engine\couplers\sap_coupler.py", line 500, in _init_rigid_fields
+    self.rigid_state_dof = rigid_state_dof.field(
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\gstaichi\lang\struct.py", line 754, in field
+    return Struct.field(self.members, self.methods, **kwargs)
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\gstaichi\lang\util.py", line 301, in wrapped
+    return func(*args, **kwargs)
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\gstaichi\lang\struct.py", line 330, in field
+    impl.root.dense(impl.index_nd(dim), shape).place(e, offset=offset)
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\gstaichi\_snode\fields_builder.py", line 77, in dense
+    return self.root.dense(indices, dimensions)
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\gstaichi\lang\snode.py", line 44, in dense
+    return SNode(self.ptr.dense(axes, dimensions, _ti_core.DebugInfo(get_traceback())))
+gstaichi._lib.core.gstaichi_python.GsTaichiRuntimeError: Every dimension of a GsTaichi field should be positive, got 0 in demension 1.
+
+[38;5;9m[Genesis] [14:11:34] [ERROR] GsTaichiRuntimeError: Every dimension of a GsTaichi field should be positive, got 0 in demension 1.[0m
+[38;5;159m[Genesis] [14:11:34] [INFO] 💤 Exiting Genesis and caching compiled kernels...[0m

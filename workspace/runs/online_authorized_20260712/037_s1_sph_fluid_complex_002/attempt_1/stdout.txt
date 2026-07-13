@@ -1,0 +1,31 @@
+[38;5;159m[Genesis] [14:43:42] [INFO] [38;5;121m╭───────────────────────────────────────────────╮[0m[38;5;159m[0m
+[38;5;159m[Genesis] [14:43:42] [INFO] [38;5;121m│┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈[0m[38;5;159m [38;5;121m[1m[3mGenesis[0m[38;5;159m [38;5;121m┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈│[0m[38;5;159m[0m
+[38;5;159m[Genesis] [14:43:42] [INFO] [38;5;121m╰───────────────────────────────────────────────╯[0m[38;5;159m[0m
+[38;5;159m[Genesis] [14:43:43] [INFO] Running on [38;5;121m[4m[NVIDIA GeForce RTX 4060 Laptop GPU][0m[38;5;159m with backend [38;5;121m[4mgs.cuda[0m[38;5;159m. Device memory: [38;5;121m[4m8.00[0m[38;5;159m GB.[0m
+[38;5;159m[Genesis] [14:43:43] [INFO] 🚀 Genesis initialized. 🔖 version: [38;5;121m[4m0.3.8[0m[38;5;159m, 🎨 theme: [38;5;121m[4mdark[0m[38;5;159m, 🌱 seed: [38;5;121m[4mNone[0m[38;5;159m, 🐛 debug: [38;5;121m[4mFalse[0m[38;5;159m, 📏 precision: [38;5;121m[4m32[0m[38;5;159m, 🔥 performance: [38;5;121m[4mFalse[0m[38;5;159m, 💬 verbose: [38;5;121m[4mINFO[0m[38;5;159m[0m
+[38;5;226m[Genesis] [14:43:48] [WARNING] Using a simulation timestep smaller than 2ms is not recommended for 'use_gjk_collision=False' as it could lead to numerically unstable collision detection.[0m
+[38;5;159m[Genesis] [14:43:48] [INFO] Scene [38;5;121m[3m<9eea060>[0m[38;5;159m created.[0m
+[38;5;159m[Genesis] [14:43:48] [INFO] Adding [38;5;121m<gs.RigidEntity>[0m[38;5;159m. idx: [38;5;121m0[0m[38;5;159m, uid: [38;5;121m[3m<f9345c6>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [14:43:48] [INFO] Adding [38;5;121m<gs.RigidEntity>[0m[38;5;159m. idx: [38;5;121m1[0m[38;5;159m, uid: [38;5;121m[3m<37e59b5>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [14:43:48] [INFO] Preprocessing geom idx [38;5;121m[4m1[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [14:43:49] [INFO] Adding [38;5;121m<gs.RigidEntity>[0m[38;5;159m. idx: [38;5;121m2[0m[38;5;159m, uid: [38;5;121m[3m<55533a6>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [14:43:49] [INFO] Adding [38;5;121m<gs.RigidEntity>[0m[38;5;159m. idx: [38;5;121m3[0m[38;5;159m, uid: [38;5;121m[3m<81edba9>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [14:43:49] [INFO] Adding [38;5;121m<gs.RigidEntity>[0m[38;5;159m. idx: [38;5;121m4[0m[38;5;159m, uid: [38;5;121m[3m<45b6b98>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [14:43:49] [INFO] Adding [38;5;121m<gs.RigidEntity>[0m[38;5;159m. idx: [38;5;121m5[0m[38;5;159m, uid: [38;5;121m[3m<65ae9f9>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [14:43:49] [INFO] Adding [38;5;121m<gs.RigidEntity>[0m[38;5;159m. idx: [38;5;121m6[0m[38;5;159m, uid: [38;5;121m[3m<a824e77>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [14:43:49] [INFO] Preprocessing geom idx [38;5;121m[4m6[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [14:43:49] [INFO] Adding [38;5;121m<gs.RigidEntity>[0m[38;5;159m. idx: [38;5;121m7[0m[38;5;159m, uid: [38;5;121m[3m<584edf0>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [14:43:49] [INFO] Preprocessing geom idx [38;5;121m[4m7[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [14:43:50] [INFO] Creating [38;5;121m<gs.Emitter>[0m[38;5;159m. id: [38;5;121m[3m<3fa5bbe>[0m[38;5;159m, max_particles: [38;5;121m50000[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [14:43:50] [INFO] Adding [38;5;121m<gs.MPMEntity>[0m[38;5;159m. idx: [38;5;121m8[0m[38;5;159m, uid: [38;5;121m[3m<6a14346>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Nowhere>[0m[38;5;159m, material: [38;5;121m<gs.materials.MPM.Liquid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [14:43:50] [INFO] Sampled [38;5;121m[4m50,000[0m[38;5;159m particles.[0m
+[38;5;159m[Genesis] [14:43:50] [INFO] [38;5;121m<gs.Emitter>[0m[38;5;159m created using [38;5;121m<gs.MPMEntity>.[0m
+Traceback (most recent call last):
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\online_authorized_20260712\037_s1_sph_fluid_complex_002\attempt_1\code.py", line 114, in <module>
+    main()
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\online_authorized_20260712\037_s1_sph_fluid_complex_002\attempt_1\code.py", line 103, in main
+    emitter.set_rate(500)
+AttributeError: 'Emitter' object has no attribute 'set_rate'
+
+[38;5;9m[Genesis] [14:43:50] [ERROR] AttributeError: 'Emitter' object has no attribute 'set_rate'[0m
+[38;5;159m[Genesis] [14:43:50] [INFO] 💤 Exiting Genesis and caching compiled kernels...[0m

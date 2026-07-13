@@ -1,0 +1,50 @@
+Traceback (most recent call last):
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\run_20260712_161214_f8cf6ba7\079_s1_sensor_simple_001\attempt_1\code.py", line 1, in <module>
+    import genesis as gs
+  File "D:\Desktop\Genesis\Genesis-main\genesis\__init__.py", line 16, in <module>
+    import gstaichi as ti
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\gstaichi\__init__.py", line 11, in <module>
+    from gstaichi import (
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\gstaichi\ad\__init__.py", line 3, in <module>
+    from gstaichi.ad._ad import *
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\gstaichi\ad\_ad.py", line 15, in <module>
+    from gstaichi import _snode
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\gstaichi\_snode\__init__.py", line 3, in <module>
+    from gstaichi._snode.fields_builder import FieldsBuilder
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\gstaichi\_snode\fields_builder.py", line 7, in <module>
+    from gstaichi._snode.snode_tree import SNodeTree
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\gstaichi\_snode\snode_tree.py", line 8, in <module>
+    from gstaichi.lang import impl
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\gstaichi\lang\__init__.py", line 3, in <module>
+    from gstaichi.lang import impl, simt  # noqa: F401
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\gstaichi\lang\impl.py", line 28, in <module>
+    from gstaichi.lang.kernel_impl import BoundGsTaichiCallable, GsTaichiCallable, Kernel
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\gstaichi\lang\kernel_impl.py", line 44, in <module>
+    from gstaichi.lang._fast_caching import src_hasher
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\gstaichi\lang\_fast_caching\__init__.py", line 1, in <module>
+    from .args_hasher import FIELD_METADATA_CACHE_VALUE
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\gstaichi\lang\_fast_caching\args_hasher.py", line 20, in <module>
+    import torch
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\torch\__init__.py", line 2150, in <module>
+    from torch import _VF as _VF, functional as functional  # usort: skip
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\torch\functional.py", line 8, in <module>
+    import torch.nn.functional as F
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\torch\nn\__init__.py", line 8, in <module>
+    from torch.nn.modules import *  # usort: skip # noqa: F403
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\torch\nn\modules\__init__.py", line 1, in <module>
+    from .module import Module  # usort: skip
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\torch\nn\modules\module.py", line 17, in <module>
+    from torch.utils._python_dispatch import is_traceable_wrapper_subclass
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\torch\utils\__init__.py", line 8, in <module>
+    from torch.utils import (
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\torch\utils\data\__init__.py", line 1, in <module>
+    from torch.utils.data.dataloader import (
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\torch\utils\data\dataloader.py", line 22, in <module>
+    import torch.distributed as dist
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\torch\distributed\__init__.py", line 3, in <module>
+    import pdb
+  File "D:\anaconda\envs\env_genesis\lib\pdb.py", line 77, in <module>
+    import code
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\run_20260712_161214_f8cf6ba7\079_s1_sensor_simple_001\attempt_1\code.py", line 4, in <module>
+    gs.init(backend=gs.gpu)
+AttributeError: partially initialized module 'genesis' has no attribute 'init' (most likely due to a circular import)

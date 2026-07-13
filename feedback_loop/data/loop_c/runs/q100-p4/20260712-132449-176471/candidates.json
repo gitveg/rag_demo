@@ -1,0 +1,39 @@
+{
+  "generated_at": "20260712_132449_176471",
+  "source_log": "workspace\\logs\\execution_log_query100_part4.jsonl",
+  "counts": {
+    "A": 0,
+    "B": 0,
+    "C": 1
+  },
+  "candidates": [
+    {
+      "candidate_id": "cand_c_31284eed1980c9d71fee51dc",
+      "type": "C",
+      "api_id": "genesis.options.morphs.Terrain",
+      "constraints": [
+        "Do not pass unrecognized attribute 'fractal_terrain'; it is not a valid parameter for this API."
+      ],
+      "error_examples": [
+        "Unrecognized attribute: fractal_terrain",
+        "`subterrain_types` should be either a string or a 2D list of strings with the same shape as `n_subterrains`."
+      ],
+      "event_count": 2,
+      "entry": {
+        "api_id": "genesis.options.morphs.Terrain",
+        "constraints": [
+          "Do not pass unrecognized attribute 'fractal_terrain'; it is not a valid parameter for this API."
+        ],
+        "error_examples": [
+          "Unrecognized attribute: fractal_terrain",
+          "`subterrain_types` should be either a string or a 2D list of strings with the same shape as `n_subterrains`."
+        ],
+        "event_count": 2,
+        "sources": [
+          "legacy_evt_18cdb868a11635674c8438dead9334a7b343fbb7547c570a90b97baafc463259",
+          "legacy_evt_88b8e4e9a75281cdb927b5449535e37220c4de50a5b9d4facf74f88f7488859b"
+        ]
+      }
+    }
+  ]
+}

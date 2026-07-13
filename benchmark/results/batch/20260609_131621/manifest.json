@@ -1,0 +1,26 @@
+[
+  {
+    "index": 1,
+    "command": "D:\\anaconda\\envs\\env_genesis\\python.exe run_benchmark.py --no-exec --rewrite-mode none --output-dir D:\\Desktop\\Genesis\\Genesis-main\\rag_demo\\benchmark\\results\\batch\\20260609_131621\\run_01",
+    "returncode": 0,
+    "elapsed_sec": 222.9,
+    "output_dir": "D:\\Desktop\\Genesis\\Genesis-main\\rag_demo\\benchmark\\results\\batch\\20260609_131621\\run_01",
+    "json": "D:\\Desktop\\Genesis\\Genesis-main\\rag_demo\\benchmark\\results\\batch\\20260609_131621\\run_01\\benchmark_20260609_131621.json"
+  },
+  {
+    "index": 2,
+    "command": "D:\\anaconda\\envs\\env_genesis\\python.exe run_benchmark.py --no-exec --rewrite-mode translate --output-dir D:\\Desktop\\Genesis\\Genesis-main\\rag_demo\\benchmark\\results\\batch\\20260609_131621\\run_02",
+    "returncode": 0,
+    "elapsed_sec": 233.1,
+    "output_dir": "D:\\Desktop\\Genesis\\Genesis-main\\rag_demo\\benchmark\\results\\batch\\20260609_131621\\run_02",
+    "json": "D:\\Desktop\\Genesis\\Genesis-main\\rag_demo\\benchmark\\results\\batch\\20260609_131621\\run_02\\benchmark_20260609_132004.json"
+  },
+  {
+    "index": 3,
+    "command": "D:\\anaconda\\envs\\env_genesis\\python.exe run_benchmark.py --no-exec --output-dir D:\\Desktop\\Genesis\\Genesis-main\\rag_demo\\benchmark\\results\\batch\\20260609_131621\\run_03",
+    "returncode": 0,
+    "elapsed_sec": 411.8,
+    "output_dir": "D:\\Desktop\\Genesis\\Genesis-main\\rag_demo\\benchmark\\results\\batch\\20260609_131621\\run_03",
+    "json": "D:\\Desktop\\Genesis\\Genesis-main\\rag_demo\\benchmark\\results\\batch\\20260609_131621\\run_03\\benchmark_20260609_132357.json"
+  }
+]

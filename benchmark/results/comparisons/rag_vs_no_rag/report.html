@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>RAG vs No-RAG 对比 (deepseek-v4-pro)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg: #0f1219; --surface: #171b24; --card: #1c2130;
+      --border: #2a3142; --text: #e8eaef; --muted: #8b93a7;
+      --accent: #6c9eff; --good: #3ecf8e; --bad: #f07178;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.5; padding: 2rem 1.5rem 4rem;
+    }
+    .wrap { max-width: 1200px; margin: 0 auto; }
+    header {
+      margin-bottom: 1.5rem; padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+    h1 { font-size: 1.75rem; font-weight: 700; margin: 0 0 0.5rem; letter-spacing: -0.02em; }
+    .sub { color: var(--muted); font-size: 0.95rem; }
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,.25);
+    }
+    h2 { font-size: 1.15rem; margin: 0 0 1rem; color: var(--accent); font-weight: 600; }
+    h3 { font-size: 1rem; margin: 1.25rem 0 0.75rem; color: var(--muted); }
+    .meta { font-size: 0.8rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; margin-bottom: 1rem; }
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    table.data { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    table.data th, table.data td {
+      padding: 0.5rem 0.65rem; text-align: left; border-bottom: 1px solid var(--border);
+    }
+    table.data th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+    table.data tr:hover td { background: rgba(255,255,255,.03); }
+    td.mono { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
+    td.query { max-width: 280px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .tag {
+      display: inline-block; padding: 0.15rem 0.45rem; border-radius: 6px;
+      font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
+    }
+    .tag.simple { background: #1e3a2f; color: #3ecf8e; }
+    .tag.medium { background: #3a2e1e; color: #ffb347; }
+    .tag.hard { background: #3a1e2e; color: #ff8cc8; }
+    table.heatmap td.cell {
+      background: rgba(108, 158, 255, var(--a, 0.5)); text-align: center;
+      font-weight: 600; font-size: 0.8rem;
+    }
+    table.heatmap td.na { color: var(--muted); text-align: center; }
+    td.ok { color: var(--good); text-align: center; font-weight: 700; }
+    td.bad { color: var(--bad); text-align: center; font-weight: 700; }
+    canvas { max-height: 320px !important; }
+    .toc { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+    .toc a {
+      color: var(--accent); text-decoration: none; font-size: 0.85rem;
+      padding: 0.35rem 0.75rem; border: 1px solid var(--border); border-radius: 8px;
+    }
+    .toc a:hover { background: var(--surface); }
+    .badge-rerank {
+      display: inline-block; padding: 0.15rem 0.5rem; border-radius: 6px;
+      font-size: 0.7rem; font-weight: 600; background: #1e2a3a; color: #6c9eff;
+      margin-left: 0.5rem; vertical-align: middle;
+    }
+    th.col-rerank { background: rgba(108, 158, 255, 0.12); }
+
+    /* ===== Tab system ===== */
+    .tab-bar {
+      display: flex; gap: 8px; margin-bottom: 1.5rem;
+      padding: 6px; background: var(--surface); border-radius: 10px; border: 1px solid var(--border);
+    }
+    .tab-btn {
+      padding: 8px 22px; border: 1px solid transparent; border-radius: 8px;
+      background: transparent; color: var(--muted); cursor: pointer;
+      font-size: 0.9rem; font-family: inherit; font-weight: 500;
+      transition: all 0.2s;
+    }
+    .tab-btn:hover { color: var(--text); background: var(--card); }
+    .tab-btn.active {
+      background: var(--accent); color: #fff; border-color: var(--accent);
+      box-shadow: 0 2px 8px rgba(108,158,255,0.3);
+    }
+    /* Section visibility */
+    .section-rag, .section-exec, .section-all { display: block; }
+    body.tab-rag .section-exec { display: none; }
+    body.tab-rag .section-all { display: none; }
+    body.tab-exec .section-rag { display: none; }
+    body.tab-exec .section-all { display: none; }
+    body.tab-all .section-rag { display: block; }
+    body.tab-all .section-exec { display: block; }
+    /* Column visibility */
+    body.tab-rag .col-exec { display: none; }
+    body.tab-exec .col-rag { display: none; }
+    /* Empty hint */
+    .empty-hint {
+      padding: 2rem; text-align: center; color: var(--muted);
+      font-size: 0.95rem; border: 1px dashed var(--border); border-radius: 8px;
+    }
+    footer { margin-top: 3rem; color: var(--muted); font-size: 0.8rem; text-align: center; }
+  </style>
+</head>
+<body class="tab-rag">
+  <div class="wrap">
+    <header>
+      <h1>RAG vs No-RAG 对比 (deepseek-v4-pro)</h1>
+      <p class="sub">生成时间 2026-06-17T16:59:15 · 共 2 次实验</p>
+      <div class="tab-bar">
+        <button class="tab-btn active" data-target="rag">📊 RAG 召回</button>
+        <button class="tab-btn" data-target="exec">🚀 执行成功率</button>
+        <button class="tab-btn" data-target="all">📋 全部指标</button>
+      </div>
+      <nav class="toc">
+        <a href="#run-1">实验 1</a> <a href="#run-2">实验 2</a>
+      </nav>
+    </header>
+    <section class='card section-rag'><h2>RAG 召回对比（Overall）</h2><canvas id='chartCompareRAG' height='120'></canvas><div class='table-wrap'><table class='data'><thead><tr><th>实验</th><th>RAG</th><th>语义RAG</th><th>新增命中</th><th>dyn子集</th><th>TokF</th></tr></thead><tbody><tr><td>No RAG</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>Best RAG</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr></tbody></table></div></section>
+    <section class='card section-exec'><h2>执行成功率对比（Overall）</h2><canvas id='chartCompareExec' height='120'></canvas><div class='table-wrap'><table class='data'><thead><tr><th>实验</th><th>Pass@1</th><th>Pass@3</th></tr></thead><tbody><tr><td>No RAG</td><td>20.0%</td><td>30.0%</td></tr><tr><td>Best RAG</td><td>70.0%</td><td>80.0%</td></tr></tbody></table></div></section>
+    <section class='card section-all'><h2>全部指标对比（Overall）</h2><canvas id='chartCompareAll' height='120'></canvas><div class='table-wrap'><table class='data'><thead><tr><th>实验</th><th>RAG</th><th>语义RAG</th><th>新增命中</th><th>dyn子集</th><th>P@1</th><th>P@3</th><th>TokF</th></tr></thead><tbody><tr><td>No RAG</td><td>—</td><td>—</td><td>—</td><td>—</td><td>20.0%</td><td>30.0%</td><td>—</td></tr><tr><td>Best RAG</td><td>—</td><td>—</td><td>—</td><td>—</td><td>70.0%</td><td>80.0%</td><td>—</td></tr></tbody></table></div></section>
+    <section class='card section-rag'><h2>逐任务 RAG 命中率（跨实验对比）</h2><div class='table-wrap'><table class='data heatmap'><thead><tr><th>task_id</th><th>No RAG</th><th class="col-rerank">Best RAG</th></tr></thead><tbody><tr><td class='mono'>eval_001</td><td class='na'>—</td><td class='na'>—</td></tr><tr><td class='mono'>eval_002</td><td class='na'>—</td><td class='na'>—</td></tr><tr><td class='mono'>eval_003</td><td class='na'>—</td><td class='na'>—</td></tr><tr><td class='mono'>eval_004</td><td class='na'>—</td><td class='na'>—</td></tr><tr><td class='mono'>eval_006</td><td class='na'>—</td><td class='na'>—</td></tr><tr><td class='mono'>eval_007</td><td class='na'>—</td><td class='na'>—</td></tr><tr><td class='mono'>eval_008</td><td class='na'>—</td><td class='na'>—</td></tr><tr><td class='mono'>eval_016</td><td class='na'>—</td><td class='na'>—</td></tr><tr><td class='mono'>eval_017</td><td class='na'>—</td><td class='na'>—</td></tr><tr><td class='mono'>eval_018</td><td class='na'>—</td><td class='na'>—</td></tr></tbody></table></div></section>
+    <section class='card section-exec'><h2>Pass@1（跨实验对比）</h2><div class='table-wrap'><table class='data'><thead><tr><th>task_id</th><th>No RAG</th><th class="col-rerank">Best RAG</th></tr></thead><tbody><tr><td class='mono'>eval_001</td><td class='ok'>✓</td><td class='bad'>✗</td></tr><tr><td class='mono'>eval_002</td><td class='bad'>✗</td><td class='ok'>✓</td></tr><tr><td class='mono'>eval_003</td><td class='bad'>✗</td><td class='ok'>✓</td></tr><tr><td class='mono'>eval_004</td><td class='bad'>✗</td><td class='ok'>✓</td></tr><tr><td class='mono'>eval_006</td><td class='ok'>✓</td><td class='ok'>✓</td></tr><tr><td class='mono'>eval_007</td><td class='bad'>✗</td><td class='ok'>✓</td></tr><tr><td class='mono'>eval_008</td><td class='bad'>✗</td><td class='ok'>✓</td></tr><tr><td class='mono'>eval_016</td><td class='bad'>✗</td><td class='bad'>✗</td></tr><tr><td class='mono'>eval_017</td><td class='bad'>✗</td><td class='ok'>✓</td></tr><tr><td class='mono'>eval_018</td><td class='bad'>✗</td><td class='bad'>✗</td></tr></tbody></table></div></section>
+    <section class='card section-rag'><h2>按难度分组的 RAG 总召回</h2><canvas id='chartByComplexity' height='100'></canvas></section>
+    
+    <section class='card run-detail' id='run-1'><h2>No RAG</h2><p class='meta'>run_id: no_rag_2026-06-16T16:30:39.184152 · timestamp: 2026-06-16T16:30:39.184152 · tasks: 10</p><table class='data'><thead><tr><th>组别</th><th>N</th><th class='col-rag'>RAG</th><th class='col-rag'>语义</th><th class='col-rag'>新增命中</th><th class='col-rag'>dyn子集</th><th class='col-rag'>TokI</th><th class='col-rag'>TokF</th><th class='col-exec'>P@1</th><th class='col-exec'>P@3</th></tr></thead><tbody><tr><td>overall</td><td>10</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-exec'>20.0%</td><td class='col-exec'>30.0%</td></tr><tr><td>simple</td><td>4</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-exec'>25.0%</td><td class='col-exec'>25.0%</td></tr><tr><td>medium</td><td>3</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-exec'>33.3%</td><td class='col-exec'>66.7%</td></tr><tr><td>hard</td><td>3</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-exec'>0.0%</td><td class='col-exec'>0.0%</td></tr></tbody></table><h3>逐任务</h3><div class='table-wrap'><table class='data tasks'><thead><tr><th>task</th><th>cx</th><th>query</th><th class='col-rag'>RAG</th><th class='col-rag'>Dynamic</th><th class='col-rag'>新增命中</th><th class='col-exec'>P@1</th><th class='col-exec'>P@3</th><th class='col-rag'>Tok I/F</th><th class='col-exec'>sec</th></tr></thead><tbody><tr><td class='mono'>eval_001</td><td><span class='tag simple'>simple</span></td><td class='query' title='Simulate a red rigid sphere falling straight down onto a flat ground.'>Simulate a red rigid sphere falling straight down onto a flat ground.</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-exec'>✓</td><td class='col-exec'>✓</td><td class='col-rag'>—/—</td><td class='col-exec'>224.5</td></tr><tr><td class='mono'>eval_002</td><td><span class='tag simple'>simple</span></td><td class='query' title='Create a static rigid box to serve as an obstacle in the scene.'>Create a static rigid box to serve as an obstacle in the scene.</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-exec'>✗</td><td class='col-exec'>✗</td><td class='col-rag'>—/—</td><td class='col-exec'>150.4</td></tr><tr><td class='mono'>eval_003</td><td><span class='tag simple'>simple</span></td><td class='query' title='Drop a rigid cylinder from a height of 3 meters onto a horizontal plane.'>Drop a rigid cylinder from a height of 3 meters onto a horizontal plane.</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-exec'>✗</td><td class='col-exec'>✗</td><td class='col-rag'>—/—</td><td class='col-exec'>132.1</td></tr><tr><td class='mono'>eval_004</td><td><span class='tag simple'>simple</span></td><td class='query' title='Create a rigid box floating without gravity in a zero-g environment.'>Create a rigid box floating without gravity in a zero-g environment.</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-exec'>✗</td><td class='col-exec'>✗</td><td class='col-rag'>—/—</td><td class='col-exec'>83.4</td></tr><tr><td class='mono'>eval_006</td><td><span class='tag medium'>medium</span></td><td class='query' title='Create two rigid spheres positioned side by side, falling onto the ground at the same time.'>Create two rigid spheres positioned side by side, falling onto the ground at the same time.</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-exec'>✓</td><td class='col-exec'>✓</td><td class='col-rag'>—/—</td><td class='col-exec'>190.2</td></tr><tr><td class='mono'>eval_007</td><td><span class='tag medium'>medium</span></td><td class='query' title='Stack three rigid boxes vertically on top of each other on a static ground plane.'>Stack three rigid boxes vertically on top of each other on a static ground plane.</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-exec'>✗</td><td class='col-exec'>✓</td><td class='col-rag'>—/—</td><td class='col-exec'>282.5</td></tr><tr><td class='mono'>eval_008</td><td><span class='tag medium'>medium</span></td><td class='query' title='Simulate a small rigid sphere falling directly onto the center of a large static rigid box.'>Simulate a small rigid sphere falling directly onto the center of a large static rigid box.</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-exec'>✗</td><td class='col-exec'>✗</td><td class='col-rag'>—/—</td><td class='col-exec'>126.1</td></tr><tr><td class='mono'>eval_016</td><td><span class='tag hard'>hard</span></td><td class='query' title='Import a bunny mesh and simulate it as a soft elastic body falling onto a rigid ground.'>Import a bunny mesh and simulate it as a soft elastic body falling onto a rigid ground.</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-exec'>✗</td><td class='col-exec'>✗</td><td class='col-rag'>—/—</td><td class='col-exec'>148.6</td></tr><tr><td class='mono'>eval_017</td><td><span class='tag hard'>hard</span></td><td class='query' title='Load a Franka robot arm from an XML file and place a red rigid box on the ground in front of it.'>Load a Franka robot arm from an XML file and place a red rigid box on the ground in front of it.</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-exec'>✗</td><td class='col-exec'>✗</td><td class='col-rag'>—/—</td><td class='col-exec'>144.3</td></tr><tr><td class='mono'>eval_018</td><td><span class='tag hard'>hard</span></td><td class='query' title='Load a bathtub mesh as a static rigid container, add a rigid ground plane, and pour an MPM liquid volume from above into the bathtub.'>Load a bathtub mesh as a static rigid container, add a rigid ground plane, and pour an MPM liquid volume from above into the bathtub.</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-exec'>✗</td><td class='col-exec'>✗</td><td class='col-rag'>—/—</td><td class='col-exec'>169.9</td></tr></tbody></table></div></section><section class='card run-detail' id='run-2'><h2>Best RAG <span class="badge-rerank">+rerank</span></h2><p class='meta'>run_id: best_rag_2026-06-16T16:30:39.184152 · timestamp: 2026-06-16T16:30:39.184152 · tasks: 10</p><table class='data'><thead><tr><th>组别</th><th>N</th><th class='col-rag'>RAG</th><th class='col-rag'>语义</th><th class='col-rag'>新增命中</th><th class='col-rag'>dyn子集</th><th class='col-rag'>TokI</th><th class='col-rag'>TokF</th><th class='col-exec'>P@1</th><th class='col-exec'>P@3</th></tr></thead><tbody><tr><td>overall</td><td>10</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-exec'>70.0%</td><td class='col-exec'>80.0%</td></tr><tr><td>simple</td><td>4</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-exec'>75.0%</td><td class='col-exec'>100.0%</td></tr><tr><td>medium</td><td>3</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-exec'>100.0%</td><td class='col-exec'>100.0%</td></tr><tr><td>hard</td><td>3</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-exec'>33.3%</td><td class='col-exec'>33.3%</td></tr></tbody></table><h3>逐任务</h3><div class='table-wrap'><table class='data tasks'><thead><tr><th>task</th><th>cx</th><th>query</th><th class='col-rag'>RAG</th><th class='col-rag'>Dynamic</th><th class='col-rag'>新增命中</th><th class='col-exec'>P@1</th><th class='col-exec'>P@3</th><th class='col-rag'>Tok I/F</th><th class='col-exec'>sec</th></tr></thead><tbody><tr><td class='mono'>eval_001</td><td><span class='tag simple'>simple</span></td><td class='query' title='Simulate a red rigid sphere falling straight down onto a flat ground.'>Simulate a red rigid sphere falling straight down onto a flat ground.</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-exec'>✗</td><td class='col-exec'>✓</td><td class='col-rag'>—/—</td><td class='col-exec'>330.0</td></tr><tr><td class='mono'>eval_002</td><td><span class='tag simple'>simple</span></td><td class='query' title='Create a static rigid box to serve as an obstacle in the scene.'>Create a static rigid box to serve as an obstacle in the scene.</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-exec'>✓</td><td class='col-exec'>✓</td><td class='col-rag'>—/—</td><td class='col-exec'>113.5</td></tr><tr><td class='mono'>eval_003</td><td><span class='tag simple'>simple</span></td><td class='query' title='Drop a rigid cylinder from a height of 3 meters onto a horizontal plane.'>Drop a rigid cylinder from a height of 3 meters onto a horizontal plane.</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-exec'>✓</td><td class='col-exec'>✓</td><td class='col-rag'>—/—</td><td class='col-exec'>190.5</td></tr><tr><td class='mono'>eval_004</td><td><span class='tag simple'>simple</span></td><td class='query' title='Create a rigid box floating without gravity in a zero-g environment.'>Create a rigid box floating without gravity in a zero-g environment.</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-exec'>✓</td><td class='col-exec'>✓</td><td class='col-rag'>—/—</td><td class='col-exec'>99.2</td></tr><tr><td class='mono'>eval_006</td><td><span class='tag medium'>medium</span></td><td class='query' title='Create two rigid spheres positioned side by side, falling onto the ground at the same time.'>Create two rigid spheres positioned side by side, falling onto the ground at the same time.</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-exec'>✓</td><td class='col-exec'>✓</td><td class='col-rag'>—/—</td><td class='col-exec'>221.1</td></tr><tr><td class='mono'>eval_007</td><td><span class='tag medium'>medium</span></td><td class='query' title='Stack three rigid boxes vertically on top of each other on a static ground plane.'>Stack three rigid boxes vertically on top of each other on a static ground plane.</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-exec'>✓</td><td class='col-exec'>✓</td><td class='col-rag'>—/—</td><td class='col-exec'>198.1</td></tr><tr><td class='mono'>eval_008</td><td><span class='tag medium'>medium</span></td><td class='query' title='Simulate a small rigid sphere falling directly onto the center of a large static rigid box.'>Simulate a small rigid sphere falling directly onto the center of a large static rigid box.</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-exec'>✓</td><td class='col-exec'>✓</td><td class='col-rag'>—/—</td><td class='col-exec'>232.7</td></tr><tr><td class='mono'>eval_016</td><td><span class='tag hard'>hard</span></td><td class='query' title='Import a bunny mesh and simulate it as a soft elastic body falling onto a rigid ground.'>Import a bunny mesh and simulate it as a soft elastic body falling onto a rigid ground.</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-exec'>✗</td><td class='col-exec'>✗</td><td class='col-rag'>—/—</td><td class='col-exec'>216.6</td></tr><tr><td class='mono'>eval_017</td><td><span class='tag hard'>hard</span></td><td class='query' title='Load a Franka robot arm from an XML file and place a red rigid box on the ground in front of it.'>Load a Franka robot arm from an XML file and place a red rigid box on the ground in front of it.</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-exec'>✓</td><td class='col-exec'>✓</td><td class='col-rag'>—/—</td><td class='col-exec'>209.3</td></tr><tr><td class='mono'>eval_018</td><td><span class='tag hard'>hard</span></td><td class='query' title='Load a bathtub mesh as a static rigid container, add a rigid ground plane, and pour an MPM liquid volume from above into the bathtub.'>Load a bathtub mesh as a static rigid container, add a rigid ground plane, and pour an MPM liquid volume from above into the bathtub.</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-rag'>—</td><td class='col-exec'>✗</td><td class='col-exec'>✗</td><td class='col-rag'>—/—</td><td class='col-exec'>321.1</td></tr></tbody></table></div></section>
+    <footer>rag_demo benchmark · visualize_benchmark</footer>
+  </div>
+  <script>
+    const chartData = {"labels": ["No RAG", "Best RAG"], "rag": [null, null], "unit": [null, null], "new_hit": [null, null], "dyn_slice": [null, null], "p1": [0.2, 0.7], "p3": [0.3, 0.8], "tok_f": [null, null]};
+    const cxData = {"labels": ["simple", "medium", "hard"], "datasets": [{"label": "No RAG", "data": [null, null, null], "backgroundColor": "#5b8defcc", "borderColor": "#5b8def", "borderWidth": 1}, {"label": "Best RAG", "data": [null, null, null], "backgroundColor": "#7c6cf0cc", "borderColor": "#7c6cf0", "borderWidth": 1}]};
+    const domainData = {"labels": [], "datasets": [{"label": "No RAG", "data": [], "backgroundColor": "#5b8defcc", "borderColor": "#5b8def", "borderWidth": 1}, {"label": "Best RAG", "data": [], "backgroundColor": "#7c6cf0cc", "borderColor": "#7c6cf0", "borderWidth": 1}]};
+
+    // ---- Tab switching ----
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.onclick = () => {
+        document.body.className = 'tab-' + btn.dataset.target;
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      };
+    });
+
+    // ---- null-safe pct for charts ----
+    const pct = (v) => v == null ? null : v * 100;
+
+    // ---- Chart options template ----
+    const chartOpts = (titleText) => ({
+      responsive: true,
+      plugins: {
+        legend: { position: 'bottom', labels: { color: '#8b93a7' } },
+        title: titleText ? { display: true, text: titleText, color: '#8b93a7' } : { display: false }
+      },
+      scales: {
+        x: { ticks: { color: '#8b93a7', maxRotation: 45, minRotation: 0 } },
+        y: {
+          beginAtZero: true, max: 100,
+          ticks: { color: '#8b93a7', callback: v => v + '%' }
+        }
+      }
+    });
+
+    // ---- RAG comparison chart ----
+    if (document.getElementById('chartCompareRAG')) {
+      new Chart(document.getElementById('chartCompareRAG').getContext('2d'), {
+        type: 'bar',
+        data: {
+          labels: chartData.labels,
+          datasets: [
+            { label: 'RAG 总召回', data: chartData.rag.map(pct), backgroundColor: 'rgba(108,158,255,0.75)', spanGaps: true },
+            { label: '语义 RAG', data: chartData.unit.map(pct), backgroundColor: 'rgba(124,108,240,0.75)', spanGaps: true },
+          ]
+        },
+        options: chartOpts()
+      });
+    }
+
+    // ---- Exec comparison chart ----
+    if (document.getElementById('chartCompareExec')) {
+      new Chart(document.getElementById('chartCompareExec').getContext('2d'), {
+        type: 'bar',
+        data: {
+          labels: chartData.labels,
+          datasets: [
+            { label: 'Pass@1', data: chartData.p1.map(pct), backgroundColor: 'rgba(61,153,112,0.75)', spanGaps: true },
+            { label: 'Pass@3', data: chartData.p3.map(pct), backgroundColor: 'rgba(224,122,95,0.75)', spanGaps: true },
+          ]
+        },
+        options: chartOpts()
+      });
+    }
+
+    // ---- All-in-one comparison chart ----
+    if (document.getElementById('chartCompareAll')) {
+      new Chart(document.getElementById('chartCompareAll').getContext('2d'), {
+        type: 'bar',
+        data: {
+          labels: chartData.labels,
+          datasets: [
+            { label: 'RAG 总召回', data: chartData.rag.map(pct), backgroundColor: 'rgba(108,158,255,0.75)', spanGaps: true },
+            { label: '语义 RAG', data: chartData.unit.map(pct), backgroundColor: 'rgba(124,108,240,0.75)', spanGaps: true },
+            { label: 'Pass@1', data: chartData.p1.map(pct), backgroundColor: 'rgba(61,153,112,0.75)', spanGaps: true },
+            { label: 'Pass@3', data: chartData.p3.map(pct), backgroundColor: 'rgba(224,122,95,0.75)', spanGaps: true },
+          ]
+        },
+        options: chartOpts()
+      });
+    }
+
+    // ---- Complexity chart ----
+    if (document.getElementById('chartByComplexity')) {
+      new Chart(document.getElementById('chartByComplexity').getContext('2d'), {
+        type: 'bar',
+        data: {
+          labels: cxData.labels,
+          datasets: cxData.datasets.map(ds => ({
+            ...ds,
+            data: ds.data.map(v => v == null ? null : v * 100)
+          }))
+        },
+        options: {
+          ...chartOpts(),
+          plugins: {
+            legend: { position: 'bottom', labels: { color: '#8b93a7' } },
+            tooltip: { callbacks: { label: c => c.dataset.label + ': ' + (c.raw == null ? 'N/A' : c.raw.toFixed(1) + '%') } }
+          }
+        }
+      });
+    }
+
+    // ---- Domain chart ----
+    if (document.getElementById('chartByDomain')) {
+      new Chart(document.getElementById('chartByDomain').getContext('2d'), {
+        type: 'bar',
+        data: {
+          labels: domainData.labels,
+          datasets: domainData.datasets.map(ds => ({
+            ...ds,
+            data: ds.data.map(v => v == null ? null : v * 100)
+          }))
+        },
+        options: {
+          ...chartOpts(),
+          plugins: {
+            legend: { position: 'bottom', labels: { color: '#8b93a7' } },
+            tooltip: { callbacks: { label: c => c.dataset.label + ': ' + (c.raw == null ? 'N/A' : c.raw.toFixed(1) + '%') } }
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html>

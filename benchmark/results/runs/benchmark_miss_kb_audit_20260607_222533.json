@@ -1,0 +1,187 @@
+{
+  "generated_at": "2026-06-07T22:25:33.776373",
+  "kb_file": "D:\\Desktop\\Genesis\\Genesis-main\\rag_demo\\benchmark\\..\\knowledge_base\\genesis_api_index.json",
+  "kb_api_count": 654,
+  "result_count": 1,
+  "single_reports": [
+    {
+      "result_json": "D:\\Desktop\\Genesis\\Genesis-main\\rag_demo\\benchmark\\results\\runs\\benchmark_20260607_222530.json",
+      "run_id": "20260607_222530",
+      "timestamp": "2026-06-07T22:25:33.659484",
+      "rag_search_params": {},
+      "total_tasks": 3,
+      "total_miss_records": 25,
+      "missing_in_kb_count": 0,
+      "exists_in_kb_but_missed_count": 25,
+      "missing_in_kb_ratio": 0.0,
+      "exists_in_kb_but_missed_ratio": 1.0,
+      "top_missing_in_kb": [],
+      "top_exists_in_kb_but_missed": [
+        {
+          "api_id": "genesis.Scene.add_entity",
+          "count": 3
+        },
+        {
+          "api_id": "genesis.morphs.Plane",
+          "count": 3
+        },
+        {
+          "api_id": "genesis.materials.Rigid",
+          "count": 3
+        },
+        {
+          "api_id": "genesis.Scene",
+          "count": 3
+        },
+        {
+          "api_id": "genesis.Scene.build",
+          "count": 3
+        },
+        {
+          "api_id": "genesis.Scene.step",
+          "count": 3
+        },
+        {
+          "api_id": "genesis.options.ViewerOptions",
+          "count": 3
+        },
+        {
+          "api_id": "genesis.morphs.Sphere",
+          "count": 1
+        },
+        {
+          "api_id": "genesis.surfaces.Default",
+          "count": 1
+        },
+        {
+          "api_id": "genesis.morphs.Box",
+          "count": 1
+        },
+        {
+          "api_id": "genesis.morphs.Cylinder",
+          "count": 1
+        }
+      ],
+      "priority_top_exists_in_kb_but_missed": [
+        {
+          "api_id": "genesis.Scene",
+          "miss_frequency": 3,
+          "task_coverage": 3,
+          "priority_score": 9
+        },
+        {
+          "api_id": "genesis.Scene.add_entity",
+          "miss_frequency": 3,
+          "task_coverage": 3,
+          "priority_score": 9
+        },
+        {
+          "api_id": "genesis.Scene.build",
+          "miss_frequency": 3,
+          "task_coverage": 3,
+          "priority_score": 9
+        },
+        {
+          "api_id": "genesis.Scene.step",
+          "miss_frequency": 3,
+          "task_coverage": 3,
+          "priority_score": 9
+        },
+        {
+          "api_id": "genesis.materials.Rigid",
+          "miss_frequency": 3,
+          "task_coverage": 3,
+          "priority_score": 9
+        },
+        {
+          "api_id": "genesis.morphs.Plane",
+          "miss_frequency": 3,
+          "task_coverage": 3,
+          "priority_score": 9
+        },
+        {
+          "api_id": "genesis.options.ViewerOptions",
+          "miss_frequency": 3,
+          "task_coverage": 3,
+          "priority_score": 9
+        },
+        {
+          "api_id": "genesis.morphs.Box",
+          "miss_frequency": 1,
+          "task_coverage": 1,
+          "priority_score": 1
+        },
+        {
+          "api_id": "genesis.morphs.Cylinder",
+          "miss_frequency": 1,
+          "task_coverage": 1,
+          "priority_score": 1
+        },
+        {
+          "api_id": "genesis.morphs.Sphere",
+          "miss_frequency": 1,
+          "task_coverage": 1,
+          "priority_score": 1
+        },
+        {
+          "api_id": "genesis.surfaces.Default",
+          "miss_frequency": 1,
+          "task_coverage": 1,
+          "priority_score": 1
+        }
+      ],
+      "per_task": [
+        {
+          "task_id": "eval_001",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.Scene",
+            "genesis.Scene.add_entity",
+            "genesis.Scene.build",
+            "genesis.Scene.step",
+            "genesis.materials.Rigid",
+            "genesis.morphs.Plane",
+            "genesis.morphs.Sphere",
+            "genesis.options.ViewerOptions",
+            "genesis.surfaces.Default"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 9
+        },
+        {
+          "task_id": "eval_002",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.Scene",
+            "genesis.Scene.add_entity",
+            "genesis.Scene.build",
+            "genesis.Scene.step",
+            "genesis.materials.Rigid",
+            "genesis.morphs.Box",
+            "genesis.morphs.Plane",
+            "genesis.options.ViewerOptions"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 8
+        },
+        {
+          "task_id": "eval_003",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.Scene",
+            "genesis.Scene.add_entity",
+            "genesis.Scene.build",
+            "genesis.Scene.step",
+            "genesis.materials.Rigid",
+            "genesis.morphs.Cylinder",
+            "genesis.morphs.Plane",
+            "genesis.options.ViewerOptions"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 8
+        }
+      ]
+    }
+  ],
+  "batch_report": null
+}

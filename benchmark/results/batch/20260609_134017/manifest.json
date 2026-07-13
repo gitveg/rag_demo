@@ -1,0 +1,66 @@
+[
+  {
+    "index": 1,
+    "command": "D:\\anaconda\\envs\\env_genesis\\python.exe run_benchmark.py --no-exec --rag-rewrite-mode none --output-dir D:\\Desktop\\Genesis\\phys_agent\\benchmark\\results\\batch\\20260609_134017\\run_01",
+    "returncode": 0,
+    "elapsed_sec": 62.9,
+    "output_dir": "D:\\Desktop\\Genesis\\phys_agent\\benchmark\\results\\batch\\20260609_134017\\run_01",
+    "json": "D:\\Desktop\\Genesis\\phys_agent\\benchmark\\results\\batch\\20260609_134017\\run_01\\benchmark_20260609_134019.json"
+  },
+  {
+    "index": 2,
+    "command": "D:\\anaconda\\envs\\env_genesis\\python.exe run_benchmark.py --no-exec --output-dir D:\\Desktop\\Genesis\\phys_agent\\benchmark\\results\\batch\\20260609_134017\\run_02",
+    "returncode": 0,
+    "elapsed_sec": 1887.9,
+    "output_dir": "D:\\Desktop\\Genesis\\phys_agent\\benchmark\\results\\batch\\20260609_134017\\run_02",
+    "json": "D:\\Desktop\\Genesis\\phys_agent\\benchmark\\results\\batch\\20260609_134017\\run_02\\benchmark_20260609_134122.json"
+  },
+  {
+    "index": 3,
+    "command": "D:\\anaconda\\envs\\env_genesis\\python.exe run_benchmark.py --no-exec --rag-rewrite-mode hyde --rag-hyde-route fourway --output-dir D:\\Desktop\\Genesis\\phys_agent\\benchmark\\results\\batch\\20260609_134017\\run_03",
+    "returncode": 0,
+    "elapsed_sec": 1936.3,
+    "output_dir": "D:\\Desktop\\Genesis\\phys_agent\\benchmark\\results\\batch\\20260609_134017\\run_03",
+    "json": "D:\\Desktop\\Genesis\\phys_agent\\benchmark\\results\\batch\\20260609_134017\\run_03\\benchmark_20260609_141250.json"
+  },
+  {
+    "index": 4,
+    "command": "D:\\anaconda\\envs\\env_genesis\\python.exe run_benchmark.py --no-exec --rag-rewrite-mode none --rerank --rerank-top-n 10 --output-dir D:\\Desktop\\Genesis\\phys_agent\\benchmark\\results\\batch\\20260609_134017\\run_04",
+    "returncode": 0,
+    "elapsed_sec": 291.8,
+    "output_dir": "D:\\Desktop\\Genesis\\phys_agent\\benchmark\\results\\batch\\20260609_134017\\run_04",
+    "json": "D:\\Desktop\\Genesis\\phys_agent\\benchmark\\results\\batch\\20260609_134017\\run_04\\benchmark_20260609_144506.json"
+  },
+  {
+    "index": 5,
+    "command": "D:\\anaconda\\envs\\env_genesis\\python.exe run_benchmark.py --no-exec --rerank --rerank-top-n 6 --output-dir D:\\Desktop\\Genesis\\phys_agent\\benchmark\\results\\batch\\20260609_134017\\run_05",
+    "returncode": 0,
+    "elapsed_sec": 3549.7,
+    "output_dir": "D:\\Desktop\\Genesis\\phys_agent\\benchmark\\results\\batch\\20260609_134017\\run_05",
+    "json": "D:\\Desktop\\Genesis\\phys_agent\\benchmark\\results\\batch\\20260609_134017\\run_05\\benchmark_20260609_144958.json"
+  },
+  {
+    "index": 6,
+    "command": "D:\\anaconda\\envs\\env_genesis\\python.exe run_benchmark.py --no-exec --rag-rewrite-mode hyde --rag-hyde-route fourway --rerank --rerank-top-n 10 --output-dir D:\\Desktop\\Genesis\\phys_agent\\benchmark\\results\\batch\\20260609_134017\\run_06",
+    "returncode": 0,
+    "elapsed_sec": 2070.7,
+    "output_dir": "D:\\Desktop\\Genesis\\phys_agent\\benchmark\\results\\batch\\20260609_134017\\run_06",
+    "json": "D:\\Desktop\\Genesis\\phys_agent\\benchmark\\results\\batch\\20260609_134017\\run_06\\benchmark_20260609_154908.json"
+  },
+  {
+    "index": 7,
+    "command": "D:\\anaconda\\envs\\env_genesis\\python.exe run_benchmark.py --no-exec --rerank --rerank-top-n 8 --output-dir D:\\Desktop\\Genesis\\phys_agent\\benchmark\\results\\batch\\20260609_134017\\run_07",
+    "returncode": 0,
+    "elapsed_sec": 1941.0,
+    "output_dir": "D:\\Desktop\\Genesis\\phys_agent\\benchmark\\results\\batch\\20260609_134017\\run_07",
+    "json": "D:\\Desktop\\Genesis\\phys_agent\\benchmark\\results\\batch\\20260609_134017\\run_07\\benchmark_20260609_162338.json"
+  },
+  {
+    "index": 8,
+    "command": "D:\\anaconda\\envs\\env_genesis\\python.exe run_benchmark.py --no-exec --rerank --rerank-top-n 10 --output-dir D:\\Desktop\\Genesis\\phys_agent\\benchmark\\results\\batch\\20260609_134017\\run_08",
+    "returncode": 0,
+    "elapsed_sec": 2043.6,
+    "output_dir": "D:\\Desktop\\Genesis\\phys_agent\\benchmark\\results\\batch\\20260609_134017\\run_08",
+    "json": "D:\\Desktop\\Genesis\\phys_agent\\benchmark\\results\\batch\\20260609_134017\\run_08\\benchmark_20260609_165559.json"
+  }
+]

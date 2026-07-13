@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\run_20260712_182331_55ce57ec\096_s1_cross_domain_complex_003\attempt_1\code.py", line 69, in <module>
+    main()
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\run_20260712_182331_55ce57ec\096_s1_cross_domain_complex_003\attempt_1\code.py", line 34, in main
+    gs.morphs.Terrain(
+  File "D:\Desktop\Genesis\Genesis-main\genesis\options\morphs.py", line 1177, in __init__
+    super().__init__(**data)
+  File "D:\Desktop\Genesis\Genesis-main\genesis\utils\misc.py", line 130, in new_init
+    original_init(self, *args, **kwargs)
+  File "D:\Desktop\Genesis\Genesis-main\genesis\options\morphs.py", line 90, in __init__
+    super().__init__(**data)
+  File "D:\Desktop\Genesis\Genesis-main\genesis\options\options.py", line 27, in __init__
+    gs.raise_exception(f"Unrecognized attribute: {key}")
+  File "D:\Desktop\Genesis\Genesis-main\genesis\utils\misc.py", line 44, in raise_exception
+    raise gs.GenesisException(msg)
+genesis.GenesisException: Unrecognized attribute: type
+
+[38;5;9m[Genesis] [18:28:47] [ERROR] GenesisException: Unrecognized attribute: type[0m
+[38;5;159m[Genesis] [18:28:47] [INFO] 💤 Exiting Genesis and caching compiled kernels...[0m

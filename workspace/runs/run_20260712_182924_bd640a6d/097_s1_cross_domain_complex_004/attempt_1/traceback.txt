@@ -1,0 +1,47 @@
+Traceback (most recent call last):
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\run_20260712_182924_bd640a6d\097_s1_cross_domain_complex_004\attempt_1\code.py", line 55, in <module>
+    main()
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\run_20260712_182924_bd640a6d\097_s1_cross_domain_complex_004\attempt_1\code.py", line 24, in main
+    scene.add_entity(
+  File "D:\Desktop\Genesis\Genesis-main\genesis\utils\misc.py", line 141, in wrapper
+    return method(self, *args, **kwargs)
+  File "D:\Desktop\Genesis\Genesis-main\genesis\engine\scene.py", line 457, in add_entity
+    entity = self._sim._add_entity(morph, material, surface, visualize_contact)
+  File "D:\Desktop\Genesis\Genesis-main\genesis\engine\simulator.py", line 173, in _add_entity
+    entity = self.mpm_solver.add_entity(self.n_entities, material, morph, surface)
+  File "D:\Desktop\Genesis\Genesis-main\genesis\engine\solvers\mpm_solver.py", line 224, in add_entity
+    entity = MPMEntity(
+  File "D:\Desktop\Genesis\Genesis-main\genesis\engine\entities\mpm_entity.py", line 58, in __init__
+    super().__init__(
+  File "D:\Desktop\Genesis\Genesis-main\genesis\engine\entities\particle_entity.py", line 105, in __init__
+    self.sample()
+  File "D:\Desktop\Genesis\Genesis-main\genesis\engine\entities\particle_entity.py", line 331, in sample
+    gs.raise_exception(
+  File "D:\Desktop\Genesis\Genesis-main\genesis\utils\misc.py", line 44, in raise_exception
+    raise gs.GenesisException(msg)
+genesis.GenesisException: Entity has particles outside solver boundary. Note that for MPMSolver, boundary is slightly tighter than the specified domain due to safety padding.
+
+Current boundary:
+<genesis.engine.boundaries.boundaries.CubeBoundary>
+lower       : <numpy.ndarray>: array([-0.453125, -0.453125,  0.046875], dtype=float32)
+upper       : <numpy.ndarray>: array([0.453125, 0.453125, 0.953125], dtype=float32)
+restitution : <float>: 0.0
+
+Entity to be added:
+min: [-0.495      -0.495       0.00500003]
+max: [0.495 0.495 0.595]
+
+
+[38;5;9m[Genesis] [18:30:52] [ERROR] GenesisException: Entity has particles outside solver boundary. Note that for MPMSolver, boundary is slightly tighter than the specified domain due to safety padding.
+
+Current boundary:
+<genesis.engine.boundaries.boundaries.CubeBoundary>
+lower       : <numpy.ndarray>: array([-0.453125, -0.453125,  0.046875], dtype=float32)
+upper       : <numpy.ndarray>: array([0.453125, 0.453125, 0.953125], dtype=float32)
+restitution : <float>: 0.0
+
+Entity to be added:
+min: [-0.495      -0.495       0.00500003]
+max: [0.495 0.495 0.595]
+[0m
+[38;5;159m[Genesis] [18:30:52] [INFO] 💤 Exiting Genesis and caching compiled kernels...[0m

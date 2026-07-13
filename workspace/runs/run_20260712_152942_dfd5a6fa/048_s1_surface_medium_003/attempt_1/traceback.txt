@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\run_20260712_152942_dfd5a6fa\048_s1_surface_medium_003\attempt_1\code.py", line 59, in <module>
+    main()
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\run_20260712_152942_dfd5a6fa\048_s1_surface_medium_003\attempt_1\code.py", line 29, in main
+    surface=gs.surfaces.Metallic(
+AttributeError: module 'genesis.options.surfaces' has no attribute 'Metallic'
+
+[38;5;9m[Genesis] [15:41:06] [ERROR] AttributeError: module 'genesis.options.surfaces' has no attribute 'Metallic'[0m

@@ -1,0 +1,47 @@
+[38;5;159m[Genesis] [16:24:01] [INFO] [38;5;121m╭───────────────────────────────────────────────╮[0m[38;5;159m[0m
+[38;5;159m[Genesis] [16:24:01] [INFO] [38;5;121m│┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈[0m[38;5;159m [38;5;121m[1m[3mGenesis[0m[38;5;159m [38;5;121m┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈│[0m[38;5;159m[0m
+[38;5;159m[Genesis] [16:24:01] [INFO] [38;5;121m╰───────────────────────────────────────────────╯[0m[38;5;159m[0m
+[38;5;159m[Genesis] [16:24:01] [INFO] Running on [38;5;121m[4m[NVIDIA GeForce RTX 4060 Laptop GPU][0m[38;5;159m with backend [38;5;121m[4mgs.cuda[0m[38;5;159m. Device memory: [38;5;121m[4m8.00[0m[38;5;159m GB.[0m
+[38;5;159m[Genesis] [16:24:01] [INFO] 🚀 Genesis initialized. 🔖 version: [38;5;121m[4m0.3.8[0m[38;5;159m, 🎨 theme: [38;5;121m[4mdark[0m[38;5;159m, 🌱 seed: [38;5;121m[4mNone[0m[38;5;159m, 🐛 debug: [38;5;121m[4mFalse[0m[38;5;159m, 📏 precision: [38;5;121m[4m32[0m[38;5;159m, 🔥 performance: [38;5;121m[4mFalse[0m[38;5;159m, 💬 verbose: [38;5;121m[4mINFO[0m[38;5;159m[0m
+[38;5;159m[Genesis] [16:24:04] [INFO] Scene [38;5;121m[3m<c666f05>[0m[38;5;159m created.[0m
+[38;5;159m[Genesis] [16:24:04] [INFO] Adding [38;5;121m<gs.RigidEntity>[0m[38;5;159m. idx: [38;5;121m0[0m[38;5;159m, uid: [38;5;121m[3m<53bdd21>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Plane>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [16:24:04] [INFO] Adding [38;5;121m<gs.DroneEntity>[0m[38;5;159m. idx: [38;5;121m1[0m[38;5;159m, uid: [38;5;121m[3m<5cc36cb>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Drone(file='D:\Desktop\Genesis\Genesis-main\genesis\assets\urdf/drones/cf2x.urdf')>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;226m[Genesis] [16:24:04] [WARNING] Some free joint has non-zero frictionloss, damping or armature parameters. Beware it is non-physical.[0m
+[38;5;159m[Genesis] [16:24:04] [INFO] Applying offset to base link's pose with user provided value in morph.[0m
+[38;5;159m[Genesis] [16:24:04] [INFO] Building scene [38;5;121m[3m<c666f05>[0m[38;5;159m...[0m
+[38;5;159m[Genesis] [16:24:06] [INFO] Compiling simulation kernels...[0m
+[38;5;159m[Genesis] [16:24:08] [INFO] Building visualizer...[0m
+[38;5;159m[Genesis] [16:24:09] [INFO] Viewer created. Resolution: [38;5;121m960×720[0m[38;5;159m, max_FPS: [38;5;121m60[0m[38;5;159m.[0m
+Traceback (most recent call last):
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\numpy\_core\fromnumeric.py", line 57, in _wrapfunc
+    return bound(*args, **kwds)
+TypeError: clip() received an invalid combination of arguments - got (float, float, out=NoneType), but expected one of:
+ * (Tensor min = None, Tensor max = None)
+ * (Number min = None, Number max = None)
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\run_20260712_161214_f8cf6ba7\073_s1_drone_medium_001\attempt_1\code.py", line 78, in <module>
+    main()
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\run_20260712_161214_f8cf6ba7\073_s1_drone_medium_001\attempt_1\code.py", line 69, in main
+    desired_rpm = np.clip(desired_rpm, min_rpm, max_rpm)
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\numpy\_core\fromnumeric.py", line 2341, in clip
+    return _wrapfunc(a, 'clip', a_min, a_max, out=out, **kwargs)
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\numpy\_core\fromnumeric.py", line 66, in _wrapfunc
+    return _wrapit(obj, method, *args, **kwds)
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\numpy\_core\fromnumeric.py", line 42, in _wrapit
+    conv = _array_converter(obj)
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\torch\_tensor.py", line 1224, in __array__
+    return handle_torch_function(Tensor.__array__, (self,), self, dtype=dtype)
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\torch\overrides.py", line 1725, in handle_torch_function
+    result = mode.__torch_function__(public_api, types, args, kwargs)
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\torch\utils\_device.py", line 103, in __torch_function__
+    return func(*args, **kwargs)
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\torch\_tensor.py", line 1226, in __array__
+    return self.numpy()
+TypeError: can't convert cuda:0 device type tensor to numpy. Use Tensor.cpu() to copy the tensor to host memory first.
+
+[38;5;9m[Genesis] [16:24:09] [ERROR] TypeError: can't convert cuda:0 device type tensor to numpy. Use Tensor.cpu() to copy the tensor to host memory first.[0m
+[38;5;159m[Genesis] [16:24:09] [INFO] 💤 Exiting Genesis and caching compiled kernels...[0m

@@ -1,0 +1,33 @@
+Traceback (most recent call last):
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\numpy\_core\fromnumeric.py", line 57, in _wrapfunc
+    return bound(*args, **kwds)
+TypeError: clip() received an invalid combination of arguments - got (float, float, out=NoneType), but expected one of:
+ * (Tensor min = None, Tensor max = None)
+ * (Number min = None, Number max = None)
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\run_20260712_161214_f8cf6ba7\073_s1_drone_medium_001\attempt_1\code.py", line 78, in <module>
+    main()
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\run_20260712_161214_f8cf6ba7\073_s1_drone_medium_001\attempt_1\code.py", line 69, in main
+    desired_rpm = np.clip(desired_rpm, min_rpm, max_rpm)
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\numpy\_core\fromnumeric.py", line 2341, in clip
+    return _wrapfunc(a, 'clip', a_min, a_max, out=out, **kwargs)
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\numpy\_core\fromnumeric.py", line 66, in _wrapfunc
+    return _wrapit(obj, method, *args, **kwds)
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\numpy\_core\fromnumeric.py", line 42, in _wrapit
+    conv = _array_converter(obj)
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\torch\_tensor.py", line 1224, in __array__
+    return handle_torch_function(Tensor.__array__, (self,), self, dtype=dtype)
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\torch\overrides.py", line 1725, in handle_torch_function
+    result = mode.__torch_function__(public_api, types, args, kwargs)
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\torch\utils\_device.py", line 103, in __torch_function__
+    return func(*args, **kwargs)
+  File "D:\anaconda\envs\env_genesis\lib\site-packages\torch\_tensor.py", line 1226, in __array__
+    return self.numpy()
+TypeError: can't convert cuda:0 device type tensor to numpy. Use Tensor.cpu() to copy the tensor to host memory first.
+
+[38;5;9m[Genesis] [16:24:09] [ERROR] TypeError: can't convert cuda:0 device type tensor to numpy. Use Tensor.cpu() to copy the tensor to host memory first.[0m
+[38;5;159m[Genesis] [16:24:09] [INFO] 💤 Exiting Genesis and caching compiled kernels...[0m

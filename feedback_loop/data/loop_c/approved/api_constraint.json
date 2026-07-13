@@ -1,0 +1,139 @@
+{
+  "generated_at": "2026-07-08T00:00:00",
+  "summary": {
+    "api_count": 9,
+    "mapped_event_count": 9
+  },
+  "apis": [
+    {
+      "api_id": "genesis.materials.MPM.Base",
+      "constraints": [
+        "When subclassing an MPM base material for custom behavior, override the constitutive update method such as update_F_S_Jp with a kernel-compatible implementation; do not rely on the base implementation, which raises NotImplementedError and cannot be compiled inside Taichi kernels."
+      ],
+      "error_examples": [
+        "A custom material inherited gs.materials.MPM.Base but did not implement update_F_S_Jp, leading to an Unsupported node \"Raise\" error during kernel compilation."
+      ],
+      "event_count": 1,
+      "sources": [
+        "error_memory:test_1_150005.py"
+      ]
+    },
+    {
+      "api_id": "genesis.materials.MPM.Elastic",
+      "constraints": [
+        "For ordinary MPM elastic bodies, instantiate a concrete material class such as gs.materials.MPM.Elastic instead of an abstract or base MPM material class."
+      ],
+      "error_examples": [
+        "Instantiating gs.materials.MPM.Material directly caused an Unsupported node \"Raise\" error because the abstract material did not implement the required physics update methods."
+      ],
+      "event_count": 1,
+      "sources": [
+        "error_memory:test_9_151601.py"
+      ]
+    },
+    {
+      "api_id": "genesis.materials.Rigid",
+      "constraints": [
+        "Do not pass linear_damping or angular_damping to gs.materials.Rigid; rigid material options describe properties such as density, friction, restitution, and coupling behavior, while dynamic damping should be configured on the entity, link, or solver-level settings when supported."
+      ],
+      "error_examples": [
+        "gs.materials.Rigid(..., linear_damping=...) was used to configure body damping, but the material constructor does not accept that parameter."
+      ],
+      "event_count": 1,
+      "sources": [
+        "error_memory:test_3_150429.py"
+      ]
+    },
+    {
+      "api_id": "genesis.options.ViewerOptions",
+      "constraints": [
+        "Configure interactive viewer resolution with ViewerOptions(res=(width, height)); do not use renderer-specific options such as BatchRenderer(resolution=...) for viewer window resolution."
+      ],
+      "error_examples": [
+        "A task attempted to set viewer resolution via gs.options.renderers.BatchRenderer(resolution=(1920, 1200)) instead of gs.options.ViewerOptions(res=(1920, 1200))."
+      ],
+      "event_count": 1,
+      "sources": [
+        "error_memory:test_2_150212.py"
+      ]
+    },
+    {
+      "api_id": "genesis.options.morphs.Box",
+      "constraints": [
+        "Use pos to place a Box morph; do not use center as a constructor argument."
+      ],
+      "error_examples": [
+        "gs.morphs.Box(center=...) was used, but the Box morph constructor expects position-style placement through pos."
+      ],
+      "event_count": 1,
+      "sources": [
+        "error_memory:test_5_150803.py"
+      ]
+    },
+    {
+      "api_id": "genesis.options.morphs.Mesh",
+      "constraints": [
+        "Use file to provide a mesh path to gs.morphs.Mesh; do not use path as a constructor argument."
+      ],
+      "error_examples": [
+        "gs.morphs.Mesh(path=...) was used, but the Mesh morph expects file=... for the mesh filename."
+      ],
+      "event_count": 1,
+      "sources": [
+        "error_memory:test_0_145852.py"
+      ]
+    },
+    {
+      "api_id": "genesis.options.morphs.MeshSet",
+      "constraints": [
+        "Use file to provide mesh-set input to gs.morphs.MeshSet; do not use path as a constructor argument."
+      ],
+      "error_examples": [
+        "gs.morphs.MeshSet(path=...) was used, but MeshSet expects file=... for the mesh-set input."
+      ],
+      "event_count": 1,
+      "sources": [
+        "error_memory:test_7_151043.py"
+      ]
+    },
+    {
+      "api_id": "genesis.options.morphs.Plane",
+      "constraints": [
+        "Create planes through the morph namespace, for example gs.morphs.Plane(); do not use gs.shapes.Plane(), because Genesis geometric primitives are exposed as morphs rather than shapes."
+      ],
+      "error_examples": [
+        "gs.shapes.Plane() failed because the genesis module does not expose a shapes namespace for primitives."
+      ],
+      "event_count": 1,
+      "sources": [
+        "error_memory:test_8_151314.py"
+      ]
+    },
+    {
+      "api_id": "genesis.options.renderers.BatchRenderer",
+      "constraints": [
+        "Do not configure interactive viewer resolution with BatchRenderer(resolution=...); use ViewerOptions(res=...) for viewer resolution instead."
+      ],
+      "error_examples": [
+        "gs.options.renderers.BatchRenderer(resolution=(1920, 1200)) was used for viewer resolution, but BatchRenderer does not accept that resolution argument."
+      ],
+      "event_count": 1,
+      "sources": [
+        "error_memory:test_2_150212.py"
+      ]
+    }
+  ],
+  "run_meta": [
+    {
+      "source": "genesis_error_memory.json",
+      "method": "codex_curated_v0_from_existing_error_memory",
+      "note": "Conservative v0 constraints derived from existing reviewed error memories. No benchmark run, merge, or re-ingest has been performed yet."
+    }
+  ],
+  "config": {
+    "judge_provider": "codex",
+    "rewrite_mode": "not_applicable",
+    "loop_a_enabled": false,
+    "benchmark_run": false
+  }
+}

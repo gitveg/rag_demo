@@ -1,0 +1,808 @@
+{
+  "generated_at": "2026-06-09T16:55:57.590320",
+  "kb_file": "D:\\Desktop\\Genesis\\phys_agent\\RAG\\genesis_api_index.json",
+  "kb_api_count": 654,
+  "result_count": 1,
+  "single_reports": [
+    {
+      "result_json": "D:\\Desktop\\Genesis\\phys_agent\\benchmark\\results\\batch\\20260609_134017\\run_07\\benchmark_20260609_162338.json",
+      "run_id": "20260609_162338",
+      "timestamp": "2026-06-09T16:55:57.439026",
+      "rag_search_params": {
+        "rewrite_mode": "hyde",
+        "hyde_route": "unit",
+        "n_api": 6,
+        "n_code": 1,
+        "n_snippet": 3,
+        "n_error": 0,
+        "n_units": 5,
+        "tag_filter": null,
+        "include_core_api": true,
+        "core_api_limit": 40,
+        "rerank": true,
+        "rerank_top_n": 8,
+        "rerank_oversample": 2.0
+      },
+      "total_tasks": 100,
+      "total_miss_records": 112,
+      "missing_in_kb_count": 0,
+      "exists_in_kb_but_missed_count": 112,
+      "missing_in_kb_ratio": 0.0,
+      "exists_in_kb_but_missed_ratio": 1.0,
+      "top_missing_in_kb": [],
+      "top_exists_in_kb_but_missed": [
+        {
+          "api_id": "genesis.options.renderers.Rasterizer",
+          "count": 28
+        },
+        {
+          "api_id": "genesis.surfaces.Default",
+          "count": 23
+        },
+        {
+          "api_id": "genesis.surfaces.Rough",
+          "count": 11
+        },
+        {
+          "api_id": "genesis.surfaces.Iron",
+          "count": 9
+        },
+        {
+          "api_id": "genesis.Scene.add_camera",
+          "count": 4
+        },
+        {
+          "api_id": "genesis.morphs.Cylinder",
+          "count": 4
+        },
+        {
+          "api_id": "genesis.morphs.Box",
+          "count": 4
+        },
+        {
+          "api_id": "genesis.surfaces.Gold",
+          "count": 3
+        },
+        {
+          "api_id": "genesis.morphs.Plane",
+          "count": 2
+        },
+        {
+          "api_id": "genesis.morphs.URDF",
+          "count": 2
+        },
+        {
+          "api_id": "genesis.surfaces.Glass",
+          "count": 2
+        },
+        {
+          "api_id": "genesis.surfaces.Metal",
+          "count": 2
+        },
+        {
+          "api_id": "genesis.surfaces.Emission",
+          "count": 2
+        },
+        {
+          "api_id": "genesis.surfaces.Aluminium",
+          "count": 2
+        },
+        {
+          "api_id": "genesis.Scene.add_emitter",
+          "count": 2
+        },
+        {
+          "api_id": "genesis.surfaces.Water",
+          "count": 1
+        },
+        {
+          "api_id": "genesis.options.surfaces.Glass",
+          "count": 1
+        },
+        {
+          "api_id": "genesis.Scene.draw_debug_sphere",
+          "count": 1
+        },
+        {
+          "api_id": "genesis.force_fields.Wind",
+          "count": 1
+        },
+        {
+          "api_id": "genesis.force_fields.Vortex",
+          "count": 1
+        },
+        {
+          "api_id": "genesis.force_fields.Constant",
+          "count": 1
+        },
+        {
+          "api_id": "genesis.Scene.add_sensor",
+          "count": 1
+        },
+        {
+          "api_id": "genesis.sensors.DepthCameraPattern",
+          "count": 1
+        },
+        {
+          "api_id": "genesis.morphs.Sphere",
+          "count": 1
+        },
+        {
+          "api_id": "genesis.force_fields.Turbulence",
+          "count": 1
+        },
+        {
+          "api_id": "genesis.morphs.Terrain",
+          "count": 1
+        },
+        {
+          "api_id": "genesis.surfaces.Plastic",
+          "count": 1
+        }
+      ],
+      "priority_top_exists_in_kb_but_missed": [
+        {
+          "api_id": "genesis.options.renderers.Rasterizer",
+          "miss_frequency": 28,
+          "task_coverage": 28,
+          "priority_score": 784
+        },
+        {
+          "api_id": "genesis.surfaces.Default",
+          "miss_frequency": 23,
+          "task_coverage": 23,
+          "priority_score": 529
+        },
+        {
+          "api_id": "genesis.surfaces.Rough",
+          "miss_frequency": 11,
+          "task_coverage": 11,
+          "priority_score": 121
+        },
+        {
+          "api_id": "genesis.surfaces.Iron",
+          "miss_frequency": 9,
+          "task_coverage": 9,
+          "priority_score": 81
+        },
+        {
+          "api_id": "genesis.Scene.add_camera",
+          "miss_frequency": 4,
+          "task_coverage": 4,
+          "priority_score": 16
+        },
+        {
+          "api_id": "genesis.morphs.Box",
+          "miss_frequency": 4,
+          "task_coverage": 4,
+          "priority_score": 16
+        },
+        {
+          "api_id": "genesis.morphs.Cylinder",
+          "miss_frequency": 4,
+          "task_coverage": 4,
+          "priority_score": 16
+        },
+        {
+          "api_id": "genesis.surfaces.Gold",
+          "miss_frequency": 3,
+          "task_coverage": 3,
+          "priority_score": 9
+        },
+        {
+          "api_id": "genesis.Scene.add_emitter",
+          "miss_frequency": 2,
+          "task_coverage": 2,
+          "priority_score": 4
+        },
+        {
+          "api_id": "genesis.morphs.Plane",
+          "miss_frequency": 2,
+          "task_coverage": 2,
+          "priority_score": 4
+        },
+        {
+          "api_id": "genesis.morphs.URDF",
+          "miss_frequency": 2,
+          "task_coverage": 2,
+          "priority_score": 4
+        },
+        {
+          "api_id": "genesis.surfaces.Aluminium",
+          "miss_frequency": 2,
+          "task_coverage": 2,
+          "priority_score": 4
+        },
+        {
+          "api_id": "genesis.surfaces.Emission",
+          "miss_frequency": 2,
+          "task_coverage": 2,
+          "priority_score": 4
+        },
+        {
+          "api_id": "genesis.surfaces.Glass",
+          "miss_frequency": 2,
+          "task_coverage": 2,
+          "priority_score": 4
+        },
+        {
+          "api_id": "genesis.surfaces.Metal",
+          "miss_frequency": 2,
+          "task_coverage": 2,
+          "priority_score": 4
+        },
+        {
+          "api_id": "genesis.Scene.add_sensor",
+          "miss_frequency": 1,
+          "task_coverage": 1,
+          "priority_score": 1
+        },
+        {
+          "api_id": "genesis.Scene.draw_debug_sphere",
+          "miss_frequency": 1,
+          "task_coverage": 1,
+          "priority_score": 1
+        },
+        {
+          "api_id": "genesis.force_fields.Constant",
+          "miss_frequency": 1,
+          "task_coverage": 1,
+          "priority_score": 1
+        },
+        {
+          "api_id": "genesis.force_fields.Turbulence",
+          "miss_frequency": 1,
+          "task_coverage": 1,
+          "priority_score": 1
+        },
+        {
+          "api_id": "genesis.force_fields.Vortex",
+          "miss_frequency": 1,
+          "task_coverage": 1,
+          "priority_score": 1
+        },
+        {
+          "api_id": "genesis.force_fields.Wind",
+          "miss_frequency": 1,
+          "task_coverage": 1,
+          "priority_score": 1
+        },
+        {
+          "api_id": "genesis.morphs.Sphere",
+          "miss_frequency": 1,
+          "task_coverage": 1,
+          "priority_score": 1
+        },
+        {
+          "api_id": "genesis.morphs.Terrain",
+          "miss_frequency": 1,
+          "task_coverage": 1,
+          "priority_score": 1
+        },
+        {
+          "api_id": "genesis.options.surfaces.Glass",
+          "miss_frequency": 1,
+          "task_coverage": 1,
+          "priority_score": 1
+        },
+        {
+          "api_id": "genesis.sensors.DepthCameraPattern",
+          "miss_frequency": 1,
+          "task_coverage": 1,
+          "priority_score": 1
+        },
+        {
+          "api_id": "genesis.surfaces.Plastic",
+          "miss_frequency": 1,
+          "task_coverage": 1,
+          "priority_score": 1
+        },
+        {
+          "api_id": "genesis.surfaces.Water",
+          "miss_frequency": 1,
+          "task_coverage": 1,
+          "priority_score": 1
+        }
+      ],
+      "per_task": [
+        {
+          "task_id": "eval_001",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.morphs.Plane",
+            "genesis.surfaces.Default"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 2
+        },
+        {
+          "task_id": "eval_009",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.surfaces.Default"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 1
+        },
+        {
+          "task_id": "eval_017",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.surfaces.Default"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 1
+        },
+        {
+          "task_id": "s1_camera_medium_001",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.surfaces.Default"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 1
+        },
+        {
+          "task_id": "s1_cross_domain_complex_003",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.force_fields.Turbulence",
+            "genesis.options.renderers.Rasterizer"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 2
+        },
+        {
+          "task_id": "s1_cross_domain_complex_004",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.Scene.add_emitter"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 1
+        },
+        {
+          "task_id": "s1_cross_domain_complex_005",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.morphs.Terrain",
+            "genesis.morphs.URDF"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 2
+        },
+        {
+          "task_id": "s1_cross_domain_complex_006",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.surfaces.Default",
+            "genesis.surfaces.Metal",
+            "genesis.surfaces.Plastic"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 3
+        },
+        {
+          "task_id": "s1_cross_domain_medium_001",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.options.renderers.Rasterizer",
+            "genesis.surfaces.Iron"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 2
+        },
+        {
+          "task_id": "s1_cross_domain_medium_002",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.morphs.Box"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 1
+        },
+        {
+          "task_id": "s1_cross_domain_simple_001",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.Scene.add_emitter"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 1
+        },
+        {
+          "task_id": "s1_drone_complex_001",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.options.renderers.Rasterizer",
+            "genesis.surfaces.Default"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 2
+        },
+        {
+          "task_id": "s1_drone_complex_002",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.morphs.Box",
+            "genesis.options.renderers.Rasterizer",
+            "genesis.surfaces.Emission",
+            "genesis.surfaces.Iron"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 4
+        },
+        {
+          "task_id": "s1_drone_complex_003",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.morphs.Box",
+            "genesis.morphs.Cylinder",
+            "genesis.options.renderers.Rasterizer",
+            "genesis.surfaces.Default"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 4
+        },
+        {
+          "task_id": "s1_drone_medium_001",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.options.renderers.Rasterizer",
+            "genesis.surfaces.Default"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 2
+        },
+        {
+          "task_id": "s1_drone_medium_002",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.morphs.Cylinder",
+            "genesis.options.renderers.Rasterizer",
+            "genesis.surfaces.Default",
+            "genesis.surfaces.Emission",
+            "genesis.surfaces.Gold"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 5
+        },
+        {
+          "task_id": "s1_drone_medium_003",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.options.renderers.Rasterizer",
+            "genesis.surfaces.Default"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 2
+        },
+        {
+          "task_id": "s1_drone_simple_001",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.options.renderers.Rasterizer",
+            "genesis.surfaces.Default"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 2
+        },
+        {
+          "task_id": "s1_drone_simple_002",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.options.renderers.Rasterizer",
+            "genesis.surfaces.Default"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 2
+        },
+        {
+          "task_id": "s1_fem_elastic_medium_002",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.options.renderers.Rasterizer",
+            "genesis.surfaces.Rough"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 2
+        },
+        {
+          "task_id": "s1_force_field_complex_001",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.force_fields.Vortex",
+            "genesis.options.renderers.Rasterizer",
+            "genesis.surfaces.Gold",
+            "genesis.surfaces.Iron",
+            "genesis.surfaces.Rough"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 5
+        },
+        {
+          "task_id": "s1_force_field_complex_003",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.force_fields.Constant"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 1
+        },
+        {
+          "task_id": "s1_force_field_medium_003",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.force_fields.Wind"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 1
+        },
+        {
+          "task_id": "s1_mpm_sand_complex_001",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.options.surfaces.Glass"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 1
+        },
+        {
+          "task_id": "s1_mpm_sand_simple_002",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.morphs.Cylinder"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 1
+        },
+        {
+          "task_id": "s1_robot_complex_003",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.options.renderers.Rasterizer",
+            "genesis.surfaces.Default"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 2
+        },
+        {
+          "task_id": "s1_robot_simple_003",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.options.renderers.Rasterizer",
+            "genesis.surfaces.Default"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 2
+        },
+        {
+          "task_id": "s1_sensor_complex_001",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.options.renderers.Rasterizer",
+            "genesis.surfaces.Default",
+            "genesis.surfaces.Iron",
+            "genesis.surfaces.Rough"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 4
+        },
+        {
+          "task_id": "s1_sensor_medium_001",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.options.renderers.Rasterizer"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 1
+        },
+        {
+          "task_id": "s1_sensor_medium_002",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.morphs.Sphere",
+            "genesis.options.renderers.Rasterizer",
+            "genesis.surfaces.Aluminium",
+            "genesis.surfaces.Default",
+            "genesis.surfaces.Iron",
+            "genesis.surfaces.Rough"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 6
+        },
+        {
+          "task_id": "s1_sensor_medium_003",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.options.renderers.Rasterizer",
+            "genesis.surfaces.Aluminium",
+            "genesis.surfaces.Default",
+            "genesis.surfaces.Iron"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 4
+        },
+        {
+          "task_id": "s1_sensor_simple_001",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.Scene.add_sensor",
+            "genesis.options.renderers.Rasterizer",
+            "genesis.sensors.DepthCameraPattern",
+            "genesis.surfaces.Glass",
+            "genesis.surfaces.Rough"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 5
+        },
+        {
+          "task_id": "s1_sensor_simple_002",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.options.renderers.Rasterizer",
+            "genesis.surfaces.Default",
+            "genesis.surfaces.Rough"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 3
+        },
+        {
+          "task_id": "s1_sph_fluid_complex_002",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.surfaces.Water"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 1
+        },
+        {
+          "task_id": "s1_sph_fluid_medium_003",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.Scene.add_camera",
+            "genesis.options.renderers.Rasterizer",
+            "genesis.surfaces.Glass"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 3
+        },
+        {
+          "task_id": "s1_sph_fluid_simple_002",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.morphs.URDF"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 1
+        },
+        {
+          "task_id": "s1_surface_complex_001",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.morphs.Box",
+            "genesis.surfaces.Default"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 2
+        },
+        {
+          "task_id": "s1_surface_complex_002",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.morphs.Cylinder"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 1
+        },
+        {
+          "task_id": "s1_surface_medium_003",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.surfaces.Default",
+            "genesis.surfaces.Metal",
+            "genesis.surfaces.Rough"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 3
+        },
+        {
+          "task_id": "s1_surface_simple_001",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.surfaces.Default"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 1
+        },
+        {
+          "task_id": "s1_surface_simple_003",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.Scene.draw_debug_sphere"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 1
+        },
+        {
+          "task_id": "s1_terrain_complex_001",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.Scene.add_camera",
+            "genesis.options.renderers.Rasterizer",
+            "genesis.surfaces.Gold",
+            "genesis.surfaces.Iron"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 4
+        },
+        {
+          "task_id": "s1_terrain_complex_003",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.Scene.add_camera",
+            "genesis.options.renderers.Rasterizer",
+            "genesis.surfaces.Iron",
+            "genesis.surfaces.Rough"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 4
+        },
+        {
+          "task_id": "s1_terrain_medium_001",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.options.renderers.Rasterizer",
+            "genesis.surfaces.Default"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 2
+        },
+        {
+          "task_id": "s1_terrain_medium_002",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.options.renderers.Rasterizer",
+            "genesis.surfaces.Rough"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 2
+        },
+        {
+          "task_id": "s1_terrain_medium_003",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.Scene.add_camera",
+            "genesis.options.renderers.Rasterizer",
+            "genesis.surfaces.Rough"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 3
+        },
+        {
+          "task_id": "s1_terrain_simple_001",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.options.renderers.Rasterizer",
+            "genesis.surfaces.Default",
+            "genesis.surfaces.Rough"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 3
+        },
+        {
+          "task_id": "s1_terrain_simple_002",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.morphs.Plane",
+            "genesis.options.renderers.Rasterizer",
+            "genesis.surfaces.Iron"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 3
+        }
+      ]
+    }
+  ],
+  "batch_report": null
+}

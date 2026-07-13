@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\run_20260712_161214_f8cf6ba7\074_s1_drone_medium_002\attempt_1\code.py", line 129, in <module>
+    main()
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\run_20260712_161214_f8cf6ba7\074_s1_drone_medium_002\attempt_1\code.py", line 126, in main
+    gs.exit()
+AttributeError: module 'genesis' has no attribute 'exit'
+
+[38;5;9m[Genesis] [16:26:42] [ERROR] AttributeError: module 'genesis' has no attribute 'exit'[0m
+[38;5;159m[Genesis] [16:26:42] [INFO] 💤 Exiting Genesis and caching compiled kernels...[0m

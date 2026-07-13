@@ -1,0 +1,22 @@
+[38;5;159m[Genesis] [16:29:51] [INFO] [38;5;121m╭───────────────────────────────────────────────╮[0m[38;5;159m[0m
+[38;5;159m[Genesis] [16:29:51] [INFO] [38;5;121m│┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈[0m[38;5;159m [38;5;121m[1m[3mGenesis[0m[38;5;159m [38;5;121m┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈│[0m[38;5;159m[0m
+[38;5;159m[Genesis] [16:29:51] [INFO] [38;5;121m╰───────────────────────────────────────────────╯[0m[38;5;159m[0m
+[38;5;159m[Genesis] [16:29:53] [INFO] Running on [38;5;121m[4m[13th Gen Intel(R) Core(TM) i7-13650HX][0m[38;5;159m with backend [38;5;121m[4mgs.cpu[0m[38;5;159m. Device memory: [38;5;121m[4m15.63[0m[38;5;159m GB.[0m
+[38;5;159m[Genesis] [16:29:53] [INFO] 🚀 Genesis initialized. 🔖 version: [38;5;121m[4m0.3.8[0m[38;5;159m, 🎨 theme: [38;5;121m[4mdark[0m[38;5;159m, 🌱 seed: [38;5;121m[4mNone[0m[38;5;159m, 🐛 debug: [38;5;121m[4mFalse[0m[38;5;159m, 📏 precision: [38;5;121m[4m32[0m[38;5;159m, 🔥 performance: [38;5;121m[4mFalse[0m[38;5;159m, 💬 verbose: [38;5;121m[4mINFO[0m[38;5;159m[0m
+[38;5;159m[Genesis] [16:29:55] [INFO] Scene [38;5;121m[3m<57a09b2>[0m[38;5;159m created.[0m
+[38;5;159m[Genesis] [16:29:55] [INFO] Adding [38;5;121m<gs.RigidEntity>[0m[38;5;159m. idx: [38;5;121m0[0m[38;5;159m, uid: [38;5;121m[3m<0f125fd>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Plane>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [16:29:55] [INFO] Adding [38;5;121m<gs.DroneEntity>[0m[38;5;159m. idx: [38;5;121m1[0m[38;5;159m, uid: [38;5;121m[3m<84afecf>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Drone(file='D:\Desktop\Genesis\Genesis-main\genesis\assets\urdf/drones/cf2x.urdf')>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;226m[Genesis] [16:29:55] [WARNING] Some free joint has non-zero frictionloss, damping or armature parameters. Beware it is non-physical.[0m
+[38;5;159m[Genesis] [16:29:55] [INFO] Applying offset to base link's pose with user provided value in morph.[0m
+[38;5;159m[Genesis] [16:29:55] [INFO] Building scene [38;5;121m[3m<57a09b2>[0m[38;5;159m...[0m
+[38;5;159m[Genesis] [16:29:56] [INFO] Compiling simulation kernels...[0m
+[38;5;159m[Genesis] [16:29:59] [INFO] Building visualizer...[0m
+Traceback (most recent call last):
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\run_20260712_161214_f8cf6ba7\076_s1_drone_complex_001\attempt_1\code.py", line 87, in <module>
+    main()
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\run_20260712_161214_f8cf6ba7\076_s1_drone_complex_001\attempt_1\code.py", line 44, in main
+    target_pos = drone.get_pos().copy()
+AttributeError: 'Tensor' object has no attribute 'copy'
+
+[38;5;9m[Genesis] [16:29:59] [ERROR] AttributeError: 'Tensor' object has no attribute 'copy'[0m
+[38;5;159m[Genesis] [16:29:59] [INFO] 💤 Exiting Genesis and caching compiled kernels...[0m

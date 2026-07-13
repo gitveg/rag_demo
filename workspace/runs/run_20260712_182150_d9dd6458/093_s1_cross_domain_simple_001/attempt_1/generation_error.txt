@@ -1,0 +1,1 @@
+InternalError: Error executing plan: Internal error: Error creating hnsw segment reader: Nothing found on disk

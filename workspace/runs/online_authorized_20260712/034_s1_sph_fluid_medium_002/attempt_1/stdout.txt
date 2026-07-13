@@ -1,0 +1,37 @@
+[38;5;159m[Genesis] [14:38:51] [INFO] [38;5;121m╭───────────────────────────────────────────────╮[0m[38;5;159m[0m
+[38;5;159m[Genesis] [14:38:51] [INFO] [38;5;121m│┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈[0m[38;5;159m [38;5;121m[1m[3mGenesis[0m[38;5;159m [38;5;121m┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈│[0m[38;5;159m[0m
+[38;5;159m[Genesis] [14:38:51] [INFO] [38;5;121m╰───────────────────────────────────────────────╯[0m[38;5;159m[0m
+[38;5;159m[Genesis] [14:38:52] [INFO] Running on [38;5;121m[4m[NVIDIA GeForce RTX 4060 Laptop GPU][0m[38;5;159m with backend [38;5;121m[4mgs.cuda[0m[38;5;159m. Device memory: [38;5;121m[4m8.00[0m[38;5;159m GB.[0m
+[38;5;159m[Genesis] [14:38:52] [INFO] 🚀 Genesis initialized. 🔖 version: [38;5;121m[4m0.3.8[0m[38;5;159m, 🎨 theme: [38;5;121m[4mdark[0m[38;5;159m, 🌱 seed: [38;5;121m[4mNone[0m[38;5;159m, 🐛 debug: [38;5;121m[4mFalse[0m[38;5;159m, 📏 precision: [38;5;121m[4m32[0m[38;5;159m, 🔥 performance: [38;5;121m[4mFalse[0m[38;5;159m, 💬 verbose: [38;5;121m[4mINFO[0m[38;5;159m[0m
+[38;5;159m[Genesis] [14:38:58] [INFO] Scene [38;5;121m[3m<9829786>[0m[38;5;159m created.[0m
+[38;5;159m[Genesis] [14:38:58] [INFO] Adding [38;5;121m<gs.RigidEntity>[0m[38;5;159m. idx: [38;5;121m0[0m[38;5;159m, uid: [38;5;121m[3m<659d831>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [14:38:58] [INFO] Preprocessing geom idx [38;5;121m[4m0[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [14:38:59] [INFO] Adding [38;5;121m<gs.RigidEntity>[0m[38;5;159m. idx: [38;5;121m1[0m[38;5;159m, uid: [38;5;121m[3m<fe7be72>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [14:38:59] [INFO] Preprocessing geom idx [38;5;121m[4m1[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [14:38:59] [INFO] Adding [38;5;121m<gs.RigidEntity>[0m[38;5;159m. idx: [38;5;121m2[0m[38;5;159m, uid: [38;5;121m[3m<463bac4>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [14:38:59] [INFO] Adding [38;5;121m<gs.RigidEntity>[0m[38;5;159m. idx: [38;5;121m3[0m[38;5;159m, uid: [38;5;121m[3m<345365b>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [14:38:59] [INFO] Preprocessing geom idx [38;5;121m[4m3[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [14:39:00] [INFO] Adding [38;5;121m<gs.RigidEntity>[0m[38;5;159m. idx: [38;5;121m4[0m[38;5;159m, uid: [38;5;121m[3m<3c26194>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [14:39:00] [INFO] Adding [38;5;121m<gs.SPHEntity>[0m[38;5;159m. idx: [38;5;121m5[0m[38;5;159m, uid: [38;5;121m[3m<608e758>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.SPH.Liquid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [14:39:00] [INFO] Sampling particles with [38;5;121mrandom[0m[38;5;159m sampler and generating `.ptc` file:[0m
+[38;5;159m[Genesis] [14:39:00] [INFO] Sampled [38;5;121m[4m320[0m[38;5;159m particles.[0m
+[38;5;159m[Genesis] [14:39:00] [INFO] Adding [38;5;121m<gs.SPHEntity>[0m[38;5;159m. idx: [38;5;121m6[0m[38;5;159m, uid: [38;5;121m[3m<9cd808c>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.SPH.Liquid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [14:39:00] [INFO] Sampled [38;5;121m[4m320[0m[38;5;159m particles.[0m
+[38;5;159m[Genesis] [14:39:00] [INFO] Building scene [38;5;121m[3m<9829786>[0m[38;5;159m...[0m
+[38;5;226m[Genesis] [14:39:04] [WARNING] Current timestep (0.002) is larger than the stable timestep (0.0016) for SPH solver. Please consider reducing the timestep, liquid viscosity (mu), or increasing the particle size.[0m
+[38;5;159m[Genesis] [14:39:05] [INFO] Compiling simulation kernels...[0m
+[38;5;159m[Genesis] [14:39:14] [INFO] Building visualizer...[0m
+[38;5;159m[Genesis] [14:39:16] [INFO] Viewer created. Resolution: [38;5;121m960×720[0m[38;5;159m, max_FPS: [38;5;121m60[0m[38;5;159m.[0m
+Traceback (most recent call last):
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\online_authorized_20260712\034_s1_sph_fluid_medium_002\attempt_1\code.py", line 86, in <module>
+    main()
+  File "D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\online_authorized_20260712\034_s1_sph_fluid_medium_002\attempt_1\code.py", line 76, in main
+    scene.start_recording()
+  File "D:\Desktop\Genesis\Genesis-main\genesis\utils\misc.py", line 140, in wrapper
+    gs.raise_exception("Scene is already built.")
+  File "D:\Desktop\Genesis\Genesis-main\genesis\utils\misc.py", line 44, in raise_exception
+    raise gs.GenesisException(msg)
+genesis.GenesisException: Scene is already built.
+
+[38;5;9m[Genesis] [14:39:16] [ERROR] GenesisException: Scene is already built.[0m
+[38;5;159m[Genesis] [14:39:16] [INFO] 💤 Exiting Genesis and caching compiled kernels...[0m

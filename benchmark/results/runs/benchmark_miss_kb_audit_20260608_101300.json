@@ -1,0 +1,47 @@
+{
+  "generated_at": "2026-06-08T10:13:00.537568",
+  "kb_file": "D:\\Desktop\\Genesis\\Genesis-main\\rag_demo\\benchmark\\..\\knowledge_base\\genesis_api_index.json",
+  "kb_api_count": 654,
+  "result_count": 1,
+  "single_reports": [
+    {
+      "result_json": "D:\\Desktop\\Genesis\\Genesis-main\\rag_demo\\benchmark\\results\\runs\\benchmark_20260608_101231.json",
+      "run_id": "20260608_101231",
+      "timestamp": "2026-06-08T10:13:00.392045",
+      "rag_search_params": {},
+      "total_tasks": 3,
+      "total_miss_records": 1,
+      "missing_in_kb_count": 0,
+      "exists_in_kb_but_missed_count": 1,
+      "missing_in_kb_ratio": 0.0,
+      "exists_in_kb_but_missed_ratio": 1.0,
+      "top_missing_in_kb": [],
+      "top_exists_in_kb_but_missed": [
+        {
+          "api_id": "genesis.surfaces.Default",
+          "count": 1
+        }
+      ],
+      "priority_top_exists_in_kb_but_missed": [
+        {
+          "api_id": "genesis.surfaces.Default",
+          "miss_frequency": 1,
+          "task_coverage": 1,
+          "priority_score": 1
+        }
+      ],
+      "per_task": [
+        {
+          "task_id": "eval_001",
+          "missing_in_kb": [],
+          "exists_in_kb_but_missed": [
+            "genesis.surfaces.Default"
+          ],
+          "missing_in_kb_count": 0,
+          "exists_in_kb_but_missed_count": 1
+        }
+      ]
+    }
+  ],
+  "batch_report": null
+}

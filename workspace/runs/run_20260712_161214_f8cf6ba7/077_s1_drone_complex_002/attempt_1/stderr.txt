@@ -1,0 +1,2 @@
+D:\Desktop\Genesis\Genesis-main\rag_demo\workspace\runs\run_20260712_161214_f8cf6ba7\077_s1_drone_complex_002\attempt_1\code.py:189: DeprecationWarning: __array_wrap__ must accept context and return_scalar arguments (positionally) in the future. (Deprecated NumPy 2.0)
+  dist_to_target = np.linalg.norm(drone_pos - target)

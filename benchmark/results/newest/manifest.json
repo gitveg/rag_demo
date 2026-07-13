@@ -1,0 +1,91 @@
+{
+  "description": "Deduplicated latest benchmark results (query.json, 100 tasks)",
+  "source_batches": [
+    "batch/20260610_021113 (runs 01-03)",
+    "batch/20260609_134017 (runs 04-08)"
+  ],
+  "dedup_key": "rewrite_mode + hyde_route + rerank + rerank_top_n",
+  "total_runs": 8,
+  "runs": [
+    {
+      "name": "01_none_unit_no-rerank",
+      "run_id": "20260610_021113",
+      "task_count": 100,
+      "rewrite_mode": "none",
+      "hyde_route": "unit",
+      "rerank": false,
+      "rerank_top_n": null,
+      "json": "results/newest\\01_none_unit_no-rerank\\benchmark_20260610_021113.json"
+    },
+    {
+      "name": "02_hyde_unit_no-rerank",
+      "run_id": "20260610_021209",
+      "task_count": 100,
+      "rewrite_mode": "hyde",
+      "hyde_route": "unit",
+      "rerank": false,
+      "rerank_top_n": null,
+      "json": "results/newest\\02_hyde_unit_no-rerank\\benchmark_20260610_021209.json"
+    },
+    {
+      "name": "03_hyde_fourway_no-rerank",
+      "run_id": "20260610_021647",
+      "task_count": 100,
+      "rewrite_mode": "hyde",
+      "hyde_route": "fourway",
+      "rerank": false,
+      "rerank_top_n": null,
+      "json": "results/newest\\03_hyde_fourway_no-rerank\\benchmark_20260610_021647.json"
+    },
+    {
+      "name": "04_none_unit_rerank-10",
+      "run_id": "20260609_144506",
+      "task_count": 100,
+      "rewrite_mode": "none",
+      "hyde_route": "unit",
+      "rerank": true,
+      "rerank_top_n": 10,
+      "json": "results/newest\\04_none_unit_rerank-10\\benchmark_20260609_144506.json"
+    },
+    {
+      "name": "05_hyde_unit_rerank-6",
+      "run_id": "20260609_144958",
+      "task_count": 100,
+      "rewrite_mode": "hyde",
+      "hyde_route": "unit",
+      "rerank": true,
+      "rerank_top_n": 6,
+      "json": "results/newest\\05_hyde_unit_rerank-6\\benchmark_20260609_144958.json"
+    },
+    {
+      "name": "06_hyde_fourway_rerank-10",
+      "run_id": "20260609_154908",
+      "task_count": 100,
+      "rewrite_mode": "hyde",
+      "hyde_route": "fourway",
+      "rerank": true,
+      "rerank_top_n": 10,
+      "json": "results/newest\\06_hyde_fourway_rerank-10\\benchmark_20260609_154908.json"
+    },
+    {
+      "name": "07_hyde_unit_rerank-8",
+      "run_id": "20260609_162338",
+      "task_count": 100,
+      "rewrite_mode": "hyde",
+      "hyde_route": "unit",
+      "rerank": true,
+      "rerank_top_n": 8,
+      "json": "results/newest\\07_hyde_unit_rerank-8\\benchmark_20260609_162338.json"
+    },
+    {
+      "name": "08_hyde_unit_rerank-10",
+      "run_id": "20260609_165559",
+      "task_count": 100,
+      "rewrite_mode": "hyde",
+      "hyde_route": "unit",
+      "rerank": true,
+      "rerank_top_n": 10,
+      "json": "results/newest\\08_hyde_unit_rerank-10\\benchmark_20260609_165559.json"
+    }
+  ]
+}
